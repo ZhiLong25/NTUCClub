@@ -437,3 +437,13 @@ C:\Users\alexa\OneDrive\Documents\NTUC-Club\server\obj\Debug\net6.0\refint\NTUCC
 C:\Users\alexa\OneDrive\Documents\NTUC-Club\server\obj\Debug\net6.0\NTUCClub.pdb
 C:\Users\alexa\OneDrive\Documents\NTUC-Club\server\obj\Debug\net6.0\NTUCClub.genruntimeconfig.cache
 C:\Users\alexa\OneDrive\Documents\NTUC-Club\server\obj\Debug\net6.0\ref\NTUCClub.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.csproj.AssemblyReference.cache
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.AssemblyInfoInputs.cache
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.AssemblyInfo.cs
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.csproj.CoreCompileInputs.cache
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\refint\NTUCClub.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.pdb
