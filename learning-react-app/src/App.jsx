@@ -26,6 +26,7 @@ import AddService from './pages/products/AddService';
 import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
+import ManageVendor from './pages/products/ManageVendor';
 
 import Addadmin from './pages/users/Addadmin';
 import Adminaccounts from './pages/users/Adminaccounts';
@@ -90,6 +91,8 @@ function App() {
       <Route path={"/getservice"} element={<GetService />} /> 
       <Route path={"/editservice/:id"} element={<EditService />} />
       <Route path={"/managecategory"} element={<ManageCategory />} /> 
+      <Route path={"/managevendor"} element={<ManageVendor />} /> 
+
     </Routes>
   </>
 )}

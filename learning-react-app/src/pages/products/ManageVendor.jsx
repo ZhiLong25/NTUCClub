@@ -13,7 +13,7 @@ import placeholder from './media/placeholder.png'
 import MUIDataTable from "mui-datatables";
 
 
-function ManageCategory() {
+function ManageVendor() {
 
 
     const [serviceList, setServiceList] = useState([]);
@@ -49,7 +49,7 @@ function ManageCategory() {
             image: '',
             name: '',
 
-
+ 
         },
 
         validationSchema: yup.object().shape({
@@ -65,27 +65,30 @@ function ManageCategory() {
                 data.imageFile = imageFile;
             }
             console.log("Submit button clicked");
-            http.post("/Category/addcategory", data)
+            http.post("/Vendor/addvendor", data)
                 .then((res) => {
                     console.log(res.data);
                     window.location.reload();
+
                 })
         }
     });
 
-    const getCategory = () => {
-        http.get('/Category/getcategory').then((res) => {
-            console.log(res.data)
-            setServiceList(res.data);
+    const getVendor = () => {
+        http.get('/Vendor/getvendor').then((res) => {
+          console.log(res.data)
+          setServiceList(res.data);
+          setTotalService(res.data.length);
         });
-    };
+      };
 
     useEffect(() => {
-        http.get('/Category/getcategory').then((res) => {
-            getCategory();
+        http.get('/Vendor/getvendor').then((res) => {
+          getVendor();
+          setTotalService(res.data.length);
 
         });
-    }, []);
+      }, []);
 
 
     const options = {
@@ -97,7 +100,7 @@ function ManageCategory() {
     return (
         <Container>
             <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
-                Add Categories
+                Add Vendors
             </Typography>
 
             <Box component="form" onSubmit={formik.handleSubmit}>
@@ -105,6 +108,7 @@ function ManageCategory() {
                 <Grid container spacing={2}>
                     <Grid item xs={4} md={4} lg={4} >
                         <Box sx={{ textAlign: 'center', mt: 2 }} >
+
 
                             {
                                 imageFile ? (
@@ -115,16 +119,15 @@ function ManageCategory() {
                                     <img src={placeholder} alt="placeholder" className='image-insert'/>
                                 )
                             }
-
-
                             <Button variant="contained" component="label" style={{ marginTop: "20px"}}>
                                 Upload Image
                                 <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
                             </Button>
+                           
                         </Box>
                     </Grid>
                     <Grid item xs={8} md={8} lg={8} >
-                        <InputLabel>Enter New Category Name</InputLabel>
+                        <InputLabel>Enter New Vendor Name</InputLabel>
 
                         <TextField
                             fullWidth margin="normal" autoComplete="off"
@@ -135,8 +138,6 @@ function ManageCategory() {
                             error={formik.touched.name && Boolean(formik.errors.name)}
                             helperText={formik.touched.name && formik.errors.name}
                         />
-
-
 
 
                         <Box sx={{ mt: 2 }}>
@@ -154,10 +155,10 @@ function ManageCategory() {
             <Box>
 
                 <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
-                    View and Manage Categories
+                    View and Manage Vendor
                 </Typography>
-
-                <MUIDataTable title="Category List" data={serviceList} columns={columns} options={options} />
+                
+                <MUIDataTable title="Vendor List" data={serviceList} columns={columns} options={options} />
 
 
 
@@ -166,4 +167,4 @@ function ManageCategory() {
         </Container>
     );
 }
-export default ManageCategory;
+export default ManageVendor;
