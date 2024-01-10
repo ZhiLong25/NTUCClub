@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NTUCClub.Models
@@ -9,7 +10,6 @@ namespace NTUCClub.Models
 
         [Required, MinLength(3), MaxLength(100)]
         public string Email { get; set; } = string.Empty;
-
 
         [Required, MinLength(3), MaxLength(500)]
         public string QuerySubject { get; set; } = string.Empty;

@@ -153,6 +153,43 @@ namespace NTUCClub.Migrations
                     b.ToTable("UserActivities");
                 });
 
+            modelBuilder.Entity("NTUCClub.Models.Query", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("QueryDescription")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<string>("QuerySubject")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Queries");
+                });
+
             modelBuilder.Entity("NTUCClub.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -240,6 +277,15 @@ namespace NTUCClub.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Vouchers");
+                });
+
+            modelBuilder.Entity("NTUCClub.Models.Query", b =>
+                {
+                    b.HasOne("NTUCClub.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Voucher", b =>
