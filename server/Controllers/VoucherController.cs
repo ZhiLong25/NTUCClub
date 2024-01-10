@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿    using Microsoft.AspNetCore.Mvc;
 using MySqlX.XDevAPI.Common;
 using NTUCClub.Models;
 using System.Security.Claims;

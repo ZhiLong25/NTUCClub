@@ -23,11 +23,13 @@ namespace NTUCClub
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Voucher> Vouchers { get; set; }
-
         public DbSet<Service> Services { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
         public DbSet<UserActivity> UserActivities { get; set; }
+        public DbSet<Query> Queries { get; set; }
+        public DbSet<Cart> Cart { get; set; }
+        public DbSet<Card> Cards { get; set; }
 
         // Method for creating object relations
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
