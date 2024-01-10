@@ -182,7 +182,6 @@ export default function UserNav() {
                                 rounded={'full'}
                                 variant={'link'}
                                 cursor={'pointer'}
-                                onClick={logout}
                                 minW={0}>
                                     {user?.userType}
                                     </MenuButton>

@@ -7,6 +7,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import PersonIcon from '@mui/icons-material/Person';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Accounts() {
   const [account, setAccount] = useState([])
@@ -40,7 +41,13 @@ function Accounts() {
       document.querySelector(".adminClick").style.textDecoration = "none";
     })
   }
- 
+ const del=(id)=>{
+  http.delete(`User/Delete/${id}`).then(()=>{
+    toast.success("Account deleted Successfully")
+  }).catch((err)=>{
+    toast.error("Unable to delete account")
+  })
+ } 
   
   return (
     <div style={{height:"80dvh"}}>
@@ -120,7 +127,7 @@ function Accounts() {
                         </CardContent>
                         
                         
-
+                        {accounts.userType != "Admin" && (
                           <CardContent style={{ margin: "auto",height:"8%" }}>
                             <Button fullWidth variant="contained" sx={{ mt: 2 }}
                               style={{ backgroundColor: "red", padding: "15px", fontWeight: "bold" }}
@@ -131,6 +138,7 @@ function Accounts() {
                               </div>}
                             </Button>
                           </CardContent>
+                        )}
                       </div>
 
 
@@ -142,6 +150,7 @@ function Accounts() {
           }
         </Card>
       </div>
+      <ToastContainer/>
     </div>
   )
 }

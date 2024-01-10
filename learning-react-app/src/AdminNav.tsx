@@ -77,12 +77,12 @@ export default function AdminNav() {
                 {
                     label: 'Add admin',
                     subLabel: 'Add admin accounts',
-                    href: 'Addadmin',
+                    href: '/Addadmin',
                 },
                 {
                     label: 'Admin dashboard',
                     subLabel: 'View admin accounts',
-                    href: 'Accounts',
+                    href: '/Accounts',
                 },
                 
             ],
@@ -197,7 +197,6 @@ export default function AdminNav() {
                                 rounded={'full'}
                                 variant={'link'}
                                 cursor={'pointer'}
-                                onClick={logout}
                                 minW={0}>
                                     {user?.userType}
                                     </MenuButton>

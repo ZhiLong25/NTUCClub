@@ -124,6 +124,22 @@ namespace NTUCClub.Controllers
             _context.SaveChanges();
             return Ok(user);
         }
+        [HttpDelete("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var foundUser = _context.Users.Where(
+            x => x.Id== id).FirstOrDefault();
+            string message = "Account is not found.";
+
+                Console.WriteLine("null");
+            if (foundUser == null)
+            {
+                return BadRequest(new { message });
+            }
+            _context.Users.Remove(foundUser);
+            _context.SaveChanges();
+            return Ok();
+        }
 
         [HttpPost("Verification")]
         public IActionResult Verification(User data)
