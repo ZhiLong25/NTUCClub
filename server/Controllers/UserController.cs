@@ -8,6 +8,7 @@ using System.Text;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Asn1.Ocsp;
+using System.Threading.Channels;
 
 namespace NTUCClub.Controllers
 {
@@ -69,6 +70,58 @@ namespace NTUCClub.Controllers
             Console.WriteLine("Password:",user.Password);
             
 
+            return Ok(user);
+        }
+        [HttpPost("Addadmin/{usertype}")]
+        public IActionResult Addadmin(string usertype, RegisterRequest request)
+        {
+            if (usertype != "Admin")
+            {
+                return BadRequest("Only admin can perform this");
+            }
+            // Trim string values
+            request.Name = request.Name.Trim();
+            request.Email = request.Email.Trim().ToLower();
+            request.Password = request.Password.Trim();
+            request.Phone = request.Phone.Trim();
+            Console.WriteLine(request.Password);
+
+            // Check email
+            var foundUser = _context.Users.FirstOrDefault(x => x.Email == request.Email);
+            if (foundUser != null)
+            {
+                string message = "Email already exists.";
+                return BadRequest(new { message });
+            }
+
+            // Check phone
+            var foundUser1 = _context.Users.FirstOrDefault(x => x.Phone == request.Phone);
+            if (foundUser1 != null)
+            {
+                string message = "Phone already exists.";
+                return BadRequest(new { message });
+            }
+
+            // Create user object
+            var now = DateTime.Now;
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            Console.WriteLine("PWHASH", passwordHash);
+            var user = new User()
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Password = passwordHash,
+                Phone = request.Phone,
+                ProfilePicture = request.ProfilePicture,
+                CreatedAt = now,
+                UpdatedAt = now,
+                UserType = "User"
+            };
+            Console.WriteLine("Password:", user.Password);
+
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
             return Ok(user);
         }
 
