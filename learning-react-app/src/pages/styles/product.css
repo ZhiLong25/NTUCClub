@@ -1,0 +1,23 @@
+.topheader {
+    
+}
+
+.dashCard {
+    min-height: 150px;
+    border-radius: 5px;
+}
+
+.addbtn {
+    float:right;
+    background-color: #E8533F!important;
+    min-width: 100px!important;
+}
+
+.ql-toolbar.ql-snow {
+    margin-top: 10px;
+    border-radius: 5px 5px 0px 0px !important;
+}
+
+.ql-container.ql-snow {
+    border-radius: 0px 0px 5px 5px imr !important;
+}

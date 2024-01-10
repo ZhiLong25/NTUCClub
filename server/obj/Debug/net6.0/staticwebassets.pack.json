@@ -1,0 +1,57 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\tanzh\\Desktop\\Github\\NTUC-Club\\server\\wwwroot\\uploads\\7cmVU_8OjE.png",
+      "PackagePath": "staticwebassets\\uploads\\7cmVU_8OjE.png"
+    },
+    {
+      "Id": "C:\\Users\\tanzh\\Desktop\\Github\\NTUC-Club\\server\\wwwroot\\uploads\\AMnqjHiU9A.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\AMnqjHiU9A.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\tanzh\\Desktop\\Github\\NTUC-Club\\server\\wwwroot\\uploads\\FBaJ9bLkt7.png",
+      "PackagePath": "staticwebassets\\uploads\\FBaJ9bLkt7.png"
+    },
+    {
+      "Id": "C:\\Users\\tanzh\\Desktop\\Github\\NTUC-Club\\server\\wwwroot\\uploads\\JCCSG_VfUV.jpg",
+      "PackagePath": "staticwebassets\\uploads\\JCCSG_VfUV.jpg"
+    },
+    {
+      "Id": "C:\\Users\\tanzh\\Desktop\\Github\\NTUC-Club\\server\\wwwroot\\uploads\\No9s_UIOgU.jpg",
+      "PackagePath": "staticwebassets\\uploads\\No9s_UIOgU.jpg"
+    },
+    {
+      "Id": "C:\\Users\\tanzh\\Desktop\\Github\\NTUC-Club\\server\\wwwroot\\uploads\\defaultPfp.png",
+      "PackagePath": "staticwebassets\\uploads\\defaultPfp.png"
+    },
+    {
+      "Id": "C:\\Users\\tanzh\\Desktop\\Github\\NTUC-Club\\server\\wwwroot\\uploads\\o0ok3cLq4T.jpg",
+      "PackagePath": "staticwebassets\\uploads\\o0ok3cLq4T.jpg"
+    },
+    {
+      "Id": "C:\\Users\\tanzh\\Desktop\\Github\\NTUC-Club\\server\\wwwroot\\uploads\\t2YrRVVHrB.jpg",
+      "PackagePath": "staticwebassets\\uploads\\t2YrRVVHrB.jpg"
+    },
+    {
+      "Id": "C:\\Users\\tanzh\\Desktop\\Github\\NTUC-Club\\server\\wwwroot\\uploads\\wAk9fliQuX.png",
+      "PackagePath": "staticwebassets\\uploads\\wAk9fliQuX.png"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.NTUCClub.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.NTUCClub.props",
+      "PackagePath": "build\\NTUCClub.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.NTUCClub.props",
+      "PackagePath": "buildMultiTargeting\\NTUCClub.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.NTUCClub.props",
+      "PackagePath": "buildTransitive\\NTUCClub.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

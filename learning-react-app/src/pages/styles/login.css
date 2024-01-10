@@ -1,0 +1,132 @@
+.loginContainer{
+    /* background-color: aqua; */
+    height:50%;
+    margin: auto;
+    z-index: 1;
+}
+.circle1{
+    width:5dvw;
+    height:5dvw;
+    z-index: 0;
+    top:30%;
+    left:30%;
+    animation: animate 6s linear infinite;
+
+}
+.circle2{
+    width:7dvw;
+    height:7dvw;
+    z-index: 0;
+    top:30%;
+    left:30%;
+    animation: animate1 6s linear infinite;
+
+}
+.circle3{
+    width:2.3dvw;
+    height:2.3dvw;
+    z-index: 0;
+    top:30%;
+    left:30%;
+    animation: animate2 6s linear infinite;
+
+}
+.circle4{
+    width:10dvw;
+    height:10dvw;
+    z-index: 0;
+    top:30%;
+    left:30%;
+    animation: animate3 6s linear infinite;
+
+}
+.circle5{
+    width:5dvw;
+    height:5dvw;
+    z-index: 0;
+    top:30%;
+    left:30%;
+    animation: animate4 10s linear infinite;
+
+}
+
+@keyframes animate {
+    0%, 100% {
+      left: 10%;
+      top: 40%;
+    }
+    50% {
+      left: 20%;
+      top:20%;
+    }
+  }
+@keyframes animate1 {
+    0%, 100% {
+      left: 26%;
+      top: 40%;
+    }
+    50% {
+      left: 38%;
+      top:20%;
+    }
+  }
+@keyframes animate2 {
+    0%, 100% {
+      left: 90%;
+      top: 80%;
+    }
+    50% {
+      left: 78%;
+      top:90%;
+    }
+  }
+@keyframes animate3 {
+    0%, 100% {
+      left: 80%;
+      top: 0%;
+    }
+    50% {
+      left: 78%;
+      top:10%;
+    }
+  }
+@keyframes animate4 {
+    0%, 100% {
+      left: 50%;
+      top: 20%;
+    }
+    50% {
+      left: 53%;
+      top:50%;
+    }
+  }
+
+  .forgotpass{
+    font-size: 10px !important;
+}
+.forgotpass:hover{
+    text-decoration: underline;
+    color:greenyellow
+}
+.errorText{
+  color:red;
+  font: 'Roboto';
+  font-size: 10px;
+}
+.textwrap{
+  height:40px;
+  border-radius: 25px;
+  background-color: white;
+  width:100%
+}
+.inp{
+  border:hidden ;
+  margin: auto;
+  height:40px;
+  width:83%;
+  box-shadow: #1c1c1c;
+  background-color:white;
+  outline: none;
+  margin-left:20px;
+  color:black
+}
