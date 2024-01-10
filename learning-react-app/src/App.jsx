@@ -28,7 +28,7 @@ import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 
 import Addadmin from './pages/users/Addadmin';
-import Adminaccounts from './pages/users/Adminaccounts';
+import Accounts from './pages/users/accounts';
 function App() {
   const [user, setUser] = useState(null);
 
@@ -63,7 +63,7 @@ function App() {
         <Route path={"/updatevouchers/:id"} element={<UpdateVouchers />} />
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/Addadmin"} element={<Addadmin />} />
-        <Route path={"/Adminaccounts"} element={<Adminaccounts />} />
+        <Route path={"/Accounts"} element={<Accounts />} />
       </Routes>
     </>
   ) : (

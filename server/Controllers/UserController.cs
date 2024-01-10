@@ -115,7 +115,7 @@ namespace NTUCClub.Controllers
                 ProfilePicture = request.ProfilePicture,
                 CreatedAt = now,
                 UpdatedAt = now,
-                UserType = "User"
+                UserType = "Admin"
             };
             Console.WriteLine("Password:", user.Password);
 
@@ -184,6 +184,23 @@ namespace NTUCClub.Controllers
             {
                 UserDTO userDTO = _mapper.Map<UserDTO>(foundUser);
                 return Ok(userDTO);
+            }
+        }
+        [HttpGet("getAllUser/{usertype}")]
+        public IActionResult getAllUser(string usertype)
+        {
+            // Trim string values
+            var foundUser = _context.Users.Where(
+                x => x.UserType == usertype).ToArray();
+            var message = "No accounts";
+            if (foundUser == null)
+            {
+                return Ok(new { message });
+            }
+            else
+            {
+                
+                return Ok(foundUser);
             }
         }
         [HttpGet("userdetails/{id}")]

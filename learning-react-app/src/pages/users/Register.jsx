@@ -166,7 +166,7 @@ function Register() {
                         />
                         <span
                             className="eyespan"
-                            style={{ display: "inline-block",margin:"auto",position:"absolute",left:"90%",top:"30%%" }}
+                            style={{ display: "inline-block",margin:"auto",position:"absolute",left:"90%",top:"30%" }}
                         >
                             <Icon
                                 icon={icon1}
@@ -199,7 +199,7 @@ function Register() {
                         />
                         <span
                             className="eyespan"
-                            style={{ display: "inline-block",margin:"auto",position:"absolute",left:"90%",top:"30%%" }}
+                            style={{ display: "inline-block",margin:"auto",position:"absolute",left:"90%",top:"30%" }}
                         >
                             <Icon
                                 icon={icon2}

@@ -82,7 +82,7 @@ export default function AdminNav() {
                 {
                     label: 'Admin dashboard',
                     subLabel: 'View admin accounts',
-                    href: 'Adminaccounts',
+                    href: 'Accounts',
                 },
                 
             ],
