@@ -3523,19 +3523,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Jun Liang\\.nuget\\packages\\": {}
+    "C:\\Users\\alexa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\NTUCClub.csproj",
+      "projectUniqueName": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\NTUCClub.csproj",
       "projectName": "NTUCClub",
-      "projectPath": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\NTUCClub.csproj",
-      "packagesPath": "C:\\Users\\Jun Liang\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\obj\\",
+      "projectPath": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\NTUCClub.csproj",
+      "packagesPath": "C:\\Users\\alexa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Jun Liang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\alexa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3619,7 +3619,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

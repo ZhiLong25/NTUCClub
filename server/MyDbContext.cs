@@ -28,6 +28,7 @@ namespace NTUCClub
         public DbSet<Category> Category { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
         public DbSet<UserActivity> UserActivities { get; set; }
+        public DbSet<Query> Queries { get; set; }
 
         // Method for creating object relations
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
