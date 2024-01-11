@@ -3523,24 +3523,40 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "D:\\Users\\222726y\\.nuget\\packages\\": {},
     "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+=======
+    "C:\\Users\\alexa\\.nuget\\packages\\": {}
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\NTUCClub.csproj",
       "projectName": "NTUCClub",
       "projectPath": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\NTUCClub.csproj",
       "packagesPath": "D:\\Users\\222726y\\.nuget\\packages\\",
       "outputPath": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\NTUCClub.csproj",
+      "projectName": "NTUCClub",
+      "projectPath": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\NTUCClub.csproj",
+      "packagesPath": "C:\\Users\\alexa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\obj\\",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "D:\\Users\\222726y\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+        "C:\\Users\\alexa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3624,7 +3640,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       }
     }
   }

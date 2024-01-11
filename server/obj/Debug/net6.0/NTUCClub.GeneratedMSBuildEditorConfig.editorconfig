@@ -9,9 +9,17 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = NTUCClub
 build_property.RootNamespace = NTUCClub
+<<<<<<< HEAD
 build_property.ProjectDir = D:\Users\222726y\Documents\GitHub\NTUCClub\server\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = D:\Users\222726y\Documents\GitHub\NTUCClub\server
+=======
+build_property.ProjectDir = C:\Users\alexa\OneDrive\Documents\NTUCClub\server\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\alexa\OneDrive\Documents\NTUCClub\server
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
 build_property._RazorSourceGeneratorDebug = 

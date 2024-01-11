@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "Hash": "bSn38y7XXdqQfGMW8ojgBw0mXpkKUVzzpSjrVG/vTjM=",
+=======
+  "Hash": "+oeMAVxtg2Fjymwn8NhyMROJAMJaJu/2X2FpRCP3RzM=",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
   "Source": "NTUCClub",
   "BasePath": "_content/NTUCClub",
   "Mode": "Default",
@@ -10,13 +14,18 @@
     {
       "Name": "NTUCClub\\wwwroot",
       "Source": "NTUCClub",
+<<<<<<< HEAD
       "ContentRoot": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+=======
+      "ContentRoot": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       "BasePath": "_content/NTUCClub",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
+<<<<<<< HEAD
       "Identity": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\1ev2op-IHf.jpeg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
@@ -38,6 +47,12 @@
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\uploads\\7cmVU_8OjE.png",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/7cmVU_8OjE.png",
       "AssetKind": "All",
@@ -51,6 +66,7 @@
       "OriginalItemSpec": "wwwroot\\uploads\\7cmVU_8OjE.png"
     },
     {
+<<<<<<< HEAD
       "Identity": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\7XXDRH4mo7.jpeg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
@@ -72,6 +88,12 @@
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\uploads\\AMnqjHiU9A.jpeg",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/AMnqjHiU9A.jpeg",
       "AssetKind": "All",
@@ -85,6 +107,7 @@
       "OriginalItemSpec": "wwwroot\\uploads\\AMnqjHiU9A.jpeg"
     },
     {
+<<<<<<< HEAD
       "Identity": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\aslyODlWoy.png",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
@@ -140,6 +163,12 @@
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\uploads\\defaultPfp.png",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/defaultPfp.png",
       "AssetKind": "All",
@@ -153,10 +182,17 @@
       "OriginalItemSpec": "wwwroot\\uploads\\defaultPfp.png"
     },
     {
+<<<<<<< HEAD
       "Identity": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\FBaJ9bLkt7.png",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\uploads\\FBaJ9bLkt7.png",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/FBaJ9bLkt7.png",
       "AssetKind": "All",
@@ -170,10 +206,17 @@
       "OriginalItemSpec": "wwwroot\\uploads\\FBaJ9bLkt7.png"
     },
     {
+<<<<<<< HEAD
       "Identity": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\JCCSG_VfUV.jpg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\uploads\\JCCSG_VfUV.jpg",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/JCCSG_VfUV.jpg",
       "AssetKind": "All",
@@ -187,10 +230,17 @@
       "OriginalItemSpec": "wwwroot\\uploads\\JCCSG_VfUV.jpg"
     },
     {
+<<<<<<< HEAD
       "Identity": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\No9s_UIOgU.jpg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\uploads\\No9s_UIOgU.jpg",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/No9s_UIOgU.jpg",
       "AssetKind": "All",
@@ -204,10 +254,17 @@
       "OriginalItemSpec": "wwwroot\\uploads\\No9s_UIOgU.jpg"
     },
     {
+<<<<<<< HEAD
       "Identity": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\o0ok3cLq4T.jpg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\uploads\\o0ok3cLq4T.jpg",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/o0ok3cLq4T.jpg",
       "AssetKind": "All",
@@ -221,10 +278,17 @@
       "OriginalItemSpec": "wwwroot\\uploads\\o0ok3cLq4T.jpg"
     },
     {
+<<<<<<< HEAD
       "Identity": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\t2YrRVVHrB.jpg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\uploads\\t2YrRVVHrB.jpg",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/t2YrRVVHrB.jpg",
       "AssetKind": "All",
@@ -238,6 +302,7 @@
       "OriginalItemSpec": "wwwroot\\uploads\\t2YrRVVHrB.jpg"
     },
     {
+<<<<<<< HEAD
       "Identity": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\Tc0FhyNN59.jpeg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
@@ -276,6 +341,12 @@
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\uploads\\wAk9fliQuX.png",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alexa\\OneDrive\\Documents\\NTUCClub\\server\\wwwroot\\",
+>>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/wAk9fliQuX.png",
       "AssetKind": "All",
