@@ -108,6 +108,13 @@ function App() {
       <Route path={"/managecategory"} element={<ManageCategory />} /> 
       <Route path={"/managevendor"} element={<ManageVendor />} /> 
 
+ 
+      <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
+      <Route path={"/addservice"} element={<AddService />} /> 
+      <Route path={"/getservice"} element={<GetService />} /> 
+      <Route path={"/editservice/:id"} element={<EditService />} />
+      <Route path={"/managecategory"} element={<ManageCategory />} /> 
+      <Route path={"/addquery"} element={<addQuery />} />
     </Routes>
   </>
 )}
