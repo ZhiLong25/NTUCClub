@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NTUCClub;
 
@@ -10,9 +11,11 @@ using NTUCClub;
 namespace NTUCClub.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240110142546_Karsten")]
+    partial class Karsten
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,8 +162,9 @@ namespace NTUCClub.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
@@ -202,8 +206,6 @@ namespace NTUCClub.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryID");
-
                     b.ToTable("Services");
                 });
 
@@ -231,32 +233,6 @@ namespace NTUCClub.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserActivities");
-                });
-
-            modelBuilder.Entity("NTUCClub.Models.Products.Vendor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Image")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Vendor");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Query", b =>
@@ -401,16 +377,6 @@ namespace NTUCClub.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                })
-            modelBuilder.Entity("NTUCClub.Models.Products.Service", b =>
-                {
-                    b.HasOne("NTUCClub.Models.Products.Category", "Category")
-                        .WithMany("Services")
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Query", b =>
@@ -429,11 +395,6 @@ namespace NTUCClub.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("NTUCClub.Models.Products.Category", b =>
-                {
-                    b.Navigation("Services");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.User", b =>

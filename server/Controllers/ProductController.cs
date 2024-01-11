@@ -85,7 +85,7 @@ namespace NTUCClub.Controllers
             myService.TimeSlots = service.TimeSlots.Trim();
             myService.Slots = service.Slots;
             myService.Vendor = service.Vendor.Trim();
-            myService.Category = service.Category.Trim();
+            //myService.Category = service.Category.Trim();
             myService.UpdatedAt = DateTime.Now;
 
             _context.SaveChanges();

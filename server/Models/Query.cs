@@ -26,7 +26,7 @@ namespace NTUCClub.Models
         [Column(TypeName = "datetime")]
         public DateTime UpdatedAt { get; set; }
         // Navigation property to represent the one-to-many relationship
-        public User? User { get; set; }
+        public User? User { get; set; } 
 
     }
 }
