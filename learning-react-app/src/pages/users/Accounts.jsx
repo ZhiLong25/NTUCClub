@@ -44,6 +44,7 @@ function Accounts() {
  const del=(id)=>{
   http.delete(`User/Delete/${id}`).then(()=>{
     toast.success("Account deleted Successfully")
+    window.location.reload()
   }).catch((err)=>{
     toast.error("Unable to delete account")
   })
