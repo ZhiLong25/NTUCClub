@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import MyTheme from './themes/MyTheme';
 import Tutorials from './pages/Tutorials';
-
 import MyForm from './pages/MyForm';
 import Register from './pages/users/Register';
 import Login from './pages/users/Login';
@@ -22,13 +21,15 @@ import UpdateVouchers from './pages/vouchers/updateVouchers';
 import VoucherDashboard from './pages/vouchers/voucherDashboard';
 import ViewVouchers from './pages/vouchers/viewVouchers';
 
+import AddCard from './pages/cards/addCard';
+
 import ProductDash from './pages/products/ProductDash';
 import AddService from './pages/products/AddService';
 import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
-
+import AddQueries from "./pages/queries/AddQueries"
 import Addadmin from './pages/users/Addadmin';
 import Adminaccounts from './pages/users/Adminaccounts';
 
@@ -85,10 +86,8 @@ function App() {
       <Routes>
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/viewVouchers"} element={<ViewVouchers/>} />
-
-
-
-
+        <Route path={"/addcard"} element={<AddCard/>} />
+        <Route path={"/AddQueries"} element={<AddQueries/>} />
       </Routes>
     </>
   )
@@ -100,6 +99,7 @@ function App() {
       <Route path={"/register"} element={<Register />} />
       <Route path={"/login"} element={<Login />} />
       <Route path={"/verification"} element={<Verification />} />
+      <Route path={"/AddQueries"} element={<AddQueries />} />
       
       <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
       <Route path={"/addservice"} element={<AddService />} /> 

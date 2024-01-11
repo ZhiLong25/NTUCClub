@@ -16,7 +16,7 @@ namespace NTUCClub.Controllers
             _environment = environment;
         }
 
-        [HttpPost("upload")] // Authorize
+        [HttpPost("upload")] // ,Authorize
         public IActionResult Upload(IFormFile file)
         {
             if (file == null || file.Length == 0)

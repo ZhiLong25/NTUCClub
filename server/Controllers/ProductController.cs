@@ -46,25 +46,31 @@ namespace NTUCClub.Controllers
         [HttpPost("addservice")]
         public IActionResult AddService(Service service)
         {
-
             var now = DateTime.Now;
+
+            // Fetch or create the category based on the service.Category value
+            var category = _context.Category.FirstOrDefault(c => c.Name == service.Category.Trim())
+                          ?? new Category { Name = service.Category.Trim() };
+
             var myService = new Service()
             {
                 Image = service.Image,
                 Name = service.Name.Trim(),
                 Description = service.Description.Trim(),
+                Category = service.Category,
                 Price = service.Price,
                 MemPrice = service.MemPrice,
                 TimeSlots = service.TimeSlots.Trim(),
                 Slots = service.Slots,
                 Vendor = service.Vendor.Trim(),
-                Category = service.Category.Trim(),
                 CreatedAt = now,
-                UpdatedAt = now
+                UpdatedAt = now,
+                CatName = category // Set the CatName navigation property instead of Category
             };
 
             _context.Services.Add(myService);
             _context.SaveChanges();
+
             return Ok(myService);
         }
 
@@ -72,6 +78,11 @@ namespace NTUCClub.Controllers
         [HttpPut("updateservice/{id}")]
         public IActionResult UpdateService(int id, Service service)
         {
+
+            // Fetch or create the category based on the service.Category value
+            var category = _context.Category.FirstOrDefault(c => c.Name == service.Category.Trim())
+                          ?? new Category { Name = service.Category.Trim() };
+
             var myService = _context.Services.Find(id);
             if (myService == null)
             {
@@ -85,8 +96,10 @@ namespace NTUCClub.Controllers
             myService.TimeSlots = service.TimeSlots.Trim();
             myService.Slots = service.Slots;
             myService.Vendor = service.Vendor.Trim();
-            //myService.Category = service.Category.Trim();
             myService.UpdatedAt = DateTime.Now;
+            myService.Category = service.Category;
+            myService.CatName = category;
+            myService.Image = service.Image;
 
             _context.SaveChanges();
             return Ok();
