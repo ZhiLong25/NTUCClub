@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect,MouseEvent  } from "react"
+import React, { useState, useEffect, MouseEvent } from "react"
 import {
     Box,
     Flex,
@@ -32,14 +32,14 @@ export default function UserNav() {
     interface User {
         id: string;
         // other user properties
-        profilePicture:string
-        userType:String
-      }
-      
-     
+        profilePicture: string
+        userType: String
+    }
+
+
     const { isOpen, onToggle } = useDisclosure()
     const [user, setUser] = useState<User | null>(null);
-      
+
     useEffect(() => {
         if (localStorage.getItem("accessToken")) {
             http.get('/user/auth').then((res) => {
@@ -49,7 +49,7 @@ export default function UserNav() {
         }
     }, []);
 
-    const logout =  (event: React.MouseEvent<HTMLButtonElement>) => {
+    const logout = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         console.log("Loggedout")
         localStorage.clear();
@@ -61,11 +61,11 @@ export default function UserNav() {
         subLabel?: string
         children?: Array<NavItem>
         href?: string;
-        
+
 
     }
 
-    const NAV_ITEMS: Array<NavItem> = user? [
+    const NAV_ITEMS: Array<NavItem> = user ? [
         {
             label: 'Account',
             children: [
@@ -90,18 +90,25 @@ export default function UserNav() {
                     subLabel: 'To get activites at a discounted price, click here!',
                     href: '/viewVouchers',
                 },
-                
+
             ],
         },
         {
-            label: 'Learn Design',
-            href: '#',
+            label: 'FAQ',
+            children: [
+                {
+                    label: 'Send Query',
+                    subLabel: 'Ask us any questions',
+                    href: '/AddQueries',
+                },
+
+            ],
         },
         {
             label: 'Hire Designers',
             href: '#',
         },
-    ]:[]
+    ] : []
     const linkColor = useColorModeValue('gray.600', 'gray.200')
     const linkHoverColor = useColorModeValue('gray.800', 'white')
     const popoverContentBgColor = useColorModeValue('white', 'gray.800')
@@ -189,8 +196,8 @@ export default function UserNav() {
                                 cursor={'pointer'}
                                 onClick={logout}
                                 minW={0}>
-                                    {user?.userType}
-                                    </MenuButton>
+                                {user?.userType}
+                            </MenuButton>
                             <MenuButton
                                 as={Button}
                                 rounded={'full'}
@@ -200,7 +207,7 @@ export default function UserNav() {
                                 minW={0}>
                                 <Button
                                     size={'sm'}
-                                    
+
                                 >Log Out</Button>
                             </MenuButton>
                             <MenuButton

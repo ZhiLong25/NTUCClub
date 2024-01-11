@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import MyTheme from './themes/MyTheme';
 import Tutorials from './pages/Tutorials';
-
 import MyForm from './pages/MyForm';
 import Register from './pages/users/Register';
 import Login from './pages/users/Login';
@@ -30,7 +29,7 @@ import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
-
+import AddQueries from "./pages/queries/AddQueries"
 import Addadmin from './pages/users/Addadmin';
 import Adminaccounts from './pages/users/Adminaccounts';
 
@@ -45,8 +44,6 @@ function App() {
       });
     }
   }, []);
-
-
 
 
   const logout = () => {
@@ -80,6 +77,7 @@ function App() {
       <Route path={"/getservice"} element={<GetService />} /> 
       <Route path={"/editservice/:id"} element={<EditService />} />
       <Route path={"/managecategory"} element={<ManageCategory />} /> 
+      <Route path={"/managevendor"} element={<ManageVendor />} /> 
       </Routes>
     </>
   ) : (
@@ -89,6 +87,7 @@ function App() {
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/viewVouchers"} element={<ViewVouchers/>} />
         <Route path={"/addcard"} element={<AddCard/>} />
+        <Route path={"/AddQueries"} element={<AddQueries/>} />
       </Routes>
     </>
   )
@@ -100,8 +99,22 @@ function App() {
       <Route path={"/register"} element={<Register />} />
       <Route path={"/login"} element={<Login />} />
       <Route path={"/verification"} element={<Verification />} />
+      <Route path={"/AddQueries"} element={<AddQueries />} />
       
+      <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
+      <Route path={"/addservice"} element={<AddService />} /> 
+      <Route path={"/getservice"} element={<GetService />} /> 
+      <Route path={"/editservice/:id"} element={<EditService />} />
+      <Route path={"/managecategory"} element={<ManageCategory />} /> 
+      <Route path={"/managevendor"} element={<ManageVendor />} /> 
 
+ 
+      <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
+      <Route path={"/addservice"} element={<AddService />} /> 
+      <Route path={"/getservice"} element={<GetService />} /> 
+      <Route path={"/editservice/:id"} element={<EditService />} />
+      <Route path={"/managecategory"} element={<ManageCategory />} /> 
+      <Route path={"/addquery"} element={<addQuery />} />
     </Routes>
   </>
 )}
