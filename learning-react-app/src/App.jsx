@@ -17,6 +17,7 @@ import AddVouchers from './pages/vouchers/addVouchers';
 import AdminNav from "./AdminNav"
 import GuestNav from './GuestNav';
 import UserNav from './UserNav';
+import MerchantNav from './MerchantNav'
 import UpdateVouchers from './pages/vouchers/updateVouchers';
 import VoucherDashboard from './pages/vouchers/voucherDashboard';
 import ViewVouchers from './pages/vouchers/viewVouchers';
@@ -29,6 +30,7 @@ import ManageCategory from './pages/products/ManageCategories';
 
 import Addadmin from './pages/users/Addadmin';
 import Adminaccounts from './pages/users/Adminaccounts';
+
 function App() {
   const [user, setUser] = useState(null);
 
@@ -66,6 +68,17 @@ function App() {
         <Route path={"/Adminaccounts"} element={<Adminaccounts />} />
       </Routes>
     </>
+  ) : user.userType === "Merchant" ? (
+    <>
+      <MerchantNav />
+      <Routes>
+      <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
+      <Route path={"/addservice"} element={<AddService />} /> 
+      <Route path={"/getservice"} element={<GetService />} /> 
+      <Route path={"/editservice/:id"} element={<EditService />} />
+      <Route path={"/managecategory"} element={<ManageCategory />} /> 
+      </Routes>
+    </>
   ) : (
     <>
       <UserNav />
@@ -83,20 +96,17 @@ function App() {
       <Route path={"/register"} element={<Register />} />
       <Route path={"/login"} element={<Login />} />
       <Route path={"/verification"} element={<Verification />} />
+      
 
- 
-      <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
-      <Route path={"/addservice"} element={<AddService />} /> 
-      <Route path={"/getservice"} element={<GetService />} /> 
-      <Route path={"/editservice/:id"} element={<EditService />} />
-      <Route path={"/managecategory"} element={<ManageCategory />} /> 
     </Routes>
   </>
 )}
+
     </Container>
   </Router>
 </UserContext.Provider>
   );
 }
+
 
 export default App;
