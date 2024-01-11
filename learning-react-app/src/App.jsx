@@ -85,14 +85,7 @@ function App() {
       <Routes>
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/viewVouchers"} element={<ViewVouchers/>} />
-<<<<<<< HEAD
         <Route path={"/AddQueries"} element={<AddQueries/>} />
-=======
-
-
-
-
->>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
       </Routes>
     </>
   )

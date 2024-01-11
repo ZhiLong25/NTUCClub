@@ -46,33 +46,32 @@ namespace NTUCClub.Controllers
             _context.SaveChanges();
             return Ok(myQuery);
         }
-<<<<<<< HEAD
-        [HttpPut("QueryID/{id}")]
-=======
 
-        [HttpPost("Replyquery")]
-        public IActionResult ReplyQuery(Query query)
-        {
-            var existingQuery = _context.Queries.FirstOrDefault(q => q.Id == query.Id);
+  
 
-            if (existingQuery == null)
-            {
-                return NotFound(); // Return a 404 if the query is not found
-            }
+        //[HttpPost("Replyquery")]
+        //public IActionResult ReplyQuery(Query query)
+        //{
+        //    var existingQuery = _context.Queries.FirstOrDefault(q => q.Id == query.Id);
 
-            // Assuming you receive the query reply content in the 'query.QueryReply' property
-            existingQuery.QueryReply = query.QueryReply.Trim();
-            existingQuery.UpdatedAt = DateTime.Now;
+        //    if (existingQuery == null)
+        //    {
+        //        return NotFound(); // Return a 404 if the query is not found
+        //    }
 
-            _context.SaveChanges();
+        //    // Assuming you receive the query reply content in the 'query.QueryReply' property
+        //    existingQuery.QueryReply = query.QueryReply.Trim();
+        //    existingQuery.UpdatedAt = DateTime.Now;
 
-            return Ok(existingQuery);
-        }
+        //    _context.SaveChanges();
+
+        //    return Ok(existingQuery);
+        //}
 
 
 
         [HttpPut("QueryID")]
->>>>>>> ebdacb39a0bd6c2b0088d80ff7b717fa0adf7717
+
         public IActionResult UpdateQuery(int id, Query query)
         {
             var myQuery = _context.Queries.Where(x => x.Id == id).FirstOrDefault();

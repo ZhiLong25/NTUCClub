@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NTUCClub;
 
@@ -10,9 +11,11 @@ using NTUCClub;
 namespace NTUCClub.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240111030846_vendor")]
+    partial class vendor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -275,13 +278,11 @@ namespace NTUCClub.Migrations
 
             modelBuilder.Entity("NTUCClub.Models.Products.Service", b =>
                 {
-                    b.HasOne("NTUCClub.Models.Products.Category", "CatName")
+                    b.HasOne("NTUCClub.Models.Products.Category", null)
                         .WithMany("Services")
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CatName");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Voucher", b =>
