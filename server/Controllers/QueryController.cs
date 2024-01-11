@@ -46,6 +46,28 @@ namespace NTUCClub.Controllers
             _context.SaveChanges();
             return Ok(myQuery);
         }
+
+        [HttpPost("Replyquery")]
+        public IActionResult ReplyQuery(Query query)
+        {
+            var existingQuery = _context.Queries.FirstOrDefault(q => q.Id == query.Id);
+
+            if (existingQuery == null)
+            {
+                return NotFound(); // Return a 404 if the query is not found
+            }
+
+            // Assuming you receive the query reply content in the 'query.QueryReply' property
+            existingQuery.QueryReply = query.QueryReply.Trim();
+            existingQuery.UpdatedAt = DateTime.Now;
+
+            _context.SaveChanges();
+
+            return Ok(existingQuery);
+        }
+
+
+
         [HttpPut("QueryID")]
         public IActionResult UpdateQuery(int id, Query query)
         {

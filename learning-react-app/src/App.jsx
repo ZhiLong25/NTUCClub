@@ -90,6 +90,7 @@ function App() {
       <Route path={"/getservice"} element={<GetService />} /> 
       <Route path={"/editservice/:id"} element={<EditService />} />
       <Route path={"/managecategory"} element={<ManageCategory />} /> 
+      <Route path={"/addquery"} element={<addQuery />} />
     </Routes>
   </>
 )}
