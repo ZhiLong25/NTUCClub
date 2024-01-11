@@ -87,10 +87,14 @@ const columns = ['id', 'name', 'category', 'updatedAt'];
 
             <Grid item xs={3} md={3} lg={3}>
               <CardContent className="dashCard" style={{ background: "linear-gradient(to right, #FFEB3B, #FF9800)" }}>
-                <Typography className="topheader">Add Services</Typography>
+                <Typography className="topheader">Manage Services</Typography>
 
                 <Box>
                   <Link to="/addservice"><IconButton className="changeicon"><Add></Add></IconButton></Link>
+                </Box>
+
+                <Box>
+                  <Link to="/getservice"><IconButton className="changeicon"><Search></Search></IconButton></Link>
                 </Box>
 
               </CardContent>
@@ -122,12 +126,12 @@ const columns = ['id', 'name', 'category', 'updatedAt'];
         <Grid container spacing={2}>
           <Grid item xs={6} md={6} lg={6} >
             <CardContent className="addCard" style={{ border: "3px solid #E8533F",borderRadius: "5px", minHeight:"250px" }}>
-              <Typography variant="h6" className="topheader">Total Services</Typography>
-              <Typography variant="h6">{totalServices} Services</Typography>
-              <Typography variant="h6" className="topheader">Total Categories</Typography>
-              <Typography variant="h6">{totalCategory} Categories</Typography>
-              <Typography variant="h6" className="topheader">Total Vendors</Typography>
-              <Typography variant="h6">{totalVendors} Vendors</Typography>
+              <Typography className="topheader">Total Services</Typography>
+              <Typography ><span className='number-head'>{totalServices}</span> Services</Typography>
+              <Typography className="topheader">Total Categories</Typography>
+              <Typography ><span className='number-head'>{totalCategory}</span> Categories</Typography>
+              <Typography className="topheader">Total Vendors</Typography>
+              <Typography className=''><span className='number-head'>{totalVendors} </span>Vendors</Typography>
 
             </CardContent>
 
