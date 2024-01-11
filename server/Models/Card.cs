@@ -15,13 +15,13 @@ namespace NTUCClub.Models
 		public string Card_Name { get; set; } = string.Empty;
 
 		[Required, MaxLength(3)]
-		public string Cvv {  get; set; } = string.Empty;
+		public string Cvv { get; set; } = string.Empty;
 
-		[Required, MinLength(3), MaxLength(30)] 
+		[Required, MinLength(3), MaxLength(30)]
 		public string First_Name { get; set; } = string.Empty;
 
 		[Required, MinLength(3), MaxLength(50)]
-		public string Last_Name { get; set;} = string.Empty;
+		public string Last_Name { get; set; } = string.Empty;
 
 		[Column(TypeName = "datetime")]
 		public DateTime CreatedAt { get; set; }

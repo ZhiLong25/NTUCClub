@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace NTUCClub.Models.Products
 {
@@ -19,7 +20,11 @@ namespace NTUCClub.Models.Products
         [Column(TypeName = "datetime")]
         public DateTime? UpdatedAt { get; set; }
 
-        //// Navigation property for the Services relationship
-        //public List<Service> Services { get; set; }
+
+        // Navigation property to represent the one-to-many relationship
+        [JsonIgnore]
+        public List<Service>? Services { get; set; }
+
+
     }
 }

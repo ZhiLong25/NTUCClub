@@ -42,6 +42,7 @@ var mappingConfig = new MapperConfiguration(mc =>
 });
 IMapper mapper = mappingConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
+
 // Add CORS policy
 var allowedOrigins = builder.Configuration.GetSection(
 "AllowedOrigins").Get<string[]>();
@@ -55,6 +56,7 @@ builder.Services.AddCors(options =>
     .AllowAnyHeader();
     });
 });
+
 // Authentication
 var secret = builder.Configuration.GetValue<string>("Authentication:Secret");
 builder.Services
@@ -83,11 +85,15 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors();
+app.UseStaticFiles();
+
 app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllers();
-app.UseCors();
-app.UseStaticFiles();
+
+
+
 app.Run();

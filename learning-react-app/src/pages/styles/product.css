@@ -1,5 +1,17 @@
+
+
 .topheader {
-    
+    font-weight: bold!important;
+    font-size: 18px!important;
+}
+
+.number-head {
+    font-weight: bold!important;
+    color: red;
+}
+.image-insert {
+    display: block;
+    margin:auto;
 }
 
 .dashCard {

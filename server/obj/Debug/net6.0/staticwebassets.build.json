@@ -185,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\wAk9fliQuX.png"
+    },
+    {
+      "Identity": "C:\\Users\\Karst\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\zWBpQETm2e.jpg",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Karst\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+      "BasePath": "_content/NTUCClub",
+      "RelativePath": "uploads/zWBpQETm2e.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\zWBpQETm2e.jpg"
     }
   ]
 }

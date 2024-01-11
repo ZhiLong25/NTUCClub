@@ -8,7 +8,6 @@ using System.Text;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Asn1.Ocsp;
-using System.Threading.Channels;
 
 namespace NTUCClub.Controllers
 {
@@ -65,7 +64,7 @@ namespace NTUCClub.Controllers
                 ProfilePicture = request.ProfilePicture,
                 CreatedAt = now,
                 UpdatedAt = now,
-                UserType = "User"
+                UserType = "Merchant"
             };
             Console.WriteLine("Password:",user.Password);
             

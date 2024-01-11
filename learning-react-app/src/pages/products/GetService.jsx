@@ -36,7 +36,6 @@ function GetService() {
   useEffect(() => {
     http.get('/Product/getservice').then((res) => {
       getService();
-      setTotalService(res.data.length);
     });
   }, []);
 
@@ -50,30 +49,6 @@ function GetService() {
     searchServices();
   }
 
-  const [isDeleted, setIsDeleted] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-};
-const handleClose = () => {
-    setOpen(false);
-    setIsDeleted(false);
-};
-
-  const deleteService = () => {
-    http.delete(`/Product/deleteservice/${id}`)
-        .then((res) => {
-            console.log(res.data);
-            setIsDeleted(true);
-            setOpen(false);
-
-            setTimeout(() => {
-                navigate("");
-            }, 2000);
-
-        });
-};
 
 
   return (
@@ -99,6 +74,18 @@ const handleClose = () => {
               <Grid item xs={12} md={6} lg={4} key={services.id}>
                 <Card>
                   <CardContent>
+
+
+                    {
+                      services.image && (
+                        <Box className="aspect-ratio-container">
+                          <img alt="image"
+                            src={`${import.meta.env.VITE_FILE_BASE_URL}${services.image}`}>
+                          </img>
+                        </Box>
+                      )
+                    }
+
                     <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Services No. #{services.id}</Typography>
                     <Box sx={{ display: 'flex', mb: 1 }}>
                       <Typography variant="h6" sx={{ flexGrow: 1 }}>
@@ -111,11 +98,7 @@ const handleClose = () => {
 
 
                       </Link>
-                      <Link onClick={handleOpen}>
-                      <IconButton color="primary" sx={{ padding: '4px' }}>
-                          <Clear />
-                        </IconButton>
-                      </Link>
+
 
                     </Box>
 
@@ -132,46 +115,16 @@ const handleClose = () => {
               </Grid>
             );
           })
+
+
+
+
+          
         }
       </Grid>
 
 
-      <Dialog open={open} onClose={handleClose} >
-                <img src='https://cdn-icons-png.flaticon.com/512/3588/3588294.png' style={{minWidth:"20%"}} alt="warning" className='noti-icon' />
-
-                <DialogTitle>
-                    Delete Service
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Are you sure you want to delete this service?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-
-                    <Button variant="contained" color="error" className='noti-btn'
-                        onClick={deleteService}>
-                        Delete
-                    </Button>
-
-                </DialogActions>
-                <DialogActions>
-                    <Button variant="contained" color="inherit" className='noti-btn'
-                        onClick={handleClose}>
-                        Cancel
-                    </Button>
-                </DialogActions>
-
-            </Dialog>
-
-            <Dialog open={isDeleted} onClose={handleClose}>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/768px-Flat_tick_icon.svg.png" className='noti-icon' />
-
-                <DialogTitle>
-                    Service has been deleted
-                </DialogTitle>
-            </Dialog>
-
+      
 
 
     </Box>
