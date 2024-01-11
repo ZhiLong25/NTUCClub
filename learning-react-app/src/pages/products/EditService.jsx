@@ -13,7 +13,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 function EditService() {
-  const [services, setServices] = useState('');
+  const [services, setServices] = useState({}); 
   const [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
   const [imageFile, setImageFile] = useState('');
 
@@ -26,7 +26,6 @@ function EditService() {
       console.log(res.data);
       setServices(res.data);
     });
-
   }, []);
 
 
@@ -104,7 +103,7 @@ function EditService() {
   return (
     <Container>
       <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
-        Add Events / Services
+        Edit Events / Services
       </Typography>
 
       <Box component="form" onSubmit={formik.handleSubmit}>

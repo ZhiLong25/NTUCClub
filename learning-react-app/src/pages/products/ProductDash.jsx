@@ -32,20 +32,24 @@ const rows = [
 function ProductDash() {
 
   const [totalServices, setTotalServices] = useState(0);
+  const [totalCategory, setTotalCategory] = useState(0);
+  const [totalVendors, setTotalVendors] = useState(0);
 
   useEffect(() => {
-    http.get('/Product').then((res) => {
+    http.get('/Product/getproduct').then((res) => {
       setTotalServices(res.data.length);
     });
-  }, []);
 
-
-
-  useEffect(() => {
-    http.get('/Product').then((res) => {
-      setTotalServices(res.data.length);
+    http.get('/Category/getcategory').then((res) => {
+      setTotalCategory(res.data.length);
     });
+
+    http.get('/Vendor/getvendor').then((res) => {
+      setTotalVendors(res.data.length);
+    });
+
   }, []);
+
 
 
   return (
@@ -74,7 +78,7 @@ function ProductDash() {
           
 
             <Grid item xs={3} md={3} lg={3}>
-              <CardContent className="dashCard" style={{ background: "linear-gradient(to right, #38ef7d, #11998e )" }}>
+              <CardContent className="dashCard" style={{ background: "linear-gradient(to right, #FFEB3B, #FF9800)" }}>
                 <Typography className="topheader">Add Services</Typography>
 
                 <Box>
@@ -85,26 +89,21 @@ function ProductDash() {
             </Grid>
 
             <Grid item xs={3} md={3} lg={3}>
-              <CardContent className="dashCard" style={{ background: "linear-gradient(to right, #FFEB3B, #FF9800)" }}>
-                <Typography className="topheader">View Services</Typography>
-
-                <Box>
-                  <Link to="/getservice"><IconButton className="changeicon"><Search></Search></IconButton></Link>
-                </Box>
-
-              </CardContent>
-            </Grid>
-
-            <Grid item xs={3} md={3} lg={3}>
               <CardContent className="dashCard" style={{ background: "linear-gradient(to right, #7F00FF,#E100FF)" }}>
                 <Typography className="topheader">Manage Vendors</Typography>
 
                 <Box>
-                  <Link to="/getservice"><IconButton className="changeicon"><Search></Search></IconButton></Link>
+                  <Link to="/managevendor"><IconButton className="changeicon"><Search></Search></IconButton></Link>
                 </Box>
 
               </CardContent>
             </Grid>
+
+
+            <Grid item xs={3} md={3} lg={3}>
+
+            </Grid>
+
 
             
           </Grid>
@@ -118,9 +117,9 @@ function ProductDash() {
               <Typography variant="h6" className="topheader">Total Services</Typography>
               <Typography variant="h6">{totalServices} Services</Typography>
               <Typography variant="h6" className="topheader">Total Categories</Typography>
-              <Typography variant="h6">0</Typography>
+              <Typography variant="h6">{totalCategory} Categories</Typography>
               <Typography variant="h6" className="topheader">Total Vendors</Typography>
-              <Typography variant="h6">0</Typography>
+              <Typography variant="h6">{totalVendors} Vendors</Typography>
 
             </CardContent>
 

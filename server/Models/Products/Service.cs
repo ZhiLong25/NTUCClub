@@ -18,7 +18,7 @@ namespace NTUCClub.Models.Products
         public string Description { get; set; } = string.Empty;
 
         [Required]
-        public string Category { get; set; }
+        public string Category { get; set; } = string.Empty;
 
         [Required]
         public float Price { get; set; }
@@ -39,20 +39,11 @@ namespace NTUCClub.Models.Products
         [Column(TypeName = "datetime")]
         public DateTime UpdatedAt { get; set; }
 
-        
-
-        //// Navigation property for the Category relationship
-        //[ForeignKey("Category")]
-        //public int CategoryId { get; set; }
-        //[Required]
-        //public Category Category { get; set; }
-
-        //// Navigation property for the Reviews relationship
-        //public List<Reviews> Reviews { get; set; }
 
 
-        //// Navigation property for the UserActivity relationship
-        //public int UserActivityId { get; set; }
-        //public UserActivity UserActivity { get; set; }
+        [ForeignKey("CategoryID")]
+        public int CategoryID { get; set; }
+        //// Navigation property to represent the one-to-many relationship
+        //public Category? Category { get; set; }
     }
 }
