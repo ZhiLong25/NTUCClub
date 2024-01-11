@@ -401,7 +401,7 @@ namespace NTUCClub.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                })
+                });
             modelBuilder.Entity("NTUCClub.Models.Products.Service", b =>
                 {
                     b.HasOne("NTUCClub.Models.Products.Category", "Category")

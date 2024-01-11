@@ -3523,19 +3523,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Karst\\.nuget\\packages\\": {}
+    "D:\\Users\\222726y\\.nuget\\packages\\": {},
+    "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Karst\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\NTUCClub.csproj",
+      "projectUniqueName": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\NTUCClub.csproj",
       "projectName": "NTUCClub",
-      "projectPath": "C:\\Users\\Karst\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\NTUCClub.csproj",
-      "packagesPath": "C:\\Users\\Karst\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Karst\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\obj\\",
+      "projectPath": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\NTUCClub.csproj",
+      "packagesPath": "D:\\Users\\222726y\\.nuget\\packages\\",
+      "outputPath": "D:\\Users\\222726y\\Documents\\GitHub\\NTUCClub\\server\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Karst\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "D:\\Users\\222726y\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3619,7 +3624,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

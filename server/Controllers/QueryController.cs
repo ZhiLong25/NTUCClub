@@ -15,7 +15,7 @@ namespace NTUCClub.Controllers
            _context = context;
        }
 
-        [HttpGet("GetQueryID")]
+        [HttpGet("GetQueryID/{id}")]
         public IActionResult GetQuerybyID(int id)
         {
             var myQuery = _context.Queries.Where(x => x.Id == id);
@@ -46,7 +46,7 @@ namespace NTUCClub.Controllers
             _context.SaveChanges();
             return Ok(myQuery);
         }
-        [HttpPut("QueryID")]
+        [HttpPut("QueryID/{id}")]
         public IActionResult UpdateQuery(int id, Query query)
         {
             var myQuery = _context.Queries.Where(x => x.Id == id).FirstOrDefault();
@@ -73,7 +73,7 @@ namespace NTUCClub.Controllers
             _context.SaveChanges();
             return Ok();
         }
-        [HttpDelete("DeletequeryID")]
+        [HttpDelete("DeletequeryID/{id}")]
         public IActionResult DeleteQueryById(int id)
         {
             var myQuery = _context.Queries.FirstOrDefault(x => x.Id == id);
