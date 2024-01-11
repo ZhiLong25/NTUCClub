@@ -45,8 +45,6 @@ function App() {
   }, []);
 
 
-
-
   const logout = () => {
     localStorage.clear();
     window.location = "/";
@@ -78,6 +76,7 @@ function App() {
       <Route path={"/getservice"} element={<GetService />} /> 
       <Route path={"/editservice/:id"} element={<EditService />} />
       <Route path={"/managecategory"} element={<ManageCategory />} /> 
+      <Route path={"/managevendor"} element={<ManageVendor />} /> 
       </Routes>
     </>
   ) : (
@@ -86,6 +85,10 @@ function App() {
       <Routes>
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/viewVouchers"} element={<ViewVouchers/>} />
+
+
+
+
       </Routes>
     </>
   )
@@ -98,6 +101,12 @@ function App() {
       <Route path={"/login"} element={<Login />} />
       <Route path={"/verification"} element={<Verification />} />
       
+      <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
+      <Route path={"/addservice"} element={<AddService />} /> 
+      <Route path={"/getservice"} element={<GetService />} /> 
+      <Route path={"/editservice/:id"} element={<EditService />} />
+      <Route path={"/managecategory"} element={<ManageCategory />} /> 
+      <Route path={"/managevendor"} element={<ManageVendor />} /> 
 
     </Routes>
   </>
