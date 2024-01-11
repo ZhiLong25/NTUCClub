@@ -11,8 +11,8 @@ using NTUCClub;
 namespace NTUCClub.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240110125551_Alex")]
-    partial class Alex
+    [Migration("20240111042730_fk")]
+    partial class fk
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,6 +87,9 @@ namespace NTUCClub.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
@@ -127,6 +130,8 @@ namespace NTUCClub.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("Services");
                 });
 
@@ -156,41 +161,30 @@ namespace NTUCClub.Migrations
                     b.ToTable("UserActivities");
                 });
 
-            modelBuilder.Entity("NTUCClub.Models.Query", b =>
+            modelBuilder.Entity("NTUCClub.Models.Products.Vendor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Image")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("QueryDescription")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
-
-                    b.Property<string>("QuerySubject")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
-
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Queries");
+                    b.ToTable("Vendor");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.User", b =>
@@ -282,13 +276,15 @@ namespace NTUCClub.Migrations
                     b.ToTable("Vouchers");
                 });
 
-            modelBuilder.Entity("NTUCClub.Models.Query", b =>
+            modelBuilder.Entity("NTUCClub.Models.Products.Service", b =>
                 {
-                    b.HasOne("NTUCClub.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.HasOne("NTUCClub.Models.Products.Category", "CatName")
+                        .WithMany("Services")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("CatName");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Voucher", b =>
@@ -298,6 +294,11 @@ namespace NTUCClub.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NTUCClub.Models.Products.Category", b =>
+                {
+                    b.Navigation("Services");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.User", b =>

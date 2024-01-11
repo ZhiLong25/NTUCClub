@@ -41,9 +41,9 @@ namespace NTUCClub.Models.Products
 
 
 
-        [ForeignKey("CategoryID")]
+        [ForeignKey("Id")]
         public int CategoryID { get; set; }
-        //// Navigation property to represent the one-to-many relationship
-        //public Category? Category { get; set; }
+        // Navigation property to represent the one-to-many relationship
+        public Category? CatName { get; set; }
     }
 }

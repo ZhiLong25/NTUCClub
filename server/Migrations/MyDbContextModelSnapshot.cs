@@ -19,85 +19,6 @@ namespace NTUCClub.Migrations
                 .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("NTUCClub.Models.Card", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Card_Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
-                    b.Property<string>("Card_Number")
-                        .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("varchar(16)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Cvv")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("varchar(3)");
-
-                    b.Property<string>("First_Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
-                    b.Property<string>("Last_Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Cards");
-                });
-
-            modelBuilder.Entity("NTUCClub.Models.Cart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Activity_Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<float>("Activity_Price")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Cart");
-                });
-
             modelBuilder.Entity("NTUCClub.Models.Products.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -158,6 +79,10 @@ namespace NTUCClub.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
@@ -259,43 +184,6 @@ namespace NTUCClub.Migrations
                     b.ToTable("Vendor");
                 });
 
-            modelBuilder.Entity("NTUCClub.Models.Query", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("QueryDescription")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
-
-                    b.Property<string>("QuerySubject")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Queries");
-                });
-
             modelBuilder.Entity("NTUCClub.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -385,41 +273,15 @@ namespace NTUCClub.Migrations
                     b.ToTable("Vouchers");
                 });
 
-            modelBuilder.Entity("NTUCClub.Models.Card", b =>
-                {
-                    b.HasOne("NTUCClub.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("NTUCClub.Models.Cart", b =>
-                {
-                    b.HasOne("NTUCClub.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                })
             modelBuilder.Entity("NTUCClub.Models.Products.Service", b =>
                 {
-                    b.HasOne("NTUCClub.Models.Products.Category", "Category")
+                    b.HasOne("NTUCClub.Models.Products.Category", "CatName")
                         .WithMany("Services")
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("NTUCClub.Models.Query", b =>
-                {
-                    b.HasOne("NTUCClub.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
+                    b.Navigation("CatName");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Voucher", b =>

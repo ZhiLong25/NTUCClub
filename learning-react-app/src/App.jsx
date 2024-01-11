@@ -22,6 +22,8 @@ import UpdateVouchers from './pages/vouchers/updateVouchers';
 import VoucherDashboard from './pages/vouchers/voucherDashboard';
 import ViewVouchers from './pages/vouchers/viewVouchers';
 
+import AddCard from './pages/cards/addCard';
+
 import ProductDash from './pages/products/ProductDash';
 import AddService from './pages/products/AddService';
 import GetService from './pages/products/GetService';
@@ -86,6 +88,7 @@ function App() {
       <Routes>
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/viewVouchers"} element={<ViewVouchers/>} />
+        <Route path={"/addcard"} element={<AddCard/>} />
       </Routes>
     </>
   )

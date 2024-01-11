@@ -128,7 +128,7 @@ namespace NTUCClub.Controllers
 			}
 			_context.Cards.Remove(myCard);
 			_context.SaveChanges();
-			return Ok();	
+			return Ok();
 		}
 
 	}

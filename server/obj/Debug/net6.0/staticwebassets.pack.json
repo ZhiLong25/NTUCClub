@@ -5,10 +5,6 @@
       "PackagePath": "staticwebassets\\uploads\\7cmVU_8OjE.png"
     },
     {
-      "Id": "C:\\Users\\Karst\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\AMnqjHiU9A.jpeg",
-      "PackagePath": "staticwebassets\\uploads\\AMnqjHiU9A.jpeg"
-    },
-    {
       "Id": "C:\\Users\\Karst\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\FBaJ9bLkt7.png",
       "PackagePath": "staticwebassets\\uploads\\FBaJ9bLkt7.png"
     },
@@ -35,6 +31,10 @@
     {
       "Id": "C:\\Users\\Karst\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\wAk9fliQuX.png",
       "PackagePath": "staticwebassets\\uploads\\wAk9fliQuX.png"
+    },
+    {
+      "Id": "C:\\Users\\Karst\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\zWBpQETm2e.jpg",
+      "PackagePath": "staticwebassets\\uploads\\zWBpQETm2e.jpg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.NTUCClub.Microsoft.AspNetCore.StaticWebAssets.props",

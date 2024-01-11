@@ -11,12 +11,6 @@ namespace NTUCClub.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Category",
-                table: "Services",
-                type: "longtext",
-                nullable: false);
-
             migrationBuilder.AddColumn<float>(
                 name: "MemPrice",
                 table: "Services",
@@ -46,10 +40,6 @@ namespace NTUCClub.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Category",
-                table: "Services");
-
             migrationBuilder.DropColumn(
                 name: "MemPrice",
                 table: "Services");

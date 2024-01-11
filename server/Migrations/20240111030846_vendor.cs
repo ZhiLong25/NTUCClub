@@ -7,11 +7,24 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace NTUCClub.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialVendor : Migration
+    public partial class vendor : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<string>(
+                name: "Category",
+                table: "Services",
+                type: "longtext",
+                nullable: false);
+
+            migrationBuilder.AddColumn<int>(
+                name: "CategoryID",
+                table: "Services",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
             migrationBuilder.CreateTable(
                 name: "Vendor",
                 columns: table => new
@@ -28,13 +41,42 @@ namespace NTUCClub.Migrations
                     table.PrimaryKey("PK_Vendor", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Services_CategoryID",
+                table: "Services",
+                column: "CategoryID");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Services_Category_CategoryID",
+                table: "Services",
+                column: "CategoryID",
+                principalTable: "Category",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Services_Category_CategoryID",
+                table: "Services");
+
             migrationBuilder.DropTable(
                 name: "Vendor");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Services_CategoryID",
+                table: "Services");
+
+            migrationBuilder.DropColumn(
+                name: "Category",
+                table: "Services");
+
+            migrationBuilder.DropColumn(
+                name: "CategoryID",
+                table: "Services");
         }
     }
 }

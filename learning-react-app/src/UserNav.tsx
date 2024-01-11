@@ -74,6 +74,11 @@ export default function UserNav() {
                     subLabel: 'Update your personal details',
                     href: user ? `/updateprofile/${user.id}` : '/login',
                 },
+                {
+                    label: 'Card Information',
+                    subLabel: 'Update your card details',
+                    href: '/addCard',
+                },
                 
             ],
         },
