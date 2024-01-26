@@ -8,6 +8,7 @@ using System.Text;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Asn1.Ocsp;
+using System.Threading.Channels;
 
 namespace NTUCClub.Controllers
 {
@@ -64,10 +65,10 @@ namespace NTUCClub.Controllers
                 ProfilePicture = request.ProfilePicture,
                 CreatedAt = now,
                 UpdatedAt = now,
-                UserType = "Merchant"
+                UserType = "User"
             };
-            Console.WriteLine("Password:",user.Password);
-            
+            Console.WriteLine("Password:", user.Password);
+
 
             return Ok(user);
         }
@@ -127,10 +128,10 @@ namespace NTUCClub.Controllers
         public IActionResult Delete(int id)
         {
             var foundUser = _context.Users.Where(
-            x => x.Id== id).FirstOrDefault();
+            x => x.Id == id).FirstOrDefault();
             string message = "Account is not found.";
 
-                Console.WriteLine("null");
+            Console.WriteLine("null");
             if (foundUser == null)
             {
                 return BadRequest(new { message });
@@ -214,12 +215,13 @@ namespace NTUCClub.Controllers
             }
             else
             {
-                
+
                 return Ok(foundUser);
             }
         }
         [HttpGet("userdetails/{id}")]
-        public IActionResult userdetails(int id) {
+        public IActionResult userdetails(int id)
+        {
             var foundUser = _context.Users.Where(
                 x => x.Id == id).FirstOrDefault();
             if (foundUser == null)
@@ -232,9 +234,9 @@ namespace NTUCClub.Controllers
         [HttpPut("securitydetails/{id}")]
         public IActionResult ChangePassword(int id, UpdatePassword password)
         {
-            
+
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(password.Password.Trim());
-            
+
             var foundUser = _context.Users.Where(
                 x => x.Id == id).FirstOrDefault();
             Console.WriteLine(foundUser.Password);
@@ -247,7 +249,8 @@ namespace NTUCClub.Controllers
 
         }
         [HttpPut("updateDetails/{id}")]
-        public IActionResult updateDetails(int id, User info) {
+        public IActionResult updateDetails(int id, User info)
+        {
             Console.WriteLine(info.ProfilePicture);
             var foundUser = _context.Users.Where(
                 x => x.Id == id).FirstOrDefault();
@@ -273,7 +276,7 @@ namespace NTUCClub.Controllers
             {
                 foundUser.ProfilePicture = info.ProfilePicture;
             }
-            
+
             _context.SaveChanges();
             return Ok();
         }
@@ -296,7 +299,7 @@ namespace NTUCClub.Controllers
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Upn , user.UserType)
-            }) ,
+            }),
                 Expires = DateTime.UtcNow.AddDays(tokenExpiresDays),
                 SigningCredentials = new SigningCredentials(
             new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -321,7 +324,7 @@ namespace NTUCClub.Controllers
             .Select(c => c.Value).SingleOrDefault();
             if (id != 0 && name != null && email != null)
             {
-                UserDTO userDTO = new() { Id = id, Name = name, Email = email,UserType = usertype };
+                UserDTO userDTO = new() { Id = id, Name = name, Email = email, UserType = usertype };
                 AuthResponse response = new() { User = userDTO };
                 return Ok(response);
             }
@@ -330,7 +333,38 @@ namespace NTUCClub.Controllers
                 return Unauthorized();
             }
         }
+        [HttpPut("claim/{id}/{VoucherId}")]
+        public IActionResult Claim(int id, int VoucherId)
+        {
+            // Find the user with the specified ID
+            var foundUser = _context.Users.FirstOrDefault(x => x.Id == id);
 
+            // Check if the user exists
+            if (foundUser == null)
+            {
+                return NotFound($"User with ID {id} not found");
+            }
+
+            // Find the voucher with the specified ID
+            var foundVoucher = _context.Vouchers.FirstOrDefault(x => x.Id == VoucherId);
+
+            // Check if the voucher exists
+            if (foundVoucher == null)
+            {
+                return NotFound($"Voucher with ID {foundVoucher.Id} not found");
+            }
+
+            // Create a new list of vouchers containing only the found voucher
+            foundUser.Vouchers = foundUser.Vouchers ?? new List<Voucher>();
+            foundUser.Vouchers.Add(foundVoucher);
+
+            // Save changes to the database
+            _context.SaveChanges();
+
+            return Ok("Claim operation completed successfully");
         }
 
+
     }
+
+}

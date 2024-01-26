@@ -52,11 +52,7 @@ namespace NTUCClub.Controllers
         public IActionResult GetAll(string? search)
         {
             IQueryable<Voucher> result = _context.Vouchers;
-            if (search != null)
-            {
-                result = result.Where(x => x.Voucher_Name.Contains(search)
-                || x.Voucher_Details.Contains(search));
-            }
+            
             var list = result.OrderByDescending(x => x.CreatedAt).ToList();
             return Ok(list);
         }

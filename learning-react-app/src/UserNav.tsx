@@ -90,6 +90,7 @@ export default function UserNav() {
                     subLabel: 'To get activites at a discounted price, click here!',
                     href: '/viewVouchers',
                 },
+                
 
             ],
         },

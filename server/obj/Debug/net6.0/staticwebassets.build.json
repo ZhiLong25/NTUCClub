@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zoAqx8+g66wGOrvaHVLm8DuhjQBA0dMgEd+h9fauzsc=",
+  "Hash": "BMPuLauONieIkw8H+IT/z2KqfWVedYzHnHwTuCLmigo=",
   "Source": "NTUCClub",
   "BasePath": "_content/NTUCClub",
   "Mode": "Default",
@@ -32,40 +32,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\7cmVU_8OjE.png"
-    },
-    {
-      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\89DMN_npup.png",
-      "SourceId": "NTUCClub",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
-      "BasePath": "_content/NTUCClub",
-      "RelativePath": "uploads/89DMN_npup.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\89DMN_npup.png"
-    },
-    {
-      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\AMnqjHiU9A.jpeg",
-      "SourceId": "NTUCClub",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
-      "BasePath": "_content/NTUCClub",
-      "RelativePath": "uploads/AMnqjHiU9A.jpeg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\AMnqjHiU9A.jpeg"
     },
     {
       "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\defaultPfp.png",
@@ -187,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\wAk9fliQuX.png"
     },
     {
-      "Identity": "C:\\Users\\Karst\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\zWBpQETm2e.jpg",
+      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\zWBpQETm2e.jpg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Karst\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/zWBpQETm2e.jpg",
       "AssetKind": "All",

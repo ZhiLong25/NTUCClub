@@ -15,10 +15,10 @@ namespace NTUCClub.Models
         public string Voucher_Details { get; set; } = string.Empty;
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Voucher_Quantity must be greater than or equal to 1.")]
-        public int Voucher_Quantity { get; set; } 
+        public int Voucher_Quantity { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime Voucher_Validity { get; set; } 
-        public int? Activity_ID { get; set; } 
+        public DateTime Voucher_Validity { get; set; }
+        public int? Activity_ID { get; set; }
         public int User_ID { get; set; }
 
         [Column(TypeName = "datetime")]
@@ -27,6 +27,8 @@ namespace NTUCClub.Models
         [Column(TypeName = "datetime")]
         public DateTime UpdatedAt { get; set; }
         // Navigation property to represent the one-to-many relationship
+        [ForeignKey("UserId")]
         public User? User { get; set; }
     }
+
 }
