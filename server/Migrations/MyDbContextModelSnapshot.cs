@@ -42,7 +42,7 @@ namespace NTUCClub.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Reviews", b =>
@@ -71,7 +71,7 @@ namespace NTUCClub.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Service", b =>
@@ -129,7 +129,7 @@ namespace NTUCClub.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Products.UserActivity", b =>
@@ -155,7 +155,7 @@ namespace NTUCClub.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserActivities");
+                    b.ToTable("UserActivities", (string)null);
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Vendor", b =>
@@ -181,7 +181,7 @@ namespace NTUCClub.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vendor");
+                    b.ToTable("Vendor", (string)null);
                 });
 
             modelBuilder.Entity("NTUCClub.Models.User", b =>
@@ -226,7 +226,7 @@ namespace NTUCClub.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Voucher", b =>
@@ -270,7 +270,7 @@ namespace NTUCClub.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Vouchers");
+                    b.ToTable("Vouchers", (string)null);
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Service", b =>
