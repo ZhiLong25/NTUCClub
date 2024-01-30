@@ -13,6 +13,9 @@ namespace NTUCClub.Models
 
         [Required, MinLength(3), MaxLength(500)]
         public string Voucher_Details { get; set; } = string.Empty;
+
+        public string? Voucher_Image { get; set; } = string.Empty;
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Voucher_Quantity must be greater than or equal to 1.")]
         public int Voucher_Quantity { get; set; }

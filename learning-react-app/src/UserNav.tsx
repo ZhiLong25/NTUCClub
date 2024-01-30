@@ -218,7 +218,7 @@ export default function UserNav() {
                                 minW={0}>
                                 <Avatar
                                     size={'sm'}
-                                    src={`${import.meta.env.VITE_FILE_BASE_URL}${user?.profilePicture}`}
+                                    // src={`${import.meta.env.VITE_FILE_BASE_URL}${user?.profilePicture}`}
                                 />
                             </MenuButton>
                         </Menu>

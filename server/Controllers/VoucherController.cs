@@ -67,6 +67,7 @@ namespace NTUCClub.Controllers
             {
                 Voucher_Name = voucher.Voucher_Name.Trim(),
                 Voucher_Details = voucher.Voucher_Details.Trim(),
+                Voucher_Image = voucher.Voucher_Image,
                 Voucher_Quantity = voucher.Voucher_Quantity,
                 Voucher_Validity = voucher.Voucher_Validity,
                 Activity_ID = voucher.Activity_ID,
@@ -79,35 +80,39 @@ namespace NTUCClub.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateVoucher (int id, Voucher voucher)
+        public IActionResult UpdateVoucher(int id, Voucher voucher)
         {
-            var myVoucher = _context.Vouchers.Where(x => x.Id== id).FirstOrDefault(); 
+            var myVoucher = _context.Vouchers.Where(x => x.Id == id).FirstOrDefault();
             if (myVoucher == null)
             {
                 return NotFound();
             }
-            if (voucher.Voucher_Details!= null)
-            {
-               myVoucher.Voucher_Details = voucher.Voucher_Details.Trim();
 
+            if (voucher.Voucher_Details != null)
+            {
+                myVoucher.Voucher_Details = voucher.Voucher_Details.Trim();
             }
-            if (voucher.Voucher_Name!= null) 
+
+            if (voucher.Voucher_Name != null)
             {
                 myVoucher.Voucher_Name = voucher.Voucher_Name.Trim();
-
             }
+
             if (voucher.Voucher_Validity != null)
             {
                 myVoucher.Voucher_Validity = voucher.Voucher_Validity;
             }
+
             if (voucher.Voucher_Quantity != null)
             {
                 myVoucher.Voucher_Quantity = voucher.Voucher_Quantity;
             }
+
             myVoucher.UpdatedAt = DateTime.Now;
             _context.SaveChanges();
             return Ok();
         }
+
 
         [HttpDelete("deletebyID/{id}")]
         public IActionResult DeleteVoucherbyId(int id)
