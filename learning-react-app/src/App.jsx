@@ -33,6 +33,7 @@ import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import Addadmin from './pages/users/Addadmin';
 import Accounts from './pages/users/accounts';
+import RegisterGoogle from "./pages/users/RegisterGoogle"
 import "./pages/styles/chatbot.css"
 // import "./script"
 import Faq from './pages/Faq';
@@ -48,6 +49,7 @@ function App() {
     }
   }, []);
 
+  
   return (
     <UserContext.Provider value={{ user, setUser }}>
   <Router>
@@ -101,6 +103,7 @@ function App() {
       <Route path={"/login"} element={<Login />} />
       <Route path={"/verification"} element={<Verification />} />
       <Route path={"/AddQueries"} element={<AddQueries />} />
+      <Route path={"/RegisterGoogle"} element={<RegisterGoogle />} />
       
       <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
       <Route path={"/addservice"} element={<AddService />} /> 
