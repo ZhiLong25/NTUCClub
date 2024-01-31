@@ -124,10 +124,10 @@ function AddService() {
               {
                 imageFile ? (
                   <Box className="aspect-ratio-container" sx={{ mt: 2 }}>
-                    <img alt="tutorial" src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`} />
+                    <img alt="product" src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`} className='image-insert' />
                   </Box>
                 ) : (
-                  <img src={placeholder} alt="placeholder" />
+                  <img src={placeholder} alt="placeholder" className='image-insert' />
                 )
               }
 
@@ -139,18 +139,18 @@ function AddService() {
           </Grid>
 
           <Grid item xs={8} md={8} lg={8} >
+            <InputLabel>Title</InputLabel>
             <TextField
               fullWidth margin="normal" autoComplete="off"
-              label="Title"
               name="name"
               value={formik.values.name}
               onChange={formik.handleChange}
               error={formik.touched.name && Boolean(formik.errors.name)}
               helperText={formik.touched.name && formik.errors.name}
             />
-
+            <InputLabel>Description</InputLabel>
             <ReactQuill
-              style={{ borderRadius: "5px" }}
+              style={{ borderRadius: "5px", marginBottom: "10px" }}
               value={formik.values.description}
               onChange={(value) => formik.setFieldValue('description', value)}
               modules={{
@@ -174,7 +174,7 @@ function AddService() {
               <div class="css-1wc848c-MuiFormHelperText-root" style={{ color: '#D32F2F' }}>{formik.errors.description}</div>
             )}
 
-
+            <InputLabel>Vendors</InputLabel>
             <Select
               style={{ marginTop: "15px" }}
               fullWidth margin="normal"
@@ -196,10 +196,9 @@ function AddService() {
               ))}
             </Select>
 
-
+            <InputLabel>TimeSlots</InputLabel>
             <TextField
               fullWidth margin='normal' autoComplete='off'
-              label='Timeslots'
               name='timeslots'
               value={formik.values.timeslots}
               onChange={formik.handleChange}
@@ -208,11 +207,10 @@ function AddService() {
             />
 
             <Grid container spacing={2}>
-
               <Grid item xs={4} md={4} lg={4} >
+              <InputLabel>Price</InputLabel>
                 <TextField
                   fullWidth margin='normal' autoComplete='off'
-                  label="Price"
                   name='price'
                   type="number"
                   value={formik.values.price}
@@ -224,9 +222,9 @@ function AddService() {
               </Grid>
 
               <Grid item xs={4} md={4} lg={4} >
+              <InputLabel>Slots</InputLabel>
                 <TextField
                   fullWidth margin='normal' autoComplete='off'
-                  label="Slots"
                   name='slots'
                   type="number"
                   value={formik.values.slots}
@@ -237,12 +235,10 @@ function AddService() {
 
               </Grid>
 
-
-
               <Grid item xs={4} md={4} lg={4} >
-
+              <InputLabel>Category</InputLabel>
                 <Select
-                  style={{ marginTop: "15px" }}
+                  style={{ marginTop: "15px", marginBottom: "10px" }}
                   fullWidth margin="normal"
                   labelId="category-label"
                   id="category"
@@ -279,17 +275,15 @@ function AddService() {
                   margin="normal"
                   autoComplete="off"
                   label="Member Price"
-                  name="memprice"
+                  name="memPrice"
                   type="number"
-                  value={formik.values.memprice}
+                  value={formik.values.memPrice}
                   onChange={formik.handleChange}
-                  error={formik.touched.memprice && Boolean(formik.errors.memprice)}
-                  helperText={formik.touched.memprice && formik.errors.memprice}
+                  error={formik.touched.memPrice && Boolean(formik.errors.memPrice)}
+                  helperText={formik.touched.memPrice && formik.errors.memPrice}
                 />
               </Grid>
             )}
-
-
 
             <Box sx={{ mt: 2 }}>
               <Button variant="contained" type="submit" className='addbtn'>
@@ -299,9 +293,6 @@ function AddService() {
 
           </Grid>
         </Grid>
-
-
-
 
       </Box>
 

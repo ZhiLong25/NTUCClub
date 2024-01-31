@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AccessTime, Search, Clear, Edit } from '@mui/icons-material';
 
-import { Container, Box, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, IconButton,InputLabel, Select, MenuItem, Grid } from '@mui/material';
+import { Container, Box, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, IconButton, InputLabel, Select, MenuItem, Grid } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
@@ -18,7 +18,7 @@ import placeholder from './media/placeholder.png';
 
 function EditService() {
 
-  const [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
+  var [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
   const [imageFile, setImageFile] = useState('');
   const [vendorList, setVendorList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
@@ -34,13 +34,24 @@ function EditService() {
     timeSlots: "",
     vendor: "",
     slots: "",
-    category: ""
+    category: "",
+    memPrice: ""
   });
 
   useEffect(() => {
     http.get(`/Product/getservice/${id}`).then((res) => {
       console.log(res.data);
       setServices(res.data);
+
+      if (res.data.memPrice != null) {
+          setIsMemberPriceVisible(true)
+
+      }
+
+      if (res.data.image) {
+        setImageFile(res.data.image);
+      }
+
     });
 
     http.get('/Vendor/getvendor').then((res) => {
@@ -82,7 +93,6 @@ function EditService() {
     initialValues: services,
     enableReinitialize: true,
 
-
     validationSchema: yup.object().shape({
       name: yup.string().trim()
         .min(3, "Name must be at least 3 characters")
@@ -112,6 +122,7 @@ function EditService() {
     onSubmit: (data) => {
       if (imageFile) {
         data.image = imageFile;
+
       }
       console.log("Submit button clicked");
       http.put(`/Product/updateservice/${id}`, data)
@@ -142,7 +153,7 @@ function EditService() {
         setOpen(false);
 
         setTimeout(() => {
-          navigate("");
+          navigate("/productdash");
         }, 2000);
 
       });
@@ -163,10 +174,10 @@ function EditService() {
               {
                 imageFile ? (
                   <Box className="aspect-ratio-container" sx={{ mt: 2 }}>
-                    <img alt="tutorial" src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`} />
+                    <img alt="product" src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`} className='image-insert' />
                   </Box>
                 ) : (
-                  <img src={placeholder} alt="placeholder" />
+                  <img src={placeholder} alt="placeholder" className='image-insert' />
                 )
               }
 
@@ -176,18 +187,19 @@ function EditService() {
               </Button>
             </Box>
           </Grid>
-            
+
           <Grid item xs={8} md={8} lg={8} >
 
-          <Link onClick={handleOpen} style={{float:"right"}}>
-                        <IconButton color="primary" sx={{ padding: '4px' }}>
-                          <Clear />
-                        </IconButton>
-                      </Link>
+            <Link onClick={handleOpen} style={{ float: "right" }}>
+              <IconButton color="primary" sx={{ padding: '4px' }}>
+                <Clear />
+              </IconButton>
+            </Link>
+              
 
+            <InputLabel>Title</InputLabel>
             <TextField
               fullWidth margin="normal" autoComplete="off"
-              label="Title"
               name="name"
               value={formik.values.name}
               onChange={formik.handleChange}
@@ -195,8 +207,9 @@ function EditService() {
               helperText={formik.touched.name && formik.errors.name}
             />
 
+          <InputLabel>Description</InputLabel>
             <ReactQuill
-              style={{ borderRadius: "5px" }}
+              style={{ borderRadius: "5px", marginBottom: "10px" }}
               value={formik.values.description}
               onChange={(value) => formik.setFieldValue('description', value)}
               modules={{
@@ -220,9 +233,9 @@ function EditService() {
               <div class="css-1wc848c-MuiFormHelperText-root" style={{ color: '#D32F2F' }}>{formik.errors.description}</div>
             )}
 
-
+<InputLabel>Vendor</InputLabel>
             <Select
-              style={{ marginTop: "15px" }}
+              style={{ marginTop: "15px", marginBottom: "15px" }}
               fullWidth margin="normal"
               labelId="vendor-label"
               id="vendor"
@@ -241,7 +254,7 @@ function EditService() {
                 </MenuItem>
               ))}
             </Select>
-
+            <InputLabel>TimeSlots</InputLabel>
             <TextField
               fullWidth margin='normal' autoComplete='off'
               label='Timeslots'
@@ -254,9 +267,9 @@ function EditService() {
             <Grid container spacing={2}>
 
               <Grid item xs={4} md={4} lg={4} >
+              <InputLabel>Price</InputLabel>
                 <TextField
                   fullWidth margin='normal' autoComplete='off'
-                  label="Price"
                   name='price'
                   type="number"
                   value={formik.values.price}
@@ -268,7 +281,9 @@ function EditService() {
               </Grid>
 
               <Grid item xs={4} md={4} lg={4} >
+              <InputLabel>Slots</InputLabel>
                 <TextField
+                
                   fullWidth margin='normal' autoComplete='off'
                   label="Slots"
                   name='slots'
@@ -284,6 +299,7 @@ function EditService() {
 
 
               <Grid item xs={4} md={4} lg={4} >
+              <InputLabel>Category</InputLabel>
                 <Select
                   style={{ marginTop: "15px" }}
                   fullWidth margin="normal"
@@ -310,9 +326,11 @@ function EditService() {
 
 
             <FormControlLabel
-              control={<Switch onChange={(e) => setIsMemberPriceVisible(e.target.checked)} />}
+              control={<Switch checked={{ isMemberPriceVisible}} onChange={(e) => setIsMemberPriceVisible(e.target.checked)} />}
               label="Member Price"
             />
+
+
 
             {isMemberPriceVisible && (
               <Grid item xs={4} md={4} lg={4}>
@@ -323,19 +341,16 @@ function EditService() {
                   label="Member Price"
                   name="memprice"
                   type="number"
-                  value={formik.values.memprice}
+                  value={formik.values.memPrice}
                   onChange={formik.handleChange}
-                  error={formik.touched.memprice && Boolean(formik.errors.memprice)}
-                  helperText={formik.touched.memprice && formik.errors.memprice}
+                  error={formik.touched.memPrice && Boolean(formik.errors.memPrice)}
+                  helperText={formik.touched.memPrice && formik.errors.memPrice}
                 />
               </Grid>
             )}
 
 
             <Box sx={{ mt: 2 }}>
-
-
-
               <Button variant="contained" type="submit" className='addbtn'>
                 Make Changes
               </Button>
@@ -346,40 +361,40 @@ function EditService() {
 
 
         <Dialog open={open} onClose={handleClose} >
-        <img src='https://cdn-icons-png.flaticon.com/512/3588/3588294.png' style={{ minWidth: "20%" }} alt="warning" className='noti-icon' />
+          <img src='https://cdn-icons-png.flaticon.com/512/3588/3588294.png' style={{ minWidth: "20%" }} alt="warning" className='noti-icon' />
 
-        <DialogTitle>
-          Delete Service
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you sure you want to delete this service?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
+          <DialogTitle>
+            Delete Service
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to delete this service?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
 
-          <Button variant="contained" color="error" className='noti-btn'
-            onClick={deleteService}>
-            Delete
-          </Button>
+            <Button variant="contained" color="error" className='noti-btn'
+              onClick={deleteService}>
+              Delete
+            </Button>
 
-        </DialogActions>
-        <DialogActions>
-          <Button variant="contained" color="inherit" className='noti-btn'
-            onClick={handleClose}>
-            Cancel
-          </Button>
-        </DialogActions>
+          </DialogActions>
+          <DialogActions>
+            <Button variant="contained" color="inherit" className='noti-btn'
+              onClick={handleClose}>
+              Cancel
+            </Button>
+          </DialogActions>
 
-      </Dialog>
+        </Dialog>
 
-      <Dialog open={isDeleted} onClose={handleClose}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/768px-Flat_tick_icon.svg.png" className='noti-icon' />
+        <Dialog open={isDeleted} onClose={handleClose}>
+          <img style={{ padding: "20px" }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/768px-Flat_tick_icon.svg.png" className='noti-icon' />
 
-        <DialogTitle>
-          Service has been deleted
-        </DialogTitle>
-      </Dialog>
+          <DialogTitle>
+            Service has been deleted
+          </DialogTitle>
+        </Dialog>
 
 
 

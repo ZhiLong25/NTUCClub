@@ -32,6 +32,8 @@ import ManageVendor from './pages/products/ManageVendor';
 import AddQueries from "./pages/queries/AddQueries"
 import Addadmin from './pages/users/Addadmin';
 import Adminaccounts from './pages/users/Adminaccounts';
+import ProductsPage from './pages/products/ProductsPage';
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -100,13 +102,7 @@ function App() {
       <Route path={"/login"} element={<Login />} />
       <Route path={"/verification"} element={<Verification />} />
       <Route path={"/AddQueries"} element={<AddQueries />} />
-      
-      <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
-      <Route path={"/addservice"} element={<AddService />} /> 
-      <Route path={"/getservice"} element={<GetService />} /> 
-      <Route path={"/editservice/:id"} element={<EditService />} />
-      <Route path={"/managecategory"} element={<ManageCategory />} /> 
-      <Route path={"/managevendor"} element={<ManageVendor />} /> 
+    
 
  
       <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
@@ -114,6 +110,9 @@ function App() {
       <Route path={"/getservice"} element={<GetService />} /> 
       <Route path={"/editservice/:id"} element={<EditService />} />
       <Route path={"/managecategory"} element={<ManageCategory />} /> 
+      <Route path={"/productspage"} element={< ProductsPage/>} />
+
+
       <Route path={"/addquery"} element={<addQuery />} />
     </Routes>
   </>

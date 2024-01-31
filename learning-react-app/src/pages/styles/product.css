@@ -5,6 +5,20 @@
     font-size: 18px!important;
 }
 
+.css-9npbnl-MuiFormLabel-root-MuiInputLabel-root {
+    color: black!important;
+}
+
+.noti-icon {
+    width: 20%;
+    display: block;
+    margin:auto
+}
+
+.noti-btn {
+    width: 100%;
+}
+
 .number-head {
     font-weight: bold!important;
     color: red;
