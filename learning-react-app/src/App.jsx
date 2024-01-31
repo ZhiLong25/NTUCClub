@@ -32,7 +32,7 @@ import ManageVendor from './pages/products/ManageVendor';
 import AddQueries from "./pages/queries/AddQueries"
 import Addadmin from './pages/users/Addadmin';
 import Accounts from './pages/users/accounts';
-import RegisterGoogle from "./pages/users/RegisterGoogle.jsx"
+import RegisterGoogle from "./pages/users/RegisterGoogle"
 import "./pages/styles/chatbot.css"
 // import "./script"
 import Faq from './pages/Faq';

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -22,6 +22,7 @@ function RegisterGoogle() {
         borderRadius: '50%',
 
     };
+    const [existingData,setExistingData] = useState(null)
     const [type1, setType1] = useState("password");
     const [icon1, setIcon1] = useState(eyeOff);
 
@@ -49,7 +50,6 @@ function RegisterGoogle() {
   };
     const formik = useFormik({
         initialValues: {
-           
             password: "",
             confirmPassword: "",
             phone:""
@@ -72,22 +72,28 @@ function RegisterGoogle() {
                 .matches(/^[0-9]+$/,"Phone number can only be numbers")
         }),
         onSubmit: (data) => {
-            data.name = data.name.trim();
-            data.email = data.email.trim().toLowerCase();
+
             data.password = data.password.trim();
-            data.ProfilePicture = "defaultPfp.png"
-            http.post("/user/register", data)
+            data.Name = existingData.name.trim();
+            data.Email = existingData.email.trim();
+            data.ProfilePicture = existingData.picture
+            console.log(data)
+            http.post("/User/register/user", data)
                 .then((res) => {
-                    console.log(res.data);
-                    localStorage.setItem('userData', JSON.stringify(res.data));
-                    navigate("/verification")
+                    localStorage.setItem("accessToken", res.data.accessToken);
+                    setUser(res.data.user);
+                    navigate("/")
                 })
                 .catch(function (err) {
                     toast.error(`${err.response.data.message}`);
                 });
         }
     });
-
+    useEffect(()=>{
+        var existingdatastr = localStorage.getItem('userDatagoogle')
+        console.log(JSON.parse(existingdatastr))
+        setExistingData(JSON.parse(existingdatastr))
+    },[])
     return (
         <Box sx={{
             height:"40rem"
@@ -111,32 +117,7 @@ function RegisterGoogle() {
             </Typography>
             <Box component="form" sx={{ maxWidth: '500px' }}
                 onSubmit={formik.handleSubmit}>
-                <TextField
-                    fullWidth margin="dense" autoComplete="off"
-                    label={ <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <PersonIcon style={{ marginRight: 8 }} />
-                    Name
-                </div>}
-                    name="name"
-                    value={formik.values.name}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.name && Boolean(formik.errors.name)}
-                    helperText={formik.touched.name && formik.errors.name}
-                />
-                <TextField
-                    fullWidth margin="dense" autoComplete="off"
-                    label={<div style={{ display: 'flex', alignItems: 'center' }}>
-                    <EmailIcon style={{ marginRight: 8 }} />
-                    Email
-                </div>}
-                    name="email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
-                />
+                
                 <div style={{display:"flex",flexDirection:"row",position:"relative",width:"100%"}}>
                         <TextField
                             

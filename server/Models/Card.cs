@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NTUCClub.Models.user;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NTUCClub.Models
 {
-	public class Card
+    public class Card
 	{
 		public int Id { get; set; }
 

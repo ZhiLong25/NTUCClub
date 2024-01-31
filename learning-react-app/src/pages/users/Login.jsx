@@ -141,7 +141,7 @@ function Login() {
         var email = userObject.email;
         //need check if account exist or not
         http.get(`user/findemail/${email}`).then((res)=>{
-            http.post("/user/login", res.data).then((res)=>{
+             http.post("/user/login", res.data).then((res)=>{
                 console.log("logging in")
                 localStorage.setItem("accessToken", res.data.accessToken);
                 setUser(userObject);

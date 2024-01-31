@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using NTUCClub.Models;
+
 namespace NTUCClub
 {
     public class MappingProfile : Profile

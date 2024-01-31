@@ -99,8 +99,13 @@ export default function UserNav() {
             children: [
                 {
                     label: 'Send Query',
-                    subLabel: 'Ask us any questions',
+                    subLabel: 'Ask us any questions(slow but more detailed reply)',
                     href: '/AddQueries',
+                },
+                {
+                    label: 'Chat Bot',
+                    subLabel: 'Ask us any questions(chatting with our AI',
+                    href: '/FAQ',
                 },
 
             ],

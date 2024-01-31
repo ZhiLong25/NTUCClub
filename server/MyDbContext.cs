@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using NTUCClub.Models.Products;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using NTUCClub.Models.user;
 
 namespace NTUCClub
 {
