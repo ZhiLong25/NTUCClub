@@ -77,12 +77,12 @@ export default function AdminNav() {
                 {
                     label: 'Add admin',
                     subLabel: 'Add admin accounts',
-                    href: 'Addadmin',
+                    href: '/Addadmin',
                 },
                 {
                     label: 'Admin dashboard',
                     subLabel: 'View admin accounts',
-                    href: 'Adminaccounts',
+                    href: '/Accounts',
                 },
                 
             ],

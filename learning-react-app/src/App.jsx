@@ -22,6 +22,9 @@ import VoucherDashboard from './pages/vouchers/voucherDashboard';
 import ViewVouchers from './pages/vouchers/viewVouchers';
 
 import AddCard from './pages/cards/addCard';
+import ViewCard from './pages/cards/viewCard';
+import UpdateCard from './pages/cards/updateCard';
+import ManageCard from './pages/cards/manageCard';
 
 import ProductDash from './pages/products/ProductDash';
 import AddService from './pages/products/AddService';
@@ -32,6 +35,9 @@ import ManageVendor from './pages/products/ManageVendor';
 import AddQueries from "./pages/queries/AddQueries"
 import Addadmin from './pages/users/Addadmin';
 import Adminaccounts from './pages/users/Adminaccounts';
+import Accounts from './pages/users/Accounts';
+import Cart from './pages/cart/cart';
+import Payment from './pages/cart/payment';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -65,7 +71,7 @@ function App() {
         <Route path={"/updatevouchers/:id"} element={<UpdateVouchers />} />
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/Addadmin"} element={<Addadmin />} />
-        <Route path={"/Adminaccounts"} element={<Adminaccounts />} />
+        <Route path={"/Accounts"} element={<Accounts />} />
       </Routes>
     </>
   ) : user.userType === "Merchant" ? (
@@ -86,8 +92,13 @@ function App() {
       <Routes>
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/viewVouchers"} element={<ViewVouchers/>} />
-        <Route path={"/addcard"} element={<AddCard/>} />
+        <Route path={"/manageCard"} element={<ManageCard/>} />
+        <Route path={"/addCard"} element={<AddCard/>} />
+        <Route path={"/viewCard"} element={<ViewCard/>} />
+        <Route path={"/updateCard/:id"} element={<UpdateCard/>} />
         <Route path={"/AddQueries"} element={<AddQueries/>} />
+        <Route path={"/cart"} element={<Cart />} />
+        <Route path={"/payment"} element={<Payment />} />
       </Routes>
     </>
   )

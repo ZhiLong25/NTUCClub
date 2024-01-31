@@ -1,0 +1,25 @@
+.filterbar{
+    width:60%;
+    height:10%;
+    box-shadow: "4px 4px 8px rgba(255, 99, 71, 0.5)";
+    display:flex;
+    flex-direction: row;
+    margin-top: 5%;
+    box-shadow: "4px 4px 8px rgba(255, 99, 71, 0.8)";
+}
+
+.merchantClick:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.userClick:hover{
+    text-decoration: underline;
+    cursor: pointer;
+
+}
+
+.adminClick:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
