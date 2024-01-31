@@ -111,22 +111,7 @@ function addVouchers() {
           data.Activity_ID = -1;
         }
 
-<<<<<<< Updated upstream
-        // Create FormData to handle file upload
-        const formData = new FormData();
-        formData.append('Voucher_Details', data.Voucher_Details);
-        formData.append('Voucher_Name', data.Voucher_Name);
-        formData.append('Voucher_Validity', data.Voucher_Validity);
-        formData.append('Voucher_Quantity', data.Voucher_Quantity);
-        formData.append('Activity_ID', data.Activity_ID);
-        formData.append('VoucherImage', data.Voucher_Image);
-
-        console.log('FormData:', formData); // Log FormData to inspect its contents
-      
-        http.post("/Voucher/Addvoucher", formData)
-=======
         http.post("/Voucher/Addvoucher", data)
->>>>>>> Stashed changes
           .then((res) => {
             toast.success("Voucher Added");
           })
