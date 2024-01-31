@@ -29,7 +29,8 @@ import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
-import AddQueries from "./pages/queries/AddQueries"
+import AddQueries from "./pages/queries/AddQueries";
+import ViewQueries from "./pages/queries/ViewQueries";
 import Addadmin from './pages/users/Addadmin';
 import Accounts from './pages/users/accounts';
 import RegisterGoogle from "./pages/users/RegisterGoogle"
@@ -64,6 +65,7 @@ function App() {
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/Addadmin"} element={<Addadmin />} />
         <Route path={"/Accounts"} element={<Accounts />} />
+        <Route path={"/ViewQueries"} element={<ViewQueries/>} />
         <Route path={"/Faq"} element={<Faq />} />
       </Routes>
     </>
