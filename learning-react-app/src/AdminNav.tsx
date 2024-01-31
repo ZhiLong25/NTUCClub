@@ -104,6 +104,17 @@ export default function AdminNav() {
             ],
         },
         {
+            label: 'Queries',
+            children: [
+                {
+                    label: 'View Queries',
+                    subLabel: 'View Queries for Admin',
+                    href: '/ViewQueries',
+                },
+                
+            ],
+        },
+        {
             label: 'Learn Design',
             href: '#',
         },

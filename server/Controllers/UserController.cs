@@ -9,6 +9,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System.Threading.Channels;
+using NTUCClub.Models.user;
 
 namespace NTUCClub.Controllers
 {
@@ -72,10 +73,24 @@ namespace NTUCClub.Controllers
 
             return Ok(user);
         }
+		//add user through google
+		[HttpPost("register/userGoogle")]
+		public IActionResult RegisterUserGoogle(GoogleRegisterRequest request)
+		{
+			// Trim string values
+			request.name = request.name.Trim();
+			request.Email = request.Email.Trim().ToLower();
+			request.picture = request.picture.Trim();
 
-        //add user
-        [HttpPost("register/user")]
-        public IActionResult RegisterUsere(RegisterRequest request)
+			// Check email
+
+			return Ok();
+
+		}
+
+		//add user
+		[HttpPost("register/user")]
+        public IActionResult RegisterUser(RegisterRequest request)
         {
             // Trim string values
             request.Name = request.Name.Trim();
@@ -118,7 +133,14 @@ namespace NTUCClub.Controllers
             Console.WriteLine("Password:", user.Password);
             _context.Users.Add(user);
             _context.SaveChanges();
-            return Ok();
+			UserDTO userDTO = _mapper.Map<UserDTO>(user);
+			string accessToken = CreateToken(user);
+			LoginResponse response = new()
+			{
+				User = userDTO,
+				AccessToken = accessToken
+			};
+			return Ok(response);
 
         }
         //add admin
@@ -306,15 +328,18 @@ namespace NTUCClub.Controllers
             request.Password = request.Password.Trim();
             // Check email and password
             string message = "Email or password is not correct.";
-            var foundUser = _context.Users.Where(
+            string messages = "no email found";
+
+			var foundUser = _context.Users.Where(
             x => x.Email == request.Email).FirstOrDefault();
             if (foundUser == null)
             {
-                return BadRequest(new { message });
+                return BadRequest(new { messages });
             }
             bool verified = BCrypt.Net.BCrypt.Verify(
             request.Password, foundUser.Password);
-            if (!verified)
+
+            if (!verified && BCrypt.Net.BCrypt.HashPassword(request.Password)!=foundUser.Password)
             {
                 return BadRequest(new { message });
             }
@@ -344,8 +369,8 @@ namespace NTUCClub.Controllers
             }
             else
             {
-                UserDTO userDTO = _mapper.Map<UserDTO>(foundUser);
-                return Ok(userDTO);
+/*                UserDTO userDTO = _mapper.Map<UserDTO>(foundUser);
+*/                return Ok(foundUser);
             }
         }
         [HttpGet("getAllUser/{usertype}")]

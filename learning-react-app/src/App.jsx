@@ -29,9 +29,11 @@ import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
-import AddQueries from "./pages/queries/AddQueries"
+import AddQueries from "./pages/queries/AddQueries";
+import ViewQueries from "./pages/queries/ViewQueries";
 import Addadmin from './pages/users/Addadmin';
 import Accounts from './pages/users/accounts';
+import RegisterGoogle from "./pages/users/RegisterGoogle"
 import "./pages/styles/chatbot.css"
 // import "./script"
 import Faq from './pages/Faq';
@@ -47,6 +49,7 @@ function App() {
     }
   }, []);
 
+  
   return (
     <UserContext.Provider value={{ user, setUser }}>
   <Router>
@@ -62,6 +65,7 @@ function App() {
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/Addadmin"} element={<Addadmin />} />
         <Route path={"/Accounts"} element={<Accounts />} />
+        <Route path={"/ViewQueries"} element={<ViewQueries/>} />
         <Route path={"/Faq"} element={<Faq />} />
       </Routes>
     </>
@@ -99,6 +103,7 @@ function App() {
       <Route path={"/login"} element={<Login />} />
       <Route path={"/verification"} element={<Verification />} />
       <Route path={"/AddQueries"} element={<AddQueries />} />
+      <Route path={"/RegisterGoogle"} element={<RegisterGoogle />} />
       
       <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
       <Route path={"/addservice"} element={<AddService />} /> 
