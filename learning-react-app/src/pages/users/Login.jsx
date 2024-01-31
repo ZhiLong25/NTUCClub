@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import { Box, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -14,6 +14,7 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import EmailIcon from '@mui/icons-material/Email';
 import '../styles/login.css'
+import {jwtDecode } from "jwt-decode";
 function Login() {
     const navigate = useNavigate();
     const [icon, setIcon] = useState(eyeOff);
@@ -21,7 +22,6 @@ function Login() {
     const [type, setType] = useState("password");
     const [open, setOpen] = useState(false);
     const[email,setEmail] = useState("")
-
     const { setUser } = useContext(UserContext);
     const circleStyles = {
         position: 'absolute',
@@ -133,7 +133,44 @@ function Login() {
         }
 
     });
+    //google auth part
+  const clientId ="187449264999-e8qk675ti421g8lau39aq1d9rqpvaq9r.apps.googleusercontent.com"
+  const handleCallbackResponse=(response)=>{
+        console.log("Encoded JWT:"+response.credential)
+        var userObject = jwtDecode (response.credential);
+        var email = userObject.email;
+        //need check if account exist or not
+        http.get(`user/findemail/${email}`).then((res)=>{
+            http.post("/user/login", res.data).then((res)=>{
+                console.log("logging in")
+                localStorage.setItem("accessToken", res.data.accessToken);
+                setUser(userObject);
+                navigate("/");
+            })
+        })
+        userObject.Email = userObject.email
+        http.post("/user/register/userGoogle", userObject).then((res)=>{
+            localStorage.setItem('userDatagoogle', JSON.stringify(userObject));
+            navigate("/RegisterGoogle")
 
+        }).catch(function(err){
+            toast.error(`${err.response.data.message}`);
+        })
+        
+       
+       
+  }
+  useEffect(()=>{
+    // global google
+    google.accounts.id.initialize({
+      client_id:clientId,
+      callback:handleCallbackResponse
+    })
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      {theme:"outline",size:"large"}
+    )
+  },[])
     return (
         <Box sx={{
             marginTop: 8,
@@ -243,6 +280,7 @@ function Login() {
                         Forget Password?
                     </a>
                 </Box>
+                    <div id="signInDiv"></div>
                 <Dialog open={open} onClose={handleClose}>
                     <img
                         src="https://cdn-icons-png.flaticon.com/512/3588/3588294.png"
