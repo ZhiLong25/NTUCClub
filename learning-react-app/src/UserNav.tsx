@@ -93,6 +93,7 @@ export default function UserNav() {
                     subLabel: 'To get activites at a discounted price, click here!',
                     href: '/viewVouchers',
                 },
+                
 
             ],
         },
@@ -101,8 +102,13 @@ export default function UserNav() {
             children: [
                 {
                     label: 'Send Query',
-                    subLabel: 'Ask us any questions',
+                    subLabel: 'Ask us any questions(slow but more detailed reply)',
                     href: '/AddQueries',
+                },
+                {
+                    label: 'Chat Bot',
+                    subLabel: 'Ask us any questions(chatting with our AI',
+                    href: '/FAQ',
                 },
 
             ],
@@ -205,7 +211,6 @@ export default function UserNav() {
                                 rounded={'full'}
                                 variant={'link'}
                                 cursor={'pointer'}
-                                onClick={logout}
                                 minW={0}>
                                 {user?.userType}
                             </MenuButton>
@@ -229,7 +234,7 @@ export default function UserNav() {
                                 minW={0}>
                                 <Avatar
                                     size={'sm'}
-                                    src={`${import.meta.env.VITE_FILE_BASE_URL}${user?.profilePicture}`}
+                                    // src={`${import.meta.env.VITE_FILE_BASE_URL}${user?.profilePicture}`}
                                 />
                             </MenuButton>
                         </Menu>

@@ -265,9 +265,14 @@ const NAV_ITEMS: Array<NavItem> = [
     children: [
       {
         label: 'Send Query',
-        subLabel: 'Ask us any questions',
+        subLabel: 'Ask us any questions(slow but more detailed reply)',
         href: '/AddQueries',
-      },
+    },
+    {
+        label: 'Chat Bot',
+        subLabel: 'Ask us any questions(chatting with our AI',
+        href: '/FAQ',
+    },
       
     ],
   },

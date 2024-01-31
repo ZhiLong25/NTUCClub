@@ -8,6 +8,8 @@ using System.Text;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Asn1.Ocsp;
+using System.Threading.Channels;
+using NTUCClub.Models.user;
 
 namespace NTUCClub.Controllers
 {
@@ -64,12 +66,247 @@ namespace NTUCClub.Controllers
                 ProfilePicture = request.ProfilePicture,
                 CreatedAt = now,
                 UpdatedAt = now,
-                UserType = "Merchant"
+                UserType = "User"
             };
-            Console.WriteLine("Password:",user.Password);
-            
+            Console.WriteLine("Password:", user.Password);
+
 
             return Ok(user);
+        }
+		//add user through google
+		[HttpPost("register/userGoogle")]
+		public IActionResult RegisterUserGoogle(GoogleRegisterRequest request)
+		{
+			// Trim string values
+			request.name = request.name.Trim();
+			request.Email = request.Email.Trim().ToLower();
+			request.picture = request.picture.Trim();
+
+			// Check email
+
+			return Ok();
+
+		}
+
+		//add user
+		[HttpPost("register/user")]
+        public IActionResult RegisterUser(RegisterRequest request)
+        {
+            // Trim string values
+            request.Name = request.Name.Trim();
+            request.Email = request.Email.Trim().ToLower();
+            request.Password = request.Password.Trim();
+            request.Phone = request.Phone.Trim();
+            Console.WriteLine(request.Password);
+
+            // Check email
+            var foundUser = _context.Users.FirstOrDefault(x => x.Email == request.Email);
+            if (foundUser != null)
+            {
+                string message = "Email already exists.";
+                return BadRequest(new { message });
+            }
+
+            // Check phone
+            var foundUser1 = _context.Users.FirstOrDefault(x => x.Phone == request.Phone);
+            if (foundUser1 != null)
+            {
+                string message = "Phone already exists.";
+                return BadRequest(new { message });
+            }
+
+            // Create user object
+            var now = DateTime.Now;
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            Console.WriteLine("PWHASH", passwordHash);
+            var user = new User()
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Password = passwordHash,
+                Phone = request.Phone,
+                ProfilePicture = request.ProfilePicture,
+                CreatedAt = now,
+                UpdatedAt = now,
+                UserType = "User"
+            };
+            Console.WriteLine("Password:", user.Password);
+            _context.Users.Add(user);
+            _context.SaveChanges();
+			UserDTO userDTO = _mapper.Map<UserDTO>(user);
+			string accessToken = CreateToken(user);
+			LoginResponse response = new()
+			{
+				User = userDTO,
+				AccessToken = accessToken
+			};
+			return Ok(response);
+
+        }
+        //add admin
+        [HttpPost("register/admin")]
+        public IActionResult Registeradmin(RegisterRequest request)
+        {
+            // Trim string values
+            request.Name = request.Name.Trim();
+            request.Email = request.Email.Trim().ToLower();
+            request.Password = request.Password.Trim();
+            request.Phone = request.Phone.Trim();
+            Console.WriteLine(request.Password);
+
+            // Check email
+            var foundUser = _context.Users.FirstOrDefault(x => x.Email == request.Email);
+            if (foundUser != null)
+            {
+                string message = "Email already exists.";
+                return BadRequest(new { message });
+            }
+
+            // Check phone
+            var foundUser1 = _context.Users.FirstOrDefault(x => x.Phone == request.Phone);
+            if (foundUser1 != null)
+            {
+                string message = "Phone already exists.";
+                return BadRequest(new { message });
+            }
+
+            // Create user object
+            var now = DateTime.Now;
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            Console.WriteLine("PWHASH", passwordHash);
+            var user = new User()
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Password = passwordHash,
+                Phone = request.Phone,
+                ProfilePicture = request.ProfilePicture,
+                CreatedAt = now,
+                UpdatedAt = now,
+                UserType = "Admin"
+            };
+            Console.WriteLine("Password:", user.Password);
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            return Ok();
+
+        }
+        //add merchant
+        [HttpPost("register/merchant")]
+        public IActionResult Registermerchant(RegisterRequest request)
+        {
+            // Trim string values
+            request.Name = request.Name.Trim();
+            request.Email = request.Email.Trim().ToLower();
+            request.Password = request.Password.Trim();
+            request.Phone = request.Phone.Trim();
+            Console.WriteLine(request.Password);
+
+            // Check email
+            var foundUser = _context.Users.FirstOrDefault(x => x.Email == request.Email);
+            if (foundUser != null)
+            {
+                string message = "Email already exists.";
+                return BadRequest(new { message });
+            }
+
+            // Check phone
+            var foundUser1 = _context.Users.FirstOrDefault(x => x.Phone == request.Phone);
+            if (foundUser1 != null)
+            {
+                string message = "Phone already exists.";
+                return BadRequest(new { message });
+            }
+
+            // Create user object
+            var now = DateTime.Now;
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            Console.WriteLine("PWHASH", passwordHash);
+            var user = new User()
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Password = passwordHash,
+                Phone = request.Phone,
+                ProfilePicture = request.ProfilePicture,
+                CreatedAt = now,
+                UpdatedAt = now,
+                UserType = "Merchant"
+            };
+            Console.WriteLine("Password:", user.Password);
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            return Ok();
+
+        }
+
+        [HttpPost("Addadmin/{usertype}")]
+        public IActionResult Addadmin(string usertype, RegisterRequest request)
+        {
+            if (usertype != "Admin")
+            {
+                return BadRequest("Only admin can perform this");
+            }
+            // Trim string values
+            request.Name = request.Name.Trim();
+            request.Email = request.Email.Trim().ToLower();
+            request.Password = request.Password.Trim();
+            request.Phone = request.Phone.Trim();
+            Console.WriteLine(request.Password);
+
+            // Check email
+            var foundUser = _context.Users.FirstOrDefault(x => x.Email == request.Email);
+            if (foundUser != null)
+            {
+                string message = "Email already exists.";
+                return BadRequest(new { message });
+            }
+
+            // Check phone
+            var foundUser1 = _context.Users.FirstOrDefault(x => x.Phone == request.Phone);
+            if (foundUser1 != null)
+            {
+                string message = "Phone already exists.";
+                return BadRequest(new { message });
+            }
+
+            // Create user object
+            var now = DateTime.Now;
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            Console.WriteLine("PWHASH", passwordHash);
+            var user = new User()
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Password = passwordHash,
+                Phone = request.Phone,
+                ProfilePicture = request.ProfilePicture,
+                CreatedAt = now,
+                UpdatedAt = now,
+                UserType = "Admin"
+            };
+            Console.WriteLine("Password:", user.Password);
+
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            return Ok(user);
+        }
+        [HttpDelete("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var foundUser = _context.Users.Where(
+            x => x.Id == id).FirstOrDefault();
+            string message = "Account is not found.";
+
+            Console.WriteLine("null");
+            if (foundUser == null)
+            {
+                return BadRequest(new { message });
+            }
+            _context.Users.Remove(foundUser);
+            _context.SaveChanges();
+            return Ok();
         }
 
         [HttpPost("Verification")]
@@ -91,15 +328,20 @@ namespace NTUCClub.Controllers
             request.Password = request.Password.Trim();
             // Check email and password
             string message = "Email or password is not correct.";
-            var foundUser = _context.Users.Where(
+            string messages = "no email found";
+
+			var foundUser = _context.Users.Where(
             x => x.Email == request.Email).FirstOrDefault();
             if (foundUser == null)
             {
-                return BadRequest(new { message });
+                return BadRequest(new { messages });
             }
             bool verified = BCrypt.Net.BCrypt.Verify(
             request.Password, foundUser.Password);
-            if (!verified)
+
+
+			bool check = foundUser.Password.Equals(request.Password);
+			if (!verified && !check)
             {
                 return BadRequest(new { message });
             }
@@ -129,12 +371,30 @@ namespace NTUCClub.Controllers
             }
             else
             {
-                UserDTO userDTO = _mapper.Map<UserDTO>(foundUser);
-                return Ok(userDTO);
+/*                UserDTO userDTO = _mapper.Map<UserDTO>(foundUser);
+*/                return Ok(foundUser);
+            }
+        }
+        [HttpGet("getAllUser/{usertype}")]
+        public IActionResult getAllUser(string usertype)
+        {
+            // Trim string values
+            var foundUser = _context.Users.Where(
+                x => x.UserType == usertype).ToArray();
+            var message = "No accounts";
+            if (foundUser == null)
+            {
+                return Ok(new { message });
+            }
+            else
+            {
+
+                return Ok(foundUser);
             }
         }
         [HttpGet("userdetails/{id}")]
-        public IActionResult userdetails(int id) {
+        public IActionResult userdetails(int id)
+        {
             var foundUser = _context.Users.Where(
                 x => x.Id == id).FirstOrDefault();
             if (foundUser == null)
@@ -147,9 +407,9 @@ namespace NTUCClub.Controllers
         [HttpPut("securitydetails/{id}")]
         public IActionResult ChangePassword(int id, UpdatePassword password)
         {
-            
+
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(password.Password.Trim());
-            
+
             var foundUser = _context.Users.Where(
                 x => x.Id == id).FirstOrDefault();
             Console.WriteLine(foundUser.Password);
@@ -162,7 +422,8 @@ namespace NTUCClub.Controllers
 
         }
         [HttpPut("updateDetails/{id}")]
-        public IActionResult updateDetails(int id, User info) {
+        public IActionResult updateDetails(int id, User info)
+        {
             Console.WriteLine(info.ProfilePicture);
             var foundUser = _context.Users.Where(
                 x => x.Id == id).FirstOrDefault();
@@ -188,7 +449,7 @@ namespace NTUCClub.Controllers
             {
                 foundUser.ProfilePicture = info.ProfilePicture;
             }
-            
+
             _context.SaveChanges();
             return Ok();
         }
@@ -211,7 +472,7 @@ namespace NTUCClub.Controllers
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Upn , user.UserType)
-            }) ,
+            }),
                 Expires = DateTime.UtcNow.AddDays(tokenExpiresDays),
                 SigningCredentials = new SigningCredentials(
             new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -236,7 +497,7 @@ namespace NTUCClub.Controllers
             .Select(c => c.Value).SingleOrDefault();
             if (id != 0 && name != null && email != null)
             {
-                UserDTO userDTO = new() { Id = id, Name = name, Email = email,UserType = usertype };
+                UserDTO userDTO = new() { Id = id, Name = name, Email = email, UserType = usertype };
                 AuthResponse response = new() { User = userDTO };
                 return Ok(response);
             }
@@ -245,7 +506,38 @@ namespace NTUCClub.Controllers
                 return Unauthorized();
             }
         }
+        [HttpPut("claim/{id}/{VoucherId}")]
+        public IActionResult Claim(int id, int VoucherId)
+        {
+            // Find the user with the specified ID
+            var foundUser = _context.Users.FirstOrDefault(x => x.Id == id);
 
+            // Check if the user exists
+            if (foundUser == null)
+            {
+                return NotFound($"User with ID {id} not found");
+            }
+
+            // Find the voucher with the specified ID
+            var foundVoucher = _context.Vouchers.FirstOrDefault(x => x.Id == VoucherId);
+
+            // Check if the voucher exists
+            if (foundVoucher == null)
+            {
+                return NotFound($"Voucher with ID {foundVoucher.Id} not found");
+            }
+
+            // Create a new list of vouchers containing only the found voucher
+            foundUser.Vouchers = foundUser.Vouchers ?? new List<Voucher>();
+            foundUser.Vouchers.Add(foundVoucher);
+
+            // Save changes to the database
+            _context.SaveChanges();
+
+            return Ok("Claim operation completed successfully");
         }
 
+
     }
+
+}

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using NTUCClub.Models.Products;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using NTUCClub.Models.user;
 
 namespace NTUCClub
 {
@@ -32,16 +33,16 @@ namespace NTUCClub
         public DbSet<UserActivity> UserActivities { get; set; }
 
 		public DbSet<Card> Cards { get; set; }
-		//public DbSet<Query> Queries { get; set; }
+        public DbSet<Enquiery> Queries { get; set; }
 
-		// Method for creating object relations
-		//protected override void OnModelCreating(ModelBuilder modelBuilder)
-		//{
-		//    // One category has many services
+        // Method for creating object relations
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    // One category has many services
 
 
 
-		//}
+        //}
 
-	}
+    }
 }

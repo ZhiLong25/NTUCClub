@@ -104,6 +104,17 @@ export default function AdminNav() {
             ],
         },
         {
+            label: 'Queries',
+            children: [
+                {
+                    label: 'View Queries',
+                    subLabel: 'View Queries for Admin',
+                    href: '/ViewQueries',
+                },
+                
+            ],
+        },
+        {
             label: 'Learn Design',
             href: '#',
         },
@@ -197,7 +208,6 @@ export default function AdminNav() {
                                 rounded={'full'}
                                 variant={'link'}
                                 cursor={'pointer'}
-                                onClick={logout}
                                 minW={0}>
                                     {user?.userType}
                                     </MenuButton>

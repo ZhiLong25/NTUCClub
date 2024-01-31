@@ -9,11 +9,37 @@ import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import PersonIcon from '@mui/icons-material/Person';
-
+import { Icon } from "react-icons-kit";
+import { eyeOff } from "react-icons-kit/feather/eyeOff";
+import { eye } from "react-icons-kit/feather/eye";
 function Addadmin() {
 
   const [user, setUser] = useState(null)
+  const [type1, setType1] = useState("password");
+  const [icon1, setIcon1] = useState(eyeOff);
 
+  //first eye
+  const passToggle = () => {
+    if (type1 === "password") {
+      setIcon1(eye);
+      setType1("text");
+    } else {
+      setIcon1(eyeOff);
+      setType1("password");
+    }
+  };
+  const [type2, setType2] = useState("password");
+  const [icon2, setIcon2] = useState(eyeOff);
+  //second eye
+  const passToggle1 = () => {
+    if (type2 === "password") {
+      setIcon2(eye);
+      setType2("text");
+    } else {
+      setIcon2(eyeOff);
+      setType2("password");
+    }
+  };
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
       http.get('/user/auth').then((res) => {
@@ -26,55 +52,55 @@ function Addadmin() {
 
   const formik = useFormik({
     initialValues: {
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        phone:""
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      phone: ""
     },
     validationSchema: yup.object({
-        name: yup.string().trim()
-            .min(3, 'Name must be at least 3 characters')
-            .max(50, 'Name must be at most 50 characters')
-            .required('Name is required')
-            .matches(/^[a-zA-Z '-,.]+$/,
-                "Only allow letters, spaces and characters: ' - , ."),
-        email: yup.string().trim()
-            .email('Enter a valid email')
-            .max(50, 'Email must be at most 50 characters')
-            .required('Email is required'),
-        password: yup.string().trim()
-            .min(8, 'Password must be at least 8 characters')
-            .max(50, 'Password must be at most 50 characters')
-            .required('Password is required')
-            .matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/,
-                "At least 1 letter and 1 number"),
-        confirmPassword: yup.string().trim()
-            .required('Confirm password is required')
-            .oneOf([yup.ref('password')], 'Passwords must match'),
-        phone:yup.string().trim()
-            .required("Phone Number is required")
-            .min(7,"Phone number must be at least 7 characters")
-            .max(15,"Phone number must be at most 15 digits")
-            .matches(/^[0-9]+$/,"Phone number can only be numbers")
+      name: yup.string().trim()
+        .min(3, 'Name must be at least 3 characters')
+        .max(50, 'Name must be at most 50 characters')
+        .required('Name is required')
+        .matches(/^[a-zA-Z '-,.]+$/,
+          "Only allow letters, spaces and characters: ' - , ."),
+      email: yup.string().trim()
+        .email('Enter a valid email')
+        .max(50, 'Email must be at most 50 characters')
+        .required('Email is required'),
+      password: yup.string().trim()
+        .min(8, 'Password must be at least 8 characters')
+        .max(50, 'Password must be at most 50 characters')
+        .required('Password is required')
+        .matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/,
+          "At least 1 letter and 1 number"),
+      confirmPassword: yup.string().trim()
+        .required('Confirm password is required')
+        .oneOf([yup.ref('password')], 'Passwords must match'),
+      phone: yup.string().trim()
+        .required("Phone Number is required")
+        .min(7, "Phone number must be at least 7 characters")
+        .max(15, "Phone number must be at most 15 digits")
+        .matches(/^[0-9]+$/, "Phone number can only be numbers")
     }),
     onSubmit: (data) => {
       console.log("try")
-        data.name = data.name.trim();
-        data.email = data.email.trim().toLowerCase();
-        data.password = data.password.trim();
-        data.ProfilePicture = "defaultPfp.png"
-        http.post(`/User/Addadmin/${user}`, data)
-            .then((res) => {
-                console.log(res.data);
-                localStorage.setItem('userData', JSON.stringify(res.data));
-                toast.success("Admin Added")
-              })
-            .catch(function (err) {
-                toast.error(`${err.response.data.message}`);
-            });
+      data.name = data.name.trim();
+      data.email = data.email.trim().toLowerCase();
+      data.password = data.password.trim();
+      data.ProfilePicture = "defaultPfp.png"
+      http.post(`/User/Addadmin/${user}`, data)
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem('userData', JSON.stringify(res.data));
+          toast.success("Admin Added")
+        })
+        .catch(function (err) {
+          toast.error(`${err.response.data.message}`);
+        });
     }
-});
+  });
 
 
   return (
@@ -140,37 +166,72 @@ function Addadmin() {
           helperText={formik.touched.phone && formik.errors.phone}
 
         />
-        <TextField
-          fullWidth margin="dense" autoComplete="off"
-          label={<div style={{ display: 'flex', alignItems: 'center' }}>
-            <LockIcon style={{ marginRight: 8 }} />
-            Password
-          </div>}
-          name="password"
+        <div style={{ display: "flex", flexDirection: "row", position: "relative", width: "100%" }}>
 
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
+          <TextField
+            fullWidth margin="dense" autoComplete="off"
+            label={<div style={{ display: 'flex', alignItems: 'center' }}>
+              <LockIcon style={{ marginRight: 8 }} />
+              Password
+            </div>}
+            name="password"
 
-        />
-        <TextField
-          fullWidth margin="dense" autoComplete="off"
-          label={<div style={{ display: 'flex', alignItems: 'center' }}>
-            <LockIcon style={{ marginRight: 8 }} />
-            Confirm Password
-          </div>}
-          name="confirmPassword"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
 
-          value={formik.values.confirmPassword}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-          helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+          />
+          <span
+            className="eyespan"
+            style={{ display: "inline-block", margin: "auto", position: "absolute", left: "90%", top: "30%" }}
+          >
+            <Icon
+              icon={icon1}
+              onClick={passToggle}
+              style={{
+                display: "inline-block",
+                color: "black",
+                cursor: "pointer",
+              }}
+            />
 
-        />
-        
+          </span>
+        </div>
+        <div style={{ display: "flex", flexDirection: "row", position: "relative", width: "100%" }}>
+
+          <TextField
+            fullWidth margin="dense" autoComplete="off"
+            label={<div style={{ display: 'flex', alignItems: 'center' }}>
+              <LockIcon style={{ marginRight: 8 }} />
+              Confirm Password
+            </div>}
+            name="confirmPassword"
+
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+            helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+
+          />
+          <span
+            className="eyespan"
+            style={{ display: "inline-block", margin: "auto", position: "absolute", left: "90%", top: "30%" }}
+          >
+            <Icon
+              icon={icon2}
+              onClick={passToggle1}
+              style={{
+                display: "inline-block",
+                color: "black",
+                cursor: "pointer",
+              }}
+            />
+
+          </span>
+        </div>
         <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#03C04A" }} type="submit">
           Add
         </Button>

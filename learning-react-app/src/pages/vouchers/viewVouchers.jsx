@@ -15,15 +15,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 function ViewVouchers() {
   const navigate = useNavigate()
   const [vouchers, setVouchers] = useState([])
+  const [user,setUser]=useState()
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("accessToken")) {
-  //     http.get('/user/auth').then((res) => {
-  //       console.log(res.data.user)
-  //       setUser(res.data.user);
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      http.get('/user/auth').then((res) => {
+        console.log(res.data.user)
+        setUser(res.data.user);
+      });
+    }
+  }, []);
+  
   useEffect(() => {
     http.get("/Voucher")    //admin can only view and edit where vouchers for everyone
       .then((res) => {
@@ -36,17 +38,15 @@ function ViewVouchers() {
       
   }, [vouchers])
 
-  const edit = (id)=>{
-    navigate(`/updateVouchers/${id}`)
-  }
-  const del = (id)=>{
-    http.delete(`/Voucher/deletebyID/${id}`).then(()=>{
-      toast.success("Successfully deleted")
-
+  const claim = (id)=>{
+    console.log(user.id)
+    http.put(`User/claim/${user.id}/${id}`).then(()=>{
+      toast.success("Successfully claimed")
     }).catch((err)=>{
-      toast.error("Can't delete right now")
+      toast.error(err)
     })
   }
+  
   return (
     <div>
       <Grid container spacing={2} style={{ marginTop: "5%", marginBottom: "5%" }}>
@@ -131,24 +131,14 @@ function ViewVouchers() {
                       <CardContent style={{ margin: "auto" }}>
                         <Button fullWidth variant="contained" sx={{ mt: 2 }}
                           style={{  backgroundColor: "#63C5DA", padding: "15px", fontWeight: "bold" }}
-                          onClick={() => edit(vouchers.id)} id={vouchers.id}>
-                          {<div style={{ display: 'flex', alignItems: 'center',fontSize:"0.7rem"  }}>
-                            <EditIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                            Edit
-                          </div>}
+                          onClick={() => claim(vouchers.id)} id={vouchers.id}>
+                          
+                            Claim
+                          
                         </Button>
                       </CardContent>
 
-                      <CardContent style={{ margin: "auto",marginBottom:"-8px" }}>
-                        <Button fullWidth variant="contained" sx={{ mt: 2 }}
-                          style={{  backgroundColor: "red", padding: "15px", fontWeight: "bold" }}
-                          onClick={() => del(vouchers.id)} id={vouchers.id}>
-                          {<div style={{ display: 'flex', alignItems: 'center',fontSize:"0.7rem" }}>
-                            <DeleteIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                            Delete
-                          </div>}
-                        </Button>
-                      </CardContent>
+                      
                       </div>
                     </div>
 

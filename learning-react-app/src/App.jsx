@@ -32,13 +32,17 @@ import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
-import AddQueries from "./pages/queries/AddQueries"
+import AddQueries from "./pages/queries/AddQueries";
+import ViewQueries from "./pages/queries/ViewQueries";
 import Addadmin from './pages/users/Addadmin';
 import Adminaccounts from './pages/users/Adminaccounts';
 import Accounts from './pages/users/Accounts';
 import Cart from './pages/cart/cart';
 import Payment from './pages/cart/payment';
-
+import RegisterGoogle from "./pages/users/RegisterGoogle"
+import "./pages/styles/chatbot.css"
+// import "./script"
+import Faq from './pages/Faq';
 function App() {
   const [user, setUser] = useState(null);
 
@@ -51,12 +55,7 @@ function App() {
     }
   }, []);
 
-
-  const logout = () => {
-    localStorage.clear();
-    window.location = "/";
-  };
-
+  
   return (
     <UserContext.Provider value={{ user, setUser }}>
   <Router>
@@ -72,6 +71,8 @@ function App() {
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/Addadmin"} element={<Addadmin />} />
         <Route path={"/Accounts"} element={<Accounts />} />
+        <Route path={"/ViewQueries"} element={<ViewQueries/>} />
+        <Route path={"/Faq"} element={<Faq />} />
       </Routes>
     </>
   ) : user.userType === "Merchant" ? (
@@ -84,6 +85,7 @@ function App() {
       <Route path={"/editservice/:id"} element={<EditService />} />
       <Route path={"/managecategory"} element={<ManageCategory />} /> 
       <Route path={"/managevendor"} element={<ManageVendor />} /> 
+      <Route path={"/Faq"} element={<Faq />} /> 
       </Routes>
     </>
   ) : (
@@ -99,6 +101,7 @@ function App() {
         <Route path={"/AddQueries"} element={<AddQueries/>} />
         <Route path={"/cart"} element={<Cart />} />
         <Route path={"/payment"} element={<Payment />} />
+        <Route path={"/Faq"} element={<Faq/>} />
       </Routes>
     </>
   )
@@ -111,6 +114,7 @@ function App() {
       <Route path={"/login"} element={<Login />} />
       <Route path={"/verification"} element={<Verification />} />
       <Route path={"/AddQueries"} element={<AddQueries />} />
+      <Route path={"/RegisterGoogle"} element={<RegisterGoogle />} />
       
       <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
       <Route path={"/addservice"} element={<AddService />} /> 
@@ -120,18 +124,34 @@ function App() {
       <Route path={"/managevendor"} element={<ManageVendor />} /> 
 
  
-      <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
-      <Route path={"/addservice"} element={<AddService />} /> 
-      <Route path={"/getservice"} element={<GetService />} /> 
-      <Route path={"/editservice/:id"} element={<EditService />} />
-      <Route path={"/managecategory"} element={<ManageCategory />} /> 
       <Route path={"/addquery"} element={<addQuery />} />
+      <Route path={"/Faq"} element={<Faq />} />
     </Routes>
   </>
 )}
 
     </Container>
   </Router>
+  <button className="chatbot-toggler">
+        <span className="material-symbols-rounded">mode_comment</span>
+        <span className="material-symbols-outlined">close</span>
+      </button>
+      <div className="chatbot">
+        <header>
+          <h2>Chatbot</h2>
+          <span className="close-btn material-symbols-outlined">close</span>
+        </header>
+        <ul className="chatbox">
+          <li className="chat incoming">
+            <span className="material-symbols-outlined">smart_toy</span>
+            <p>Hi there 👋<br />How can I help you today?</p>
+          </li>
+        </ul>
+        <div className="chat-input">
+          <textarea placeholder="Enter a message..." spellCheck="false" required></textarea>
+          <span id="send-btn" className="material-symbols-rounded">send</span>
+        </div>
+      </div>
 </UserContext.Provider>
   );
 }

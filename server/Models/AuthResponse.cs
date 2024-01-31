@@ -1,4 +1,6 @@
-﻿namespace NTUCClub.Models
+﻿using NTUCClub.Models.user;
+
+namespace NTUCClub.Models
 {
     public class AuthResponse
     {

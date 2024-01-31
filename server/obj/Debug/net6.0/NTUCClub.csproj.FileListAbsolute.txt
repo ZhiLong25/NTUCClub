@@ -437,3 +437,273 @@ C:\Users\Karst\OneDrive\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\refint
 C:\Users\Karst\OneDrive\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.pdb
 C:\Users\Karst\OneDrive\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.genruntimeconfig.cache
 C:\Users\Karst\OneDrive\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\ref\NTUCClub.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\appsettings.json
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\NTUCClub.staticwebassets.runtime.json
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\NTUCClub.exe
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\NTUCClub.deps.json
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\NTUCClub.runtimeconfig.json
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\NTUCClub.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\NTUCClub.pdb
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\BCrypt.Net-Next.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Google.Protobuf.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Humanizer.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\K4os.Compression.LZ4.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\K4os.Compression.LZ4.Streams.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\K4os.Hash.xxHash.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\MySql.Data.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\MySql.EntityFrameworkCore.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Nanoid.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\System.IO.Pipelines.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\ZstdSharp.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\comerr64.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\gssapi64.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\krb5_64.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\krbcc64.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\NTUCClub.csproj.AssemblyReference.cache
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\NTUCClub.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\NTUCClub.AssemblyInfoInputs.cache
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\NTUCClub.AssemblyInfo.cs
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\NTUCClub.csproj.CoreCompileInputs.cache
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\NTUCClub.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\NTUCClub.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.NTUCClub.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.build.NTUCClub.props
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.NTUCClub.props
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.NTUCClub.props
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\scopedcss\bundle\NTUCClub.styles.css
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\NTUCClub.csproj.CopyComplete
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\NTUCClub.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\refint\NTUCClub.dll
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\NTUCClub.pdb
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\NTUCClub.genruntimeconfig.cache
+C:\Users\alexa\OneDrive\Documents\NTUCClub\server\obj\Debug\net6.0\ref\NTUCClub.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\appsettings.json
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\NTUCClub.staticwebassets.runtime.json
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\NTUCClub.exe
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\NTUCClub.deps.json
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\NTUCClub.runtimeconfig.json
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\NTUCClub.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\NTUCClub.pdb
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\BCrypt.Net-Next.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Google.Protobuf.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Humanizer.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\K4os.Compression.LZ4.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\K4os.Compression.LZ4.Streams.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\K4os.Hash.xxHash.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\MySql.Data.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\MySql.EntityFrameworkCore.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Nanoid.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\System.IO.Pipelines.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\ZstdSharp.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\comerr64.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\gssapi64.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\krb5_64.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\krbcc64.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.csproj.AssemblyReference.cache
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.AssemblyInfoInputs.cache
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.AssemblyInfo.cs
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.csproj.CoreCompileInputs.cache
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.NTUCClub.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.build.NTUCClub.props
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.NTUCClub.props
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.NTUCClub.props
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\scopedcss\bundle\NTUCClub.styles.css
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.csproj.CopyComplete
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\refint\NTUCClub.dll
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.pdb
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\NTUCClub.genruntimeconfig.cache
+C:\Users\Jun Liang\Documents\GitHub\NTUCClub\server\obj\Debug\net6.0\ref\NTUCClub.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\appsettings.json
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\NTUCClub.staticwebassets.runtime.json
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\NTUCClub.exe
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\NTUCClub.deps.json
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\NTUCClub.runtimeconfig.json
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\NTUCClub.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\NTUCClub.pdb
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\BCrypt.Net-Next.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Google.Protobuf.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Humanizer.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\K4os.Compression.LZ4.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\K4os.Compression.LZ4.Streams.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\K4os.Hash.xxHash.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\MySql.Data.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\MySql.EntityFrameworkCore.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Nanoid.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\System.IO.Pipelines.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\ZstdSharp.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\comerr64.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\gssapi64.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\krb5_64.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\runtimes\win-x64\native\krbcc64.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\NTUCClub.csproj.AssemblyReference.cache
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\NTUCClub.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\NTUCClub.AssemblyInfoInputs.cache
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\NTUCClub.AssemblyInfo.cs
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\NTUCClub.csproj.CoreCompileInputs.cache
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\NTUCClub.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\NTUCClub.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.NTUCClub.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.build.NTUCClub.props
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.NTUCClub.props
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.NTUCClub.props
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\scopedcss\bundle\NTUCClub.styles.css
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\NTUCClub.csproj.CopyComplete
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\NTUCClub.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\refint\NTUCClub.dll
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\NTUCClub.pdb
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\NTUCClub.genruntimeconfig.cache
+C:\Users\thede\Downloads\PowerCycle-main (4)\PowerCycle-main\NTUCClub\server\obj\Debug\net6.0\ref\NTUCClub.dll

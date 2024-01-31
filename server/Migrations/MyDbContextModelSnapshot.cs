@@ -68,6 +68,38 @@ namespace NTUCClub.Migrations
                     b.ToTable("Cards");
                 });
 
+            modelBuilder.Entity("NTUCClub.Models.Enquiery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("QueryDescription")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<string>("QuerySubject")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Queries");
+                });
+
             modelBuilder.Entity("NTUCClub.Models.Products.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -263,8 +295,8 @@ namespace NTUCClub.Migrations
                         .HasColumnType("varchar(8)");
 
                     b.Property<string>("ProfilePicture")
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime");
@@ -303,6 +335,9 @@ namespace NTUCClub.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
+
+                    b.Property<string>("Voucher_Image")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Voucher_Name")
                         .IsRequired()

@@ -17,7 +17,7 @@ namespace NTUCClub.Models
         public string Password { get; set; } = string.Empty;
         [MaxLength(8), ]
         public string Phone{get;set; } = string.Empty;
-        [MaxLength(20)]
+        [MaxLength(100)]
         public string? ProfilePicture{get; set; } = string.Empty;
         public string UserType { get; set; } = string.Empty;
         [Column(TypeName = "datetime")]

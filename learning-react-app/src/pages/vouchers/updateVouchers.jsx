@@ -93,83 +93,73 @@
 
     });
 
-
-    return (
-        <Card style={{
-          marginTop: "8%",
-
-          background: "white",
-          borderRadius: "50px",
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          height: "48em",
-          position: 'relative'
-        }}>
-          <Typography variant="h5" sx={{ my: 2 }} style={{ marginTop: "5%" }}>
-            Update Voucher
-          </Typography>
-          <Box component="form" sx={{ maxWidth: '500px' }}
-            onSubmit={formik.handleSubmit}>
-            <TextField
-              fullWidth margin="dense" autoComplete="off"
-              label={<div style={{ display: 'flex', alignItems: 'center' }}>
-                <DriveFileRenameOutlineIcon style={{ marginRight: 8 }} />
-                Voucher Name
-              </div>}
-              name="Voucher_Name"
-              value={formik.values.Voucher_Name ?? VoucherDetails.Voucher_Name}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.Voucher_Name && Boolean(formik.errors.Voucher_Name)}
-              helperText={formik.touched.Voucher_Name && formik.errors.Voucher_Name}
-            />
-            <TextField
-              fullWidth margin="dense" autoComplete="off"
-              label={<div style={{ display: 'flex', alignItems: 'center' }}>
-                <DescriptionIcon style={{ marginRight: 8 }} />
-                Details
-              </div>}
-              name="Voucher_Details"
-
-              value={formik.values.Voucher_Details ?? VoucherDetails.Voucher_Details}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.Voucher_Details && Boolean(formik.errors.Voucher_Details)}
-              helperText={formik.touched.Voucher_Details && formik.errors.Voucher_Details}
-
-            />
-
-
-
-            <TextField
-              fullWidth margin="dense" autoComplete="off"
-              label={<div style={{ display: 'flex', alignItems: 'center' }}>
-                <ProductionQuantityLimitsIcon style={{ marginRight: 8 }} />
-                Quantity
-              </div>}
-              name="Voucher_Quantity"
-
-              value={formik.values.Voucher_Quantity ?? VoucherDetails.Voucher_Quantity}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.Voucher_Quantity && Boolean(formik.errors.Voucher_Quantity)}
-              helperText={formik.touched.Voucher_Quantity && formik.errors.Voucher_Quantity}
-
-            />
-
-              <Calendar 
-                  onChange={onChange} value={date ?? VoucherDetails.Voucher_Validity}
-                  />
-
-            <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#03C04A" }} type="submit">
-              Save
-            </Button>
-          </Box>
-          <ToastContainer />
-
-        </Card>
-    )
-  }
+  return (
+    <Card style={{
+      marginTop: "8%",
+      background: "white",
+      borderRadius: "50px",
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      height: "48em",
+      position: 'relative'
+    }}>
+      <Typography variant="h5" sx={{ my: 2 }} style={{ marginTop: "5%" }}>
+        Update Voucher
+      </Typography>
+      <Box component="form" sx={{ maxWidth: '500px' }} onSubmit={formik.handleSubmit}>
+        <TextField
+          fullWidth margin="dense" autoComplete="off"
+          label={<div style={{ display: 'flex', alignItems: 'center' }}>
+            <DriveFileRenameOutlineIcon style={{ marginRight: 8 }} />
+            Voucher Name
+          </div>}
+          name="Voucher_Name"
+          value={formik.values.Voucher_Name ?? VoucherDetails.Voucher_Name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.Voucher_Name && Boolean(formik.errors.Voucher_Name)}
+          helperText={formik.touched.Voucher_Name && formik.errors.Voucher_Name}
+        />
+        <TextField
+          fullWidth margin="dense" autoComplete="off"
+          label={<div style={{ display: 'flex', alignItems: 'center' }}>
+            <DescriptionIcon style={{ marginRight: 8 }} />
+            Details
+          </div>}
+          name="Voucher_Details"
+          value={formik.values.Voucher_Details ?? VoucherDetails.Voucher_Details}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.Voucher_Details && Boolean(formik.errors.Voucher_Details)}
+          helperText={formik.touched.Voucher_Details && formik.errors.Voucher_Details}
+        />
+        <TextField
+          fullWidth margin="dense" autoComplete="off"
+          label={<div style={{ display: 'flex', alignItems: 'center' }}>
+            <ProductionQuantityLimitsIcon style={{ marginRight: 8 }} />
+            Quantity
+          </div>}
+          name="Voucher_Quantity"
+          value={formik.values.Voucher_Quantity ?? VoucherDetails.Voucher_Quantity}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.Voucher_Quantity && Boolean(formik.errors.Voucher_Quantity)}
+          helperText={formik.touched.Voucher_Quantity && formik.errors.Voucher_Quantity}
+        />
+  
+        <Calendar 
+            onChange={onChange} 
+            value={date ?? VoucherDetails.Voucher_Validity}
+        />
+  
+        <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#03C04A" }} type="submit">
+          Save
+        </Button>
+      </Box>
+      <ToastContainer />
+    </Card>
+  );  
+}
 
   export default updateVouchers
