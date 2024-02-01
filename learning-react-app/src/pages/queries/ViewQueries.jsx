@@ -12,9 +12,9 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
-function viewQueries() {
+function ViewQueries() {
   const navigate = useNavigate()
-  const [vouchers, setVouchers] = useState([])
+  const [query, setQuery] = useState([])
 
   // useEffect(() => {
   //   if (localStorage.getItem("accessToken")) {
@@ -25,22 +25,21 @@ function viewQueries() {
   //   }
   // }, []);
   useEffect(() => {
-    http.get(`Query/GetAllQuery`)    //admin can only view and edit where vouchers for everyone
+    http.get(`/Query`)    //admin can only view and edit where vouchers for everyone
       .then((res) => {
         const modifiedData = res.data.map(item => ({
           ...item,
-          voucher_Validity: new Date(item.voucher_Validity).toLocaleString(),
         }));
-        setVouchers(modifiedData)
+        setQuery(modifiedData)
         console.log(modifiedData)
       })
-  }, [vouchers])
+  }, [])
 
   const edit = (id)=>{
-    navigate(`/updateVouchers/${id}`)
+    navigate(`/Query/UpdateQuery/${id}`)
   }
   const del = (id)=>{
-    http.delete(`/Voucher/deletebyID/${id}`).then(()=>{
+    http.delete(`/Query/DeletequeryID/${id}`).then(()=>{
       toast.success("Successfully deleted")
 
     }).catch((err)=>{
@@ -51,9 +50,9 @@ function viewQueries() {
     <div>
       <Grid container spacing={2} style={{ marginTop: "5%", marginBottom: "5%" }}>
         {
-          vouchers.map((vouchers, i) => {
+          query.map((query, i) => {
             return (
-              <Grid item xs={12} md={6} lg={4} key={vouchers.id}>
+              <Grid item xs={12} md={6} lg={4} key={query.id}>
                 <div style={{
                   background: "linear-gradient(45deg, rgba(255, 99, 71, 0.4) 0%, rgba(255, 99, 71, 0.7) 100%)",
                   borderRadius: "50px",
@@ -76,7 +75,7 @@ function viewQueries() {
                           <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
                             {<div style={{ display: 'flex', alignItems: 'center' }}>
                               <DriveFileRenameOutlineIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                              Name: {vouchers.voucher_Name}
+                              Email: {query.email}
                             </div>}
                           </Typography>
                         </Box>
@@ -91,7 +90,7 @@ function viewQueries() {
                           <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
                             {<div style={{ display: 'flex', alignItems: 'center' }}>
                               <DescriptionIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                              Description: {vouchers.voucher_Details}
+                              Subject: {query.querySubject}
                             </div>}
                           </Typography>
                         </Box>
@@ -103,7 +102,7 @@ function viewQueries() {
                             <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
                               {<div style={{ display: 'flex', alignItems: 'center' }}>
                                 <ProductionQuantityLimitsIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                                Quantity: {vouchers.voucher_Quantity}
+                                Description: {query.queryDescription}
                               </div>}
                             </Typography>
                           </Box>
@@ -112,29 +111,16 @@ function viewQueries() {
                         
 
                       </CardContent>
-                      <CardContent style={{ margin: "auto" }}>
-
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 0 }}
-                          color="text.secondary">
-                          <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
-                            {<div style={{ display: 'flex', alignItems: 'center' }}>
-                              <AccessTimeIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                              Validity: {vouchers.voucher_Validity}
-                            </div>}
-                          </Typography>
-                        </Box>
-
-
-                      </CardContent>
+           
                       <div style={{display:"flex",alignItems:"center"}}>
 
                       <CardContent style={{ margin: "auto" }}>
                         <Button fullWidth variant="contained" sx={{ mt: 2 }}
                           style={{  backgroundColor: "#63C5DA", padding: "15px", fontWeight: "bold" }}
-                          onClick={() => edit(vouchers.id)} id={vouchers.id}>
+                          onClick={() => edit(query.id)} id={query.id}>
                           {<div style={{ display: 'flex', alignItems: 'center',fontSize:"0.7rem"  }}>
                             <EditIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                            Edit
+                            Reply
                           </div>}
                         </Button>
                       </CardContent>
@@ -142,7 +128,7 @@ function viewQueries() {
                       <CardContent style={{ margin: "auto",marginBottom:"-8px" }}>
                         <Button fullWidth variant="contained" sx={{ mt: 2 }}
                           style={{  backgroundColor: "red", padding: "15px", fontWeight: "bold" }}
-                          onClick={() => del(vouchers.id)} id={vouchers.id}>
+                          onClick={() => del(query.id)} id={query.id}>
                           {<div style={{ display: 'flex', alignItems: 'center',fontSize:"0.7rem" }}>
                             <DeleteIcon style={{ marginRight: 8, fontSize: "18px" }} />
                             Delete
@@ -164,4 +150,4 @@ function viewQueries() {
     </div>
   )
 }
-export default viewQueries
+export default ViewQueries

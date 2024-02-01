@@ -82,6 +82,7 @@ function addVouchers() {
           data.Activity_ID = -1;
         }
 
+        // Create FormData to handle file upload
         if (imageFile) {
           data.Voucher_Image = imageFile;
         }
@@ -95,6 +96,7 @@ function addVouchers() {
         formData.append('VoucherImage', data.Voucher_Image);
 
         http.post("/Voucher/Addvoucher", formData)
+        http.post("/Voucher/Addvoucher", data)
           .then((res) => {
             toast.success("Voucher Added");
           })
