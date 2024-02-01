@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TDcb8BbeOD+ViO9/X7ZIf/DUZWd9b6P1Z4n4pXBvFGU=",
+  "Hash": "BMPuLauONieIkw8H+IT/z2KqfWVedYzHnHwTuCLmigo=",
   "Source": "NTUCClub",
   "BasePath": "_content/NTUCClub",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "NTUCClub\\wwwroot",
       "Source": "NTUCClub",
-      "ContentRoot": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
       "BasePath": "_content/NTUCClub",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\uploads\\7cmVU_8OjE.png",
+      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\7cmVU_8OjE.png",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/7cmVU_8OjE.png",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\7cmVU_8OjE.png"
     },
     {
-      "Identity": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\uploads\\defaultPfp.png",
+      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\defaultPfp.png",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/defaultPfp.png",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\defaultPfp.png"
     },
     {
-      "Identity": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\uploads\\FBaJ9bLkt7.png",
+      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\FBaJ9bLkt7.png",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/FBaJ9bLkt7.png",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\FBaJ9bLkt7.png"
     },
     {
-      "Identity": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\uploads\\JCCSG_VfUV.jpg",
+      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\JCCSG_VfUV.jpg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/JCCSG_VfUV.jpg",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\JCCSG_VfUV.jpg"
     },
     {
-      "Identity": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\uploads\\No9s_UIOgU.jpg",
+      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\No9s_UIOgU.jpg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/No9s_UIOgU.jpg",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\No9s_UIOgU.jpg"
     },
     {
-      "Identity": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\uploads\\o0ok3cLq4T.jpg",
+      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\o0ok3cLq4T.jpg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/o0ok3cLq4T.jpg",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\o0ok3cLq4T.jpg"
     },
     {
-      "Identity": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\uploads\\t2YrRVVHrB.jpg",
+      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\t2YrRVVHrB.jpg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/t2YrRVVHrB.jpg",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\t2YrRVVHrB.jpg"
     },
     {
-      "Identity": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\uploads\\wAk9fliQuX.png",
+      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\wAk9fliQuX.png",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/wAk9fliQuX.png",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\wAk9fliQuX.png"
     },
     {
-      "Identity": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\uploads\\zWBpQETm2e.jpg",
+      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\zWBpQETm2e.jpg",
       "SourceId": "NTUCClub",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\thede\\Downloads\\PowerCycle-main (4)\\PowerCycle-main\\NTUCClub\\server\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
       "BasePath": "_content/NTUCClub",
       "RelativePath": "uploads/zWBpQETm2e.jpg",
       "AssetKind": "All",

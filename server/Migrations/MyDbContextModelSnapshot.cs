@@ -25,6 +25,9 @@ namespace NTUCClub.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Card_Expiry")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Card_Name")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -32,16 +35,15 @@ namespace NTUCClub.Migrations
 
                     b.Property<string>("Card_Number")
                         .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("varchar(16)");
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
                     b.Property<string>("Cvv")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("varchar(3)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("First_Name")
                         .IsRequired()

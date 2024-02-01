@@ -12,44 +12,20 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Calendar from "react-calendar";
 
+
 function addVouchers() {
+  const [user, setUser] = useState(null);
+  const [date, setDate] = useState(new Date());
+  const [imageFile, setImageFile] = useState(null);
 
-  const [user, setUser] = useState(null)
-  const [date, setDate] = useState(new Date())
-  const [image, setImage] = useState(null);  // Add image state
-  const [uploadedImage, setUploadedImage] = useState(null);  // Add image URL state
-
-  const onChange = date => {
-    setDate(date)
-  }
-
-  const onImageChange = (event) => {
-    const selectedImage = event.target.files[0];
-    setImage(selectedImage);
-  
-    // Read the selected image and set its URL in state
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setUploadedImage(reader.result);
-    };
-    if (selectedImage) {
-      reader.readAsDataURL(selectedImage);
-    }
-  
-    // Set Voucher_Image in formik values
-    formik.setFieldValue('Voucher_Image', selectedImage);
-  };
-
-  const onEditImage = () => {
-    // Reset the image states when the user wants to edit
-    setImage(null);
-    setUploadedImage(null);
+  const onChange = (date) => {
+    setDate(date);
   };
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
       http.get('/user/auth').then((res) => {
-        console.log(res.data.user)
+        console.log(res.data.user);
         setUser(res.data.user);
       });
     }
@@ -59,17 +35,16 @@ function addVouchers() {
     return (
       <FormControl fullWidth style={style}>
         <InputLabel> Voucher Quantity</InputLabel>
-        <Select
-          value={value}
-          onChange={onChange}
-        >
+        <Select value={value} onChange={onChange}>
           {[...Array(101).keys()].map((num) => (
-            <MenuItem key={num} value={num}>{num}</MenuItem>
+            <MenuItem key={num} value={num}>
+              {num}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>
     );
-  };  
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -92,26 +67,26 @@ function addVouchers() {
         .min(3, 'Name must be at least 3 characters')
         .max(100, 'Name must be at most 50 characters')
         .required('Name is required')
-        .matches(/^[a-zA-Z]+$/,
-          "Only letter input accepted"),
+        .matches(/^[a-zA-Z]+$/, "Only letter input accepted"),
     }),
 
     onSubmit: (data) => {
-      // Trim string values
       data.Voucher_Details = data.Voucher_Details.trim();
       data.Voucher_Name = data.Voucher_Name.trim();
       data.Voucher_Validity = date.toISOString();
 
-      // Check if the selected date is in the past
       if (date < new Date()) {
         toast.error("Date should not be in the past");
       } else {
-        // Check if the user is an admin
         if (user.userType === "Admin") {
           data.Activity_ID = -1;
         }
 
         // Create FormData to handle file upload
+        if (imageFile) {
+          data.Voucher_Image = imageFile;
+        }
+
         const formData = new FormData();
         formData.append('Voucher_Details', data.Voucher_Details);
         formData.append('Voucher_Name', data.Voucher_Name);
@@ -120,121 +95,184 @@ function addVouchers() {
         formData.append('Activity_ID', data.Activity_ID);
         formData.append('VoucherImage', data.Voucher_Image);
 
-        console.log('FormData:', formData); // Log FormData to inspect its contents
-      
         http.post("/Voucher/Addvoucher", formData)
         http.post("/Voucher/Addvoucher", data)
           .then((res) => {
             toast.success("Voucher Added");
           })
           .catch(function (err) {
-            console.error('Error:', err); // Log any errors during the request
+            console.error('Error:', err);
             toast.error(`${err.response.data.message}`);
           });
       }
     }
   });
 
-  return (
-    <Card style={{
-      marginTop: "8%",
-      background: "white",
-      borderRadius: "50px",
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      height: "auto", // Change to "auto" to allow dynamic height based on content
-      position: 'relative'
-    }}>
-      <Typography variant="h5" sx={{ my: 2, marginTop: "5%" }}>
-        Add Voucher
-      </Typography>
-      <Box component="form" sx={{ maxWidth: '500px', width: '100%' }} onSubmit={formik.handleSubmit}>
-        <Box mb={2}>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={onImageChange}
-            style={{ display: 'none' }}
-            id="imageInput"  // Assign a unique id to the file input
-          />
-          {!uploadedImage ? (
-            <label htmlFor="imageInput">
-              <Button component="span" fullWidth variant="contained" sx={{ background: "#03C04A" }}>
-                Upload Image
-              </Button>
-            </label>
-          ) : (
-            <Box mt={2} mb={2} sx={{ width: '200px', height: '200px', overflow: 'hidden', position: 'relative' }}>
-              <img
-                src={uploadedImage}
-                alt="Uploaded"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-              <Button
-                variant="contained"
-                sx={{
-                  position: 'absolute',
-                  bottom: 8,
-                  right: 8,
-                  background: "#03C04A",
-                }}
-                onClick={onEditImage}
-              >
-                Edit Image
-              </Button>
-            </Box>
-          )}
-          {image && <Typography variant="subtitle1">{image.name}</Typography>}
-        </Box>
-        <TextField
-          fullWidth margin="dense" autoComplete="off"
-          label={<div style={{ display: 'flex', alignItems: 'center' }}>
-            <DriveFileRenameOutlineIcon style={{ marginRight: 8 }} />
-            Voucher Name
-          </div>}
-          name="Voucher_Name"
-          value={formik.values.Voucher_Name}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={formik.touched.Voucher_Name && Boolean(formik.errors.Voucher_Name)}
-          helperText={formik.touched.Voucher_Name && formik.errors.Voucher_Name}
-        />
-        <TextField
-          fullWidth
-          multiline // Enable multiline
-          rows={4} // Adjust the number of rows as needed
-          margin="dense"
-          autoComplete="off"
-          label={
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <DescriptionIcon style={{ marginRight: 8 }} />
-              Details
-            </div>
-          }
-          name="Voucher_Details"
-          value={formik.values.Voucher_Details}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={formik.touched.Voucher_Details && Boolean(formik.errors.Voucher_Details)}
-          helperText={formik.touched.Voucher_Details && formik.errors.Voucher_Details}
-        />
-        <DropdownCounter
-          style={{ marginTop: "8px" }}
-          value={formik.values.Voucher_Quantity}
-          onChange={(e) => formik.setFieldValue('Voucher_Quantity', e.target.value)}
-        />
+  const onFileChange = (e) => {
+    let file = e.target.files[0];
+    if (file) {
+      if (file.size > 1024 * 1024) {
+        toast.error('Maximum file size is 1MB');
+        return;
+      }
 
-        <div style={{ marginTop: "8px" }}><p>Select Expiry Date</p></div>
-        <div style={{ marginTop: "8px" }}>
-          <Calendar onChange={onChange} value={date} />
-        </div>
-        <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#03C04A" }} type="submit">
-          Add
-        </Button>
-      </Box>
-      <ToastContainer />
-    </Card>
+      let formData = new FormData();
+      formData.append('file', file);
+      http.post('/file/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then((res) => {
+          console.log("Image Uploaded");
+          setImageFile(res.data.filename);
+        })
+        .catch(function (error) {
+          console.log(error.response);
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (formik.values.Voucher_Image) {
+      setImageFile(formik.values.Voucher_Image);
+    }
+  }, [formik.values.Voucher_Image]);
+
+  return (
+    <Box>
+      <Card className='pfp-container'>
+                    <Box component="form" onSubmit={formik.handleSubmit}style={{width:"80%",height:"100%",margin:"auto"}}> 
+
+                        <Box style={{ marginBottom: "30px", marginTop: "30px", height: "5rem",textAlign:"center" }} >
+                            {
+                                imageFile && (
+                                    <img
+                                    alt="tutorial"
+                                    className="voucherImg"
+                                    style={{
+                                        borderRadius: "50%",
+                                        height: "150px",
+                                        width: "150px",
+                                        objectFit: 'cover', // Adjust based on your requirements
+                                        marginTop: "5%",
+                                        margin:"auto"
+                                    }}
+                                    src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
+                                    />
+                                    )
+                                }
+                                    <Button variant="contained" component="label" style={{ marginTop: "25px" }}>
+                                        Upload Image
+                                        <input hidden accept="image/*" multiple type="file"
+                                            onChange={onFileChange} />              </Button>
+                            <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#E8533F", marhin:"auto" }}
+                                type="submit">
+                                Save
+                            </Button>
+                        </Box>
+                    </Box>
+                </Card>
+      <Card style={{
+        marginTop: "8%",
+        background: "white",
+        borderRadius: "50px",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: "auto", // Change to "auto" to allow dynamic height based on content
+        position: 'relative'
+      }}>
+        <Typography variant="h5" sx={{ my: 2, marginTop: "5%" }}>
+          Add Voucher
+        </Typography>
+        <Box component="form" sx={{ maxWidth: '500px', width: '100%' }} onSubmit={formik.handleSubmit}>
+          {/* <Box mb={2}>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={onImageChange}
+              style={{ display: 'none' }}
+              id="imageInput"  // Assign a unique id to the file input
+            />
+            {!uploadedImage ? (
+              <label htmlFor="imageInput">
+                <Button component="span" fullWidth variant="contained" sx={{ background: "#03C04A" }}>
+                  Upload Image
+                </Button>
+              </label>
+            ) : (
+              <Box mt={2} mb={2} sx={{ width: '200px', height: '200px', overflow: 'hidden', position: 'relative' }}>
+                <img
+                  src={uploadedImage}
+                  alt="Uploaded"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+                <Button
+                  variant="contained"
+                  sx={{
+                    position: 'absolute',
+                    bottom: 8,
+                    right: 8,
+                    background: "#03C04A",
+                  }}
+                  onClick={onEditImage}
+                >
+                  Edit Image
+                </Button>
+              </Box>
+            )}
+            {image && <Typography variant="subtitle1">{image.name}</Typography>}
+          </Box> */}
+          <TextField
+            fullWidth margin="dense" autoComplete="off"
+            label={<div style={{ display: 'flex', alignItems: 'center' }}>
+              <DriveFileRenameOutlineIcon style={{ marginRight: 8 }} />
+              Voucher Name
+            </div>}
+            name="Voucher_Name"
+            value={formik.values.Voucher_Name}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.Voucher_Name && Boolean(formik.errors.Voucher_Name)}
+            helperText={formik.touched.Voucher_Name && formik.errors.Voucher_Name}
+          />
+          <TextField
+            fullWidth
+            multiline // Enable multiline
+            rows={4} // Adjust the number of rows as needed
+            margin="dense"
+            autoComplete="off"
+            label={
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <DescriptionIcon style={{ marginRight: 8 }} />
+                Details
+              </div>
+            }
+            name="Voucher_Details"
+            value={formik.values.Voucher_Details}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.Voucher_Details && Boolean(formik.errors.Voucher_Details)}
+            helperText={formik.touched.Voucher_Details && formik.errors.Voucher_Details}
+          />
+          <DropdownCounter
+            style={{ marginTop: "8px" }}
+            value={formik.values.Voucher_Quantity}
+            onChange={(e) => formik.setFieldValue('Voucher_Quantity', e.target.value)}
+          />
+
+          <div style={{ marginTop: "8px" }}><p>Select Expiry Date</p></div>
+          <div style={{ marginTop: "8px" }}>
+            <Calendar onChange={onChange} value={date} />
+          </div>
+          <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#03C04A" }} type="submit">
+            Add
+          </Button>
+        </Box>
+        <ToastContainer />
+      </Card>
+    </Box>
   );
 }
 

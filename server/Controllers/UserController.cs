@@ -339,7 +339,9 @@ namespace NTUCClub.Controllers
             bool verified = BCrypt.Net.BCrypt.Verify(
             request.Password, foundUser.Password);
 
-            if (!verified && BCrypt.Net.BCrypt.HashPassword(request.Password)!=foundUser.Password)
+
+			bool check = foundUser.Password.Equals(request.Password);
+			if (!verified && !check)
             {
                 return BadRequest(new { message });
             }

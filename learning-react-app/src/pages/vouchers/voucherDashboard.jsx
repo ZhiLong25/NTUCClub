@@ -49,121 +49,116 @@ function voucherDashboard() {
     })
   }
   return (
-    <div>
-      <Grid container spacing={2} style={{ marginTop: "5%", marginBottom: "5%" }}>
-        {
-          vouchers.map((vouchers, i) => {
-            return (
-              <Grid item xs={12} md={6} lg={4} key={vouchers.id}>
-                <div style={{
-                  background: "linear-gradient(45deg, rgba(255, 99, 71, 0.4) 0%, rgba(255, 99, 71, 0.7) 100%)",
-                  borderRadius: "50px",
-                  boxShadow: "4px 4px 8px rgba(255, 99, 71, 0.5)", marginBottom: "5%", height: "20rem", width: "100%", display: "flex", alignItems: "center", justifyContent: "center"
-                }}>
-                  <Card style={{
+    <Box>
+        <Typography variant="h5" sx={{ my: 2 }}>
+            Vouchers
+        </Typography>
 
-                    boxShadow: "none",
-                    width: "75%",
-                    height: "90%",
-                    background: "transparent",
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+            {/* Add your search input and buttons here */}
+        </Box>
 
-                  }}>
+        <Grid container spacing={2} style={{ marginTop: "5%", marginBottom: "5%" }}>
+            {vouchers.map((voucher, i) => (
+                <Grid item xs={12} md={6} lg={4} key={voucher.id}>
+                    <div style={{
+                        background: "linear-gradient(45deg, rgba(255, 99, 71, 0.4) 0%, rgba(255, 99, 71, 0.7) 100%)",
+                        borderRadius: "50px",
+                        boxShadow: "4px 4px 8px rgba(255, 99, 71, 0.5)",
+                        marginBottom: "5%",
+                        height: "20rem",
+                        width: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                    }}>
+                        <Card style={{
+                            boxShadow: "none",
+                            width: "75%",
+                            height: "90%",
+                            background: "transparent",
+                        }}>
+                            <div style={{ height: "15vh" }}>
+                                <CardContent style={{ margin: "auto" }}>
+                                    <Box sx={{}}
+                                        color="text.secondary">
+                                        <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
+                                            {<div style={{ display: 'flex', alignItems: 'center' }}>
+                                                <DriveFileRenameOutlineIcon style={{ marginRight: 8, fontSize: "18px" }} />
+                                                Name: {voucher.voucher_Name}
+                                            </div>}
+                                        </Typography>
+                                    </Box>
+                                </CardContent>
 
-                    <div style={{ height: "15vh" }}>
-                      <CardContent style={{ margin: "auto" }}>
+                                <CardContent style={{ margin: "auto" }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
+                                        color="text.secondary">
+                                        <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
+                                            {<div style={{ display: 'flex', alignItems: 'center' }}>
+                                                <DescriptionIcon style={{ marginRight: 8, fontSize: "18px" }} />
+                                                Description: {voucher.voucher_Details}
+                                            </div>}
+                                        </Typography>
+                                    </Box>
+                                </CardContent>
 
-                        <Box sx={{}}
-                          color="text.secondary">
-                          <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
-                            {<div style={{ display: 'flex', alignItems: 'center' }}>
-                              <DriveFileRenameOutlineIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                              Name: {vouchers.voucher_Name}
-                            </div>}
-                          </Typography>
-                        </Box>
+                                <CardContent style={{ margin: "auto" }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 0 }}
+                                        color="text.secondary">
+                                        <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
+                                            {<div style={{ display: 'flex', alignItems: 'center' }}>
+                                                <ProductionQuantityLimitsIcon style={{ marginRight: 8, fontSize: "18px" }} />
+                                                Quantity: {voucher.voucher_Quantity}
+                                            </div>}
+                                        </Typography>
+                                    </Box>
+                                </CardContent>
 
+                                <CardContent style={{ margin: "auto" }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 0 }}
+                                        color="text.secondary">
+                                        <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
+                                            {<div style={{ display: 'flex', alignItems: 'center' }}>
+                                                <AccessTimeIcon style={{ marginRight: 8, fontSize: "18px" }} />
+                                                Validity: {voucher.voucher_Validity}
+                                            </div>}
+                                        </Typography>
+                                    </Box>
+                                </CardContent>
 
-                      </CardContent>
+                                <div style={{ display: "flex", alignItems: "center" }}>
+                                    <CardContent style={{ margin: "auto" }}>
+                                        <Button fullWidth variant="contained" sx={{ mt: 2 }}
+                                            style={{ backgroundColor: "#63C5DA", padding: "15px", fontWeight: "bold" }}
+                                            onClick={() => edit(voucher.id)} id={voucher.id}>
+                                            {<div style={{ display: 'flex', alignItems: 'center', fontSize: "0.7rem" }}>
+                                                <EditIcon style={{ marginRight: 8, fontSize: "18px" }} />
+                                                Edit
+                                            </div>}
+                                        </Button>
+                                    </CardContent>
 
-                      <CardContent style={{ margin: "auto" }}>
-
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
-                          color="text.secondary">
-                          <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
-                            {<div style={{ display: 'flex', alignItems: 'center' }}>
-                              <DescriptionIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                              Description: {vouchers.voucher_Details}
-                            </div>}
-                          </Typography>
-                        </Box>
-                        </CardContent>
-                        <CardContent style={{ margin: "auto" }}>
-
-                          <Box sx={{ display: 'flex', alignItems: 'center', mb: 0 }}
-                            color="text.secondary">
-                            <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
-                              {<div style={{ display: 'flex', alignItems: 'center' }}>
-                                <ProductionQuantityLimitsIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                                Quantity: {vouchers.voucher_Quantity}
-                              </div>}
-                            </Typography>
-                          </Box>
-
-
-                        
-
-                      </CardContent>
-                      <CardContent style={{ margin: "auto" }}>
-
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 0 }}
-                          color="text.secondary">
-                          <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.7rem" }}>
-                            {<div style={{ display: 'flex', alignItems: 'center' }}>
-                              <AccessTimeIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                              Validity: {vouchers.voucher_Validity}
-                            </div>}
-                          </Typography>
-                        </Box>
-
-
-                      </CardContent>
-                      <div style={{display:"flex",alignItems:"center"}}>
-
-                      <CardContent style={{ margin: "auto" }}>
-                        <Button fullWidth variant="contained" sx={{ mt: 2 }}
-                          style={{  backgroundColor: "#63C5DA", padding: "15px", fontWeight: "bold" }}
-                          onClick={() => edit(vouchers.id)} id={vouchers.id}>
-                          {<div style={{ display: 'flex', alignItems: 'center',fontSize:"0.7rem"  }}>
-                            <EditIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                            Edit
-                          </div>}
-                        </Button>
-                      </CardContent>
-
-                      <CardContent style={{ margin: "auto",marginBottom:"-8px" }}>
-                        <Button fullWidth variant="contained" sx={{ mt: 2 }}
-                          style={{  backgroundColor: "red", padding: "15px", fontWeight: "bold" }}
-                          onClick={() => del(vouchers.id)} id={vouchers.id}>
-                          {<div style={{ display: 'flex', alignItems: 'center',fontSize:"0.7rem" }}>
-                            <DeleteIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                            Delete
-                          </div>}
-                        </Button>
-                      </CardContent>
-                      </div>
+                                    <CardContent style={{ margin: "auto", marginBottom: "-8px" }}>
+                                        <Button fullWidth variant="contained" sx={{ mt: 2 }}
+                                            style={{ backgroundColor: "red", padding: "15px", fontWeight: "bold" }}
+                                            onClick={() => del(voucher.id)} id={voucher.id}>
+                                            {<div style={{ display: 'flex', alignItems: 'center', fontSize: "0.7rem" }}>
+                                                <DeleteIcon style={{ marginRight: 8, fontSize: "18px" }} />
+                                                Delete
+                                            </div>}
+                                        </Button>
+                                    </CardContent>
+                                </div>
+                            </div>
+                        </Card>
                     </div>
-
-
-                  </Card>
-                </div>
-              </Grid>
-            );
-          })
-        }
-      </Grid>
-      <ToastContainer/>
-    </div>
-  )
+                </Grid>
+            ))}
+        </Grid>
+        <ToastContainer />
+    </Box>
+  );
 }
 
 export default voucherDashboard
