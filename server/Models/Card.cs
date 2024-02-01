@@ -9,13 +9,13 @@ namespace NTUCClub.Models
 	{
 		public int Id { get; set; }
 
-		[Required, MinLength(15), MaxLength(16)]
+		[Required, MaxLength(20)]
 		public string Card_Number { get; set; } = string.Empty;
 
 		[Required, MaxLength(30)]
 		public string Card_Name { get; set; } = string.Empty;
 
-		[Required, MaxLength(3)]
+		[Required]
 		public string Cvv { get; set; } = string.Empty;
 
 		[Required, MinLength(3), MaxLength(30)]
@@ -23,6 +23,8 @@ namespace NTUCClub.Models
 
 		[Required, MinLength(3), MaxLength(50)]
 		public string Last_Name { get; set; } = string.Empty;
+
+		public DateTime Card_Expiry { get; set; }
 
 		[Column(TypeName = "datetime")]
 		public DateTime CreatedAt { get; set; }

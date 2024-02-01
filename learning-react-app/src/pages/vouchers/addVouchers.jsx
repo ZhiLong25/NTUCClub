@@ -12,6 +12,7 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Calendar from "react-calendar";
 
+
 function addVouchers() {
   const [user, setUser] = useState(null);
   const [date, setDate] = useState(new Date());
@@ -81,6 +82,7 @@ function addVouchers() {
           data.Activity_ID = -1;
         }
 
+        // Create FormData to handle file upload
         if (imageFile) {
           data.Voucher_Image = imageFile;
         }
@@ -94,6 +96,7 @@ function addVouchers() {
         formData.append('VoucherImage', data.Voucher_Image);
         console.log(formData)
         http.post("/Voucher/Addvoucher", formData)
+        http.post("/Voucher/Addvoucher", data)
           .then((res) => {
             toast.success("Voucher Added");
           })

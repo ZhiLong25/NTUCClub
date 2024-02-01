@@ -22,6 +22,9 @@ import VoucherDashboard from './pages/vouchers/voucherDashboard';
 import ViewVouchers from './pages/vouchers/viewVouchers';
 
 import AddCard from './pages/cards/addCard';
+import ViewCard from './pages/cards/viewCard';
+import UpdateCard from './pages/cards/updateCard';
+import ManageCard from './pages/cards/manageCard';
 
 import ProductDash from './pages/products/ProductDash';
 import AddService from './pages/products/AddService';
@@ -29,10 +32,19 @@ import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
+import ManageTimeslots from './pages/products/ManageTimeslots';
+
+
+import Products from './pages/products/Products'
+import ProductsPage from './pages/products/ProductsPage';
+
 import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import Addadmin from './pages/users/Addadmin';
-import Accounts from './pages/users/accounts';
+// import Adminaccounts from './pages/users/Adminaccounts';
+import Accounts from './pages/users/Accounts';
+import Cart from './pages/cart/cart';
+import Payment from './pages/cart/payment';
 import RegisterGoogle from "./pages/users/RegisterGoogle"
 import "./pages/styles/chatbot.css"
 // import "./script"
@@ -88,8 +100,13 @@ function App() {
       <Routes>
         <Route path={"/updateprofile/:id"} element={<UpdateProfile />} />
         <Route path={"/viewVouchers"} element={<ViewVouchers/>} />
-        <Route path={"/addcard"} element={<AddCard/>} />
+        <Route path={"/manageCard"} element={<ManageCard/>} />
+        <Route path={"/addCard"} element={<AddCard/>} />
+        <Route path={"/viewCard"} element={<ViewCard/>} />
+        <Route path={"/updateCard/:id"} element={<UpdateCard/>} />
         <Route path={"/AddQueries"} element={<AddQueries/>} />
+        <Route path={"/cart"} element={<Cart />} />
+        <Route path={"/payment"} element={<Payment />} />
         <Route path={"/Faq"} element={<Faq/>} />
       </Routes>
     </>
@@ -111,6 +128,11 @@ function App() {
       <Route path={"/editservice/:id"} element={<EditService />} />
       <Route path={"/managecategory"} element={<ManageCategory />} /> 
       <Route path={"/managevendor"} element={<ManageVendor />} /> 
+      <Route path={"/manageTimeslots"} element={<ManageTimeslots />} /> 
+
+
+      <Route path={"/products/:id"} element={<Products />} />
+      <Route path={"/productspage"} element={< ProductsPage/>} />
 
  
       <Route path={"/addquery"} element={<addQuery />} />

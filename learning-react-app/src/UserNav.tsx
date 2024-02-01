@@ -26,6 +26,9 @@ import {
     ChevronRightIcon,
 } from '@chakra-ui/icons'
 import http from "./http"
+import { ShoppingCart } from "@mui/icons-material"
+import { Link } from "react-router-dom"
+
 
 export default function UserNav() {
 
@@ -76,8 +79,8 @@ export default function UserNav() {
                 },
                 {
                     label: 'Card Information',
-                    subLabel: 'Update your card details',
-                    href: '/addCard',
+                    subLabel: 'View your card details',
+                    href: '/manageCard',
                 },
                 
             ],
@@ -195,6 +198,14 @@ export default function UserNav() {
 
                     <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={6}>
                         <Menu>
+                            <MenuButton
+                                as={Link}
+                                to="/cart"
+                                rounded={'full'}
+                                cursor={'pointer'}
+                                minW={0}>
+                                <ShoppingCart />
+                            </MenuButton>
                             <MenuButton
                                 as={Button}
                                 rounded={'full'}

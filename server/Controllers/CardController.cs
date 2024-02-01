@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NTUCClub.Models;
+using NTUCClub.Models.Products;
 using System.Security.Claims;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace NTUCClub.Controllers
 {
@@ -15,17 +17,6 @@ namespace NTUCClub.Controllers
 			_context = context;
 		}
 
-		[HttpGet("GetCardByName/{name}")]
-		public IActionResult GetCardByName(string name)
-		{
-			var myCard = _context.Cards.Where(x => x.Card_Name == name).ToArray();
-			if (myCard == null)
-			{
-				return NotFound();
-			}
-			return Ok(myCard);
-		}
-
 		[HttpGet("GetCardById/{id}")]
 		public IActionResult GetCardById(int id)
 		{
@@ -37,11 +28,12 @@ namespace NTUCClub.Controllers
 			return Ok(myCard);
 		}
 
-		[HttpGet]
-		public IActionResult GetAllCards(string? search)
+
+		[HttpGet("GetCard")]
+		public IActionResult GetAll(string? search)
 		{
 			IQueryable<Card> result = _context.Cards;
-			if (search == null)
+			if (search != null)
 			{
 				result = result.Where(x => x.Card_Name.Contains(search)
 				|| x.Card_Number.Contains(search));
@@ -55,14 +47,17 @@ namespace NTUCClub.Controllers
 		{
 			Console.WriteLine("here");
 			var now = DateTime.Now;
+			var dataProtectionProvider = DataProtectionProvider.Create("EncryptData");
+			var protector = dataProtectionProvider.CreateProtector("MySecretKey");
 
 			var myCard = new Card()
 			{
 				Card_Number = card.Card_Number.Trim(),
 				Card_Name = card.Card_Name.Trim(),
-				Cvv = card.Cvv.Trim(),
+				Cvv = protector.Protect(card.Cvv.Trim()),
 				First_Name = card.First_Name.Trim(),
 				Last_Name = card.Last_Name.Trim(),
+				Card_Expiry = card.Card_Expiry,
 				CreatedAt = now,
 				UpdatedAt = now
 			};
@@ -71,7 +66,7 @@ namespace NTUCClub.Controllers
 			return Ok(myCard);
 		}
 
-		[HttpPut("UpdateCard")]
+		[HttpPut("{id}")]
 		public IActionResult UpdateCard(int id, Card card)
 		{
 			var myCard = _context.Cards.Where(x => x.Id == id).FirstOrDefault();
@@ -99,7 +94,11 @@ namespace NTUCClub.Controllers
 			{
 				myCard.Last_Name = card.Last_Name.Trim();
 			}
-			myCard.UpdatedAt = DateTime.Now;
+            if (card.Card_Expiry != null)
+            {
+				myCard.Card_Expiry = card.Card_Expiry;
+            }
+            myCard.UpdatedAt = DateTime.Now;
 			_context.SaveChanges();
 			return Ok();
 		}

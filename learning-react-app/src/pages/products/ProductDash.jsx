@@ -113,8 +113,16 @@ const columns = ['id', 'name', 'category', 'updatedAt'];
 
 
             <Grid item xs={3} md={3} lg={3}>
+              <CardContent className="dashCard" style={{ background: "linear-gradient(to right, #7F00FF,#E100FF)" }}>
+                <Typography className="topheader">Implement Timeslots</Typography>
 
+                <Box>
+                  <Link to="/manageTimeslots"><IconButton className="changeicon"><Search></Search></IconButton></Link>
+                </Box>
+
+              </CardContent>
             </Grid>
+
 
 
             

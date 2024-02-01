@@ -29,6 +29,8 @@ namespace NTUCClub
         public DbSet<Service> Services { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Vendor> Vendor { get; set; }
+
+        public DbSet<Timeslots> Timeslots { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
         public DbSet<UserActivity> UserActivities { get; set; }
 
