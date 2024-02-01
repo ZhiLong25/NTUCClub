@@ -50,7 +50,9 @@ function ProductsPage() {
     searchServices();
   }
 
-
+const telegram = () => {
+  window.location.href = "https://t.me/uplayassistant"
+}
 
 
   useEffect(() => {
@@ -75,7 +77,8 @@ function ProductsPage() {
           <img alt="image" src={banner} style={{width: "100%"}}></img>
         <Typography variant="h5">Products Page</Typography>
 
-
+        <Button onClick={ telegram } className='addbtn' style={{color:"white"}} >Join our channel for the latest updates</Button>
+        
 
       {/* Filter input */}
       <Input value={search} placeholder="Search" sx={{ width: '100%' }}
@@ -112,10 +115,10 @@ function ProductsPage() {
                       )
                     }
 
-                    <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Services No. #{services.id}</Typography>
+                    <Typography variant='h6' sx={{ fontWeight: 'bold' }}>{services.name}</Typography>
                     <Box sx={{ display: 'flex', mb: 1 }}>
                       <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        {services.name}
+                        {services.category}
                       </Typography>
 
                     </Box>

@@ -7,6 +7,8 @@ import { Container, Box, Typography, TextField, Button, Dialog, DialogTitle, Dia
 import http from '../../http';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 
 function Products() {
@@ -72,6 +74,33 @@ function Products() {
     });
 
 
+    const [isFavorite, setIsFavorite] = useState(false);
+      
+    const handleClick = () => {
+        setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+    };
+
+    useEffect(() => {
+
+        if (isFavorite == true) {
+            if (isFavorite == true) {
+                http.post("/Favorites/addfavorites", currentuser, isFavorite)
+                .then((res) => {
+                  console.log(res.data);
+                  navigate("/cart");
+                })
+            }
+            else {
+                http.delete("/Favorites/deletefavorites", currentuser, isFavorite)
+                .then((res) => {
+                  console.log(res.data);
+                  navigate("/cart");
+                })
+            }
+        }
+        
+    }, []);
+
   return (
     <Container>
         <Container>
@@ -88,10 +117,17 @@ function Products() {
                     Description
                 </Typography>
 
+                
+                <div onClick={handleClick}>
+                    {isFavorite ? <FavoriteBorderIcon /> : <FavoriteIcon />}
+                </div>
+
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                         {services.description}
                 </Typography>
             
+
+
             </Grid>
 
 
@@ -108,7 +144,7 @@ function Products() {
 
 
                     <InputLabel>TimeSlots</InputLabel>
-                    
+
                     <Select
                     style={{ marginTop: "15px" }}
                     fullWidth margin="normal"
