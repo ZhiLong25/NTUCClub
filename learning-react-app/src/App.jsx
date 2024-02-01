@@ -32,10 +32,14 @@ import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
+
+import Products from './pages/products/Products'
+import ProductsPage from './pages/products/ProductsPage';
+
 import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import Addadmin from './pages/users/Addadmin';
-import Adminaccounts from './pages/users/Adminaccounts';
+// import Adminaccounts from './pages/users/Adminaccounts';
 import Accounts from './pages/users/Accounts';
 import Cart from './pages/cart/cart';
 import Payment from './pages/cart/payment';
@@ -122,6 +126,9 @@ function App() {
       <Route path={"/editservice/:id"} element={<EditService />} />
       <Route path={"/managecategory"} element={<ManageCategory />} /> 
       <Route path={"/managevendor"} element={<ManageVendor />} /> 
+
+      <Route path={"/products"} element={<Products />} />
+      <Route path={"/productspage"} element={< ProductsPage/>} />
 
  
       <Route path={"/addquery"} element={<addQuery />} />
