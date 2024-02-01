@@ -20,6 +20,7 @@ function AddService() {
   const [imageFile, setImageFile] = useState('');
   const [categoryList, setCategoryList] = useState([]);
   const [vendorList, setVendorList] = useState([]);
+  const [timeslotsList, setTimeslots] = useState([]);
 
 
   useEffect(() => {
@@ -29,6 +30,11 @@ function AddService() {
 
     http.get('/Vendor/getvendor').then((res) => {
       setVendorList(res.data);
+    });
+
+    http.get('/Timeslot/gettimeslots').then((res) => {
+      setTimeslots(res.data);
+        console.log(res.data.length)
     });
   }, []);
 
@@ -59,7 +65,7 @@ function AddService() {
 
   const formik = useFormik({
     initialValues: {
-      image: '',
+      image: 'placeholder.png',
       name: '',
       description: '',
       price: null,
@@ -196,16 +202,27 @@ function AddService() {
               ))}
             </Select>
 
+            <Select
+                    style={{ marginTop: "15px" }}
+                    fullWidth margin="normal"
+                    labelId="timeslots-label"
+                    id="timeslots"
+                    name="timeslots"
+                    value={formik.values.timeslots}
+                    onChange={formik.handleChange}
+                    error={formik.touched.timeslots && Boolean(formik.errors.timeslots)}
+                    helperText={formik.touched.timeslots && formik.errors.timeslots}
+                    >
 
-            <TextField
-              fullWidth margin='normal' autoComplete='off'
-              label='Timeslots'
-              name='timeslots'
-              value={formik.values.timeslots}
-              onChange={formik.handleChange}
-              error={formik.touched.timeslots && Boolean(formik.errors.timeslots)}
-              helperText={formik.touched.timeslots && formik.errors.timeslots}
-            />
+                    <MenuItem value="" disabled>
+                        Select a timeslot
+                    </MenuItem>
+                    {timeslotsList.map((timeslot) => (
+                        <MenuItem key={timeslot.id} value={timeslot.timeslot}>
+                            {timeslot.timeslot}
+                        </MenuItem>
+                    ))}
+                    </Select>
 
             <Grid container spacing={2}>
 
