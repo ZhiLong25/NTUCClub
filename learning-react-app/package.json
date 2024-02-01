@@ -33,11 +33,8 @@
     "formik": "^2.2.9",
     "framer-motion": "^10.17.8",
     "immutable": "^5.0.0-beta.4",
-<<<<<<< Updated upstream
     "moment-timezone": "^0.5.44",
-=======
     "jwt-decode": "^4.0.0",
->>>>>>> Stashed changes
     "mui-datatables": "^4.3.0",
     "otp-input-react": "^0.3.0",
     "react": "^18.2.0",
