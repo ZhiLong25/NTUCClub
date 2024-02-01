@@ -92,7 +92,7 @@ function addVouchers() {
         formData.append('Voucher_Quantity', data.Voucher_Quantity);
         formData.append('Activity_ID', data.Activity_ID);
         formData.append('VoucherImage', data.Voucher_Image);
-
+        console.log(formData)
         http.post("/Voucher/Addvoucher", formData)
           .then((res) => {
             toast.success("Voucher Added");

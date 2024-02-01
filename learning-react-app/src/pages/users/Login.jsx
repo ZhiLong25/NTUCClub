@@ -140,8 +140,8 @@ function Login() {
         var userObject = jwtDecode (response.credential);
         var email = userObject.email;
         //need check if account exist or not
-        http.get(`user/findemail/${email}`).then((res)=>{
-             http.post("/user/login", res.data).then((res)=>{
+        http.get(`user/findemail/${email}`).then(async(res)=>{
+            await http.post("/user/login", res.data).then((res)=>{
                 console.log("logging in")
                 localStorage.setItem("accessToken", res.data.accessToken);
                 setUser(userObject);
@@ -156,10 +156,8 @@ function Login() {
         }).catch(function(err){
             toast.error(`${err.response.data.message}`);
         })
-        
-       
-       
   }
+
   useEffect(()=>{
     // global google
     google.accounts.id.initialize({
@@ -168,8 +166,9 @@ function Login() {
     })
     google.accounts.id.renderButton(
       document.getElementById("signInDiv"),
-      {theme:"outline",size:"large"}
+      {theme:"outline",size:"large",text: "Sign in with Google",prompt: "none"}
     )
+    google.accounts.id.prompt();
   },[])
     return (
         <Box sx={{
