@@ -32,6 +32,8 @@ import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
+import ManageTimeslots from './pages/products/ManageTimeslots';
+
 
 import Products from './pages/products/Products'
 import ProductsPage from './pages/products/ProductsPage';
@@ -126,8 +128,10 @@ function App() {
       <Route path={"/editservice/:id"} element={<EditService />} />
       <Route path={"/managecategory"} element={<ManageCategory />} /> 
       <Route path={"/managevendor"} element={<ManageVendor />} /> 
+      <Route path={"/manageTimeslots"} element={<ManageTimeslots />} /> 
 
-      <Route path={"/products"} element={<Products />} />
+
+      <Route path={"/products/:id"} element={<Products />} />
       <Route path={"/productspage"} element={< ProductsPage/>} />
 
  
