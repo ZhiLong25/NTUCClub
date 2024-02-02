@@ -44,38 +44,6 @@ const ManageCard = () => {
             </Card>
           </Link>
         </Grid>
-
-        {/* Update Card */}
-        <Grid item xs={12} md={6}>
-          <Link to="/updateCard" style={{ textDecoration: 'none' }}>
-            <Card style={{ background: '#FFBF00', padding: '40px', cursor: 'pointer', borderRadius: '15px', border: '1px solid black', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-              <CardContent>
-                <Typography variant="h5" component="div" align="center" color="white">
-                  Update Card <EditIcon/>
-                </Typography>
-                <Typography color="white" align="center">
-                  Update your credit cards
-                </Typography>
-              </CardContent>
-            </Card>
-          </Link>
-        </Grid>
-
-        {/* Delete Card */}
-        <Grid item xs={12} md={6}>
-          <Link to="/delete-card" style={{ textDecoration: 'none' }}>
-            <Card style={{ background: '#EE4B2B', padding: '40px' , cursor: 'pointer', borderRadius: '15px', border: '1px solid black', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-              <CardContent>
-                <Typography variant="h5" component="div" align="center" color="white">
-                  Delete Card <DeleteIcon/>
-                </Typography>
-                <Typography color="white" align="center">
-                  Delete a credit card
-                </Typography>
-              </CardContent>
-            </Card>
-          </Link>
-        </Grid>
       </Grid>
     </Container>
   );

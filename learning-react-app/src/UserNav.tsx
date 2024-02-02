@@ -86,6 +86,10 @@ export default function UserNav() {
             ],
         },
         {
+            label: 'Products',
+            href: "/productspage",
+        },
+        {
             label: 'Vouchers',
             children: [
                 {
