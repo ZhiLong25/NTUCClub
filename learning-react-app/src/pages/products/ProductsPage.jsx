@@ -1,7 +1,7 @@
 import { AccessTime, Add, Search, Clear, Edit, Delete } from '@mui/icons-material';
 import SellIcon from '@mui/icons-material/Sell';
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Grid, Card, CardContent, Input, IconButton, Button, Container } from '@mui/material';
+import { Box, Typography, Grid, Card, CardContent, Input, IconButton, Button, Container, Checkbox, FormControlLabel} from '@mui/material';
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import http from '../../http';
@@ -11,12 +11,54 @@ import banner from '../products/media/Banner.png'
 function ProductsPage() {
   const [imageFile, setImageFile] = useState('');
   const [serviceList, setServiceList] = useState([]);
-  const [categoryList, setCategoryList] = useState('');
+  const [categoryList, setCategoryList] = useState([]);
 
   const [totalService, setTotalService] = useState('');
+  const [search, setSearch] = useState('');
+
+
+
+  const onClickClear = () => {
+    setSearch(''); 
+
+    http.get('/Product/getservice').then((res) => {
+      setServiceList(res.data);
+      setTotalService(res.data.length);
+    });
+
+    // setSelectedCategories([]);
+  }
+
+  const onSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const searchServices = () => {
+    http.get(`/Product/getservice?search=${search}`).then((res) => {
+      setServiceList(res.data);
+    }
+    )
+  };
+
+  const onSearchKeyDown = (e) => {
+    if (e.key === "Enter") {
+      searchServices();
+    }
+  }
+
+  const onClickSearch = () => {
+    searchServices();
+  }
+
+const telegram = () => {
+  window.location.href = "https://t.me/uplayassistant"
+}
+
 
   useEffect(() => {
     http.get('/Category/getcategory').then((res) => {
+      console.log(res.data); // Check the structure of the response
+
       setCategoryList(res.data);
 
     });
@@ -28,11 +70,29 @@ function ProductsPage() {
 
   }, []);
 
+
   return (
     
     <Box>
           <img alt="image" src={banner} style={{width: "100%"}}></img>
         <Typography variant="h5">Products Page</Typography>
+
+        <Button onClick={ telegram } className='addbtn' style={{color:"white"}} >Join our channel for the latest updates</Button>
+        
+
+      {/* Filter input */}
+      <Input value={search} placeholder="Search" sx={{ width: '100%' }}
+          onChange={onSearchChange} onKeyDown={onSearchKeyDown} />
+        <IconButton color="primary" onClick={onClickSearch}>
+          
+          <Search />
+        </IconButton>
+
+        <IconButton color="primary" onClick={onClickClear}>
+          <Clear />
+        </IconButton>
+
+      {/* Category checkboxes */}
 
 
         
@@ -55,13 +115,11 @@ function ProductsPage() {
                       )
                     }
 
-                    <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Services No. #{services.id}</Typography>
+                    <Typography variant='h6' sx={{ fontWeight: 'bold' }}>{services.name}</Typography>
                     <Box sx={{ display: 'flex', mb: 1 }}>
                       <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        {services.name}
+                        {services.category}
                       </Typography>
-
-
 
                     </Box>
 
@@ -78,7 +136,7 @@ function ProductsPage() {
 
                       ) : (
                         // Otherwise, show only the regular price
-                        <Typography>{services.price}</Typography>
+                        <Typography>${services.price}</Typography>
                       )}
                       
                       </Typography>

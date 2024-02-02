@@ -7,6 +7,8 @@ import { Container, Box, Typography, TextField, Button, Dialog, DialogTitle, Dia
 import http from '../../http';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 
 function Products() {
@@ -15,12 +17,12 @@ function Products() {
     const [imageFile, setImageFile] = useState('');
     const [vendorList, setVendorList] = useState([]);
     const [categoryList, setCategoryList] = useState([]);
-  
+    const [timeslotsList, setTimeslots] = useState([]);
+
     const [services, setServices] = useState([]);
 
     const { id } = useParams();
     const navigate = useNavigate();
-
 
     useEffect(() => {
         http.get(`/Product/getservice/${id}`).then((res) => {
@@ -35,6 +37,10 @@ function Products() {
           if (res.data.image) {
             setImageFile(res.data.image);
           }
+
+          http.get('/Vendor/getvendor').then((res) => {
+            setVendorList(res.data);
+          });
     
         });
 
@@ -43,36 +49,17 @@ function Products() {
         setTimeslots(res.data);
           console.log(res.data.length)
       });
-      
+
     }, []);
 
     const formik = useFormik({
-        initialValues: services,
-        enableReinitialize: true,
-    
+        initialValues: {
+            timeslot: ''
+        },
+            
         validationSchema: yup.object().shape({
-          name: yup.string().trim()
-            .min(3, "Name must be at least 3 characters")
-            .max(100, 'Name must be at most 100 characters')
-            .required('Name is required'),
     
-          description: yup.string().trim()
-            .min(3, "Description must be at least 3 characters")
-            .max(100, 'Description must be at most 100 characters')
-            .required('Description is required'),
-    
-          price: yup.number().required('Price is required'),
-    
-          timeslots: yup.string().required('Timeslots is required'),
-    
-          slots: yup.number().required('Slots amount is required'),
-    
-          vendor: yup.string().trim()
-            .min(3, "Vendor must be at least 3 characters")
-            .max(100, 'Vendor must be at most 100 characters')
-            .required('Vendor is required'),
-    
-          category: yup.string().required('Category is required')
+          timeslot: yup.string().required('Timeslots is required'),
     
         }),
     
@@ -84,12 +71,38 @@ function Products() {
               navigate("/cart");
             })
         }
-      });
+    });
 
+
+    const [isFavorite, setIsFavorite] = useState(false);
+      
+    const handleClick = () => {
+        setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+    };
+
+    useEffect(() => {
+
+        if (isFavorite == true) {
+            if (isFavorite == true) {
+                http.post("/Favorites/addfavorites", currentuser, isFavorite)
+                .then((res) => {
+                  console.log(res.data);
+                  navigate("/cart");
+                })
+            }
+            else {
+                http.delete("/Favorites/deletefavorites", currentuser, isFavorite)
+                .then((res) => {
+                  console.log(res.data);
+                  navigate("/cart");
+                })
+            }
+        }
+        
+    }, []);
 
   return (
     <Container>
-        <Typography>hghello</Typography>
         <Container>
         <Box className="aspect-ratio-container" sx={{ mt: 2 }}>
             <img alt="product" src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`} className='image-insert' />
@@ -104,48 +117,58 @@ function Products() {
                     Description
                 </Typography>
 
+                
+                <div onClick={handleClick}>
+                    {isFavorite ? <FavoriteBorderIcon /> : <FavoriteIcon />}
+                </div>
+
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                         {services.description}
                 </Typography>
             
+
+
             </Grid>
 
 
             <Grid item xs={4} md={4} lg={4} >
 
-                <Box className="booking-box">
+                <Box className="booking-box" component="form">
                     <Typography variant='h4' style={{marginTop:"40px"}}>
                         Book Now
                     </Typography>
 
                     <Typography>Price: ${services.price}</Typography>
 
+                    <Typography>Slots left: {services.slots}</Typography>
+
 
                     <InputLabel>TimeSlots</InputLabel>
-                    
+
                     <Select
                     style={{ marginTop: "15px" }}
                     fullWidth margin="normal"
                     labelId="timeslots-label"
-                    id="timeslots"
-                    name="timeslots"
-                    value={formik.values.timeslots}
+                    id="timeslot"
+                    name="timeslot"
+                    value={formik.values.timeslot}
                     onChange={formik.handleChange}
-                    error={formik.touched.timeslots && Boolean(formik.errors.timeslots)}
-                    helperText={formik.touched.timeslots && formik.errors.timeslots}
+                    error={formik.touched.timeslot && Boolean(formik.errors.timeslot)}
+                    helperText={formik.touched.timeslot && formik.errors.timeslot}
                     >
 
                     <MenuItem value="" disabled>
                         Select a timeslot
                     </MenuItem>
-                    {/* {timeslotsList.map((timeslots) => (
-                        <MenuItem key={timeslots.id} value={timeslots.slot}>
-                        {timeslots.slot}
+                    {timeslotsList.map((timeslots) => (
+                        <MenuItem key={timeslots.id} value={timeslots.timeslot}>
+                            {timeslots.timeslot}
                         </MenuItem>
-                    ))} */}
+                    ))}
                     </Select>
 
-                    
+
+
                     <Box sx={{ mt: 2 }}>
                         <Button variant="contained" type="submit" className='addbtn'>
                             Add to Cart

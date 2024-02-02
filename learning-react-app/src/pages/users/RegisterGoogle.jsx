@@ -82,6 +82,7 @@ function RegisterGoogle() {
                 .then((res) => {
                     localStorage.setItem("accessToken", res.data.accessToken);
                     setUser(res.data.user);
+                    toast.success("Registered successfully")
                     navigate("/")
                 })
                 .catch(function (err) {

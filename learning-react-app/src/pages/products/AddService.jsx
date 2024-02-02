@@ -14,12 +14,19 @@ import 'react-quill/dist/quill.snow.css';
 import placeholder from './media/placeholder.png';
 import '../styles/product.css'
 
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+
+
 function AddService() {
   const navigate = useNavigate();
   const [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
   const [imageFile, setImageFile] = useState('');
   const [categoryList, setCategoryList] = useState([]);
   const [vendorList, setVendorList] = useState([]);
+  const [timeslotsList, setTimeslots] = useState([]);
 
 
   useEffect(() => {
@@ -29,6 +36,11 @@ function AddService() {
 
     http.get('/Vendor/getvendor').then((res) => {
       setVendorList(res.data);
+    });
+
+    http.get('/Timeslot/gettimeslots').then((res) => {
+      setTimeslots(res.data);
+      console.log(res.data.length)
     });
   }, []);
 
@@ -59,11 +71,13 @@ function AddService() {
 
   const formik = useFormik({
     initialValues: {
-      image: '',
+      image: 'placeholder.png',
       name: '',
       description: '',
       price: null,
-      timeslots: '',
+      timeInterval: '',
+      starttime: '',
+      endtime: '',
       slots: null,
       vendor: '',
       category: ''
@@ -83,7 +97,11 @@ function AddService() {
 
       price: yup.number().required('Price is required'),
 
-      timeslots: yup.string().required('Timeslots is required'),
+
+      timeslots : yup.string().required('Timeslots is required'),
+      // timeInterval: yup.string().required('Time interval is required'),
+      // starttime: yup.string().required('Start Time is required'),
+      // endtime: yup.string().required('End Time is required'),
 
       slots: yup.number().required('Slots amount is required'),
 
@@ -104,7 +122,9 @@ function AddService() {
       http.post("/Product/addservice", data)
         .then((res) => {
           console.log(res.data);
+            http.get("https://api.telegram.org/bot6933338568:AAFGiQqnJ1S5wQnowUebvVhnoOA-BlSSFSs/sendMessage?chat_id=-1002088213559&text=%3Cb%3EA%20new%20activities%20has%20been%20added!%3C/b%3E%20Click%20%3Ca%20href=%27google.com%27%3Ehere%3C/a%3E%20to%20see!&parse_mode=HTML")
           navigate("/productdash");
+
         })
     }
   });
@@ -196,16 +216,72 @@ function AddService() {
               ))}
             </Select>
 
+            {/* <Grid container spacing={2}>
 
-            <TextField
-              fullWidth margin='normal' autoComplete='off'
-              label='Timeslots'
-              name='timeslots'
-              value={formik.values.timeslots}
-              onChange={formik.handleChange}
-              error={formik.touched.timeslots && Boolean(formik.errors.timeslots)}
-              helperText={formik.touched.timeslots && formik.errors.timeslots}
-            />
+              <Grid item xs={4} md={4} lg={4} >
+
+                <TimePicker
+                  label="Duration Time"
+                  value={formik.values.timeInterval}
+                  onChange={(value) => formik.setFieldValue('timeInterval', value)}
+                  error={formik.touched.timeInterval && Boolean(formik.errors.timeInterval)}
+                  helperText={formik.touched.timeInterval && formik.errors.timeInterval}
+                />
+
+
+
+              </Grid>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={['TimePicker', 'TimePicker']}>
+                  <Grid item xs={4} md={4} lg={4} >
+
+                    <TimePicker
+                      label="Start Time"
+                      value={formik.values.starttime}
+                      onChange={(value) => formik.setFieldValue('starttime', value)}
+                      error={formik.touched.starttime && Boolean(formik.errors.starttime)}
+                      helperText={formik.touched.starttime && formik.errors.starttime}
+                    />
+                  </Grid>
+
+
+                  <Grid item xs={4} md={4} lg={4} >
+
+                    <TimePicker
+                      label="End Time"
+                      value={formik.values.endtime}
+                      onChange={(value) => formik.setFieldValue('endtime', value)}
+                      error={formik.touched.endtime && Boolean(formik.errors.endtime)}
+                      helperText={formik.touched.endtime && formik.errors.endtime}
+                    />
+                  </Grid>
+
+                </DemoContainer>
+              </LocalizationProvider>
+            </Grid> */}
+
+
+            <Select
+                    style={{ marginTop: "15px" }}
+                    fullWidth margin="normal"
+                    labelId="timeslots-label"
+                    id="timeslots"
+                    name="timeslots"
+                    value={formik.values.timeslots}
+                    onChange={formik.handleChange}
+                    error={formik.touched.timeslots && Boolean(formik.errors.timeslots)}
+                    helperText={formik.touched.timeslots && formik.errors.timeslots}
+                    >
+
+                    <MenuItem value="" disabled>
+                        Select a timeslot
+                    </MenuItem>
+                    {timeslotsList.map((timeslot) => (
+                        <MenuItem key={timeslot.id} value={timeslot.timeslot}>
+                            {timeslot.timeslot}
+                        </MenuItem>
+                    ))}
+                    </Select>
 
             <Grid container spacing={2}>
 

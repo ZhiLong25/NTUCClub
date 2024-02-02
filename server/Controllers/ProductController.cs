@@ -24,7 +24,7 @@ namespace NTUCClub.Controllers
             IQueryable<Service> result = _context.Services;
             if (search != null)
             {
-                result = result.Where(x => x.Name.Contains(search) || x.Description.Contains(search));
+                result = result.Where(x => x.Name.Contains(search) || x.Description.Contains(search) || x.Vendor.Contains(search));
             }
 
             var list = result.OrderByDescending(x => x.CreatedAt).ToList();

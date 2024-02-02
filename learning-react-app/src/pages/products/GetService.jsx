@@ -58,9 +58,11 @@ function GetService() {
         Total Services: {totalService}
       </Typography>
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, marginTop: "10px" }}>
+
         <Input value={search} placeholder="Search" sx={{ width: '100%' }}
           onChange={onSearchChange} onKeyDown={onSearchKeyDown} />
         <IconButton color="primary" onClick={onClickSearch}>
+
           <Search />
         </IconButton>
         <IconButton color="primary" onClick={onClickSearch}>
@@ -86,11 +88,12 @@ function GetService() {
                       )
                     }
 
-                    <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Services No. #{services.id}</Typography>
+                    <Typography variant='h6' sx={{ fontWeight: 'bold' }}>{services.name}</Typography>
                     <Box sx={{ display: 'flex', mb: 1 }}>
-                      <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        {services.name}
+                      <Typography variant="" sx={{ flexGrow: 1 }}>
+                        <b>Category:</b> {services.category}
                       </Typography>
+                      
                       <Link to={`/editservice/${services.id}`}>
                         <IconButton color="primary" sx={{ padding: '4px' }}>
                           <Edit />
@@ -109,6 +112,10 @@ function GetService() {
                         {dayjs(services.createdAt).format(global.datetimeFormat)}
                       </Typography>
                     </Box>
+                    
+                    <Typography variant="" sx={{ flexGrow: 1 }} >
+                        <b>Vendor:</b> {services.vendor}
+                    </Typography>
 
                   </CardContent>
                 </Card>
