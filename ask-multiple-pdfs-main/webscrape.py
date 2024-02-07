@@ -10,6 +10,7 @@ def scrape_website(url):
     try:
         response = requests.get(url)
         response.raise_for_status()  # Raise an exception for bad status codes
+        print(response.text)
         html = BeautifulSoup(response.text, 'html.parser')
 
         my_data = []
