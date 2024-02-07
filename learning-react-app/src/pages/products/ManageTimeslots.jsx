@@ -10,16 +10,14 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import placeholder from './media/placeholder.png'
 
-import MUIDataTable from "mui-datatables";
-
 
 function ManageTimeslots() {
 
     const [timeslotsList, setTimeslots] = useState([]);
-
+    const [selectedDateTime, setSelectedDateTime] = useState(null);
     const formik = useFormik({
         initialValues: {
-            timeslots: '',
+            timeslot: '',
  
         },
 
@@ -63,26 +61,23 @@ function ManageTimeslots() {
     return (
         <Container>
             <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
-                Add Vendors
+                Timeslots
             </Typography>
 
             <Box component="form" onSubmit={formik.handleSubmit}>
 
                 <Grid container spacing={2}>
-                    <Grid item xs={4} md={4} lg={4} >
-
-                    </Grid>
                     <Grid item xs={8} md={8} lg={8} >
                         <InputLabel>Enter Timeslots</InputLabel>
-
+            
                         <TextField
                             fullWidth margin="normal" autoComplete="off"
                             label="Timeslots"
-                            name="timeslots"
-                            value={formik.values.timeslots}
+                            name="timeslot"
+                            value={formik.values.timeslot}
                             onChange={formik.handleChange}
-                            error={formik.touched.timeslots && Boolean(formik.errors.timeslots)}
-                            helperText={formik.touched.timeslots && formik.errors.timeslots}
+                            error={formik.touched.timeslot && Boolean(formik.errors.timeslot)}
+                            helperText={formik.touched.timeslot && formik.errors.timeslot}
                         />
 
 
@@ -94,19 +89,6 @@ function ManageTimeslots() {
 
                     </Grid>
                 </Grid>
-
-            </Box>
-
-
-            <Box>
-
-                <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
-                    View and Manage Timeslots
-                </Typography>
-                
-                <MUIDataTable title="Vendor List" data={timeslotsList} columns={columns} options={options} />
-
-
 
             </Box>
 
