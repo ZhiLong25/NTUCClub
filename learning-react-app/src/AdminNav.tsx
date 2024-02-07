@@ -70,7 +70,7 @@ export default function AdminNav() {
             label: 'Account',
             children: [
                 {
-                    label: 'User Account',
+                    label: 'Account',
                     subLabel: 'Update your personal details',
                     href: user ? `/updateprofile/${user.id}` : '/login',
                 },
@@ -80,8 +80,13 @@ export default function AdminNav() {
                     href: '/Addadmin',
                 },
                 {
+                    label: 'Add Merchant',
+                    subLabel: 'Add Merchant accounts',
+                    href: '/AddMerchant',
+                },
+                {
                     label: 'Admin dashboard',
-                    subLabel: 'View admin accounts',
+                    subLabel: 'View all accounts',
                     href: '/Accounts',
                 },
                 

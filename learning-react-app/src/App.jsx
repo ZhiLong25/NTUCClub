@@ -42,7 +42,8 @@ import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import Addadmin from './pages/users/Addadmin';
 // import Adminaccounts from './pages/users/Adminaccounts';
-import Accounts from './pages/users/Accounts';
+import Accounts from './pages/users/accounts';
+import AddMerchant from './pages/users/AddMerchant';
 import Cart from './pages/cart/cart';
 import Payment from './pages/cart/payment';
 import RegisterGoogle from "./pages/users/RegisterGoogle"
@@ -78,6 +79,7 @@ function App() {
         <Route path={"/Addadmin"} element={<Addadmin />} />
         <Route path={"/Accounts"} element={<Accounts />} />
         <Route path={"/ViewQueries"} element={<ViewQueries/>} />
+        <Route path={"/AddMerchant"} element={<AddMerchant/>} />
         <Route path={"/Faq"} element={<Faq />} />
       </Routes>
     </>
