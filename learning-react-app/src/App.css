@@ -21,10 +21,6 @@ body {
   margin: 0px !important;
 }
 
-#categoryListItem li div {
-  border-radius: 5px !important;
-}
-
 img {
   pointer-events: none;
   width: 100%;
