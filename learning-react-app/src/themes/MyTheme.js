@@ -1,15 +1,34 @@
-// https://mui.com/material-ui/customization/color/
 import { createTheme } from '@mui/material/styles';
 
+
+// BUILT THEME HERE: https://zenoo.github.io/mui-theme-creator/
 const theme = createTheme({
     palette: {
+        mode: 'light',
         primary: {
-            main: '#388e3c',
+            main: '#e81515',
         },
         secondary: {
-            main: '#f4511e',
-        }
-    }
+            main: '#fddc02',
+        },
+    },
+    shape: {
+        borderRadius: 5,
+    },
+    typography: {
+        button: {
+            textTransform: "none",
+        },
+    },
+    components: {
+        MuiListItemButton: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "5px!important",
+                },
+            },
+        },
+    },
 });
 
 export default theme;

@@ -4,8 +4,6 @@ import {
   Box,
   Flex,
   Text,
-  IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
@@ -17,123 +15,87 @@ import {
   useDisclosure,
   ChakraProvider
 } from '@chakra-ui/react'
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from '@chakra-ui/icons'
+
+
+import { ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons'
+import { Link } from "react-router-dom"
+import { Button, IconButton, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material"
+import { MenuRounded, CloseRounded, ExpandMoreRounded, SubdirectoryArrowRightRounded, ExpandLessRounded } from "@mui/icons-material"
+
 
 export default function GuestNav() {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
-    <ChakraProvider >
-    <Box>
-      <Flex
-        bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
-        minH={'60px'}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
-        align={'center'}>
+    <ChakraProvider>
+      <Box>
         <Flex
-          flex={{ base: 1, md: 'auto' }}
-          ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}>
-          <IconButton
-            onClick={onToggle}
-            icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
-            variant={'ghost'}
-            aria-label={'Toggle Navigation'}
-          />
+          minH={'60px'}
+          py={{ base: 2 }}
+          px={{ base: 4 }}
+          borderBottom={1}
+          align={'center'}
+          borderStyle={'solid'}
+          justifyContent={"space-between"}
+          bg={useColorModeValue('white', 'gray.800')}
+          color={useColorModeValue('gray.600', 'white')}
+          borderColor={useColorModeValue('gray.200', 'gray.900')}
+        >
+          <Box display={"flex"} alignItems={"center"} gap={"20px"} >
+            <Link to={"/"}>
+              <img src="./assets/logo.png" id="navLogo" />
+            </Link>
+            <Flex display={{ base: 'none', md: 'flex' }}>
+              <DesktopNav />
+            </Flex>
+          </Box>
+
+          <Stack display={{ base: 'none', md: 'flex' }} flex={1} justify={'flex-end'} direction={'row'} spacing={2}>
+            <Link to={"/login"}>
+              <Button variant="text">Sign In</Button>
+            </Link>
+            <Link to={"/register"}>
+              <Button variant="contained">Sign Up</Button>
+            </Link>
+          </Stack>
+
+          <Box display={{ base: 'block', md: 'none' }}>
+            <IconButton color="primary" onClick={onToggle} aria-label={'Toggle Navigation'}>
+              {isOpen ? <CloseRounded /> : <MenuRounded />}
+            </IconButton>
+          </Box>
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            // textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')}>
-            Logo
-          </Text>
 
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
-            <DesktopNav />
-          </Flex>
-        </Flex>
-
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}>
-          <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'/login'}>
-            Sign In
-          </Button>
-          <Button
-            as={'a'}
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            href={'/register'}
-            _hover={{
-              bg: 'pink.300',
-            }}>
-            Sign Up
-          </Button>
-        </Stack>
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse>
-    </Box>
+        <Collapse in={isOpen} animateOpacity>
+          <MobileNav />
+        </Collapse>
+      </Box>
     </ChakraProvider>
   )
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200')
-  const linkHoverColor = useColorModeValue('gray.800', 'white')
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800')
-
   return (
-    <Stack direction={'row'} spacing={4}>
+    <Stack direction={'row'} spacing={2}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <Box
-                as="a"
-                p={2}
-                href={navItem.href ?? '#'}
-                fontSize={'sm'}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                  color: linkHoverColor,
-                }}>
-                {navItem.label}
-              </Box>
+              <Link to={navItem.href ?? '#'}>
+                <Button variant="text">{navItem.label}</Button>
+              </Link>
             </PopoverTrigger>
 
             {navItem.children && (
               <PopoverContent
                 border={0}
                 boxShadow={'xl'}
-                bg={popoverContentBgColor}
+                bg={useColorModeValue('white', 'gray.800')}
                 p={4}
                 rounded={'xl'}
                 minW={'sm'}>
                 <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
+                  {navItem.children.map((child) => (<DesktopSubNav key={child.label} {...child} />))}
                 </Stack>
               </PopoverContent>
             )}
@@ -153,7 +115,8 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}
+    >
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
@@ -171,7 +134,8 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
           justify={'flex-end'}
           align={'center'}
-          flex={1}>
+          flex={1}
+        >
           <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
@@ -181,59 +145,39 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 
 const MobileNav = () => {
   return (
-    <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
+    <List id="mobileNavList" aria-labelledby="nested-list-subheader">
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
-    </Stack>
+    </List>
   )
 }
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure()
-
   return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Box
-        py={2}
-        as="a"
-        href={href ?? '#'}
-        justifyContent="space-between"
-        alignItems="center"
-        _hover={{
-          textDecoration: 'none',
-        }}>
-        <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
-          />
-        )}
-      </Box>
+    <>
+      <Link to={href ?? "#"}>
+        <ListItemButton onClick={children && onToggle}>
+          <ListItemText primary={label} />
+          {children ? isOpen ? <ExpandLessRounded /> : <ExpandMoreRounded /> : null}
+        </ListItemButton>
+      </Link>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}>
+      {children && <Collapse in={isOpen} unmountOnExit>
+        <List component="div" disablePadding>
           {children &&
             children.map((child) => (
-              <Box as="a" key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Box>
+              <Link to={child.href ?? "#"}>
+                <ListItemButton sx={{ pl: 4 }} >
+                  <ListItemIcon><SubdirectoryArrowRightRounded /></ListItemIcon>
+                  <ListItemText primary={child.label} />
+                </ListItemButton>
+              </Link>
             ))}
-        </Stack>
-      </Collapse>
-    </Stack>
+        </List>
+      </Collapse>}
+    </>
   )
 }
 
@@ -246,42 +190,22 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Inspiration',
+    label: 'Home',
+    href: '/',
+  },
+  {
+    label: 'Experiences',
+    href: '/experiences',
+  },
+  {
+    label: 'Queries',
     children: [
       {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
-        href: '#',
+        label: 'View Queries',
+        subLabel: 'View Queries for Admin',
+        href: '/ViewQueries',
       },
-      {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
-        href: '#',
-      },
+
     ],
-  },
-  {
-    label: 'FAQ',
-    children: [
-      {
-        label: 'Send Query',
-        subLabel: 'Ask us any questions(slow but more detailed reply)',
-        href: '/AddQueries',
-    },
-    {
-        label: 'Chat Bot',
-        subLabel: 'Ask us any questions(chatting with our AI',
-        href: '/FAQ',
-    },
-      
-    ],
-  },
-  {
-    label: 'Products',
-    href: '/productspage',
-  },
-  {
-    label: 'Hire Designers',
-    href: '#',
-  },
+  }
 ]

@@ -105,7 +105,7 @@ const columns = ['id', 'name', 'category', 'updatedAt'];
                 <Typography className="topheader">Manage Vendors</Typography>
 
                 <Box>
-                  <Link to="/managevendor"><IconButton className="changeicon"><Search></Search></IconButton></Link>
+                  <Link to="/managevendor"><IconButton className="link changeicon"><Search></Search></IconButton></Link>
                 </Box>
 
               </CardContent>
@@ -117,7 +117,7 @@ const columns = ['id', 'name', 'category', 'updatedAt'];
                 <Typography className="topheader">Implement Timeslots</Typography>
 
                 <Box>
-                  <Link to="/manageTimeslots"><IconButton className="changeicon"><Search></Search></IconButton></Link>
+                  <Link className='link' to="/manageTimeslots"><IconButton className="changeicon"><Search></Search></IconButton></Link>
                 </Box>
 
               </CardContent>
