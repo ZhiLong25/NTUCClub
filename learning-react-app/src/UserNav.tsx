@@ -82,7 +82,7 @@ export default function UserNav() {
                     subLabel: 'View your card details',
                     href: '/manageCard',
                 },
-                
+
             ],
         },
         {
@@ -93,7 +93,7 @@ export default function UserNav() {
                     subLabel: 'To get activites at a discounted price, click here!',
                     href: '/viewVouchers',
                 },
-                
+
 
             ],
         },
@@ -146,12 +146,7 @@ export default function UserNav() {
                         />
                     </Flex>
                     <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-                        <Text
-                            // textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-                            fontFamily={'heading'}
-                            color={useColorModeValue('gray.800', 'white')}>
-                            Logo
-                        </Text>
+                        <img src="./assets/logo.png" id="navLogo" />
                         {/* desktop */}
                         <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
                             <Stack direction={'row'} spacing={4}>
@@ -234,7 +229,7 @@ export default function UserNav() {
                                 minW={0}>
                                 <Avatar
                                     size={'sm'}
-                                    // src={`${import.meta.env.VITE_FILE_BASE_URL}${user?.profilePicture}`}
+                                // src={`${import.meta.env.VITE_FILE_BASE_URL}${user?.profilePicture}`}
                                 />
                             </MenuButton>
                         </Menu>
