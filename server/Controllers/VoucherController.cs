@@ -83,6 +83,8 @@ namespace NTUCClub.Controllers
         public IActionResult UpdateVoucher(int id, Voucher voucher)
         {
             var myVoucher = _context.Vouchers.Where(x => x.Id == id).FirstOrDefault();
+            Console.WriteLine(voucher.Voucher_Validity);
+            Console.WriteLine(myVoucher.Voucher_Validity);
             if (myVoucher == null)
             {
                 return NotFound();
@@ -106,6 +108,11 @@ namespace NTUCClub.Controllers
             if (voucher.Voucher_Quantity != null)
             {
                 myVoucher.Voucher_Quantity = voucher.Voucher_Quantity;
+            }
+            if(voucher.Voucher_Image != null)
+            {
+                myVoucher.Voucher_Image = voucher.Voucher_Image;
+
             }
 
             myVoucher.UpdatedAt = DateTime.Now;

@@ -1,0 +1,5 @@
+.black-selected-date .react-calendar__tile--active {
+    background-color: #E8533F;
+    color: white !important; /* Set the text color of the selected date */
+  }
+  

@@ -167,6 +167,7 @@ function UpdateProfile() {
 
             let formData = new FormData();
             formData.append('file', file);
+            console.log(formData)
             http.post('/file/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
