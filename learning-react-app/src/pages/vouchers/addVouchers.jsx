@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Typography, Card, TextField, Button } from '@mui/material';
-import { Select, MenuItem, InputLabel, FormControl} from '@mui/material';
+import { Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import UserContext from '../../contexts/UserContext';
 import http from '../../http';
@@ -11,7 +11,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Calendar from "react-calendar";
-
+import "../styles/updateProfile.css"
 
 function addVouchers() {
   const [user, setUser] = useState(null);
@@ -67,8 +67,8 @@ function addVouchers() {
         .min(3, 'Name must be at least 3 characters')
         .max(100, 'Name must be at most 50 characters')
         .required('Name is required')
-        .matches(/^[a-zA-Z]+$/, "Only letter input accepted"),
-    }),
+        .matches(/^[a-zA-Z0-9\s]+$/, "Only letter and numbers input accepted"),
+      }),
 
     onSubmit: (data) => {
       data.Voucher_Details = data.Voucher_Details.trim();
@@ -97,9 +97,13 @@ function addVouchers() {
         console.log(formData)
         http.post("/Voucher/Addvoucher", formData)
         http.post("/Voucher/Addvoucher", data)
-          .then((res) => {
-            toast.success("Voucher Added");
-          })
+        .then((res) => {
+          toast.success("Voucher Added");
+          setTimeout(() => {
+              window.location.reload();
+          }, 2000); // 2000 milliseconds = 2 seconds
+      })
+      
           .catch(function (err) {
             console.error('Error:', err);
             toast.error(`${err.response.data.message}`);
@@ -141,52 +145,42 @@ function addVouchers() {
 
   return (
     <Box>
-      <Card className='pfp-container'>
-                    <Box component="form" onSubmit={formik.handleSubmit}style={{width:"80%",height:"100%",margin:"auto"}}> 
 
-                        <Box style={{ marginBottom: "30px", marginTop: "30px", height: "5rem",textAlign:"center" }} >
-                            {
-                                imageFile && (
-                                    <img
-                                    alt="tutorial"
-                                    className="voucherImg"
-                                    style={{
-                                        borderRadius: "50%",
-                                        height: "150px",
-                                        width: "150px",
-                                        objectFit: 'cover', // Adjust based on your requirements
-                                        marginTop: "5%",
-                                        margin:"auto"
-                                    }}
-                                    src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
-                                    />
-                                    )
-                                }
-                                    <Button variant="contained" component="label" style={{ marginTop: "25px" }}>
-                                        Upload Image
-                                        <input hidden accept="image/*" multiple type="file"
-                                            onChange={onFileChange} />              </Button>
-                            <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#E8533F", marhin:"auto" }}
-                                type="submit">
-                                Save
-                            </Button>
-                        </Box>
-                    </Box>
-                </Card>
-      <Card style={{
-        marginTop: "8%",
-        background: "white",
-        borderRadius: "50px",
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        height: "auto", // Change to "auto" to allow dynamic height based on content
-        position: 'relative'
-      }}>
-        <Typography variant="h5" sx={{ my: 2, marginTop: "5%" }}>
+      
+<div className='main-container'>
+                <Card className='pfp-container'>
+                <Box style={{ width: "80%", height: "100%", margin: "auto" }}>
+        <Box style={{ marginBottom: "30px", marginTop: "30px", height: "5rem", textAlign: "center" }} >
+          {
+            imageFile && (
+              <img
+                alt="tutorial"
+                className="voucherImg"
+                style={{
+                  height: "150px",
+                  width: "150px",
+                  objectFit: 'cover', // Adjust based on your requirements
+                  marginTop: "5%",
+                  margin: "auto"
+                }}
+                src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
+              />
+            )
+          }
+          <Button variant="contained" component="label" style={{ marginTop: "25px" }}>
+            Upload Image
+            <input hidden accept="image/*" multiple type="file"
+              onChange={onFileChange} />              
+              </Button>
+        </Box>
+      </Box>
+      </Card>
+      <Card className='information-container' >
+        <Typography variant="h5" sx={{ my: 2, marginTop: "5%" }}style={{textAlign:"center"}}>
           Add Voucher
         </Typography>
-        <Box component="form" sx={{ maxWidth: '500px', width: '100%' }} onSubmit={formik.handleSubmit}>
+        <Box component="form" sx={{ maxWidth: '500px', width: '100%' }} onSubmit={formik.handleSubmit} style={{margin:"auto"}}>
+          
           {/* <Box mb={2}>
             <input
               type="file"
@@ -266,12 +260,13 @@ function addVouchers() {
           <div style={{ marginTop: "8px" }}>
             <Calendar onChange={onChange} value={date} />
           </div>
-          <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#03C04A" }} type="submit">
+          <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#03C04A",marginBottom:"5%" }} type="submit">
             Add
           </Button>
         </Box>
         <ToastContainer />
       </Card>
+      </div>
     </Box>
   );
 }
