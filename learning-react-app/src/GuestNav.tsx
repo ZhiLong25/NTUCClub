@@ -19,9 +19,8 @@ import {
 
 import { ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import { Link } from "react-router-dom"
-import CONSTANT from "./pages/const"
-import { Button, IconButton } from "@mui/material"
-import { MenuRounded, CloseRounded } from "@mui/icons-material"
+import { Button, IconButton, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material"
+import { MenuRounded, CloseRounded, ExpandMoreRounded, SubdirectoryArrowRightRounded, ExpandLessRounded } from "@mui/icons-material"
 
 
 export default function GuestNav() {
@@ -37,31 +36,34 @@ export default function GuestNav() {
           borderBottom={1}
           align={'center'}
           borderStyle={'solid'}
+          justifyContent={"space-between"}
           bg={useColorModeValue('white', 'gray.800')}
           color={useColorModeValue('gray.600', 'white')}
           borderColor={useColorModeValue('gray.200', 'gray.900')}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          <Box display={"flex"} alignItems={"center"} gap={"20px"} >
             <Link to={"/"}>
               <img src="./assets/logo.png" id="navLogo" />
             </Link>
             <Flex display={{ base: 'none', md: 'flex' }}>
               <DesktopNav />
             </Flex>
-          </div>
+          </Box>
 
-          <Stack flex={1} justify={'flex-end'} direction={'row'} spacing={2}>
+          <Stack display={{ base: 'none', md: 'flex' }} flex={1} justify={'flex-end'} direction={'row'} spacing={2}>
             <Link to={"/login"}>
               <Button variant="text">Sign In</Button>
             </Link>
             <Link to={"/register"}>
-              <Button variant="contained" className="p-5">Sign Up</Button>
+              <Button variant="contained">Sign Up</Button>
             </Link>
           </Stack>
 
-          <IconButton color="primary" onClick={onToggle} aria-label={'Toggle Navigation'}>
-            {isOpen ? <CloseRounded /> : <MenuRounded />}
-          </IconButton>
+          <Box display={{ base: 'block', md: 'none' }}>
+            <IconButton color="primary" onClick={onToggle} aria-label={'Toggle Navigation'}>
+              {isOpen ? <CloseRounded /> : <MenuRounded />}
+            </IconButton>
+          </Box>
         </Flex>
 
         <Collapse in={isOpen} animateOpacity>
@@ -93,9 +95,7 @@ const DesktopNav = () => {
                 rounded={'xl'}
                 minW={'sm'}>
                 <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
+                  {navItem.children.map((child) => (<DesktopSubNav key={child.label} {...child} />))}
                 </Stack>
               </PopoverContent>
             )}
@@ -134,7 +134,8 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
           justify={'flex-end'}
           align={'center'}
-          flex={1}>
+          flex={1}
+        >
           <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
@@ -144,59 +145,39 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 
 const MobileNav = () => {
   return (
-    <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
+    <List id="mobileNavList" aria-labelledby="nested-list-subheader">
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
-    </Stack>
+    </List>
   )
 }
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure()
-
   return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Box
-        py={2}
-        as="a"
-        href={href ?? '#'}
-        justifyContent="space-between"
-        alignItems="center"
-        _hover={{
-          textDecoration: 'none',
-        }}>
-        <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
-          />
-        )}
-      </Box>
+    <>
+      <Link to={href ?? "#"}>
+        <ListItemButton onClick={children && onToggle}>
+          <ListItemText primary={label} />
+          {children ? isOpen ? <ExpandLessRounded /> : <ExpandMoreRounded /> : null}
+        </ListItemButton>
+      </Link>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}>
+      {children && <Collapse in={isOpen} unmountOnExit>
+        <List component="div" disablePadding>
           {children &&
             children.map((child) => (
-              <Box as="a" key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Box>
+              <Link to={child.href ?? "#"}>
+                <ListItemButton sx={{ pl: 4 }} >
+                  <ListItemIcon><SubdirectoryArrowRightRounded /></ListItemIcon>
+                  <ListItemText primary={child.label} />
+                </ListItemButton>
+              </Link>
             ))}
-        </Stack>
-      </Collapse>
-    </Stack>
+        </List>
+      </Collapse>}
+    </>
   )
 }
 

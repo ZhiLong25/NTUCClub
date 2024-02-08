@@ -20,6 +20,15 @@ const theme = createTheme({
             textTransform: "none",
         },
     },
+    components: {
+        MuiListItemButton: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "5px!important",
+                },
+            },
+        },
+    },
 });
 
 export default theme;
