@@ -21,7 +21,7 @@ namespace NTUCClub.Models
         [Range(1, int.MaxValue, ErrorMessage = "Voucher_Quantity must be greater than or equal to 1.")]
         public int Voucher_Quantity { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime Voucher_Validity { get; set; }
+        public DateTimeOffset Voucher_Validity { get; set; }
         public int? Activity_ID { get; set; }
         public int User_ID { get; set; }
 

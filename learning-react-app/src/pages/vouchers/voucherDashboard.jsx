@@ -69,15 +69,11 @@ function voucherDashboard() {
 
     return (
         <Box>
-            <Typography variant="h5" sx={{ my: 2 }}>
+            <Typography variant="h5" sx={{ mt: 8, fontWeight:"bold" }}>
                 Vouchers
             </Typography>
 
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                {/* Add your search input and buttons here */}
-            </Box>
-
-            <Grid container spacing={2} style={{ marginTop: "5%", marginBottom: "5%" }}>
+            <Grid container spacing={2} style={{ marginTop: "1%", marginBottom: "5%" }}>
                 {vouchers.map((voucher, i) => (
                     //         <Grid item xs={12} md={6} lg={4} key={voucher.id}>
                     //             <div style={{
@@ -197,12 +193,11 @@ function voucherDashboard() {
                                 )
                             }
                             <CardContent style={{ margin: "auto" }}>
-                                <Box sx={{ display: 'flex', mb: 1 }}
+                                <Box sx={{ display: 'flex', mb: 5, mt: 1 }}
                                     color="text.secondary">
-                                    <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.85rem", flex: "3" }}>
+                                    <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "1.2rem", flex: "3" }}>
                                         {<div style={{ display: 'flex', alignItems: 'center' }}>
-                                            <DriveFileRenameOutlineIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                                            Name: {voucher.voucher_Name}
+                                            Voucher Details
                                         </div>}
                                     </Typography>
                                     {
@@ -214,6 +209,16 @@ function voucherDashboard() {
                                         <DeleteIcon onClick={() => handleOpen(voucher.id)} id={voucher.id} style={{ marginRight: 8, fontSize: "1.5rem", color: "red" }} />
 
                                     }
+                                </Box>
+                                <Box sx={{ display: 'flex', mb: 1 }}
+                                    color="text.secondary">
+                                    <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.85rem", flex: "3" }}>
+                                        {<div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <DriveFileRenameOutlineIcon style={{ marginRight: 8, fontSize: "18px" }} />
+                                            Name: {voucher.voucher_Name}
+                                        </div>}
+                                    </Typography>
+                                    
                                 </Box>
                             </CardContent>
 
@@ -245,7 +250,7 @@ function voucherDashboard() {
                                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 0 }}
                                     color="text.secondary">
                                     <Typography style={{ fontWeight: "bold", textAlign: "center", color: "black", fontSize: "0.85rem" }}>
-                                        {<div style={{ display: 'flex', alignItems: 'center' }}>
+                                        {<div style={{ display: 'flex', alignItems: 'center'}}>
                                             <AccessTimeIcon style={{ marginRight: 8, fontSize: "18px" }} />
                                             Validity: {voucher.voucher_Validity}
                                         </div>}
@@ -266,7 +271,7 @@ function voucherDashboard() {
                         alt="warning"
                         className="noti-icon"
                     />
-                    <DialogTitle style={{textAlign: 'center'}}>Are you sure you would like to delete voucher?</DialogTitle>
+                    <DialogTitle style={{ textAlign: 'center' }}>Are you sure you would like to delete voucher?</DialogTitle>
                     <DialogContent>
                         <DialogContentText></DialogContentText>
                     </DialogContent>

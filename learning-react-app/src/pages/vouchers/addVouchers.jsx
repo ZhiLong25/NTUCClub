@@ -11,9 +11,12 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Calendar from "react-calendar";
-import "../styles/updateProfile.css"
+import "../styles/updateProfile.css";
+import { useNavigate } from 'react-router-dom';
+import "../styles/calendar.css";
 
 function addVouchers() {
+  const navigate = useNavigate()
   const [user, setUser] = useState(null);
   const [date, setDate] = useState(new Date());
   const [imageFile, setImageFile] = useState(null);
@@ -100,7 +103,7 @@ function addVouchers() {
         .then((res) => {
           toast.success("Voucher Added");
           setTimeout(() => {
-              window.location.reload();
+              navigate("/voucherdashboard")
           }, 2000); // 2000 milliseconds = 2 seconds
       })
       
@@ -176,7 +179,7 @@ function addVouchers() {
       </Box>
       </Card>
       <Card className='information-container' >
-        <Typography variant="h5" sx={{ my: 2, marginTop: "5%" }}style={{textAlign:"center"}}>
+        <Typography variant="h5" sx={{ my: 2, marginTop: "5%" }}style={{textAlign:"center", fontWeight:"bold"}}>
           Add Voucher
         </Typography>
         <Box component="form" sx={{ maxWidth: '500px', width: '100%' }} onSubmit={formik.handleSubmit} style={{margin:"auto"}}>
@@ -258,7 +261,8 @@ function addVouchers() {
 
           <div style={{ marginTop: "8px" }}><p>Select Expiry Date</p></div>
           <div style={{ marginTop: "8px" }}>
-            <Calendar onChange={onChange} value={date} />
+            <Calendar onChange={onChange} value={date} className="black-selected-date"
+ />
           </div>
           <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#03C04A",marginBottom:"5%" }} type="submit">
             Add
