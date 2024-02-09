@@ -111,8 +111,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
       {children && <Collapse in={isOpen} unmountOnExit>
         <List component="div" disablePadding>
           {children &&
-            children.map((child) => (
-              <Link to={child.href ?? "#"}>
+            children.map((child, i) => (
+              <Link to={child.href ?? "#"} key={i}>
                 <ListItemButton sx={{ pl: 4 }} >
                   <ListItemIcon><SubdirectoryArrowRightRounded /></ListItemIcon>
                   <ListItemText primary={child.label} />
@@ -125,10 +125,18 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   )
 }
 
+const CheckIfDataIsArray = ({ data }) => {
+  if (Array.isArray(data)) {
+    return data
+  } else {
+    return []
+  }
+}
 
 export {
   DesktopNav,
   DesktopSubNav,
   MobileNav,
-  MobileNavItem
+  MobileNavItem,
+  CheckIfDataIsArray
 }
