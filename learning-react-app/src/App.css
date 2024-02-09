@@ -1,3 +1,7 @@
+body {
+  background-color: #fff !important;
+}
+
 .AppBar a {
   color: inherit;
   text-decoration: none;
@@ -8,6 +12,92 @@
   color: inherit;
   margin-left: 12px;
 }
-.react-calendar{
-  margin:"auto"
+
+.react-calendar {
+  margin: "auto"
+}
+
+.css-sgoict-MuiCardHeader-action {
+  margin: 0px !important;
+}
+
+img {
+  pointer-events: none;
+  width: 100%;
+  height: auto;
+}
+
+.eventTitle,
+.eventDescription {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.eventTitle {
+  height: 44px;
+}
+
+.eventDescription {
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  height: 60px;
+}
+
+.css-1ef8uzr {
+  align-items: center;
+}
+
+
+/* NAV */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  justify-content: space-between;
+  min-height: 60px;
+  background-color: white;
+  border-bottom: solid 1px #4A5568;
+}
+
+.navbar .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navItemMain {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#navLogo {
+  height: 100%;
+  width: 90px;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* CAROUSEL */
+.carouselBanner .css-1abc02a,
+.carouselBanner .css-hn784z {
+  padding: 20px !important;
+}
+
+.carouselBanner img {
+  border-radius: 10px;
 }

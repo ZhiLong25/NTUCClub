@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { Container, Box, Typography, TextField, Button, InputLabel, Select, MenuItem, Grid } from '@mui/material';
+import { Container, Box, Typography, TextField, Button, InputLabel, Select, MenuItem, Grid, Chip } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
@@ -14,10 +14,9 @@ import 'react-quill/dist/quill.snow.css';
 import placeholder from './media/placeholder.png';
 import '../styles/product.css'
 
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { useTheme } from '@mui/material/styles';
+
 
 
 function AddService() {
@@ -130,11 +129,88 @@ function AddService() {
   });
 
 
+  const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const names = [
+  'Oliver Hansen',
+  'Van Henry',
+  'April Tucker',
+  'Ralph Hubbard',
+  'Omar Alexander',
+  'Carlos Abbott',
+  'Miriam Wagner',
+  'Bradley Wilkerson',
+  'Virginia Andrews',
+  'Kelly Snyder',
+];
+
+const [personName, setPersonName] = React.useState([]);
+const theme = useTheme();
+
+const handleChange = (event) => {
+  const {
+    target: { value },
+  } = event;
+  setPersonName(
+    // On autofill we get a stringified value.
+    typeof value === 'string' ? value.split(',') : value,
+  );
+};
+
+function getStyles(name, personName, theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+
   return (
     <Container>
       <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
         Add Events / Services
       </Typography>
+
+
+    <InputLabel id="demo-multiple-chip-label">Title</InputLabel>
+    <Select
+        style={{ width: "100%"}}
+        labelId="demo-multiple-chip-label" // <- Specify labelId
+        id="demo-multiple-chip"
+        multiple
+        value={personName}
+        onChange={handleChange}
+        input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+        renderValue={(selected) => (
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+            {selected.map((value) => (
+              <Chip key={value} label={value} />
+            ))}
+          </Box>
+        )}
+        MenuProps={MenuProps}
+      >
+        {names.map((name) => (
+          <MenuItem
+            key={name}
+            value={name}
+            style={getStyles(name, personName, theme)}
+          >
+            {name}
+          </MenuItem>
+        ))}
+      </Select>
+      
 
       <Box component="form" onSubmit={formik.handleSubmit}>
 
