@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -29,4 +27,44 @@ body {
   left: 0;
   top: 0;
   object-fit: cover;
+}
+
+.carouselBanner {
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.gridCTA {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 10px;
+}
+
+#categoryListTitle {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.gridTwoCTA {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+#categoryList {
+  background-color: #eee;
+  border-radius: 10px;
+  padding: 30px 20px 20px;
+}
+
+#eventShowcase {
+  margin: 20px 0 30px;
+  border-radius: 10px;
+}
+
+#eventShowcase #eventList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }

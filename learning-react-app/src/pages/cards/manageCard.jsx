@@ -14,7 +14,7 @@ const ManageCard = () => {
       <Grid container spacing={3}>
         {/* Add Card */}
         <Grid item xs={12} md={6}>
-          <Link to="/addCard" style={{ textDecoration: 'none' }}>
+          <Link to="/addCard" style={{ textDecoration: 'none' }} className='link'>
             <Card style={{ background: '#0BDA51', padding: '40px', cursor: 'pointer', borderRadius: '15px', border: '1px solid black', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
               <CardContent>
                 <Typography variant="h5" component="div" align="center" color="white">

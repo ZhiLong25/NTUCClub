@@ -68,7 +68,7 @@ function Tutorials() {
                 <Box sx={{ flexGrow: 1 }} />
                 {
                     user && (
-                        <Link to="/addtutorial" style={{ textDecoration: 'none' }}>
+                        <Link to="/addtutorial" style={{ textDecoration: 'none' }} className='link'>
                             <Button variant='contained'>
                                 Add
                             </Button>
@@ -99,7 +99,7 @@ function Tutorials() {
                                             </Typography>
                                             {
                                                 user && user.id === tutorial.userId && (
-                                                    <Link to={`/edittutorial/${tutorial.id}`}>
+                                                    <Link to={`/edittutorial/${tutorial.id}`} className='link'>
                                                         <IconButton color="primary" sx={{ padding: '4px' }}>
                                                             <Edit />
                                                         </IconButton>
