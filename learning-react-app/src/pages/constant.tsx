@@ -125,11 +125,16 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   )
 }
 
-const CheckIfDataIsArray = ({ data }) => {
-  if (Array.isArray(data)) {
-    console.log(data)
-    return data
-  } else {
+const CheckIfDataIsArray = (data: any) => {
+  try {
+    if (Array.isArray(data)) {
+      return data
+    } else {
+      const checkIfArray = JSON.parse(data);
+      return checkIfArray
+    }
+  }
+  catch {
     return []
   }
 }

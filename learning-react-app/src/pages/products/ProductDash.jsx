@@ -27,20 +27,19 @@ function ProductDash() {
     http.get('/Product/getservice')
       .then((res) => {
         const data = CheckIfDataIsArray(res.data)
-        setTotalServices(res.data.length);
-
+        setTotalServices(data.length);
       });
 
     http.get('/Category/getcategory')
       .then((res) => {
         const data = CheckIfDataIsArray(res.data)
-        setTotalCategory(res.data.length);
+        setTotalCategory(data.length);
       });
 
     http.get('/Vendor/getvendor')
       .then((res) => {
         const data = CheckIfDataIsArray(res.data)
-        setTotalVendors(res.data.length);
+        setTotalVendors(data.length);
       });
 
     getServices();

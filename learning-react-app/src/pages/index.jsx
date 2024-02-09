@@ -8,9 +8,11 @@ import EventCard from './components/event';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
 import http from '../http';
+import { CheckIfDataIsArray } from './constant';
 
 
 function Home() {
+  const [services, setServices] = useState([]);
   const carouselItems = [
     {
       name: "Random Name #1",
@@ -151,18 +153,16 @@ function Home() {
       "vendor": "Vendor2"
     }
   ]
-  const [services, setServices] = useState([]);
 
   useEffect(() => {
-
     http.get('/Product/getservice')
       .then((res) => {
         try {
-          Array.isArray(res.data)
-          setServices(res.data);
+          const data = CheckIfDataIsArray(res.data)
+          setServices(data);
         }
         catch {
-          setTotalService([])
+          setServices([])
         }
       })
       .catch((err) => {
