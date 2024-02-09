@@ -109,6 +109,10 @@ export default function AdminNav() {
             ],
         },
         {
+            label: 'Payment Records',
+            href: '/paymentRecords'
+        },
+        {
             label: 'Queries',
             children: [
                 {
