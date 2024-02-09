@@ -70,6 +70,17 @@ export default function UserNav() {
 
     const NAV_ITEMS: Array<NavItem> = user ? [
         {
+            label: 'Experiences',
+            children: [
+                {
+                    label: 'Experiences',
+                    subLabel: 'Explore what we have to provide!',
+                    href: '/productspage',
+                },
+               
+            ],
+        },
+        {
             label: 'Account',
             children: [
                 {
@@ -113,10 +124,7 @@ export default function UserNav() {
 
             ],
         },
-        {
-            label: 'Hire Designers',
-            href: '#',
-        },
+        
     ] : []
     const linkColor = useColorModeValue('gray.600', 'gray.200')
     const linkHoverColor = useColorModeValue('gray.800', 'white')

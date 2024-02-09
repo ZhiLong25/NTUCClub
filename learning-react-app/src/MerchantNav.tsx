@@ -67,6 +67,23 @@ export default function MerchantNav() {
 
     const NAV_ITEMS: Array<NavItem> = user? [
         {
+            label: 'Experiences',
+            children: [
+                {
+                    label: 'Add Experiences',
+                    subLabel: 'Add your activities here',
+                    href: '/addService',
+                },
+                {
+                    label: 'Experiences dashboard',
+                    subLabel: 'View your activities here',
+                    href: '/productsdash',
+                },
+                
+                
+            ],
+        },
+        {
             label: 'Account',
             children: [
                 {
@@ -107,10 +124,7 @@ export default function MerchantNav() {
             label: 'Learn Design',
             href: '#',
         },
-        {
-            label: 'Hire Designers',
-            href: '#',
-        },
+        
     ]:[]
     const linkColor = useColorModeValue('gray.600', 'gray.200')
     const linkHoverColor = useColorModeValue('gray.800', 'white')
