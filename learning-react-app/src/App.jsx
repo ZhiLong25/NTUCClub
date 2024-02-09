@@ -114,6 +114,9 @@ function App() {
                     <Route path={"/cart"} element={<Cart />} />
                     <Route path={"/payment"} element={<Payment />} />
                     <Route path={"/Faq"} element={<Faq />} />
+
+                    <Route path={"/experiences/:id"} element={<Products />} />
+                    <Route path={"/experiences"} element={< ProductsPage />} />
                   </Routes>
                 </>
               )
@@ -128,6 +131,7 @@ function App() {
                   <Route path={"/verification"} element={<Verification />} />
                   <Route path={"/AddQueries"} element={<AddQueries />} />
                   <Route path={"/RegisterGoogle"} element={<RegisterGoogle />} />
+
                   <Route path={"/productdash"} element={<ProductDash />} />
                   <Route path={"/addservice"} element={<AddService />} />
                   <Route path={"/getservice"} element={<GetService />} />
@@ -136,6 +140,7 @@ function App() {
                   <Route path={"/managevendor"} element={<ManageVendor />} />
                   <Route path={"/experiences/:id"} element={<Products />} />
                   <Route path={"/experiences"} element={< ProductsPage />} />
+
                   <Route path={"/addquery"} element={<addQuery />} />
                   <Route path={"/Faq"} element={<Faq />} />
                 </Routes>

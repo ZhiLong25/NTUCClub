@@ -24,6 +24,7 @@ function Products() {
 
     useEffect(() => {
         http.get(`/Product/getservice/${id}`).then((res) => {
+
           console.log(res.data);
           setServices(res.data);
     
@@ -39,8 +40,6 @@ function Products() {
           const timeValues = timeslotValues.split(', ')
             setTimeslots(timeValues);
 
-
-    
         });
     }, []);
 
@@ -65,14 +64,22 @@ function Products() {
         }
     });
 
-
     const [isFavorite, setIsFavorite] = useState(false);
       
     const handleClick = () => {
         setIsFavorite((prevIsFavorite) => !prevIsFavorite);
     };
 
+    const [user, setUser] = useState(null);
+
     useEffect(() => {
+
+        http.get('/user/auth').then((res) => {
+            setUser(res.data.user);
+            console.log(res.data.user.name);
+        });
+
+
 
         if (isFavorite == true) {
             if (isFavorite == true) {
@@ -111,7 +118,7 @@ function Products() {
 
                 
                 <div onClick={handleClick}>
-                    {isFavorite ? <FavoriteBorderIcon /> : <FavoriteIcon />}
+                    {isFavorite ? <FavoriteBorderIcon /> : <FavoriteIcon />} Add to your wishlist
                 </div>
 
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>

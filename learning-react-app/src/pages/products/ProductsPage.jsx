@@ -7,6 +7,7 @@ import http from '../../http';
 import '../styles/product.css';
 import banner from '../products/media/placeholder.png'
 import TelegramCard from '../components/telegram';
+import { CheckIfDataIsArray } from '../constant';
 
 function ProductsPage() {
   const [imageFile, setImageFile] = useState('');
@@ -20,12 +21,10 @@ function ProductsPage() {
     setSearch('');
     http.get('/Product/getservice')
       .then((res) => {
-        Array.isArray(res.data)
-        setServiceList(res.data);
-        setTotalService(res.data.length);
-      })
-      .catch((err) => {
-        console.log(err)
+        const data = CheckIfDataIsArray(res.data)
+        setServiceList(data);
+        setTotalService(data.length);
+
       })
 
     // setSelectedCategories([]);
@@ -38,11 +37,8 @@ function ProductsPage() {
   const searchServices = () => {
     http.get(`/Product/getservice?search=${search}`)
       .then((res) => {
-        Array.isArray(res.data)
-        setServiceList(res.data);
-      })
-      .catch((err) => {
-        console.log(err)
+        const data = CheckIfDataIsArray(res.data)
+        setServiceList(data);
       })
   };
 
@@ -59,32 +55,19 @@ function ProductsPage() {
   useEffect(() => {
     http.get('/Category/getcategory')
       .then((res) => {
-        try {
-          Array.isArray(res.data)
-          setCategoryList(res.data);
-        }
-        catch {
-          setCategoryList([])
-        }
-      })
-      .catch((err) => {
-        console.log(err)
+
+          const data = CheckIfDataIsArray(res.data)
+          setCategoryList(data);
+
       })
 
     http.get('/Product/getservice')
       .then((res) => {
-        try {
-          Array.isArray(res.data)
-          setServiceList(res.data);
-          setTotalService(res.data.length);
-        }
-        catch {
-          setCategoryList([])
-          setTotalService(0)
-        }
-      })
-      .catch((err) => {
-        console.log(err)
+
+          const data = CheckIfDataIsArray(res.data)
+          setServiceList(data);
+          setTotalService(data.length);
+          console.log(data)
       })
   }, []);
 
