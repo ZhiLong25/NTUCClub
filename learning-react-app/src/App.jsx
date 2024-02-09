@@ -43,7 +43,7 @@ import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import Addadmin from './pages/users/Addadmin';
 // import Adminaccounts from './pages/users/Adminaccounts';
-import Accounts from './pages/users/accounts';
+import Accounts from './pages/users/Accounts';
 import AddMerchant from './pages/users/AddMerchant';
 import Cart from './pages/cart/cart';
 import Payment from './pages/cart/payment';
@@ -122,6 +122,7 @@ function App() {
               <>
                 {/* Guest navigation */}
                 <GuestNav />
+                <MerchantNav />
                 <Routes>
                   <Route path={"/"} element={<Home />} />
                   <Route path={"/register"} element={<Register />} />
