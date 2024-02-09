@@ -191,9 +191,11 @@ function Home() {
             }
           })}
           <Link to={"/experiences"} className='link'>
-            <CardActionArea style={{ textAlign: "center", display: "flex", placeContent: "center", alignItems: "center", height: "100%", fontWeight: "bold", backgroundColor: "black", color: "white" }}>
-              Explore More<br />Experiences
-            </CardActionArea>
+            <Card>
+              <CardActionArea style={{ textAlign: "center", display: "flex", placeContent: "center", alignItems: "center", height: "100%", fontWeight: "bold", backgroundColor: "black", color: "white" }}>
+                Explore More<br />Experiences
+              </CardActionArea>
+            </Card>
           </Link>
         </div>
       </div>

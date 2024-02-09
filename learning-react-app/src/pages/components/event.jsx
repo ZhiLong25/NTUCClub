@@ -13,8 +13,8 @@ function EventCard(props) {
 
   return (
     <Link to={finalURL} className='link'>
-      <Card variant="outlined" style={{ borderRadius: "10px", height: "100%" }}>
-        <CardActionArea style={{ height: "100%" }}>
+      <Card variant="outlined" style={{ height: "100%" }}>
+        <CardActionArea>
           <CardHeader subheader={event.vendor} action={icon} />
           <CardMedia style={{ height: 150 }} image={event.image} />
           <CardContent style={{ height: "100%" }}>
