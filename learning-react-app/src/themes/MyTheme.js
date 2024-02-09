@@ -2,6 +2,7 @@ import { createTheme } from '@mui/material/styles';
 
 
 // BUILT THEME HERE: https://zenoo.github.io/mui-theme-creator/
+const borderRadius = "5px!important"
 const theme = createTheme({
     palette: {
         mode: 'light',
@@ -24,10 +25,18 @@ const theme = createTheme({
         MuiListItemButton: {
             styleOverrides: {
                 root: {
-                    borderRadius: "5px!important",
+                    borderRadius: borderRadius,
                 },
             },
         },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "10px!important",
+                    height: "100%"
+                },
+            },
+        }
     },
 });
 
