@@ -15,8 +15,6 @@ function Products() {
 
     var [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
     const [imageFile, setImageFile] = useState('');
-    const [vendorList, setVendorList] = useState([]);
-    const [categoryList, setCategoryList] = useState([]);
     const [timeslotsList, setTimeslots] = useState([]);
 
     const [services, setServices] = useState([]);
@@ -31,25 +29,19 @@ function Products() {
     
           if (res.data.memPrice != null) {
               setIsMemberPriceVisible(true)
-    
           }
     
           if (res.data.image) {
             setImageFile(res.data.image);
           }
 
-          http.get('/Vendor/getvendor').then((res) => {
-            setVendorList(res.data);
-          });
+          const timeslotValues = res.data.timeSlots;
+          const timeValues = timeslotValues.split(', ')
+            setTimeslots(timeValues);
+
+
     
         });
-
-        
-    http.get('/Timeslot/gettimeslots').then((res) => {
-        setTimeslots(res.data);
-          console.log(res.data.length)
-      });
-
     }, []);
 
     const formik = useFormik({
@@ -143,7 +135,8 @@ function Products() {
                     <Typography>Slots left: {services.slots}</Typography>
 
 
-                    <InputLabel>TimeSlots</InputLabel>
+                    <InputLabel>TimeSlots : {services.timeSlots}</InputLabel>
+
 
                     <Select
                     style={{ marginTop: "15px" }}
@@ -161,8 +154,8 @@ function Products() {
                         Select a timeslot
                     </MenuItem>
                     {timeslotsList.map((timeslots) => (
-                        <MenuItem key={timeslots.id} value={timeslots.timeslot}>
-                            {timeslots.timeslot}
+                        <MenuItem key={timeslots} value={timeslots}>
+                            {timeslots}
                         </MenuItem>
                     ))}
                     </Select>

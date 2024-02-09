@@ -24,22 +24,23 @@ function ProductDash() {
   const [serviceList, setServiceList] = useState([]);
 
   useEffect(() => {
-    http.get('/Product/getproduct')
+    http.get('/Product/getservice')
       .then((res) => {
         const data = CheckIfDataIsArray(res.data)
-        setTotalServices(data.length);
+        setTotalServices(res.data.length);
+
       });
 
     http.get('/Category/getcategory')
       .then((res) => {
         const data = CheckIfDataIsArray(res.data)
-        setTotalCategory(data.length);
+        setTotalCategory(res.data.length);
       });
 
     http.get('/Vendor/getvendor')
       .then((res) => {
         const data = CheckIfDataIsArray(res.data)
-        setTotalVendors(data.length);
+        setTotalVendors(res.data.length);
       });
 
     getServices();
