@@ -126,9 +126,10 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 }
 
 const logout = (event: React.MouseEvent<HTMLButtonElement>) => {
-  event.preventDefault();
   console.log("Logout")
+  event.preventDefault();
   localStorage.clear();
+  window.location.assign("/");
 };
 
 const CheckIfDataIsArray = (data: any) => {
