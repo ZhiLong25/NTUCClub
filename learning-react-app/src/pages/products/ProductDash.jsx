@@ -26,35 +26,20 @@ function ProductDash() {
   useEffect(() => {
     http.get('/Product/getproduct')
       .then((res) => {
-        try {
-          Array.isArray(res.data)
-          setTotalServices(res.data.length);
-        }
-        catch {
-          setTotalServices(0);
-        }
+        const data = CheckIfDataIsArray(res.data)
+        setTotalServices(data.length);
       });
 
     http.get('/Category/getcategory')
       .then((res) => {
-        try {
-          Array.isArray(res.data)
-          setTotalCategory(res.data.length);
-        }
-        catch {
-          setTotalCategory(0);
-        }
+        const data = CheckIfDataIsArray(res.data)
+        setTotalCategory(data.length);
       });
 
     http.get('/Vendor/getvendor')
       .then((res) => {
-        try {
-          Array.isArray(res.data)
-          setTotalVendors(res.data.length);
-        }
-        catch {
-          setTotalVendors(0);
-        }
+        const data = CheckIfDataIsArray(res.data)
+        setTotalVendors(data.length);
       });
 
     getServices();
@@ -64,7 +49,8 @@ function ProductDash() {
   const getServices = () => {
     http.get('/Product/getservice')
       .then((res) => {
-        setServiceList(CheckIfDataIsArray(res.data));
+        const data = CheckIfDataIsArray(res.data)
+        setServiceList(data);
       });
   };
 
@@ -79,7 +65,7 @@ function ProductDash() {
 
       {/* STATS */}
       <Flex gap={"10px"}>
-      <CardContent className="statsCard" style={{ background: "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)" }}>
+        <CardContent className="statsCard" style={{ background: "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)" }}>
           <Typography className="statsTitle" variant='subtitle'>Services</Typography>
           <Flex gap={"5px"} alignItems={"center"}>
             <SettingsOutlined fontSize='large' />
