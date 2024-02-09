@@ -28,7 +28,7 @@ import {
 import http from "./http"
 import { ShoppingCart } from "@mui/icons-material"
 import { Link } from "react-router-dom"
-
+import { useNavigate } from "react-router-dom"
 
 export default function UserNav() {
 
@@ -38,7 +38,7 @@ export default function UserNav() {
         profilePicture: string
         userType: String
     }
-
+    const navigate = useNavigate()
 
     const { isOpen, onToggle } = useDisclosure()
     const [user, setUser] = useState<User | null>(null);
@@ -51,6 +51,9 @@ export default function UserNav() {
             });
         }
     }, []);
+    const home = () =>{
+        navigate("/")
+    }
 
     const logout = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -154,7 +157,7 @@ export default function UserNav() {
                         />
                     </Flex>
                     <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-                        <img src="./assets/logo.png" id="navLogo" />
+                        <button onClick={home}><img src="./assets/logo.png" id="navLogo" /></button>
                         {/* desktop */}
                         <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
                             <Stack direction={'row'} spacing={4}>

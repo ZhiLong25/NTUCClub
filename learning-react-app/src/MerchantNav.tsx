@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect,MouseEvent  } from "react"
+import React, { useState, useEffect, MouseEvent } from "react"
 import {
     Box,
     Flex,
@@ -26,20 +26,21 @@ import {
     ChevronRightIcon,
 } from '@chakra-ui/icons'
 import http from "./http"
-
+import { useNavigate } from "react-router"
 export default function MerchantNav() {
 
     interface User {
         id: string;
         // other user properties
-        profilePicture:string
-        userType:String
-      }
-      
-     
+        profilePicture: string
+        userType: String
+    }
+
+    const navigate = useNavigate()
+
     const { isOpen, onToggle } = useDisclosure()
     const [user, setUser] = useState<User | null>(null);
-      
+
     useEffect(() => {
         if (localStorage.getItem("accessToken")) {
             http.get('/user/auth').then((res) => {
@@ -49,23 +50,25 @@ export default function MerchantNav() {
         }
     }, []);
 
-    const logout =  (event: React.MouseEvent<HTMLButtonElement>) => {
+    const logout = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         console.log("Loggedout")
         localStorage.clear();
         window.location.assign("/");
     };
-
+    const home = () => {
+        navigate("/")
+    }
     interface NavItem {
         label: string
         subLabel?: string
         children?: Array<NavItem>
         href?: string;
-        
+
 
     }
 
-    const NAV_ITEMS: Array<NavItem> = user? [
+    const NAV_ITEMS: Array<NavItem> = user ? [
         {
             label: 'Experiences',
             children: [
@@ -79,8 +82,8 @@ export default function MerchantNav() {
                     subLabel: 'View your activities here',
                     href: '/productsdash',
                 },
-                
-                
+
+
             ],
         },
         {
@@ -101,7 +104,7 @@ export default function MerchantNav() {
                     subLabel: 'View admin accounts',
                     href: 'Adminaccounts',
                 },
-                
+
             ],
         },
         {
@@ -117,15 +120,15 @@ export default function MerchantNav() {
                     subLabel: 'Add vouchers for users',
                     href: '/addVouchers',
                 },
-                
+
             ],
         },
         {
             label: 'Learn Design',
             href: '#',
         },
-        
-    ]:[]
+
+    ] : []
     const linkColor = useColorModeValue('gray.600', 'gray.200')
     const linkHoverColor = useColorModeValue('gray.800', 'white')
     const popoverContentBgColor = useColorModeValue('white', 'gray.800')
@@ -158,7 +161,8 @@ export default function MerchantNav() {
                             // textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
                             fontFamily={'heading'}
                             color={useColorModeValue('gray.800', 'white')}>
-                            Logo
+                            <button onClick={home}><img src="./assets/logo.png" id="navLogo" /></button>
+
                         </Text>
                         {/* desktop */}
                         <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -213,8 +217,8 @@ export default function MerchantNav() {
                                 cursor={'pointer'}
                                 onClick={logout}
                                 minW={0}>
-                                    {user?.userType}
-                                    </MenuButton>
+                                {user?.userType}
+                            </MenuButton>
                             <MenuButton
                                 as={Button}
                                 rounded={'full'}
@@ -224,7 +228,7 @@ export default function MerchantNav() {
                                 minW={0}>
                                 <Button
                                     size={'sm'}
-                                    
+
                                 >Log Out</Button>
                             </MenuButton>
                             <MenuButton
@@ -235,7 +239,7 @@ export default function MerchantNav() {
                                 minW={0}>
                                 <Avatar
                                     size={'sm'}
-                                    // src={`${import.meta.env.VITE_FILE_BASE_URL}${user?.profilePicture}`}
+                                // src={`${import.meta.env.VITE_FILE_BASE_URL}${user?.profilePicture}`}
                                 />
                             </MenuButton>
                         </Menu>
