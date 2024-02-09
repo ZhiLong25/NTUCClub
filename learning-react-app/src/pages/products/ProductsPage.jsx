@@ -20,9 +20,13 @@ function ProductsPage() {
     setSearch('');
     http.get('/Product/getservice')
       .then((res) => {
+        Array.isArray(res.data)
         setServiceList(res.data);
         setTotalService(res.data.length);
-      });
+      })
+      .catch((err) => {
+        console.log(err)
+      })
 
     // setSelectedCategories([]);
   }
@@ -34,7 +38,11 @@ function ProductsPage() {
   const searchServices = () => {
     http.get(`/Product/getservice?search=${search}`)
       .then((res) => {
+        Array.isArray(res.data)
         setServiceList(res.data);
+      })
+      .catch((err) => {
+        console.log(err)
       })
   };
 
@@ -52,18 +60,21 @@ function ProductsPage() {
     http.get('/Category/getcategory')
       .then((res) => {
         try {
-          JSON.parse(res.data)
+          Array.isArray(res.data)
           setCategoryList(res.data);
         }
         catch {
           setCategoryList([])
         }
-      });
+      })
+      .catch((err) => {
+        console.log(err)
+      })
 
     http.get('/Product/getservice')
       .then((res) => {
         try {
-          JSON.parse(res.data)
+          Array.isArray(res.data)
           setServiceList(res.data);
           setTotalService(res.data.length);
         }
