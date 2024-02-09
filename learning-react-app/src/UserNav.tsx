@@ -7,7 +7,7 @@ import { CloseRounded, LogoutRounded, MenuRounded, PersonRounded, ShoppingCart }
 import { Link } from "react-router-dom"
 import MyTheme from "./themes/MyTheme"
 import { ThemeProvider, IconButton, Avatar } from "@mui/material"
-import { DesktopNav, MobileNav, User, logoURL } from "./pages/constant"
+import { DesktopNav, MobileNav, NavItem, User, logoURL, logout } from "./pages/constant"
 
 
 
@@ -31,12 +31,6 @@ export default function UserNav() {
         }
     }, []);
 
-    const logout = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-        console.log("Loggedout")
-        localStorage.clear();
-        window.location.assign("/");
-    };
 
     const NAV_ITEMS: Array<NavItem> = user ? [
         {
@@ -129,7 +123,7 @@ export default function UserNav() {
                                 </IconButton>
                             </Link>
                             <Link to={"/"}>
-                                <IconButton aria-label={'Toggle Logout'} color="primary">
+                                <IconButton aria-label={'Toggle Logout'} color="primary" onClick={logout}>
                                     <LogoutRounded />
                                 </IconButton>
                             </Link>
@@ -153,98 +147,3 @@ export default function UserNav() {
     )
 }
 
-
-
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
-    return (
-        <Box
-            as="a"
-            href={href}
-            role={'group'}
-            display={'block'}
-            p={2}
-            rounded={'md'}
-            _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
-            <Stack direction={'row'} align={'center'}>
-                <Box>
-                    <Text
-                        transition={'all .3s ease'}
-                        _groupHover={{ color: 'pink.400' }}
-                        fontWeight={500}>
-                        {label}
-                    </Text>
-                    <Text fontSize={'sm'}>{subLabel}</Text>
-                </Box>
-                <Flex
-                    transition={'all .3s ease'}
-                    transform={'translateX(-10px)'}
-                    opacity={0}
-                    _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-                    justify={'flex-end'}
-                    align={'center'}
-                    flex={1}>
-                    <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
-                </Flex>
-            </Stack>
-        </Box>
-    )
-}
-
-
-
-const MobileNavItem = ({ label, children, href }: NavItem) => {
-    const { isOpen, onToggle } = useDisclosure()
-
-    return (
-        <Stack spacing={4} onClick={children && onToggle}>
-            <Box
-                py={2}
-                as="a"
-                href={href ?? '#'}
-                justifyContent="space-between"
-                alignItems="center"
-                _hover={{
-                    textDecoration: 'none',
-                }}>
-                <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
-                    {label}
-                </Text>
-                {children && (
-                    <Icon
-                        as={ChevronDownIcon}
-                        transition={'all .25s ease-in-out'}
-                        transform={isOpen ? 'rotate(180deg)' : ''}
-                        w={6}
-                        h={6}
-                    />
-                )}
-            </Box>
-
-            <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-                <Stack
-                    mt={2}
-                    pl={4}
-                    borderLeft={1}
-                    borderStyle={'solid'}
-                    borderColor={useColorModeValue('gray.200', 'gray.700')}
-                    align={'start'}>
-                    {children &&
-                        children.map((child) => (
-                            <Box as="a" key={child.label} py={2} href={child.href}>
-                                {child.label}
-                            </Box>
-                        ))}
-                </Stack>
-            </Collapse>
-        </Stack>
-    )
-}
-
-interface NavItem {
-    label: string
-    subLabel?: string
-    children?: Array<NavItem>
-    href?: string;
-    onclick?: () => void;
-
-}

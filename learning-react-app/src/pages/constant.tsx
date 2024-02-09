@@ -125,6 +125,12 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   )
 }
 
+const logout = (event: React.MouseEvent<HTMLButtonElement>) => {
+  event.preventDefault();
+  console.log("Logout")
+  localStorage.clear();
+};
+
 const CheckIfDataIsArray = (data: any) => {
   try {
     if (Array.isArray(data)) {
@@ -144,5 +150,6 @@ export {
   DesktopSubNav,
   MobileNav,
   MobileNavItem,
-  CheckIfDataIsArray
+  CheckIfDataIsArray,
+  logout
 }

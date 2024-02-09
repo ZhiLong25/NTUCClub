@@ -4,7 +4,7 @@ import React, { useState, useEffect, MouseEvent } from "react"
 import { Box, Flex, Stack, Collapse, useColorModeValue, useDisclosure, ChakraProvider } from '@chakra-ui/react'
 import http from "./http"
 import { ThemeProvider, Avatar, Button, IconButton } from "@mui/material"
-import { DesktopNav, DesktopSubNav, MobileNav, MobileNavItem, NavItem, User, logoURL } from "./pages/constant"
+import { DesktopNav, DesktopSubNav, MobileNav, MobileNavItem, NavItem, User, logoURL, logout } from "./pages/constant"
 import { Link } from "react-router-dom"
 import { AccountCircleRounded, CloseRounded, LogoutRounded, MenuRounded, PersonRounded, ShoppingCart, ShoppingCartRounded } from "@mui/icons-material"
 
@@ -30,12 +30,6 @@ export default function AdminNav() {
         }
     }, []);
 
-    const logout = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-        console.log("Loggedout")
-        localStorage.clear();
-        // window.location.assign("/");
-    };
 
 
 
@@ -139,7 +133,7 @@ export default function AdminNav() {
 
                         <Stack flex={1} justify={'flex-end'} direction={'row'} spacing={2}>
                             <Link to={"/"}>
-                                <IconButton aria-label={'Toggle Logout'} color="primary">
+                                <IconButton aria-label={'Toggle Logout'} color="primary" onClick={logout}>
                                     <LogoutRounded />
                                 </IconButton>
                             </Link>
