@@ -29,10 +29,10 @@ function AddService() {
 
 
   useEffect(() => {
-    http.get('/Category/getcategory').then((res) => {
-      setCategoryList(res.data);
-    });
-
+    // http.get('/Category/getcategory').then((res) => {
+    //   setCategoryList(res.data);
+    // });
+    
     http.get('/Vendor/getvendor').then((res) => {
       setVendorList(res.data);
     });
@@ -134,16 +134,17 @@ function AddService() {
   };
 
   const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
+    '12:00',
+    '13:00',
+    '14:00',
+    '15:00',
+    '16:00',
+    '17:00',
+    '18:00',
+    '19:00',
+    '20:00',
+    '21:00',
+    '22:00',
   ];
 
   const theme = useTheme();

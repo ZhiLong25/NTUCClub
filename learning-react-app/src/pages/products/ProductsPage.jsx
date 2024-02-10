@@ -59,7 +59,7 @@ function ProductsPage() {
       .then((res) => {
         const data = CheckIfDataIsArray(res.data)
         setServiceList(data);
-        setServiceList(sampleExperienceItems)
+        // setServiceList(sampleExperienceItems)
       })
   }, []);
 

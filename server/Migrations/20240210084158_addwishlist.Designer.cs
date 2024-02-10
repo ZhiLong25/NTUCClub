@@ -11,8 +11,8 @@ using NTUCClub;
 namespace NTUCClub.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240210053423_wishlistCreate")]
-    partial class wishlistCreate
+    [Migration("20240210084158_addwishlist")]
+    partial class addwishlist
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
