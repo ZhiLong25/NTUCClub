@@ -175,7 +175,7 @@ function Addadmin() {
               Password
             </div>}
             name="password"
-
+            type={type1}
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -185,7 +185,7 @@ function Addadmin() {
           />
           <span
             className="eyespan"
-            style={{ display: "inline-block", margin: "auto", position: "absolute", left: "90%", top: "30%" }}
+            style={{ display: "inline-block", margin: "auto", position: "absolute", left: "90%", top: "25%" }}
           >
             <Icon
               icon={icon1}
@@ -208,7 +208,7 @@ function Addadmin() {
               Confirm Password
             </div>}
             name="confirmPassword"
-
+            type={type2}
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}

@@ -68,26 +68,27 @@ function Accounts() {
           </div>
         </Card>
         <Card style={{ height: "80%", marginTop: "5%",overflow:"hidden",overflowY:"sroll" }}>
+        <div style={{ overflowY: "scroll", height: "100%" }}>
           {
             account.map((accounts, i) => {
               return (
                 <Grid  key={accounts.id}>
                   <div style={{
                     background: "linear-gradient(45deg, rgba(255, 99, 71, 0.4) 0%, rgba(255, 99, 71, 0.7) 100%)",
-                    borderRadius: "50px",
-                    boxShadow: "4px 4px 8px rgba(255, 99, 71, 0.5)", marginBottom: "5%", height: "3%", width: "100%", marginTop:"2%"
+                    
+                    boxShadow: "4px 4px 8px rgba(255, 99, 71, 0.5)", marginBottom: "5%", height: "3%", width: "100%"
                   }}>
                     <Card style={{
 
                       boxShadow: "none",
-                      width: "75%",
+                      width: "100%",
                       height: "90%",
                       background: "transparent",
 
                     }}>
 
-                      <div style={{ height: "4%",display: "flex", flexDirection:"row", }}>
-                        <CardContent style={{ margin: "auto" }}>
+                      <div style={{ height: "4%",display: "flex", flexDirection:"row" }}>
+                        <CardContent style={{ margin: "auto" ,flex:"2"}}>
 
                           <Box sx={{}}
                             color="text.secondary">
@@ -102,7 +103,7 @@ function Accounts() {
 
                         </CardContent>
 
-                        <CardContent style={{ margin: "auto" }}>
+                        <CardContent style={{ margin: "auto" ,flex:"2"}}>
 
                           <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
                             color="text.secondary">
@@ -114,7 +115,7 @@ function Accounts() {
                             </Typography>
                           </Box>
                         </CardContent>
-                        <CardContent style={{ margin: "auto" }}>
+                        <CardContent style={{ margin: "auto" ,flex:"2"}}>
 
                           <Box sx={{ display: 'flex', alignItems: 'center', mb: 0 }}
                             color="text.secondary">
@@ -128,8 +129,8 @@ function Accounts() {
                         </CardContent>
                         
                         
-                        {accounts.userType != "Admin" && (
-                          <CardContent style={{ margin: "auto",height:"8%" }}>
+                        {accounts.userType != "Admin"  ?(
+                          <CardContent style={{ margin: "auto",height:"8%",flex:"1",width:"70%" }}>
                             <Button fullWidth variant="contained" sx={{ mt: 2 }}
                               style={{ backgroundColor: "red", padding: "15px", fontWeight: "bold" }}
                               onClick={() => del(accounts.id)} id={accounts.id}>
@@ -139,6 +140,17 @@ function Accounts() {
                               </div>}
                             </Button>
                           </CardContent>
+                        ):(
+                          <CardContent style={{ margin: "auto",height:"8%",flex:"1",width:"70%" }}>
+                          <Button fullWidth variant="contained" sx={{ mt: 2 }} disabled="true"
+                            style={{ backgroundColor: "gray", padding: "15px", fontWeight: "bold" }}
+                            onClick={() => del(accounts.id)} id={accounts.id}>
+                            {<div style={{ display: 'flex', alignItems: 'center', fontSize: "0.7rem" }}>
+                              <DeleteIcon style={{ marginRight: 8, fontSize: "0.7rem" }} />
+                              Delete
+                            </div>}
+                          </Button>
+                        </CardContent>
                         )}
                       </div>
 
@@ -149,6 +161,7 @@ function Accounts() {
               );
             })
           }
+          </div>
         </Card>
       </div>
       <ToastContainer/>

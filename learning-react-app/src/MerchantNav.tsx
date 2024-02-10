@@ -146,5 +146,3 @@ export default function MerchantNav() {
         </ChakraProvider>
     )
 }
-
-

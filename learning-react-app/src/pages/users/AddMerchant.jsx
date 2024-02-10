@@ -175,7 +175,7 @@ function AddMerchant() {
               Password
             </div>}
             name="password"
-
+            type={type1}
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -208,7 +208,7 @@ function AddMerchant() {
               Confirm Password
             </div>}
             name="confirmPassword"
-
+            type={type2}
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
