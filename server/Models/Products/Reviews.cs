@@ -8,18 +8,22 @@ namespace NTUCClub.Models.Products
     {
         public int Id { get; set; }
 
+        //public int ServiceId { get; set; }
+
         [Required]
         public int Rating { get; set; }
 
-        public string? Description { get; set; } 
+        public string User { get; set; }
+
+        public string? Description { get; set; }
 
         [MaxLength(100)]
-        public string? Media { get; set; } 
+        public string? Media { get; set; }
 
-        public string FirstName { get; set; } = string.Empty;
-
-        public string LastName { get; set; } = string.Empty;
-
+        [Column(TypeName = "datetime")]
+        public DateTime CreatedAt { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime UpdatedAt { get; set; }
 
         //// Navigation property for the Service relationship
         //[ForeignKey("Service")]

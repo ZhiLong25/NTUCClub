@@ -18,6 +18,7 @@ function Products() {
     const [timeslotsList, setTimeslots] = useState([]);
 
     const [services, setServices] = useState([]);
+    const [reviewsList, setReviews] = useState([]);
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -41,6 +42,14 @@ function Products() {
             setTimeslots(timeValues);
 
         });
+        
+
+        http.get(`/Review/getreview`).then((res) => {
+            console.log(res.data);
+            setReviews(res.data);
+            
+        });
+
     }, []);
 
     const formik = useFormik({
@@ -111,7 +120,7 @@ function Products() {
             });
         } else {
             console.log(id);
-            
+
             // DELETE
             http.delete(`/Wishlist/deletewishlist/${id}`)
             .then((res) => {
@@ -156,10 +165,9 @@ function Products() {
                 </div>
 
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        {services.description}
+                    {services.description.replace(/<[^>]*>?/gm, '')}
                 </Typography>
             
-
 
             </Grid>
 
@@ -202,7 +210,6 @@ function Products() {
                     </Select>
 
 
-
                     <Box sx={{ mt: 2 }}>
                         <Button variant="contained" type="submit" className='addbtn'>
                             Add to Cart
@@ -214,6 +221,37 @@ function Products() {
 
             </Grid>
         </Grid>
+
+        {/* REVIEWS SECTION */}
+        
+        <Typography variant="h5" style={{ marginBottom: "20px", marginTop: '20px' }}>Reviews by others</Typography>
+
+        <Box>
+        {reviewsList.map((reviews, i) => {
+            return (
+            <Container>
+
+                <Typography variant="h5" component="div">{reviews.subject}</Typography>
+                
+                <Typography>{reviews.rating}</Typography>
+
+
+                <Typography>{reviews.description.replace(/<[^>]*>?/gm, '')}</Typography>
+                <Typography>Listed on : {reviews.createdAt}</Typography>
+                <Typography>Listed by : {reviews.user}</Typography>
+
+
+                <Box style={{width: "80px"}}>
+                    <img alt="product" src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`} className='image-insert' />
+                </Box>
+                <hr style={{ height: "10px"}}></hr>
+            </Container>
+
+            );
+          })}
+        </Box>
+
+
     </Container>
   )
 }

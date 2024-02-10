@@ -11,7 +11,7 @@ using NTUCClub;
 namespace NTUCClub.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240209173836_wishlistCreate")]
+    [Migration("20240210053423_wishlistCreate")]
     partial class wishlistCreate
     {
         /// <inheritdoc />
@@ -135,15 +135,10 @@ namespace NTUCClub.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
+
                     b.Property<string>("Description")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Media")
@@ -152,6 +147,13 @@ namespace NTUCClub.Migrations
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("User")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -289,8 +291,6 @@ namespace NTUCClub.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServiceId");
-
                     b.ToTable("Wishlist");
                 });
 
@@ -405,17 +405,6 @@ namespace NTUCClub.Migrations
                         .IsRequired();
 
                     b.Navigation("CatName");
-                });
-
-            modelBuilder.Entity("NTUCClub.Models.Products.Wishlist", b =>
-                {
-                    b.HasOne("NTUCClub.Models.Products.Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Voucher", b =>

@@ -55,7 +55,7 @@ namespace NTUCClub.Controllers
         }
 
         [HttpDelete("deletewishlist/{ServiceId}")]
-        public IActionResult DeleteWishlist(int serviceid)
+        public IActionResult DeleteWishlist(int serviceid) 
         {
             var myWishlist = _context.Wishlist.FirstOrDefault(w => w.ServiceId == serviceid);
 
