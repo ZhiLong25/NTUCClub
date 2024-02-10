@@ -14,9 +14,6 @@ import { DesktopNav, MobileNav, NavItem, User, logoURL, logout } from "./pages/c
 export default function UserNav() {
     const { isOpen, onToggle } = useDisclosure()
     const [user, setUser] = useState<User | null>(null);
-    const linkColor = useColorModeValue('gray.600', 'gray.200')
-    const linkHoverColor = useColorModeValue('gray.800', 'white')
-    const popoverContentBgColor = useColorModeValue('white', 'gray.800')
 
     useEffect(() => {
         if (localStorage.getItem("accessToken")) {
