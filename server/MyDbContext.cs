@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NTUCClub.Models.Products;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using NTUCClub.Models.user;
+using NTUCClub.Models.Cart;
 
 namespace NTUCClub
 {
@@ -37,6 +38,14 @@ namespace NTUCClub
 
 		public DbSet<Card> Cards { get; set; }
         public DbSet<Enquiery> Queries { get; set; }
+
+        public DbSet<CartItem> CartItems { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+           
+            modelBuilder.Entity<CartItem>().ToTable("cart");
+        }
 
         // Method for creating object relations
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

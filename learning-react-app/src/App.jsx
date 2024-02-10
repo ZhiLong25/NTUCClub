@@ -33,19 +33,23 @@ import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
+import ManageTimeslots from './pages/products/ManageTimeslots';
 import AddReviews from './pages/products/AddReviews';
 
 import Products from './pages/products/Products'
 import ProductsPage from './pages/products/ProductsPage';
 
+import Cart from './pages/cart/cart';
+import Payment from './pages/cart/payment';
+import PaymentRecords from './pages/cart/paymentRecords';
+
 import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import Addadmin from './pages/users/Addadmin';
 // import Adminaccounts from './pages/users/Adminaccounts';
+// import Accounts from './pages/users/accounts';
 import Accounts from './pages/users/Accounts';
 import AddMerchant from './pages/users/AddMerchant';
-import Cart from './pages/cart/cart';
-import Payment from './pages/cart/payment';
 import RegisterGoogle from "./pages/users/RegisterGoogle"
 import "./pages/styles/chatbot.css"
 // import "./script"
@@ -83,6 +87,7 @@ function App() {
                     <Route path={"/ViewQueries"} element={<ViewQueries />} />
                     <Route path={"/AddMerchant"} element={<AddMerchant />} />
                     <Route path={"/Faq"} element={<Faq />} />
+                    <Route path={"/paymentRecords"} element={<PaymentRecords />} />
                   </Routes>
                 </>
               ) : user.userType === "Merchant" ? (

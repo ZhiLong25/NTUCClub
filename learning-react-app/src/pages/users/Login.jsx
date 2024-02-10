@@ -14,7 +14,8 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import EmailIcon from '@mui/icons-material/Email';
 import '../styles/login.css'
-import {jwtDecode } from "jwt-decode";
+// import {jwtDecode } from "jwt-decode";
+
 function Login() {
     const navigate = useNavigate();
     const [icon, setIcon] = useState(eyeOff);
