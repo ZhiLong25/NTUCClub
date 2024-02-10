@@ -67,7 +67,58 @@ function Products() {
     const [isFavorite, setIsFavorite] = useState(false);
       
     const handleClick = () => {
-        setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+        if (isFavorite) {
+            setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+            http.get('/user/auth')
+            .then((res) => {
+                const currentUser = res.data.user;
+                console.log(currentUser.name)
+    
+                if (currentUser) {
+                    // Fetch the user's wishlist
+                    http.get("/Wishlist/getwishlist")
+                        .then((response) => {
+                            const wishlist = response.data;
+                            const existingService = wishlist.find(item => item.ServiceId === parseInt(id));
+    
+                            if (existingService) {
+                                console.log("Service is already in the wishlist.");
+                            } else {
+                                // If the service is not in the wishlist, add it
+                                const requestData = {
+                                    User: currentUser.name,
+                                    ServiceId: parseInt(id)
+                                };
+    
+                                http.post("/Wishlist/addwishlist", requestData)
+                                    .then((res) => {
+                                        console.log("Service added to wishlist:", res.data);
+                                    })
+                                    .catch((error) => {
+                                        console.error("Error adding service to wishlist:", error);
+                                    });
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error fetching wishlist:", error);
+                        });
+                } else {
+                    console.error("Unable to fetch current user's information");
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching current user's information:", error);
+            });
+        } else {
+            console.log(id);
+            
+            // DELETE
+            http.delete(`/Wishlist/deletewishlist/${id}`)
+            .then((res) => {
+              console.log(res.data);
+              setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+            });
+        }
     };
 
     const [user, setUser] = useState(null);
@@ -80,23 +131,6 @@ function Products() {
         });
 
 
-
-        if (isFavorite == true) {
-            if (isFavorite == true) {
-                http.post("/Favorites/addfavorites", currentuser, isFavorite)
-                .then((res) => {
-                  console.log(res.data);
-                  navigate("/cart");
-                })
-            }
-            else {
-                http.delete("/Favorites/deletefavorites", currentuser, isFavorite)
-                .then((res) => {
-                  console.log(res.data);
-                  navigate("/cart");
-                })
-            }
-        }
         
     }, []);
 
