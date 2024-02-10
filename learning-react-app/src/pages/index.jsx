@@ -95,7 +95,7 @@ function Home() {
         <div id='eventList' >
           {services.map((event, i) => {
             if (i < 7) {
-              const icon = categoryItems.find((cat) => cat.title === event.category)?.icon
+              const icon = sampleCategoryItems.find((cat) => cat.title === event.category)?.icon
               return (<EventCard key={i} events={event} icon={icon} />)
             }
           })}
