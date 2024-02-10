@@ -3,7 +3,7 @@ import React, { useState, useEffect, MouseEvent } from "react"
 import { Box, Flex, Stack, Collapse, useColorModeValue, useDisclosure, ChakraProvider } from '@chakra-ui/react'
 
 import http from "./http"
-import { DesktopNav, MobileNav, NavItem, User, logoURL } from "./pages/constant"
+import { DesktopNav, MobileNav, NavItem, User, logoURL, logout } from "./pages/constant"
 import { CloseRounded, LogoutRounded, MenuRounded, PersonRounded } from "@mui/icons-material"
 import { ThemeProvider, Avatar, IconButton } from "@mui/material"
 import MyTheme from "./themes/MyTheme"
@@ -22,18 +22,22 @@ export default function MerchantNav() {
         }
     }, []);
 
-    const logout = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-        console.log("Loggedout")
-        localStorage.clear();
-        window.location.assign("/");
-    };
-
-
-    const linkColor = useColorModeValue('gray.600', 'gray.200')
-    const linkHoverColor = useColorModeValue('gray.800', 'white')
-    const popoverContentBgColor = useColorModeValue('white', 'gray.800')
     const NAV_ITEMS: Array<NavItem> = user ? [
+        {
+            label: 'Experiences',
+            children: [
+                {
+                    label: 'Add Experiences',
+                    subLabel: 'Add your activities here',
+                    href: '/addService',
+                },
+                {
+                    label: 'Experiences dashboard',
+                    subLabel: 'View your activities here',
+                    href: '/productsdash',
+                },
+            ],
+        },
         {
             label: 'Account',
             children: [
@@ -117,7 +121,7 @@ export default function MerchantNav() {
 
                         <Stack flex={1} justify={'flex-end'} direction={'row'} spacing={2}>
                             <Link to={"/"}>
-                                <IconButton aria-label={'Toggle Logout'} color="primary">
+                                <IconButton onClick={logout} aria-label={'Toggle Logout'} color="primary">
                                     <LogoutRounded />
                                 </IconButton>
                             </Link>
