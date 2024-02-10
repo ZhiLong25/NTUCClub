@@ -15,6 +15,9 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import placeholder from './media/placeholder.png';
 
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { useTheme } from '@mui/material/styles';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 function EditService() {
 
@@ -148,6 +151,43 @@ function EditService() {
       });
   };
 
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+  const names = [
+    '12:00',
+    '13:00',
+    '14:00',
+    '15:00',
+    '16:00',
+    '17:00',
+    '18:00',
+    '19:00',
+    '20:00',
+    '21:00',
+    '22:00',
+  ];
+
+  const theme = useTheme();
+
+  function getStyles(name, personName, theme) {
+    return {
+      fontWeight:
+        personName.indexOf(name) === -1
+          ? theme.typography.fontWeightRegular
+          : theme.typography.fontWeightMedium,
+    };
+  }
+
   return (
     <Container>
       <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
@@ -242,15 +282,55 @@ function EditService() {
               ))}
             </Select>
 
-            <TextField
-              fullWidth margin='normal' autoComplete='off'
-              label='Timeslots'
-              name='timeSlots'
-              value={formik.values.timeSlots}
-              onChange={formik.handleChange}
-              error={formik.touched.timeSlots && Boolean(formik.errors.timeSlots)}
-              helperText={formik.touched.timeSlots && formik.errors.timeSlots}
-            />
+            <InputLabel id="timeslot">Timeslots</InputLabel>
+            <Select
+              style={{ width: "100%" }}
+              labelId="demo-multiple-chip-label"
+              id="timeslots"
+              name="timeslots"
+              multiple
+              value={formik.values.timeslots || []}
+              onChange={(event) => {
+                const selectedValues = event.target.value;
+                console.log('Timeslots', selectedValues);
+                formik.setFieldValue('timeslots', Array.isArray(selectedValues) ? selectedValues : [selectedValues]); // Ensure it's always an array
+              }}
+              input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+              renderValue={(selected) => {
+                if (Array.isArray(selected)) {
+                  return (
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip
+                          key={value}
+                          label={value}
+                          value={value}
+                          onDelete={() => {
+                            const newSelected = formik.values.timeslots.filter((item) => item !== value);
+                            const newSelectedString = newSelected.join(','); // Convert array to string
+                            formik.setFieldValue('timeslots', newSelectedString); // Update formik state with the string
+                          }}
+                          deleteIcon={<CancelIcon />}
+                        />
+                      ))}
+                    </Box>
+                  );
+                } else {
+                  return selected;
+                }
+              }}
+            >
+              {names.map((name) => (
+                <MenuItem
+                  key={name}
+                  value={name}
+                  style={getStyles(name, formik.values.timeslots || [], theme)}
+                >
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+
             <Grid container spacing={2}>
 
               <Grid item xs={4} md={4} lg={4} >

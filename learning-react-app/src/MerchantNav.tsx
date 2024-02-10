@@ -15,10 +15,14 @@ export default function MerchantNav() {
 
     useEffect(() => {
         if (localStorage.getItem("accessToken")) {
-            http.get('/user/auth').then((res) => {
-                console.log(res.data.user)
-                setUser(res.data.user);
-            });
+            http.get('/user/auth')
+                .then((res) => {
+                    console.log(res.data.user)
+                    setUser(res.data.user);
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
         }
     }, []);
 

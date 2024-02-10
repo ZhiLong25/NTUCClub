@@ -54,9 +54,30 @@ const theme = createTheme({
             }
         },
         MuiPaper: {
-            styleOverrides:{
-                root:{
+            styleOverrides: {
+                root: {
                     borderRadius: mainBorderRadius
+                }
+            }
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    borderRadius: mainBorderRadius
+                }
+            }
+        },
+        MuiListSubheader: {
+            styleOverrides: {
+                root: {
+                    paddingLeft: '0px'
+                }
+            }
+        },
+        MuiFormControlLabel: {
+            styleOverrides: {
+                root: {
+                    margin: '0px'
                 }
             }
         }

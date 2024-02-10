@@ -19,7 +19,7 @@ namespace NTUCClub.Controllers
 
 
         [HttpGet("getservice")]
-        public IActionResult GetAll(string? search)
+        public IActionResult GetAll(string? search, string? sort, string? category)
         {
             IQueryable<Service> result = _context.Services;
             if (search != null)
@@ -27,8 +27,44 @@ namespace NTUCClub.Controllers
                 result = result.Where(x => x.Name.Contains(search) || x.Description.Contains(search) || x.Vendor.Contains(search));
             }
 
-            var list = result.OrderByDescending(x => x.CreatedAt).ToList();
-            return Ok(list);
+            if (sort != null)
+            {
+                switch (sort)
+                {
+                    case "recentlyadded":
+                        result = result.OrderByDescending(x => x.CreatedAt);
+                        break;
+
+                    case "atoz":
+                        result = result.OrderBy(x => x.Name); 
+                        break;
+
+                    case "ztoa":
+                        result = result.OrderByDescending(x => x.Name); 
+                        break;
+
+                    case "priceAsc":
+                        result = result.OrderBy(x => x.Price);
+                        break;
+
+                    case "priceDesc":
+                        result = result.OrderByDescending(x => x.Price);
+                        break;
+                }
+            }
+
+            if (category != null)
+            {
+                string[] selectedCat = category.Split(',');
+
+                result = result.Where(service => selectedCat.Contains(service.Category));
+
+            }
+
+
+
+            // var list = result.OrderByDescending(x => x.CreatedAt).ToList();
+            return Ok(result);
         }
 
         [HttpGet("getservice/{id}")]
