@@ -52,6 +52,13 @@ const theme = createTheme({
                     borderRadius: mainBorderRadius
                 }
             }
+        },
+        MuiPaper: {
+            styleOverrides:{
+                root:{
+                    borderRadius: mainBorderRadius
+                }
+            }
         }
     },
 });
