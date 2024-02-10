@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NTUCClub;
 
@@ -10,9 +11,11 @@ using NTUCClub;
 namespace NTUCClub.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240209083822_cartitem")]
+    partial class cartitem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,32 +69,6 @@ namespace NTUCClub.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Cards");
-                });
-
-            modelBuilder.Entity("NTUCClub.Models.Cart.CartItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Activity_Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<float>("Activity_Price")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("cart", (string)null);
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Enquiery", b =>
@@ -441,17 +418,6 @@ namespace NTUCClub.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("NTUCClub.Models.Cart.CartItem", b =>
-                {
-                    b.HasOne("NTUCClub.Models.Products.Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Service", b =>

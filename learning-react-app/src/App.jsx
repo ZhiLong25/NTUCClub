@@ -46,7 +46,8 @@ import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import Addadmin from './pages/users/Addadmin';
 // import Adminaccounts from './pages/users/Adminaccounts';
-import Accounts from './pages/users/accounts';
+// import Accounts from './pages/users/accounts';
+import Accounts from './pages/users/Accounts';
 import AddMerchant from './pages/users/AddMerchant';
 import RegisterGoogle from "./pages/users/RegisterGoogle"
 import "./pages/styles/chatbot.css"
@@ -85,6 +86,7 @@ function App() {
                     <Route path={"/ViewQueries"} element={<ViewQueries />} />
                     <Route path={"/AddMerchant"} element={<AddMerchant />} />
                     <Route path={"/Faq"} element={<Faq />} />
+                    <Route path={"/paymentRecords"} element={<PaymentRecords />} />
                   </Routes>
                 </>
               ) : user.userType === "Merchant" ? (
