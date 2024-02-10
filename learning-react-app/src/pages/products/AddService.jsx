@@ -16,6 +16,7 @@ import '../styles/product.css'
 
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { useTheme } from '@mui/material/styles';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 
 
@@ -25,7 +26,6 @@ function AddService() {
   const [imageFile, setImageFile] = useState('');
   const [categoryList, setCategoryList] = useState([]);
   const [vendorList, setVendorList] = useState([]);
-  const [timeslotsList, setTimeslots] = useState([]);
 
 
   useEffect(() => {
@@ -37,10 +37,6 @@ function AddService() {
       setVendorList(res.data);
     });
 
-    http.get('/Timeslot/gettimeslots').then((res) => {
-      setTimeslots(res.data);
-      console.log(res.data.length)
-    });
   }, []);
 
   const onFileChange = (e) => {
@@ -74,9 +70,8 @@ function AddService() {
       name: '',
       description: '',
       price: null,
-      timeInterval: '',
-      starttime: '',
-      endtime: '',
+      timeslots: '',
+
       slots: null,
       vendor: '',
       category: ''
@@ -96,12 +91,7 @@ function AddService() {
 
       price: yup.number().required('Price is required'),
 
-
-      timeslots : yup.string().required('Timeslots is required'),
-      // timeInterval: yup.string().required('Time interval is required'),
-      // starttime: yup.string().required('Start Time is required'),
-      // endtime: yup.string().required('End Time is required'),
-
+      timeslots: yup.array().min(1, 'Timeslots is required').of(yup.string().required('Timeslot is required')),
       slots: yup.number().required('Slots amount is required'),
 
       vendor: yup.string().trim()
@@ -114,6 +104,9 @@ function AddService() {
     }),
 
     onSubmit: (data) => {
+
+      data.timeslots = data.timeslots.join(', ');
+
       if (imageFile) {
         data.image = imageFile;
       }
@@ -121,7 +114,7 @@ function AddService() {
       http.post("/Product/addservice", data)
         .then((res) => {
           console.log(res.data);
-            http.get("https://api.telegram.org/bot6933338568:AAFGiQqnJ1S5wQnowUebvVhnoOA-BlSSFSs/sendMessage?chat_id=-1002088213559&text=%3Cb%3EA%20new%20activities%20has%20been%20added!%3C/b%3E%20Click%20%3Ca%20href=%27google.com%27%3Ehere%3C/a%3E%20to%20see!&parse_mode=HTML")
+          // http.get("https://api.telegram.org/bot6933338568:AAFGiQqnJ1S5wQnowUebvVhnoOA-BlSSFSs/sendMessage?chat_id=-1002088213559&text=%3Cb%3EA%20new%20activities%20has%20been%20added!%3C/b%3E%20Click%20%3Ca%20href=%27google.com%27%3Ehere%3C/a%3E%20to%20see!&parse_mode=HTML")
           navigate("/productdash");
 
         })
@@ -130,50 +123,39 @@ function AddService() {
 
 
   const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
     },
-  },
-};
-
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
-const [personName, setPersonName] = React.useState([]);
-const theme = useTheme();
-
-const handleChange = (event) => {
-  const {
-    target: { value },
-  } = event;
-  setPersonName(
-    // On autofill we get a stringified value.
-    typeof value === 'string' ? value.split(',') : value,
-  );
-};
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
   };
-}
+
+  const names = [
+    'Oliver Hansen',
+    'Van Henry',
+    'April Tucker',
+    'Ralph Hubbard',
+    'Omar Alexander',
+    'Carlos Abbott',
+    'Miriam Wagner',
+    'Bradley Wilkerson',
+    'Virginia Andrews',
+    'Kelly Snyder',
+  ];
+
+  const theme = useTheme();
+
+  function getStyles(name, personName, theme) {
+    return {
+      fontWeight:
+        personName.indexOf(name) === -1
+          ? theme.typography.fontWeightRegular
+          : theme.typography.fontWeightMedium,
+    };
+  }
 
   return (
     <Container>
@@ -182,35 +164,7 @@ function getStyles(name, personName, theme) {
       </Typography>
 
 
-    <InputLabel id="demo-multiple-chip-label">Title</InputLabel>
-    <Select
-        style={{ width: "100%"}}
-        labelId="demo-multiple-chip-label" // <- Specify labelId
-        id="demo-multiple-chip"
-        multiple
-        value={personName}
-        onChange={handleChange}
-        input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-        renderValue={(selected) => (
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-            {selected.map((value) => (
-              <Chip key={value} label={value} />
-            ))}
-          </Box>
-        )}
-        MenuProps={MenuProps}
-      >
-        {names.map((name) => (
-          <MenuItem
-            key={name}
-            value={name}
-            style={getStyles(name, personName, theme)}
-          >
-            {name}
-          </MenuItem>
-        ))}
-      </Select>
-      
+
 
       <Box component="form" onSubmit={formik.handleSubmit}>
 
@@ -235,6 +189,8 @@ function getStyles(name, personName, theme) {
           </Grid>
 
           <Grid item xs={8} md={8} lg={8} >
+            <InputLabel id="title">Title</InputLabel>
+
             <TextField
               fullWidth margin="normal" autoComplete="off"
               label="Title"
@@ -244,6 +200,8 @@ function getStyles(name, personName, theme) {
               error={formik.touched.name && Boolean(formik.errors.name)}
               helperText={formik.touched.name && formik.errors.name}
             />
+
+            <InputLabel id="description">Description</InputLabel>
 
             <ReactQuill
               style={{ borderRadius: "5px" }}
@@ -270,6 +228,7 @@ function getStyles(name, personName, theme) {
               <div class="css-1wc848c-MuiFormHelperText-root" style={{ color: '#D32F2F' }}>{formik.errors.description}</div>
             )}
 
+            <InputLabel id="vendor-label">Vendor</InputLabel>
 
             <Select
               style={{ marginTop: "15px" }}
@@ -292,76 +251,62 @@ function getStyles(name, personName, theme) {
               ))}
             </Select>
 
-            {/* <Grid container spacing={2}>
 
-              <Grid item xs={4} md={4} lg={4} >
-
-                <TimePicker
-                  label="Duration Time"
-                  value={formik.values.timeInterval}
-                  onChange={(value) => formik.setFieldValue('timeInterval', value)}
-                  error={formik.touched.timeInterval && Boolean(formik.errors.timeInterval)}
-                  helperText={formik.touched.timeInterval && formik.errors.timeInterval}
-                />
-
-
-
-              </Grid>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={['TimePicker', 'TimePicker']}>
-                  <Grid item xs={4} md={4} lg={4} >
-
-                    <TimePicker
-                      label="Start Time"
-                      value={formik.values.starttime}
-                      onChange={(value) => formik.setFieldValue('starttime', value)}
-                      error={formik.touched.starttime && Boolean(formik.errors.starttime)}
-                      helperText={formik.touched.starttime && formik.errors.starttime}
-                    />
-                  </Grid>
-
-
-                  <Grid item xs={4} md={4} lg={4} >
-
-                    <TimePicker
-                      label="End Time"
-                      value={formik.values.endtime}
-                      onChange={(value) => formik.setFieldValue('endtime', value)}
-                      error={formik.touched.endtime && Boolean(formik.errors.endtime)}
-                      helperText={formik.touched.endtime && formik.errors.endtime}
-                    />
-                  </Grid>
-
-                </DemoContainer>
-              </LocalizationProvider>
-            </Grid> */}
-
-
+            <InputLabel id="timeslot">Timeslots</InputLabel>
             <Select
-                    style={{ marginTop: "15px" }}
-                    fullWidth margin="normal"
-                    labelId="timeslots-label"
-                    id="timeslots"
-                    name="timeslots"
-                    value={formik.values.timeslots}
-                    onChange={formik.handleChange}
-                    error={formik.touched.timeslots && Boolean(formik.errors.timeslots)}
-                    helperText={formik.touched.timeslots && formik.errors.timeslots}
-                    >
+              style={{ width: "100%" }}
+              labelId="demo-multiple-chip-label"
+              id="timeslots"
+              name="timeslots"
+              multiple
+              value={formik.values.timeslots || []}
+              onChange={(event) => {
+                const selectedValues = event.target.value;
+                console.log('Timeslots', selectedValues);
+                formik.setFieldValue('timeslots', Array.isArray(selectedValues) ? selectedValues : [selectedValues]); // Ensure it's always an array
+              }}
+              input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+              renderValue={(selected) => {
+                if (Array.isArray(selected)) {
+                  return (
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip
+                          key={value}
+                          label={value}
+                          value={value}
+                          onDelete={() => {
+                            const newSelected = formik.values.timeslots.filter((item) => item !== value);
+                            const newSelectedString = newSelected.join(','); // Convert array to string
+                            formik.setFieldValue('timeslots', newSelectedString); // Update formik state with the string
+                          }}
+                          deleteIcon={<CancelIcon />}
+                        />
+                      ))}
+                    </Box>
+                  );
+                } else {
+                  return selected;
+                }
+              }}
+            >
+              {names.map((name) => (
+                <MenuItem
+                  key={name}
+                  value={name}
+                  style={getStyles(name, formik.values.timeslots || [], theme)}
+                >
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
 
-                    <MenuItem value="" disabled>
-                        Select a timeslot
-                    </MenuItem>
-                    {timeslotsList.map((timeslot) => (
-                        <MenuItem key={timeslot.id} value={timeslot.timeslot}>
-                            {timeslot.timeslot}
-                        </MenuItem>
-                    ))}
-                    </Select>
 
             <Grid container spacing={2}>
 
               <Grid item xs={4} md={4} lg={4} >
+                <InputLabel id="price">Price</InputLabel>
+
                 <TextField
                   fullWidth margin='normal' autoComplete='off'
                   label="Price"
@@ -376,6 +321,8 @@ function getStyles(name, personName, theme) {
               </Grid>
 
               <Grid item xs={4} md={4} lg={4} >
+                <InputLabel id="slots">Slots</InputLabel>
+
                 <TextField
                   fullWidth margin='normal' autoComplete='off'
                   label="Slots"
@@ -392,7 +339,7 @@ function getStyles(name, personName, theme) {
 
 
               <Grid item xs={4} md={4} lg={4} >
-
+                <InputLabel id="category">Category</InputLabel>
                 <Select
                   style={{ marginTop: "15px" }}
                   fullWidth margin="normal"
@@ -426,6 +373,8 @@ function getStyles(name, personName, theme) {
 
             {isMemberPriceVisible && (
               <Grid item xs={4} md={4} lg={4}>
+                <InputLabel id="memprice">Member Price</InputLabel>
+
                 <TextField
                   fullWidth
                   margin="normal"

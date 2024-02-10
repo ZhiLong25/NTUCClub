@@ -15,40 +15,40 @@ function Products() {
 
     var [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
     const [imageFile, setImageFile] = useState('');
-    const [vendorList, setVendorList] = useState([]);
-    const [categoryList, setCategoryList] = useState([]);
     const [timeslotsList, setTimeslots] = useState([]);
 
     const [services, setServices] = useState([]);
+    const [reviewsList, setReviews] = useState([]);
 
     const { id } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
         http.get(`/Product/getservice/${id}`).then((res) => {
+
           console.log(res.data);
           setServices(res.data);
     
           if (res.data.memPrice != null) {
               setIsMemberPriceVisible(true)
-    
           }
     
           if (res.data.image) {
             setImageFile(res.data.image);
           }
 
-          http.get('/Vendor/getvendor').then((res) => {
-            setVendorList(res.data);
-          });
-    
-        });
+          const timeslotValues = res.data.timeSlots;
+          const timeValues = timeslotValues.split(', ')
+            setTimeslots(timeValues);
 
+        });
         
-    http.get('/Timeslot/gettimeslots').then((res) => {
-        setTimeslots(res.data);
-          console.log(res.data.length)
-      });
+
+        http.get(`/Review/getreview`).then((res) => {
+            console.log(res.data);
+            setReviews(res.data);
+            
+        });
 
     }, []);
 
@@ -73,31 +73,73 @@ function Products() {
         }
     });
 
-
     const [isFavorite, setIsFavorite] = useState(false);
       
     const handleClick = () => {
-        setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+        if (isFavorite) {
+            setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+            http.get('/user/auth')
+            .then((res) => {
+                const currentUser = res.data.user;
+                console.log(currentUser.name)
+    
+                if (currentUser) {
+                    // Fetch the user's wishlist
+                    http.get("/Wishlist/getwishlist")
+                        .then((response) => {
+                            const wishlist = response.data;
+                            const existingService = wishlist.find(item => item.ServiceId === parseInt(id));
+    
+                            if (existingService) {
+                                console.log("Service is already in the wishlist.");
+                            } else {
+                                // If the service is not in the wishlist, add it
+                                const requestData = {
+                                    User: currentUser.name,
+                                    ServiceId: parseInt(id)
+                                };
+    
+                                http.post("/Wishlist/addwishlist", requestData)
+                                    .then((res) => {
+                                        console.log("Service added to wishlist:", res.data);
+                                    })
+                                    .catch((error) => {
+                                        console.error("Error adding service to wishlist:", error);
+                                    });
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error fetching wishlist:", error);
+                        });
+                } else {
+                    console.error("Unable to fetch current user's information");
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching current user's information:", error);
+            });
+        } else {
+            console.log(id);
+
+            // DELETE
+            http.delete(`/Wishlist/deletewishlist/${id}`)
+            .then((res) => {
+              console.log(res.data);
+              setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+            });
+        }
     };
+
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
 
-        if (isFavorite == true) {
-            if (isFavorite == true) {
-                http.post("/Favorites/addfavorites", currentuser, isFavorite)
-                .then((res) => {
-                  console.log(res.data);
-                  navigate("/cart");
-                })
-            }
-            else {
-                http.delete("/Favorites/deletefavorites", currentuser, isFavorite)
-                .then((res) => {
-                  console.log(res.data);
-                  navigate("/cart");
-                })
-            }
-        }
+        http.get('/user/auth').then((res) => {
+            setUser(res.data.user);
+            console.log(res.data.user.name);
+        });
+
+
         
     }, []);
 
@@ -119,14 +161,13 @@ function Products() {
 
                 
                 <div onClick={handleClick}>
-                    {isFavorite ? <FavoriteBorderIcon /> : <FavoriteIcon />}
+                    {isFavorite ? <FavoriteBorderIcon /> : <FavoriteIcon />} Add to your wishlist
                 </div>
 
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        {services.description}
+                    {services.description.replace(/<[^>]*>?/gm, '')}
                 </Typography>
             
-
 
             </Grid>
 
@@ -143,7 +184,8 @@ function Products() {
                     <Typography>Slots left: {services.slots}</Typography>
 
 
-                    <InputLabel>TimeSlots</InputLabel>
+                    <InputLabel>TimeSlots : {services.timeSlots}</InputLabel>
+
 
                     <Select
                     style={{ marginTop: "15px" }}
@@ -161,12 +203,11 @@ function Products() {
                         Select a timeslot
                     </MenuItem>
                     {timeslotsList.map((timeslots) => (
-                        <MenuItem key={timeslots.id} value={timeslots.timeslot}>
-                            {timeslots.timeslot}
+                        <MenuItem key={timeslots} value={timeslots}>
+                            {timeslots}
                         </MenuItem>
                     ))}
                     </Select>
-
 
 
                     <Box sx={{ mt: 2 }}>
@@ -180,6 +221,37 @@ function Products() {
 
             </Grid>
         </Grid>
+
+        {/* REVIEWS SECTION */}
+        
+        <Typography variant="h5" style={{ marginBottom: "20px", marginTop: '20px' }}>Reviews by others</Typography>
+
+        <Box>
+        {reviewsList.map((reviews, i) => {
+            return (
+            <Container>
+
+                <Typography variant="h5" component="div">{reviews.subject}</Typography>
+                
+                <Typography>{reviews.rating}</Typography>
+
+
+                <Typography>{reviews.description.replace(/<[^>]*>?/gm, '')}</Typography>
+                <Typography>Listed on : {reviews.createdAt}</Typography>
+                <Typography>Listed by : {reviews.user}</Typography>
+
+
+                <Box style={{width: "80px"}}>
+                    <img alt="product" src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`} className='image-insert' />
+                </Box>
+                <hr style={{ height: "10px"}}></hr>
+            </Container>
+
+            );
+          })}
+        </Box>
+
+
     </Container>
   )
 }

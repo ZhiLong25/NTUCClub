@@ -1,4 +1,3 @@
-import React from 'react'
 import Carousel from 'react-material-ui-carousel'
 import "../index.css";
 import { Card, CardActionArea, Typography, ListItem, ListItemIcon, ListItemButton, ListItemText, List } from '@mui/material';
@@ -7,9 +6,13 @@ import TelegramCard from './components/telegram';
 import FriendsOfUPlayCard from './components/friends_of_uplay';
 import EventCard from './components/event';
 import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import http from '../http';
+import { CheckIfDataIsArray } from './constant';
 
 
 function Home() {
+  const [services, setServices] = useState([]);
   const carouselItems = [
     {
       name: "Random Name #1",
@@ -151,6 +154,23 @@ function Home() {
     }
   ]
 
+  useEffect(() => {
+    http.get('/Product/getservice')
+      .then((res) => {
+        try {
+          const data = CheckIfDataIsArray(res.data)
+          setServices(data);
+        }
+        catch {
+          setServices([])
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, []);
+
+
   return (
     <div id='homepage'>
       {/* DOC: https://github.com/Learus/react-material-ui-carousel/blob/master/README.md */}
@@ -184,16 +204,18 @@ function Home() {
       <div id='eventShowcase'>
         <Typography variant="h5" style={{ marginBottom: "5px", fontWeight: "bold", marginTop: "40px" }}>Sweet Experiences With Your Sweetheart</Typography>
         <div id='eventList' >
-          {eventItems.map((event, i) => {
+          {services.map((event, i) => {
             if (i < 7) {
               const icon = categoryItems.find((cat) => cat.title === event.category)?.icon
-              return (<EventCard key={i} event={event} icon={icon} />)
+              return (<EventCard key={i} events={event} icon={icon} />)
             }
           })}
           <Link to={"/experiences"} className='link'>
-            <CardActionArea style={{ textAlign: "center", display: "flex", placeContent: "center", alignItems: "center", height: "100%", fontWeight: "bold", backgroundColor: "black", color: "white" }}>
-              Explore More<br />Experiences
-            </CardActionArea>
+            <Card>
+              <CardActionArea style={{ textAlign: "center", display: "flex", placeContent: "center", alignItems: "center", height: "100%", fontWeight: "bold", backgroundColor: "black", color: "white" }}>
+                Explore More<br />Experiences
+              </CardActionArea>
+            </Card>
           </Link>
         </div>
       </div>
