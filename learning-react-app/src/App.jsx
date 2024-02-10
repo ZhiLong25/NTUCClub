@@ -33,8 +33,7 @@ import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
-import ManageTimeslots from './pages/products/ManageTimeslots';
-
+import AddReviews from './pages/products/AddReviews';
 
 import Products from './pages/products/Products'
 import ProductsPage from './pages/products/ProductsPage';
@@ -115,6 +114,11 @@ function App() {
                     <Route path={"/cart"} element={<Cart />} />
                     <Route path={"/payment"} element={<Payment />} />
                     <Route path={"/Faq"} element={<Faq />} />
+
+                    <Route path={"/addreviews"} element={< AddReviews />} />
+
+                    <Route path={"/experiences/:id"} element={<Products />} />
+                    <Route path={"/experiences"} element={< ProductsPage />} />
                   </Routes>
                 </>
               )
@@ -129,15 +133,18 @@ function App() {
                   <Route path={"/verification"} element={<Verification />} />
                   <Route path={"/AddQueries"} element={<AddQueries />} />
                   <Route path={"/RegisterGoogle"} element={<RegisterGoogle />} />
+
                   <Route path={"/productdash"} element={<ProductDash />} />
                   <Route path={"/addservice"} element={<AddService />} />
                   <Route path={"/getservice"} element={<GetService />} />
                   <Route path={"/editservice/:id"} element={<EditService />} />
                   <Route path={"/managecategory"} element={<ManageCategory />} />
                   <Route path={"/managevendor"} element={<ManageVendor />} />
-                  <Route path={"/manageTimeslots"} element={<ManageTimeslots />} />
                   <Route path={"/experiences/:id"} element={<Products />} />
                   <Route path={"/experiences"} element={< ProductsPage />} />
+                  <Route path={"/addreviews"} element={< AddReviews />} />
+
+
                   <Route path={"/addquery"} element={<addQuery />} />
                   <Route path={"/Faq"} element={<Faq />} />
                 </Routes>

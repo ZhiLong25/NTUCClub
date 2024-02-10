@@ -1,28 +1,33 @@
-
-
 .topheader {
-    font-weight: bold!important;
-    font-size: 18px!important;
+    font-weight: bold !important;
+    font-size: 18px !important;
 }
 
 .number-head {
-    font-weight: bold!important;
+    font-weight: bold !important;
     color: red;
 }
+
 .image-insert {
     display: block;
-    margin:auto;
+    margin: auto;
 }
 
-.dashCard {
-    min-height: 150px;
-    border-radius: 5px;
+.statsCard {
+    padding: 16px!important;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.statsData {
+    font-weight: bold!important;
+    font-size: 32px!important;
 }
 
 .addbtn {
-    float:right;
-    background-color: #E8533F!important;
-    min-width: 100px!important;
+    float: right;
+    background-color: #E8533F !important;
+    min-width: 100px !important;
 }
 
 .ql-toolbar.ql-snow {

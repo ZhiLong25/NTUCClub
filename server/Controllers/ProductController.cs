@@ -60,7 +60,7 @@ namespace NTUCClub.Controllers
                 Category = service.Category,
                 Price = service.Price,
                 MemPrice = service.MemPrice,
-                TimeSlots = service.TimeSlots.Trim(),
+                TimeSlots = service.TimeSlots,
                 Slots = service.Slots,
                 Vendor = service.Vendor.Trim(),
                 CreatedAt = now,
@@ -93,7 +93,7 @@ namespace NTUCClub.Controllers
             myService.Description = service.Description.Trim();
             myService.Price = service.Price;
             myService.MemPrice = service.MemPrice;
-            myService.TimeSlots = service.TimeSlots.Trim();
+            myService.TimeSlots = service.TimeSlots;
             myService.Slots = service.Slots;
             myService.Vendor = service.Vendor.Trim();
             myService.UpdatedAt = DateTime.Now;

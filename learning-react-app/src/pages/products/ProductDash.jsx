@@ -1,11 +1,12 @@
-import { AccessTime, Add, Search, Clear, Edit, Delete } from '@mui/icons-material';
+import { SearchRounded, AddRounded, StorefrontOutlined, SettingsOutlined, CategoryOutlined } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Grid, Card, CardContent, Input, IconButton, Button, Container } from '@mui/material';
-
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Box, Typography, Grid, Chip, Card, CardContent, Input, IconButton, Button, Container } from '@mui/material';
+import { Link } from 'react-router-dom';
 import http from '../../http';
 import '../styles/product.css';
-
+import MUIDataTable from "mui-datatables";
+import { Flex } from '@chakra-ui/react';
+import { CheckIfDataIsArray } from '../constant';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,7 +14,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import MUIDataTable from "mui-datatables";
 
 
 function ProductDash() {
@@ -21,149 +21,101 @@ function ProductDash() {
   const [totalServices, setTotalServices] = useState(0);
   const [totalCategory, setTotalCategory] = useState(0);
   const [totalVendors, setTotalVendors] = useState(0);
-
   const [serviceList, setServiceList] = useState([]);
 
   useEffect(() => {
-    http.get('/Product/getproduct').then((res) => {
-      setTotalServices(res.data.length);
-    });
+    http.get('/Product/getservice')
+      .then((res) => {
+        const data = CheckIfDataIsArray(res.data)
+        setTotalServices(data.length);
+      });
 
-    http.get('/Category/getcategory').then((res) => {
-      setTotalCategory(res.data.length);
-    });
+    http.get('/Category/getcategory')
+      .then((res) => {
+        const data = CheckIfDataIsArray(res.data)
+        setTotalCategory(data.length);
+      });
 
-    http.get('/Vendor/getvendor').then((res) => {
-      setTotalVendors(res.data.length);
-    });
+    http.get('/Vendor/getvendor')
+      .then((res) => {
+        const data = CheckIfDataIsArray(res.data)
+        setTotalVendors(data.length);
+      });
 
+    getServices();
   }, []);
 
 
   const getServices = () => {
-    http.get('/Product/getservice').then((res) => {
-        console.log(res.data)
-        setServiceList(res.data);
-    });
-};
+    http.get('/Product/getservice')
+      .then((res) => {
+        const data = CheckIfDataIsArray(res.data)
+        setServiceList(data);
+      });
+  };
 
-useEffect(() => {
-    http.get('/Product/getservice').then((res) => {
-        getServices();
 
-    });
-}, []);
 
-const options = {
-  filterType: 'checkbox',
-};  
-
-const columns = ['id', 'name', 'category', 'updatedAt'];
+  const options = { filterType: 'checkbox' };
+  const columns = ['ID', 'Name', 'Category', 'Updated At'];
 
   return (
-    <Box display="block">
+    <Box className="main-wrap admin-wrap" >
+      <Typography variant="h5" className="main-title" style={{ marginTop: "20px", marginBottom: "10px" }}>Dashboard</Typography>
 
-      <Box className="main-wrap admin-wrap" >
-        <Typography variant="h5" sx={{ my: 2 }} className="main-title">
-          Product Management
-        </Typography>
+      {/* STATS */}
+      <Flex gap={"10px"}>
+        <CardContent className="statsCard" style={{ background: "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)" }}>
+          <Typography className="statsTitle" variant='subtitle'>Services</Typography>
+          <Flex gap={"5px"} alignItems={"center"}>
+            <SettingsOutlined fontSize='large' />
+            <Typography className="statsData">{totalServices}</Typography>
+          </Flex>
+        </CardContent>
+        <CardContent className="statsCard" style={{ background: "linear-gradient(to top, #c1dfc4 0%, #deecdd 100%)" }}>
+          <Typography className="statsTitle" variant='subtitle'>Category</Typography>
+          <Flex gap={"5px"} alignItems={"center"}>
+            <CategoryOutlined fontSize='large' />
+            <Typography className="statsData">{totalCategory}</Typography>
+          </Flex>
+        </CardContent>
+        <CardContent className="statsCard" style={{ background: "linear-gradient(to top, #feada6 0%, #f5efef 100%)" }}>
+          <Typography className="statsTitle" variant='subtitle'>Vendors</Typography>
+          <Flex gap={"5px"} alignItems={"center"}>
+            <StorefrontOutlined fontSize='large' />
+            <Typography className="statsData">{totalVendors}</Typography>
+          </Flex>
+        </CardContent>
+      </Flex>
 
-        <Box>
-          <Grid container spacing={2}>
-
-          <Grid item xs={3} md={3} lg={3}>
-              <CardContent className="dashCard" style={{ background: "linear-gradient(to right, #38ef7d, #11998e )" }}>
-                <Typography className="topheader">Manage Categories</Typography>
-
-                <Box>
-                  <Link to="/managecategory"><IconButton className="changeicon"><Search></Search></IconButton></Link>
-
-                </Box>
-
-              </CardContent>
-            </Grid>
-
-          
-
-            <Grid item xs={3} md={3} lg={3}>
-              <CardContent className="dashCard" style={{ background: "linear-gradient(to right, #FFEB3B, #FF9800)" }}>
-                <Typography className="topheader">Manage Services</Typography>
-
-                <Box>
-                  <Link to="/addservice"><IconButton className="changeicon"><Add></Add></IconButton></Link>
-                </Box>
-
-                <Box>
-                  <Link to="/getservice"><IconButton className="changeicon"><Search></Search></IconButton></Link>
-                </Box>
-
-              </CardContent>
-            </Grid>
-
-            <Grid item xs={3} md={3} lg={3}>
-              <CardContent className="dashCard" style={{ background: "linear-gradient(to right, #7F00FF,#E100FF)" }}>
-                <Typography className="topheader">Manage Vendors</Typography>
-
-                <Box>
-                  <Link to="/managevendor"><IconButton className="link changeicon"><Search></Search></IconButton></Link>
-                </Box>
-
-              </CardContent>
-            </Grid>
-
-
-            <Grid item xs={3} md={3} lg={3}>
-              <CardContent className="dashCard" style={{ background: "linear-gradient(to right, #7F00FF,#E100FF)" }}>
-                <Typography className="topheader">Implement Timeslots</Typography>
-
-                <Box>
-                  <Link className='link' to="/manageTimeslots"><IconButton className="changeicon"><Search></Search></IconButton></Link>
-                </Box>
-
-              </CardContent>
-            </Grid>
-
-
-
-            
-          </Grid>
-
+      {/* QUICK ACCESS */}
+      <Box className="quickAccesChips" marginTop={"30px"}>
+        <Typography variant="h6" style={{ marginBottom: "5px" }}>Quick Access</Typography>
+        <Box display={'flex'} alignItems={'center'} gap={"10px"}>
+          <Link to={"/managecategory"}>
+            <Chip icon={<SearchRounded />} label="Category" />
+          </Link>
+          <Link to={"/getservice"}>
+            <Chip icon={<SearchRounded />} label="Services" />
+          </Link>
+          <Link to={"/addservice"}>
+            <Chip icon={<AddRounded />} label="Services" />
+          </Link>
+          <Link to={"/managevendor"}>
+            <Chip icon={<SearchRounded />} label="Vendors" />
+          </Link>
+          <Link to={"/manageTimeslots"}>
+            <Chip icon={<SearchRounded />} label="Implement Timeslots" />
+          </Link>
+        </Box>
       </Box>
 
-      <Box style={{ marginTop: "20px" }}>
-        <Grid container spacing={2}>
-          <Grid item xs={6} md={6} lg={6} >
-            <CardContent className="addCard" style={{ border: "3px solid #E8533F",borderRadius: "5px", minHeight:"250px" }}>
-              <Typography className="topheader">Total Services</Typography>
-              <Typography ><span className='number-head'>{totalServices}</span> Services</Typography>
-              <Typography className="topheader">Total Categories</Typography>
-              <Typography ><span className='number-head'>{totalCategory}</span> Categories</Typography>
-              <Typography className="topheader">Total Vendors</Typography>
-              <Typography className=''><span className='number-head'>{totalVendors} </span>Vendors</Typography>
-
-            </CardContent>
-
-          </Grid>
-
-          <Grid item xs={6} md={6} lg={6} >
-            <CardContent className="addCard" style={{ border: "3px solid #E8533F",borderRadius: "5px", minHeight:"250px" }}>
-              
-
-            </CardContent>
-
-          </Grid>
-
-        </Grid>
+      {/* TABLE */}
+      <Box marginTop={"30px"}>
+        <Typography variant="h6" style={{ marginBottom: "5px" }}>Services List</Typography>
+        <MUIDataTable data={serviceList} columns={columns} options={options} />
       </Box>
-
-      <Box style={{ marginTop: "30px" }}>
-      <MUIDataTable title="Services List" data={serviceList} columns={columns} options={options} />
-
-
-      </Box>
-
     </Box>
-    </Box >
   )
 }
 
