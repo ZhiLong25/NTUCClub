@@ -26,7 +26,7 @@ function ProductsPage() {
   }
 
   const searchServices = () => {
-    http.get(`/Product/getservice?search=${search}&sort=${selectedSort}`)
+    http.get(`/Product/getservice?search=${search}&sort=${selectedSort}&category=${selectedCategory}`)
       .then((res) => {
         const data = CheckIfDataIsArray(res.data)
         setServiceList(data);
