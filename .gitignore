@@ -45,3 +45,9 @@ server/.vs/NTUCClub/FileContentIndex/e3d74866-f174-4c77-aa7e-1e31d5ccffa9.vsidx
 *.dll
 *.bin
 *.vsidx
+ask-multiple-pdfs-main/sentimentModel.py
+ask-multiple-pdfs-main/tensorflow/
+ask-multiple-pdfs-main/test.ft.txt
+ask-multiple-pdfs-main/train.ft.txt
+ask-multiple-pdfs-main/test.ft.txt
+ask-multiple-pdfs-main/train.ft.txt

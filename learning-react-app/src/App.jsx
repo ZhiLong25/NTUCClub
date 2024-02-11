@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Container, AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
+
 import MyTheme from './themes/MyTheme';
 import Tutorials from './pages/Tutorials';
 import MyForm from './pages/MyForm';
@@ -33,7 +34,7 @@ import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
-import ManageTimeslots from './pages/products/ManageTimeslots';
+// import ManageTimeslots from './pages/products/ManageTimeslots';
 import AddReviews from './pages/products/AddReviews';
 
 import Products from './pages/products/Products'
