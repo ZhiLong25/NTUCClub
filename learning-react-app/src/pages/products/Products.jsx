@@ -340,12 +340,25 @@ function Products() {
                     </Typography>
 
 
-                    <div onClick={handleClick}>
-                        {isFavorite ? <FavoriteBorderIcon /> : <FavoriteIcon />} Add to your wishlist
-                    </div>
+                    <Box onClick={handleClick}>
+                        {isFavorite ? 
+                        
+                        <Box>
+                            <FavoriteBorderIcon /> Add to your wishlist
+                        </Box>
 
-                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        {services.description}
+                        : 
+                        <Box>
+                            <FavoriteIcon /> Remove from wishlist
+                        </Box>
+
+                        } 
+                        
+                        
+                    </Box>
+
+                    <Typography variant="subtitle1" sx={{ flexGrow: 1 }} style={{ marginTop: "10px "}}>
+                    {services.description?.replace(/<[^>]*>?/gm, '') || ''}
                     </Typography>
 
 

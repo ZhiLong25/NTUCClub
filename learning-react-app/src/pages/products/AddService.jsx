@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { Container, Box, Typography, TextField, Button, InputLabel, Select, MenuItem, Grid, Chip } from '@mui/material';
+import { Container, Box, Typography, TextField, Button, InputLabel, ListItemIcon, Select, MenuItem, Grid, Chip, ListItemText } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
@@ -18,14 +18,17 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { useTheme } from '@mui/material/styles';
 import CancelIcon from '@mui/icons-material/Cancel';
 
+import { ExpandLessRounded, ExpandMoreRounded, FamilyRestroomRounded, FlightRounded, LocalDiningRounded, SpaRounded, SportsBasketballRounded, SubdirectoryArrowRightRounded } from "@mui/icons-material";
+import { CheckIfDataIsArray, sampleCategoryItems, GetCategoryCodeName } from '../../pages/constant';
 
 
 function AddService() {
   const navigate = useNavigate();
   const [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
   const [imageFile, setImageFile] = useState('');
-  const [categoryList, setCategoryList] = useState([]);
+  // const [categoryList, setCategoryList] = useState([]);
   const [vendorList, setVendorList] = useState([]);
+
 
 
   useEffect(() => {
@@ -77,6 +80,7 @@ function AddService() {
       category: ''
 
     },
+    enableReinitialize: true,
 
     validationSchema: yup.object().shape({
       name: yup.string().trim()
@@ -163,9 +167,6 @@ function AddService() {
       <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
         Add Events / Services
       </Typography>
-
-
-
 
       <Box component="form" onSubmit={formik.handleSubmit}>
 
@@ -344,6 +345,7 @@ function AddService() {
                 <Select
                   style={{ marginTop: "15px" }}
                   fullWidth margin="normal"
+                  renderValue={(v) => v}
                   labelId="category-label"
                   id="category"
                   name="category"
@@ -355,9 +357,14 @@ function AddService() {
                   <MenuItem value="" disabled>
                     Select a Category
                   </MenuItem>
-                  {categoryList.map((category) => (
-                    <MenuItem key={category.id} value={category.name}>
-                      {category.name}
+                  {sampleCategoryItems.map((category) => (
+                    <MenuItem key={category.title} value={category.title}>
+
+                      <ListItemIcon>{category.icon}
+                      
+                      </ListItemIcon>
+                      <ListItemText primary={category.title} />
+
                     </MenuItem>
                   ))}
                 </Select>

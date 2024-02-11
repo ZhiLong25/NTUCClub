@@ -364,9 +364,11 @@ function EditService() {
 
 
               <Grid item xs={4} md={4} lg={4} >
+                <InputLabel id="category">Category</InputLabel>
                 <Select
                   style={{ marginTop: "15px" }}
                   fullWidth margin="normal"
+                  renderValue={(v) => v}
                   labelId="category-label"
                   id="category"
                   name="category"
@@ -378,15 +380,22 @@ function EditService() {
                   <MenuItem value="" disabled>
                     Select a Category
                   </MenuItem>
-                  {categoryList.map((category) => (
-                    <MenuItem key={category.id} value={category.name}>
-                      {category.name}
+                  {sampleCategoryItems.map((category) => (
+                    <MenuItem key={category.title} value={category.title}>
+
+                      <ListItemIcon>{category.icon}
+                      
+                      </ListItemIcon>
+                      <ListItemText primary={category.title} />
+
                     </MenuItem>
                   ))}
                 </Select>
 
+
               </Grid>
             </Grid>
+
 
 
             <FormControlLabel
@@ -426,7 +435,7 @@ function EditService() {
 
 
         <Dialog open={open} onClose={handleClose} >
-        <img src='https://cdn-icons-png.flaticon.com/512/3588/3588294.png' style={{ minWidth: "20%" }} alt="warning" className='noti-icon' />
+         <img src='https://cdn-icons-png.flaticon.com/512/3588/3588294.png' style={{ minWidth: "20%" }} alt="warning" className='noti-icon' />
 
         <DialogTitle>
           Delete Service

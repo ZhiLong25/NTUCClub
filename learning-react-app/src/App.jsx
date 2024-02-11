@@ -31,7 +31,6 @@ import ProductDash from './pages/products/ProductDash';
 import AddService from './pages/products/AddService';
 import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
-import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
 import AddReviews from './pages/products/AddReviews';
 
@@ -94,7 +93,6 @@ function App() {
                     <Route path={"/addservice"} element={<AddService />} />
                     <Route path={"/getservice"} element={<GetService />} />
                     <Route path={"/editservice/:id"} element={<EditService />} />
-                    <Route path={"/managecategory"} element={<ManageCategory />} />
                     <Route path={"/managevendor"} element={<ManageVendor />} />
                     <Route path={"/Faq"} element={<Faq />} />
                   </Routes>
@@ -138,7 +136,6 @@ function App() {
                   <Route path={"/addservice"} element={<AddService />} />
                   <Route path={"/getservice"} element={<GetService />} />
                   <Route path={"/editservice/:id"} element={<EditService />} />
-                  <Route path={"/managecategory"} element={<ManageCategory />} />
                   <Route path={"/managevendor"} element={<ManageVendor />} />
                   <Route path={"/experiences/:id"} element={<Products />} />
                   <Route path={"/experiences"} element={< ProductsPage />} />

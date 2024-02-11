@@ -72,13 +72,13 @@ function ProductDash() {
             <Typography className="statsData">{totalServices}</Typography>
           </Flex>
         </CardContent>
-        <CardContent className="statsCard" style={{ background: "linear-gradient(to top, #c1dfc4 0%, #deecdd 100%)" }}>
+        {/* <CardContent className="statsCard" style={{ background: "linear-gradient(to top, #c1dfc4 0%, #deecdd 100%)" }}>
           <Typography className="statsTitle" variant='subtitle'>Category</Typography>
           <Flex gap={"5px"} alignItems={"center"}>
             <CategoryOutlined fontSize='large' />
             <Typography className="statsData">{totalCategory}</Typography>
           </Flex>
-        </CardContent>
+        </CardContent> */}
         <CardContent className="statsCard" style={{ background: "linear-gradient(to top, #feada6 0%, #f5efef 100%)" }}>
           <Typography className="statsTitle" variant='subtitle'>Vendors</Typography>
           <Flex gap={"5px"} alignItems={"center"}>
@@ -92,9 +92,6 @@ function ProductDash() {
       <Box className="quickAccesChips" marginTop={"30px"}>
         <Typography variant="h6" style={{ marginBottom: "5px" }}>Quick Access</Typography>
         <Box display={'flex'} alignItems={'center'} gap={"10px"}>
-          <Link to={"/managecategory"}>
-            <Chip icon={<SearchRounded />} label="Category" />
-          </Link>
           <Link to={"/getservice"}>
             <Chip icon={<SearchRounded />} label="Services" />
           </Link>
@@ -104,9 +101,7 @@ function ProductDash() {
           <Link to={"/managevendor"}>
             <Chip icon={<SearchRounded />} label="Vendors" />
           </Link>
-          <Link to={"/manageTimeslots"}>
-            <Chip icon={<SearchRounded />} label="Implement Timeslots" />
-          </Link>
+
         </Box>
       </Box>
 
