@@ -151,6 +151,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   )
 }
 
+
+
 const logout = (event: React.MouseEvent<HTMLButtonElement>) => {
   console.log("Logout")
   event.preventDefault();

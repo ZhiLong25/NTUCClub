@@ -167,7 +167,7 @@ function ProductsPage() {
             </Box> :
             <Alert icon={<SearchOffRounded fontSize="inherit" />} severity="info">
               <AlertTitle style={{ fontWeight: "bold" }}>No results found</AlertTitle>
-              Maybe try resetting the filters to get other results
+              Try resetting the filters to get other results
             </Alert>
           }
         </Box>
