@@ -17,27 +17,22 @@ export const sampleCategoryItems = [
   {
     title: "Dine & Wine",
     icon: <LocalDiningRounded />,
-    code: 'dinewine'
   },
   {
     title: "Family Bonding",
     icon: <FamilyRestroomRounded />,
-    code: "familybonding"
   },
   {
     title: "Hobbies & Wellness",
     icon: <SpaRounded />,
-    code: "hobbieswellness"
   },
   {
     title: "Sport & Advanture",
     icon: <SportsBasketballRounded />,
-    code: "sportadvanture"
   },
   {
     title: "Travel",
     icon: <FlightRounded />,
-    code: "travel"
   }
 ]
 
