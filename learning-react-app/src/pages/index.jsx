@@ -74,7 +74,7 @@ function Home() {
         <div id="categoryList">
           <List id="categoryListItem" subheader={<label id='categoryListTitle'>Category</label>}>
             {sampleCategoryItems.map((item, i) =>
-              <Link to={"/experiences?category=" + GetCategoryCodeName(item.code)} key={i} className='link'>
+              <Link to={"/experiences?category=" + GetCategoryCodeName(item.title)} key={i} className='link'>
                 <ListItem disablePadding disableGutters >
                   <ListItemButton>
                     <ListItemIcon>{item.icon}</ListItemIcon>
