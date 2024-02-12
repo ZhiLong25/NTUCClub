@@ -28,7 +28,8 @@ namespace NTUCClub
         public DbSet<Voucher> Vouchers { get; set; }
 
         public DbSet<Service> Services { get; set; }
-        public DbSet<Category> Category { get; set; }
+
+        // public DbSet<Category> Category { get; set; }
         public DbSet<Vendor> Vendor { get; set; }
 
         public DbSet<Wishlist> Wishlist { get; set; }

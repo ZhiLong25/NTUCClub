@@ -66,7 +66,6 @@ namespace NTUCClub.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Cards");
-
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Cart.CartItem", b =>
@@ -127,32 +126,6 @@ namespace NTUCClub.Migrations
                     b.ToTable("Queries");
                 });
 
-            modelBuilder.Entity("NTUCClub.Models.Products.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Image")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
             modelBuilder.Entity("NTUCClub.Models.Products.Reviews", b =>
                 {
                     b.Property<int>("Id")
@@ -194,9 +167,6 @@ namespace NTUCClub.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
@@ -237,9 +207,8 @@ namespace NTUCClub.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryID");
-
                     b.ToTable("Services");
+                });
 
             modelBuilder.Entity("NTUCClub.Models.Products.UserActivity", b =>
                 {
@@ -290,6 +259,8 @@ namespace NTUCClub.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Vendor");
+                });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Wishlist", b =>
                 {
@@ -312,6 +283,10 @@ namespace NTUCClub.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("Wishlist");
+                });
 
             modelBuilder.Entity("NTUCClub.Models.User", b =>
                 {
@@ -426,15 +401,15 @@ namespace NTUCClub.Migrations
                     b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("NTUCClub.Models.Products.Service", b =>
+            modelBuilder.Entity("NTUCClub.Models.Products.Wishlist", b =>
                 {
-                    b.HasOne("NTUCClub.Models.Products.Category", "CatName")
-                        .WithMany("Services")
-                        .HasForeignKey("CategoryID")
+                    b.HasOne("NTUCClub.Models.Products.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CatName");
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.Voucher", b =>
@@ -444,11 +419,6 @@ namespace NTUCClub.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("NTUCClub.Models.Products.Category", b =>
-                {
-                    b.Navigation("Services");
                 });
 
             modelBuilder.Entity("NTUCClub.Models.User", b =>

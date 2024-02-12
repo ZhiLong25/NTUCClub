@@ -17,9 +17,8 @@ import '../styles/product.css'
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { useTheme } from '@mui/material/styles';
 import CancelIcon from '@mui/icons-material/Cancel';
-
-import { ExpandLessRounded, ExpandMoreRounded, FamilyRestroomRounded, FlightRounded, LocalDiningRounded, SpaRounded, SportsBasketballRounded, SubdirectoryArrowRightRounded } from "@mui/icons-material";
 import { CheckIfDataIsArray, sampleCategoryItems, GetCategoryCodeName } from '../../pages/constant';
+import usePlacesService from "react-google-autocomplete/lib/usePlacesAutocompleteService";
 
 
 function AddService() {

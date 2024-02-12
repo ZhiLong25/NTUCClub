@@ -85,8 +85,8 @@ namespace NTUCClub.Controllers
             var now = DateTime.Now;
 
             // Fetch or create the category based on the service.Category value
-            var category = _context.Category.FirstOrDefault(c => c.Name == service.Category.Trim())
-                          ?? new Category { Name = service.Category.Trim() };
+            //var category = _context.Category.FirstOrDefault(c => c.Name == service.Category.Trim())
+            //              ?? new Category { Name = service.Category.Trim() };
 
             var myService = new Service()
             {
@@ -101,7 +101,6 @@ namespace NTUCClub.Controllers
                 Vendor = service.Vendor.Trim(),
                 CreatedAt = now,
                 UpdatedAt = now,
-                CatName = category // Set the CatName navigation property instead of Category
             };
 
             _context.Services.Add(myService);
@@ -116,8 +115,8 @@ namespace NTUCClub.Controllers
         {
 
             // Fetch or create the category based on the service.Category value
-            var category = _context.Category.FirstOrDefault(c => c.Name == service.Category.Trim())
-                          ?? new Category { Name = service.Category.Trim() };
+            //var category = _context.Category.FirstOrDefault(c => c.Name == service.Category.Trim())
+            //              ?? new Category { Name = service.Category.Trim() };
 
             var myService = _context.Services.Find(id);
             if (myService == null)
@@ -134,7 +133,6 @@ namespace NTUCClub.Controllers
             myService.Vendor = service.Vendor.Trim();
             myService.UpdatedAt = DateTime.Now;
             myService.Category = service.Category;
-            myService.CatName = category;
             myService.Image = service.Image;
 
             _context.SaveChanges();

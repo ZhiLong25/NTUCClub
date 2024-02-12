@@ -25,6 +25,8 @@ function Products() {
 
     const [services, setServices] = useState([]);
     const [reviewsList, setReviews] = useState([]);
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [user, setUser] = useState('');
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -55,13 +57,28 @@ function Products() {
             setReviews(res.data);
         });
 
+
+        http.get(`/user/auth`).then((res) => {
+            setUser(res.data.user);
+            console.log(res.data.user.name);
+    
+            http.get(`/Wishlist/getwishlist/${res.data.user.name}/${id}`).then((res) => {
+                setIsFavorite(res.data);
+            }).catch((error) => {
+                console.error("Error fetching wishlist:", error);
+            });
+        }).catch((error) => {
+            console.error("Error fetching current user's information:", error);
+        });
+
     }, []);
 
     const formik = useFormik({
         initialValues: {
+            ServiceId: id,
+            quantity: 0,
             timeslot: '',
             date: '',
-            quantity: 0,
         },
 
         validationSchema: yup.object().shape({
@@ -74,7 +91,9 @@ function Products() {
 
         onSubmit: (data) => {
             console.log("Submit button clicked");
-            http.post("/cart/addproduct", data)
+
+            console.log(data)
+            http.post("/cart/addtocart", data)
                 .then((res) => {
                     console.log(res.data);
                     navigate("/cart");
@@ -82,19 +101,19 @@ function Products() {
         }
     });
 
-    const [isFavorite, setIsFavorite] = useState(false);
 
     const handleClick = () => {
-        if (isFavorite) {
+
+
+        if (!isFavorite) {
             setIsFavorite((prevIsFavorite) => !prevIsFavorite);
             http.get('/user/auth')
                 .then((res) => {
-                    const currentUser = res.data.user;
-                    console.log(currentUser.name)
+                    const currentUser = res.data.user.name;
 
                     if (currentUser) {
                         // Fetch the user's wishlist
-                        http.get("/Wishlist/getwishlist")
+                        http.get(`/Wishlist/getwishlist/${currentUser}`)
                             .then((response) => {
                                 const wishlist = response.data;
                                 const existingService = wishlist.find(item => item.ServiceId === parseInt(id));
@@ -104,8 +123,9 @@ function Products() {
                                 } else {
                                     // If the service is not in the wishlist, add it
                                     const requestData = {
-                                        User: currentUser.name,
-                                        ServiceId: parseInt(id)
+                                        User: currentUser,
+                                        ServiceId: parseInt(id),
+                                        Service: services
                                     };
 
                                     http.post("/Wishlist/addwishlist", requestData)
@@ -114,10 +134,12 @@ function Products() {
                                         })
                                         .catch((error) => {
                                             console.error("Error adding service to wishlist:", error);
+
                                         });
                                 }
                             })
                             .catch((error) => {
+                                console.log(response.data)
                                 console.error("Error fetching wishlist:", error);
                             });
                     } else {
@@ -128,10 +150,8 @@ function Products() {
                     console.error("Error fetching current user's information:", error);
                 });
         } else {
-            console.log(id);
-
             // DELETE
-            http.delete(`/Wishlist/deletewishlist/${id}`)
+            http.delete(`/Wishlist/deletewishlist/${user.name}/${id}`)
                 .then((res) => {
                     console.log(res.data);
                     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
@@ -139,59 +159,50 @@ function Products() {
         }
     };
 
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-
-        http.get('/user/auth').then((res) => {
-            setUser(res.data.user);
-            console.log(res.data.user.name);
-        });
-
-
-
-    }, []);
 
 
     const CustomNumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
         const {
-          getRootProps,
-          getInputProps,
-          getIncrementButtonProps,
-          getDecrementButtonProps,
-          focused,
+            getRootProps,
+            getInputProps,
+            getIncrementButtonProps,
+            getDecrementButtonProps,
+            focused,
         } = useNumberInput(props);
-      
+
         const inputProps = getInputProps();
-      
+
         // Make sure that both the forwarded ref and the ref returned from the getInputProps are applied on the input element
         inputProps.ref = useForkRef(inputProps.ref, ref);
-      
+
         // Event handler for incrementing the value
         const handleIncrement = () => {
-          props.onChange(props.value + 1); // Update the value by incrementing
+            const newValue = parseInt(props.value) + 1; // Increment the value
+            props.onChange(newValue); // Update the value
         };
-      
+
         // Event handler for decrementing the value
         const handleDecrement = () => {
-          props.onChange(props.value - 1); // Update the value by decrementing
+            const newValue = parseInt(props.value) - 1; // Decrement the value
+            props.onChange(newValue); // Update the value
         };
-      
+
         return (
-          <StyledInputRoot {...getRootProps()} className={focused ? 'focused' : null}>
-            <StyledStepperButton {...getIncrementButtonProps()} className="increment" onClick={handleIncrement} type="button">
-              ▴
-            </StyledStepperButton>
-            <StyledStepperButton {...getDecrementButtonProps()} className="decrement" onClick={handleDecrement} type="button">
-              ▾
-            </StyledStepperButton>
-            <StyledInputElement {...inputProps} />
-          </StyledInputRoot>
+            <StyledInputRoot {...getRootProps()} className={focused ? 'focused' : null}>
+                <StyledStepperButton {...getIncrementButtonProps()} className="increment" onClick={handleIncrement} type="button">
+                    ▴
+                </StyledStepperButton>
+                <StyledStepperButton {...getDecrementButtonProps()} className="decrement" onClick={handleDecrement} type="button">
+                    ▾
+                </StyledStepperButton>
+                <StyledInputElement {...inputProps} />
+            </StyledInputRoot>
         );
-      });
-      
-      
-      const blue = {
+    });
+
+
+
+    const blue = {
         100: '#DAECFF',
         200: '#B6DAFF',
         400: '#3399FF',
@@ -199,9 +210,9 @@ function Products() {
         600: '#0072E5',
         700: '#0059B2',
         900: '#003A75',
-      };
-      
-      const grey = {
+    };
+
+    const grey = {
         50: '#F3F6F9',
         100: '#E5EAF2',
         200: '#DAE2ED',
@@ -212,9 +223,9 @@ function Products() {
         700: '#434D5B',
         800: '#303740',
         900: '#1C2025',
-      };
-      
-      const StyledInputRoot = styled('div')(
+    };
+
+    const StyledInputRoot = styled('div')(
         ({ theme }) => `
         font-family: 'IBM Plex Sans', sans-serif;
         font-weight: 400;
@@ -222,9 +233,8 @@ function Products() {
         color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
         background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
         border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-        box-shadow: 0px 2px 4px ${
-          theme.palette.mode === 'dark' ? 'rgba(0,0,0, 0.5)' : 'rgba(0,0,0, 0.05)'
-        };
+        box-shadow: 0px 2px 4px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0, 0.5)' : 'rgba(0,0,0, 0.05)'
+            };
         display: grid;
         grid-template-columns: 1fr 19px;
         grid-template-rows: 1fr 1fr;
@@ -244,9 +254,9 @@ function Products() {
               outline: 0;
           }
         `,
-      );
-      
-      const StyledInputElement = styled('input')(
+    );
+
+    const StyledInputElement = styled('input')(
         ({ theme }) => `
         font-size: 0.875rem;
         font-family: inherit;
@@ -261,9 +271,9 @@ function Products() {
         padding: 8px 12px;
         outline: 0;
       `,
-      );
-      
-      const StyledStepperButton = styled('button')(
+    );
+
+    const StyledStepperButton = styled('button')(
         ({ theme }) => `
         display: flex;
         flex-flow: row nowrap;
@@ -321,7 +331,7 @@ function Products() {
             }
         }
         `,
-      );
+    );
 
     return (
         <Container>
@@ -341,24 +351,24 @@ function Products() {
 
 
                     <Box onClick={handleClick}>
-                        {isFavorite ? 
-                        
-                        <Box>
-                            <FavoriteBorderIcon /> Add to your wishlist
-                        </Box>
+                        {!isFavorite ?
 
-                        : 
-                        <Box>
-                            <FavoriteIcon /> Remove from wishlist
-                        </Box>
+                            <Box>
+                                <FavoriteBorderIcon /> Add to your wishlist
+                            </Box>
 
-                        } 
-                        
-                        
+                            :
+                            
+                            <Box>
+                                <FavoriteIcon /> Remove from wishlist
+                            </Box>
+
+                        }
+
                     </Box>
 
-                    <Typography variant="subtitle1" sx={{ flexGrow: 1 }} style={{ marginTop: "10px "}}>
-                    {services.description?.replace(/<[^>]*>?/gm, '') || ''}
+                    <Typography variant="subtitle1" sx={{ flexGrow: 1 }} style={{ marginTop: "10px " }}>
+                        {services.description?.replace(/<[^>]*>?/gm, '') || ''}
                     </Typography>
 
 
@@ -367,7 +377,7 @@ function Products() {
 
                 <Grid item xs={4} md={4} lg={4} >
 
-                    <Box className="booking-box" component="form">
+                    <Box className="booking-box" component="form" onSubmit={formik.handleSubmit}>
                         <Typography variant='h4' style={{ marginTop: "40px" }}>
                             Book Now
                         </Typography>
@@ -375,10 +385,11 @@ function Products() {
                         <Typography>Price: ${services.price}</Typography>
 
                         <Typography>Slots left: {services.slots}</Typography>
-
+                        <InputLabel>Timeslot :</InputLabel>
                         <Select
                             style={{ marginTop: "15px" }}
-                            fullWidth margin="normal"
+                            fullWidth
+                            margin="normal"
                             labelId="timeslots-label"
                             id="timeslot"
                             name="timeslot"
@@ -396,27 +407,37 @@ function Products() {
                                 </MenuItem>
                             ))}
                         </Select>
-
                         <InputLabel>Date :</InputLabel>
 
+                        {formik.touched.date && formik.errors.date ? (
+                            <Typography color="error">{formik.errors.date}</Typography>
+                        ) : null}
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker />
+                            <DatePicker
+                                value={formik.values.date}
+                                onChange={(value) => formik.setFieldValue('date', value)}
+                                renderInput={(props) => <TextField {...props} error={formik.touched.date && Boolean(formik.errors.date)} helperText={formik.touched.date && formik.errors.date} />}
+                            />
                         </LocalizationProvider>
 
+                        {formik.touched.quantity && formik.errors.quantity ? (
+                            <Typography color="error">{formik.errors.quantity}</Typography>
+                        ) : null}
                         <InputLabel>Quantity :</InputLabel>
                         <CustomNumberInput
                             aria-label="Demo number input"
                             placeholder="Type a number…"
-                            value={formik.values.quantity}  // Assuming formik is used to manage state
-                            onChange={(newValue) => formik.setFieldValue('quantity', newValue)} // Update the formik state with the new value
+                            value={formik.values.quantity}
+                            onChange={(newValue) => formik.setFieldValue('quantity', newValue)}
+                            error={formik.touched.quantity && Boolean(formik.errors.quantity)}
+                            helperText={formik.touched.quantity && formik.errors.quantity}
                         />
+
                         <Box sx={{ mt: 2 }}>
                             <Button variant="contained" type="submit" className='addbtn'>
                                 Add to Cart
                             </Button>
                         </Box>
-
-
                     </Box>
 
                 </Grid>

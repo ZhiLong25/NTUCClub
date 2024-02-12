@@ -85,16 +85,15 @@
 
         return (
             <Box component="form" onSubmit={formik.handleSubmit}>
-                <Container>
+                <Container className='main-container'>
                     <Grid container spacing={2}>
-
-
 
                         <Grid item xs={4} md={4} lg={4} >
                             <InputLabel id="rating">Rating</InputLabel>
 
 
                             <Rating
+                                size="large"
                                 name="rating"
                                 value={formik.values.rating}
                                 onChange={(event, newValue) => {
@@ -113,13 +112,7 @@
                                 error={formik.touched.subject && Boolean(formik.errors.subject)}
                                 helperText={formik.touched.subject && formik.errors.subject}
                             />
-
                         </Grid>
-
-
-
-
-
                     </Grid>
 
 
