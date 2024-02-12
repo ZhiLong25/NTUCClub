@@ -5,26 +5,22 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace NTUCClub.Migrations
 {
-    /// <inheritdoc />
-    public partial class UpdateCart : Migration
+    public partial class add_cart : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "cart",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Activity_Name = table.Column<string>(type: "longtext", nullable: false),
-                    Activity_Price = table.Column<float>(type: "float", nullable: false)
+                    Date = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Timeslot = table.Column<string>(type: "varchar(255)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cart", x => x.Id);
+                    table.PrimaryKey("PK_cart", x => x.ServiceId);
                     table.ForeignKey(
                         name: "FK_cart_Services_ServiceId",
                         column: x => x.ServiceId,
@@ -40,7 +36,6 @@ namespace NTUCClub.Migrations
                 column: "ServiceId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

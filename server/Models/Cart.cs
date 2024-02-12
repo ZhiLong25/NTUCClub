@@ -7,8 +7,6 @@ namespace NTUCClub.Models.Cart
     public class CartItem
     {
         [Key]
-        public int Id { get; set; }
-
         public int ServiceId { get; set; }
 
         [ForeignKey("ServiceId")]
@@ -16,8 +14,8 @@ namespace NTUCClub.Models.Cart
 
         public int Quantity { get; set; }
 
-        public string Activity_Name {  get; set; }
+        public DateTime Date { get; set; }
 
-        public float Activity_Price { get; set; }
+        public string Timeslot { get; set; }
     }
 }

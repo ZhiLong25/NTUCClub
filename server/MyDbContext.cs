@@ -43,7 +43,7 @@ namespace NTUCClub
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+
             modelBuilder.Entity<CartItem>().ToTable("cart");
         }
 
