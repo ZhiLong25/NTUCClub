@@ -10,6 +10,7 @@ namespace NTUCClub.Models.Cart
         public int Id { get; set; }
 
         public string Email { get; set; }
+        [Required]
         public int ServiceId { get; set; }
 
         [ForeignKey("ServiceId")]

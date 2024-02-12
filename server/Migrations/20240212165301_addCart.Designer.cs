@@ -11,7 +11,7 @@ using NTUCClub;
 namespace NTUCClub.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240212145839_addCart")]
+    [Migration("20240212165301_addCart")]
     partial class addCart
     {
         /// <inheritdoc />
@@ -78,6 +78,10 @@ namespace NTUCClub.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("longtext");
 

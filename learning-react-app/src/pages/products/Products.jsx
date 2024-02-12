@@ -40,22 +40,7 @@ function Products() {
     useEffect(() => {
         http.get(`/Product/getservice/${id}`)
             .then((res) => {
-                res.data = {
-                    "id": 1,
-                    "image": "https://avionrx.blob.core.windows.net/avalon/899e398c-dce7-4935-b3f8-934a9d76faa1?v=20240108052937",
-                    "name": "Good Old Days Asian Dinner Buffet (Adult)",
-                    "description": "Good Old Days Food Court will delight you and your loved ones with its diverse range of tantalising local favourites",
-                    "category": "Dine & Wine",
-                    "price": 25,
-                    "memPrice": 20,
-                    "timeSlots": "12:00",
-                    "slots": 12,
-                    "vendor": "Vendor1",
-                    "createdAt": "2024-02-01T23:53:51",
-                    "updatedAt": "2024-02-01T23:53:51",
-                    "categoryID": 4,
-                    "catName": null
-                }
+
                 setServices(res.data);
                 if (res.data.memPrice != null) {
                     setIsMemberPriceVisible(true)
@@ -69,98 +54,7 @@ function Products() {
 
         http.get(`/Review/getreview/${id}`)
             .then((res) => {
-                res.data = [
-                    {
-                        "id": 9,
-                        "serviceId": 1,
-                        "rating": 4,
-                        "user": "Amos Tan Jun Wei",
-                        "description": "<p>sadadadasdas</p>",
-                        "media": 'https://avionrx.blob.core.windows.net/avalon/1da88e73-36b0-41f8-89a7-2d4d414e39c0',
-                        "createdAt": "2024-02-12T22:41:51",
-                        "updatedAt": "2024-02-12T22:41:51"
-                    },
-                    {
-                        "id": 8,
-                        "serviceId": 1,
-                        "rating": 5,
-                        "user": "Amos Tan",
-                        "description": "<p>asdasd</p>",
-                        "media": null,
-                        "createdAt": "2024-02-12T22:41:45",
-                        "updatedAt": "2024-02-12T22:41:45"
-                    },
-                    {
-                        "id": 7,
-                        "serviceId": 0,
-                        "rating": 5,
-                        "user": "Amos Tan",
-                        "description": "<p>asdasd</p>",
-                        "media": null,
-                        "createdAt": "2024-02-12T22:40:55",
-                        "updatedAt": "2024-02-12T22:40:55"
-                    },
-                    {
-                        "id": 6,
-                        "serviceId": 0,
-                        "rating": 5,
-                        "user": "Amos Tan",
-                        "description": "<p>asdadsa</p>",
-                        "media": 'https://avionrx.blob.core.windows.net/avalon/b27096cc-1a58-4317-8fa7-144e07cf266c',
-                        "createdAt": "2024-02-12T22:40:41",
-                        "updatedAt": "2024-02-12T22:40:41"
-                    },
-                    {
-                        "id": 5,
-                        "serviceId": 0,
-                        "rating": 3,
-                        "user": "string",
-                        "description": "string",
-                        "media": null,
-                        "createdAt": "2024-02-12T22:36:05",
-                        "updatedAt": "2024-02-12T22:36:05"
-                    },
-                    {
-                        "id": 4,
-                        "serviceId": 0,
-                        "rating": 5,
-                        "user": "Amos Tan",
-                        "description": "<p>sadasdsadas</p>",
-                        "media": null,
-                        "createdAt": "2024-02-12T22:34:26",
-                        "updatedAt": "2024-02-12T22:34:26"
-                    },
-                    {
-                        "id": 3,
-                        "serviceId": 0,
-                        "rating": 5,
-                        "user": "Amos Tan",
-                        "description": "<p>sadasdsadas</p>",
-                        "media": null,
-                        "createdAt": "2024-02-12T22:34:24",
-                        "updatedAt": "2024-02-12T22:34:24"
-                    },
-                    {
-                        "id": 2,
-                        "serviceId": 0,
-                        "rating": 4,
-                        "user": "Amos Tan",
-                        "description": "<p>adasdsada</p>",
-                        "media": null,
-                        "createdAt": "2024-02-12T22:31:21",
-                        "updatedAt": "2024-02-12T22:31:21"
-                    },
-                    {
-                        "id": 1,
-                        "serviceId": 0,
-                        "rating": 5,
-                        "user": "Amos Tan",
-                        "description": "<p>adsadsadasdsadsad</p>",
-                        "media": null,
-                        "createdAt": "2024-02-12T22:22:04",
-                        "updatedAt": "2024-02-12T22:22:04"
-                    }
-                ]
+                
                 const data = CheckIfDataIsArray(res.data)
                 setReviews(data);
                 // const mediaArray = data.filter(obj => obj.media !== null).map(obj => ({ "src": obj.media }))
@@ -189,14 +83,12 @@ function Products() {
             });
     }, []);
 
-
     const formik = useFormik({
         initialValues: { ServiceId: id, service: services, email: user.email, quantity: 0, timeslot: '', date: '' },
         validationSchema: yup.object().shape({
             timeslot: yup.string().required('Timeslots is required'),
-            date: yup.date().required('Date is required'),
-            quantity: yup.number().required('Quantity is required')
         }),
+        enableReinitialize: true,
 
         onSubmit: (data) => {
             console.log(data)
@@ -205,6 +97,9 @@ function Products() {
                     console.log(res.data);
                     navigate("/cart");
                 })
+                .catch((error) => {
+                    console.error("Error adding to cart:", error);
+                });
         }
     });
 
@@ -499,7 +394,7 @@ function Products() {
             {/* BOOK */}
             <Box padding={"20px"} backgroundColor={"#efefef"} position={"sticky"} bottom={"20px"} borderRadius={"10px"} marginTop={"60px"}>
                 <Typography variant='h6' style={{ marginBottom: "5px", fontWeight: "bold" }}>Book Now</Typography>
-                <Box component="form">
+                <Box component="form" onSubmit={formik.handleSubmit}>
                     <FormControl style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr auto", gap: "20px", alignItems: "center" }}>
                         <Select
                             displayEmpty
@@ -519,13 +414,12 @@ function Products() {
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker slotProps={{ textField: { variant: "standard", placeholder: "Select a Date" } }} />
                         </LocalizationProvider>
-                        <div>Select a Quantity</div>
-                        {/* <CustomNumberInput
+                        <CustomNumberInput
                             aria-label="Demo number input"
                             placeholder="Type a number…"
                             value={formik.values.quantity}  // Assuming formik is used to manage state
                             onChange={(newValue) => formik.setFieldValue('quantity', newValue)} // Update the formik state with the new value
-                        /> */}
+                        />
                         <Button variant="contained" type="submit">Add to Cart</Button>
                     </FormControl>
                 </Box>

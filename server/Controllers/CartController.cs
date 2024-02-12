@@ -1,6 +1,8 @@
 ﻿// CartController.cs
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NTUCClub.Models;
 using NTUCClub.Models.Cart;
 using NTUCClub.Models.Products;
 using System.Collections.Generic;
@@ -19,12 +21,19 @@ namespace NTUCClub.Controllers
             _context = context;
         }
 
-        [HttpGet("getcart")]
-        public IActionResult GetCart()
+        [HttpGet("getcart/{email}")]
+        public IActionResult GetCart(string email)
         {
-            // Retrieve the cart items from the database
-            var cartItems = _context.CartItems.ToList();
-            return Ok(cartItems);
+            IQueryable<Cart> result = _context.CartItems
+                    .Where(c => c.Email == email)
+                    .Include(c => c.Service);
+
+            if (result == null || !result.Any())
+            {
+                return NotFound("No cart items found for the provided email address.");
+            }
+
+            return Ok(result);
         }
 
         [HttpPost("addtocart")]

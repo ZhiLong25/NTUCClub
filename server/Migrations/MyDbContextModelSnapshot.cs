@@ -78,6 +78,10 @@ namespace NTUCClub.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
