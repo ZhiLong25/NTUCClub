@@ -27,6 +27,7 @@ function AddService() {
   const [imageFile, setImageFile] = useState('');
   // const [categoryList, setCategoryList] = useState([]);
   const [vendorList, setVendorList] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
 
 
 
@@ -42,33 +43,34 @@ function AddService() {
   }, []);
 
   const onFileChange = (e) => {
-    let file = e.target.files[0];
-    if (file) {
-
-      if (file.size > 1024 * 1024) {
-        toast.error('Maximum file size is 1MB');
-        return;
-      }
-
-      let formData = new FormData();
-      formData.append('file', file);
-      http.post('/file/upload', formData, {
+    const files = e.target.files;
+    if (files) {
+      const formData = new FormData();
+      Array.from(files).forEach((file) => {
+        if (file.size > 1024 * 1024) {
+          toast.error('Maximum file size is 1MB');
+          return;
+        }
+        formData.append('files', file);
+      });
+      http.post('/file/upload-multiple', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
         .then((res) => {
-          setImageFile(res.data.filename);
+          setImageFiles((prevImageFiles) => [...prevImageFiles, ...res.data.filenames]);
+          console.log(imageFiles)
         })
-        .catch(function (error) {
-          console.log(error.response);
+        .catch((error) => {
+          console.log(error);
         });
     }
   };
 
   const formik = useFormik({
     initialValues: {
-      image: 'placeholder.png',
+      image: '',
       name: '',
       description: '',
       price: null,
@@ -107,6 +109,9 @@ function AddService() {
     }),
 
     onSubmit: (data) => {
+
+      const imageFilesAsString = imageFiles.join(',');
+      data.image = imageFilesAsString;
 
       data.timeslots = data.timeslots.join(', ');
 

@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace NTUCClub.Migrations
 {
     /// <inheritdoc />
-    public partial class removeReview : Migration
+    public partial class removereviews : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,6 +29,7 @@ namespace NTUCClub.Migrations
                     Description = table.Column<string>(type: "longtext", nullable: true),
                     Media = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
                     Rating = table.Column<int>(type: "int", nullable: false),
+                    ServiceId = table.Column<int>(type: "int", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                     User = table.Column<string>(type: "longtext", nullable: false)
                 },

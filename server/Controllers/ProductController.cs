@@ -61,8 +61,6 @@ namespace NTUCClub.Controllers
 
             }
 
-
-
             // var list = result.OrderByDescending(x => x.CreatedAt).ToList();
             return Ok(result);
         }

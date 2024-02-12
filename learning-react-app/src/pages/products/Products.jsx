@@ -51,17 +51,15 @@ function Products() {
 
         });
 
-
-        http.get(`/Review/getreview`).then((res) => {
+        http.get(`/Review/getreview/${id}`).then((res) => {
             console.log(res.data);
             setReviews(res.data);
         });
 
-
         http.get(`/user/auth`).then((res) => {
             setUser(res.data.user);
             console.log(res.data.user.name);
-    
+
             http.get(`/Wishlist/getwishlist/${res.data.user.name}/${id}`).then((res) => {
                 setIsFavorite(res.data);
             }).catch((error) => {
@@ -76,6 +74,8 @@ function Products() {
     const formik = useFormik({
         initialValues: {
             ServiceId: id,
+            service: services,
+            email : user.email,
             quantity: 0,
             timeslot: '',
             date: '',
@@ -103,8 +103,6 @@ function Products() {
 
 
     const handleClick = () => {
-
-
         if (!isFavorite) {
             setIsFavorite((prevIsFavorite) => !prevIsFavorite);
             http.get('/user/auth')
@@ -336,9 +334,15 @@ function Products() {
     return (
         <Container>
             <Container>
-                <Box className="aspect-ratio-container" sx={{ mt: 2 }}>
-                    <img alt="product" src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`} className='image-insert' />
-                </Box>
+                <Container>
+                    {imageFile && (
+                        imageFile.split(',').map((fileName, index) => (
+                            <Box key={index} className="aspect-ratio-container" sx={{ mt: 2 }}>
+                                <img alt={`product-${index}`} src={`${import.meta.env.VITE_FILE_BASE_URL}${fileName}`} className='image-insert' />
+                            </Box>
+                        ))
+                    )}
+                </Container>
             </Container>
 
             <Grid container spacing={2}>
@@ -358,7 +362,7 @@ function Products() {
                             </Box>
 
                             :
-                            
+
                             <Box>
                                 <FavoriteIcon /> Remove from wishlist
                             </Box>

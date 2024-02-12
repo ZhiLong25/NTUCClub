@@ -23,7 +23,7 @@
                 
         const formik = useFormik({
             initialValues: {
-                ServiceId: id || 1, // Set to 1 if id is null
+                serviceId: 1, // Set to 1 if id is null
                 User : user ? user.name : '' ,
                 rating: 0,
                 subject: '',
