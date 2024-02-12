@@ -82,6 +82,11 @@ export default function UserNav() {
                     subLabel: 'Explore what we have to provide!',
                     href: '/productspage',
                 },
+                {
+                    label: 'Add Experience',
+                    subLabel: 'Add Experiences Here',
+                    href: '/AddService',
+                },
                
             ],
         },

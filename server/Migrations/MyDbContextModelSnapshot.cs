@@ -20,445 +20,409 @@ namespace NTUCClub.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("NTUCClub.Models.Card", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("Card_Expiry")
-                        .HasColumnType("datetime(6)");
+                b.Property<DateTime>("Card_Expiry")
+                    .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Card_Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                b.Property<string>("Card_Name")
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .HasColumnType("varchar(30)");
 
-                    b.Property<string>("Card_Number")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                b.Property<string>("Card_Number")
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .HasColumnType("varchar(20)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("CreatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("Cvv")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                b.Property<string>("Cvv")
+                    .IsRequired()
+                    .HasColumnType("longtext");
 
-                    b.Property<string>("First_Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                b.Property<string>("First_Name")
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .HasColumnType("varchar(30)");
 
-                    b.Property<string>("Last_Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                b.Property<string>("Last_Name")
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnType("varchar(50)");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("UpdatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                b.Property<int?>("UserId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                b.HasIndex("UserId");
 
-                    b.ToTable("Cards");
-                });
-
-            modelBuilder.Entity("NTUCClub.Models.Cart.CartItem", b =>
-                {
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Timeslot")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("ServiceId");
-
-                    b.ToTable("cart", (string)null);
-                });
+                b.ToTable("Cards");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Enquiery", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("CreatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.Property<string>("QueryDescription")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                b.Property<string>("QueryDescription")
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .HasColumnType("varchar(500)");
 
-                    b.Property<string>("QueryReply")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                b.Property<string>("QuerySubject")
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .HasColumnType("varchar(500)");
 
-                    b.Property<string>("QuerySubject")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                b.Property<DateTime>("UpdatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                b.HasKey("Id");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Queries");
-                });
+                b.ToTable("Queries");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime?>("CreatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("Image")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("Image")
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime?>("UpdatedAt")
+                    .HasColumnType("datetime");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Category");
-                });
+                b.ToTable("Category");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Reviews", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("CreatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext");
+                b.Property<string>("Description")
+                    .HasColumnType("longtext");
 
-                    b.Property<string>("Media")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("Media")
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
+                b.Property<int>("Rating")
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("UpdatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("User")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                b.Property<string>("User")
+                    .IsRequired()
+                    .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Reviews");
-                });
+                b.ToTable("Reviews");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                b.Property<string>("Category")
+                    .IsRequired()
+                    .HasColumnType("longtext");
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
+                b.Property<int>("CategoryID")
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("CreatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                b.Property<string>("Description")
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .HasColumnType("varchar(500)");
 
-                    b.Property<string>("Image")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("Image")
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.Property<float?>("MemPrice")
-                        .HasColumnType("float");
+                b.Property<float?>("MemPrice")
+                    .HasColumnType("float");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("float");
+                b.Property<float>("Price")
+                    .HasColumnType("float");
 
-                    b.Property<int>("Slots")
-                        .HasColumnType("int");
+                b.Property<int>("Slots")
+                    .HasColumnType("int");
 
-                    b.Property<string>("TimeSlots")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                b.Property<string>("TimeSlots")
+                    .IsRequired()
+                    .HasColumnType("longtext");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("UpdatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("Vendor")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("Vendor")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("CategoryID");
+                b.HasIndex("CategoryID");
 
-                    b.ToTable("Services");
-                });
+                b.ToTable("Services");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Products.UserActivity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.Property<string>("Activity_Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                b.Property<string>("Activity_Name")
+                    .IsRequired()
+                    .HasColumnType("longtext");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
+                b.Property<DateTime>("Date")
+                    .HasColumnType("datetime(6)");
 
-                    b.Property<string>("TimeSlot")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                b.Property<string>("TimeSlot")
+                    .IsRequired()
+                    .HasColumnType("longtext");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                b.Property<string>("Username")
+                    .IsRequired()
+                    .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("UserActivities");
-                });
+                b.ToTable("UserActivities");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Vendor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime?>("CreatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("Image")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("Image")
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime?>("UpdatedAt")
+                    .HasColumnType("datetime");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Vendor");
-                });
+                b.ToTable("Vendor");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Wishlist", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("CreatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
+                b.Property<int>("ServiceId")
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("UpdatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("User")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                b.Property<string>("User")
+                    .IsRequired()
+                    .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Wishlist");
-                });
+                b.ToTable("Wishlist");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("CreatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("Password")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("varchar(8)");
+                b.Property<string>("Phone")
+                    .IsRequired()
+                    .HasMaxLength(8)
+                    .HasColumnType("varchar(8)");
 
-                    b.Property<string>("ProfilePicture")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("ProfilePicture")
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("UpdatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("UserType")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                b.Property<string>("UserType")
+                    .IsRequired()
+                    .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Users");
-                });
+                b.ToTable("Users");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Voucher", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.Property<int?>("Activity_ID")
-                        .HasColumnType("int");
+                b.Property<int?>("Activity_ID")
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("CreatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("UpdatedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                b.Property<int?>("UserId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("User_ID")
-                        .HasColumnType("int");
+                b.Property<int>("User_ID")
+                    .HasColumnType("int");
 
-                    b.Property<string>("Voucher_Details")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                b.Property<string>("Voucher_Details")
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .HasColumnType("varchar(500)");
 
-                    b.Property<string>("Voucher_Image")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                b.Property<string>("Voucher_Image")
+                    .IsRequired()
+                    .HasColumnType("longtext");
 
-                    b.Property<string>("Voucher_Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                b.Property<string>("Voucher_Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("varchar(100)");
 
-                    b.Property<int>("Voucher_Quantity")
-                        .HasColumnType("int");
+                b.Property<int>("Voucher_Quantity")
+                    .HasColumnType("int");
 
-                    b.Property<DateTimeOffset>("Voucher_Validity")
-                        .HasColumnType("datetime");
+                b.Property<DateTimeOffset>("Voucher_Validity")
+                    .HasColumnType("datetime");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                b.HasIndex("UserId");
 
-                    b.ToTable("Vouchers");
-                });
+                b.ToTable("Vouchers");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Card", b =>
-                {
-                    b.HasOne("NTUCClub.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+            {
+                b.HasOne("NTUCClub.Models.User", "User")
+                    .WithMany()
+                    .HasForeignKey("UserId");
 
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("NTUCClub.Models.Cart.CartItem", b =>
-                {
-                    b.HasOne("NTUCClub.Models.Products.Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Service");
-                });
+                b.Navigation("User");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Service", b =>
-                {
-                    b.HasOne("NTUCClub.Models.Products.Category", "CatName")
-                        .WithMany("Services")
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("NTUCClub.Models.Products.Category", "CatName")
+                    .WithMany("Services")
+                    .HasForeignKey("CategoryID")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("CatName");
-                });
+                b.Navigation("CatName");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Voucher", b =>
-                {
-                    b.HasOne("NTUCClub.Models.User", "User")
-                        .WithMany("Vouchers")
-                        .HasForeignKey("UserId");
+            {
+                b.HasOne("NTUCClub.Models.User", "User")
+                    .WithMany("Vouchers")
+                    .HasForeignKey("UserId");
 
-                    b.Navigation("User");
-                });
+                b.Navigation("User");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.Products.Category", b =>
-                {
-                    b.Navigation("Services");
-                });
+            {
+                b.Navigation("Services");
+            });
 
             modelBuilder.Entity("NTUCClub.Models.User", b =>
-                {
-                    b.Navigation("Vouchers");
-                });
+            {
+                b.Navigation("Vouchers");
+            });
 #pragma warning restore 612, 618
-        }
+        }
     }
 }
