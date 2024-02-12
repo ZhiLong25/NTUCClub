@@ -80,6 +80,14 @@ const theme = createTheme({
                     margin: '0px'
                 }
             }
+        },
+        MuiCardActions: {
+            styleOverrides: {
+                root: {
+                    paddingLeft: "16px",
+                    paddingRight: "16px"
+                }
+            }
         }
     },
 });

@@ -65,8 +65,8 @@ function ProductsPage() {
     const params = new URLSearchParams(window.location.search);
     const reqCategory = params.get('category');
     if (reqCategory != null && reqCategory != "") {
-      const getCategoryInfo = sampleCategoryItems.find((v) => GetCategoryCodeName(v.title) == reqCategory);
-      setSelectedCategory([getCategoryInfo.title])
+      const getCategoryInfo = sampleCategoryItems.find((v) => GetCategoryCodeName((v.title).toLocaleLowerCase()) == reqCategory.toLocaleLowerCase());
+      if (getCategoryInfo != undefined) setSelectedCategory([getCategoryInfo.title])
     }
   }, []);
 
@@ -88,8 +88,8 @@ function ProductsPage() {
   }
 
   return (
-    <Box style={{ padding: "30px 0 20px" }}>
-      {/* <Typography variant="h5" style={{ marginBottom: "20px", marginTop: '20px' }}>Experiences</Typography> */}
+    <Box style={{ padding: "20px 0 20px" }}>
+      <Typography variant="h5" style={{ marginBottom: "20px" }}>Experiences</Typography>
       <Box display={"grid"} gridTemplateColumns={"300px 1fr"} gap={"30px"}>
         <Box className="searchAndFilterSection">
           <Box position={"sticky"} top={"30px"}>

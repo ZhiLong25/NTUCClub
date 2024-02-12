@@ -6,7 +6,7 @@ import { ListItemButton, ListItemIcon, ListItemText, List, Button } from "@mui/m
 import { ExpandLessRounded, ExpandMoreRounded, FamilyRestroomRounded, FlightRounded, LocalDiningRounded, SpaRounded, SportsBasketballRounded, SubdirectoryArrowRightRounded } from "@mui/icons-material";
 
 // VARIABLES
-export const logoURL = './assets/logo.png'
+export const logoURL = '/assets/logo.png'
 
 
 // INTERFACE
@@ -73,7 +73,6 @@ const DesktopNav = ({ items }) => {
   )
 }
 
-
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
     <Box
@@ -111,7 +110,6 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   )
 }
 
-
 const MobileNav = ({ items }) => {
   return (
     <List id="mobileNavList" aria-labelledby="nested-list-subheader">
@@ -121,7 +119,6 @@ const MobileNav = ({ items }) => {
     </List>
   )
 }
-
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure()
@@ -150,8 +147,6 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
     </>
   )
 }
-
-
 
 const logout = (event: React.MouseEvent<HTMLButtonElement>) => {
   console.log("Logout")
