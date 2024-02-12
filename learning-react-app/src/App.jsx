@@ -33,7 +33,7 @@ import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageCategory from './pages/products/ManageCategories';
 import ManageVendor from './pages/products/ManageVendor';
-import ManageTimeslots from './pages/products/ManageTimeslots';
+// import ManageTimeslots from './pages/products/ManageTimeslots';
 import AddReviews from './pages/products/AddReviews';
 
 import Products from './pages/products/Products'
@@ -45,6 +45,7 @@ import PaymentRecords from './pages/cart/paymentRecords';
 
 import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
+import ReplyQueries from "./pages/queries/ReplyQueries";
 import Addadmin from './pages/users/Addadmin';
 // import Adminaccounts from './pages/users/Adminaccounts';
 // import Accounts from './pages/users/accounts';
@@ -85,6 +86,7 @@ function App() {
                     <Route path={"/Addadmin"} element={<Addadmin />} />
                     <Route path={"/Accounts"} element={<Accounts />} />
                     <Route path={"/ViewQueries"} element={<ViewQueries />} />
+                    <Route path={"/replyqueries/:id"} element={<ReplyQueries />} />
                     <Route path={"/AddMerchant"} element={<AddMerchant />} />
                     <Route path={"/Faq"} element={<Faq />} />
                     <Route path={"/paymentRecords"} element={<PaymentRecords />} />
@@ -150,7 +152,7 @@ function App() {
                   <Route path={"/addreviews"} element={< AddReviews />} />
 
 
-                  <Route path={"/addquery"} element={<addQuery />} />
+        
                   <Route path={"/Faq"} element={<Faq />} />
                 </Routes>
               </>
