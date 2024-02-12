@@ -8,7 +8,7 @@ import EventCard from './components/event';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
 import http from '../http';
-import { CheckIfDataIsArray, sampleCategoryItems, GetCategoryCodeName } from './constant';
+import { CheckIfDataIsArray, sampleCategoryItems, GetCategoryCodeName, sampleExperienceItems } from './constant';
 
 
 function Home() {
@@ -74,7 +74,7 @@ function Home() {
         <div id="categoryList">
           <List id="categoryListItem" subheader={<label id='categoryListTitle'>Category</label>}>
             {sampleCategoryItems.map((item, i) =>
-              <Link to={"/experiences?category=" + GetCategoryCodeName(item.code)} key={i} className='link'>
+              <Link to={"/experiences?category=" + GetCategoryCodeName(item.title)} key={i} className='link'>
                 <ListItem disablePadding disableGutters >
                   <ListItemButton>
                     <ListItemIcon>{item.icon}</ListItemIcon>

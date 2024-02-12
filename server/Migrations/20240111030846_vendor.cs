@@ -42,18 +42,6 @@ namespace NTUCClub.Migrations
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Services_CategoryID",
-                table: "Services",
-                column: "CategoryID");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Services_Category_CategoryID",
-                table: "Services",
-                column: "CategoryID",
-                principalTable: "Category",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />

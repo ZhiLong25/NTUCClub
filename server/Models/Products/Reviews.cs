@@ -8,7 +8,7 @@ namespace NTUCClub.Models.Products
     {
         public int Id { get; set; }
 
-        //public int ServiceId { get; set; }
+        public int ServiceId { get; set; }
 
         [Required]
         public int Rating { get; set; }

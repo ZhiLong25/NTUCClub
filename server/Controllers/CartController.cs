@@ -1,7 +1,10 @@
 ﻿// CartController.cs
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NTUCClub.Models;
 using NTUCClub.Models.Cart;
+using NTUCClub.Models.Products;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,37 +21,53 @@ namespace NTUCClub.Controllers
             _context = context;
         }
 
-        [HttpGet("getcart")]
-        public IActionResult GetCart()
+        [HttpGet("getcart/{email}")]
+        public IActionResult GetCart(string email)
         {
-            // Retrieve the cart items from the database
-            var cartItems = _context.CartItems.ToList();
-            return Ok(cartItems);
+            IQueryable<Cart> result = _context.CartItems
+                    .Where(c => c.Email == email)
+                    .Include(c => c.Service);
+
+            if (result == null || !result.Any())
+            {
+                return NotFound("No cart items found for the provided email address.");
+            }
+
+            return Ok(result);
         }
 
         [HttpPost("addtocart")]
-        public IActionResult AddToCart(CartItem cartItem)
+        public IActionResult AddToCart(Cart cartItem)
         {
             // Check if the item already exists in the cart
             var existingCartItem = _context.CartItems.FirstOrDefault(ci => ci.ServiceId == cartItem.ServiceId);
 
+            var myCart = new Cart()
+            {
+                Email = cartItem.Email,
+                ServiceId = cartItem.ServiceId,
+                Service = _context.Services.FirstOrDefault(s => s.Id == cartItem.ServiceId),
+                Quantity = cartItem.Quantity,
+                Date = cartItem.Date,
+            };
+
             if (existingCartItem != null)
             {
                 // Update quantity if the item already exists
-                existingCartItem.Quantity += cartItem.Quantity;
+                myCart.Quantity += cartItem.Quantity;
             }
             else
             {
                 // Add new item to the cart
-                _context.CartItems.Add(cartItem);
+                _context.CartItems.Add(myCart);
             }
 
             _context.SaveChanges();
-            return Ok();
+            return Ok(myCart);
         }
 
         [HttpPut("updatecartitem/{id}")]
-        public IActionResult UpdateCartItem(int id, CartItem cartItem)
+        public IActionResult UpdateCartItem(int id, Cart cartItem)
         {
             var existingCartItem = _context.CartItems.Find(id);
             if (existingCartItem == null)

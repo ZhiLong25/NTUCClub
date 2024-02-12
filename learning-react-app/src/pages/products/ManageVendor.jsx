@@ -78,14 +78,12 @@ function ManageVendor() {
         http.get('/Vendor/getvendor').then((res) => {
           console.log(res.data)
           setServiceList(res.data);
-          setTotalService(res.data.length);
         });
       };
 
     useEffect(() => {
         http.get('/Vendor/getvendor').then((res) => {
           getVendor();
-          setTotalService(res.data.length);
 
         });
       }, []);
