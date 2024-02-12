@@ -14,6 +14,9 @@ namespace NTUCClub.Models
         [Required, MinLength(3), MaxLength(500)]
         public string QueryDescription { get; set; } = string.Empty;
 
+        [Required, MinLength(3), MaxLength(500)]
+        public string QueryReply { get; set; } = string.Empty;
+
         [Column(TypeName = "datetime")]
         public DateTime CreatedAt { get; set; }
 
@@ -22,3 +25,4 @@ namespace NTUCClub.Models
 
     }
 }
+

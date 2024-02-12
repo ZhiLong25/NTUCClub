@@ -35,9 +35,9 @@ function ViewQueries() {
       })
   }, [])
 
-  const edit = (id)=>{
-    navigate(`/Query/UpdateQuery/${id}`)
-  }
+  const reply = (id) => {
+    navigate(`/ReplyQueries/${id}`);
+  };
   const del = (id)=>{
     http.delete(`/Query/DeletequeryID/${id}`).then(()=>{
       toast.success("Successfully deleted")
@@ -117,7 +117,7 @@ function ViewQueries() {
                       <CardContent style={{ margin: "auto" }}>
                         <Button fullWidth variant="contained" sx={{ mt: 2 }}
                           style={{  backgroundColor: "#63C5DA", padding: "15px", fontWeight: "bold" }}
-                          onClick={() => edit(query.id)} id={query.id}>
+                          onClick={() => reply(query.id)} id={query.id}>
                           {<div style={{ display: 'flex', alignItems: 'center',fontSize:"0.7rem"  }}>
                             <EditIcon style={{ marginRight: 8, fontSize: "18px" }} />
                             Reply

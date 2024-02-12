@@ -101,8 +101,6 @@ function GetService() {
 
 
                       </Link>
-
-
                     </Box>
 
                     <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
@@ -122,10 +120,6 @@ function GetService() {
               </Grid>
             );
           })
-
-
-
-
           
         }
       </Grid>
