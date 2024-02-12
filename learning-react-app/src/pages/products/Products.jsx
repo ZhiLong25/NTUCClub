@@ -1,14 +1,12 @@
 import global from '../../global';
-import { AccessTime, Search, Clear, Edit, TimelineRounded, FavoriteRounded, FavoriteBorderRounded, AutoAwesomeRounded } from '@mui/icons-material';
+import { AccessTime, Search, Clear, Edit, TimelineRounded, FavoriteRounded, FavoriteBorderRounded, AutoAwesomeRounded, StarRounded, StarBorderRounded } from '@mui/icons-material';
 import { useNavigate, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { Container, Box, Typography, TextField, Button, Rating, InputLabel, Select, MenuItem, Grid, Card, CardHeader, CardContent, CardActions, FormControl } from '@mui/material';
+import { Box, Typography, Button, Rating, Select, MenuItem, Card, CardHeader, CardContent, CardActions, FormControl, Avatar } from '@mui/material';
 import http from '../../http';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -17,19 +15,27 @@ import { styled } from '@mui/system';
 import { unstable_useForkRef as useForkRef } from '@mui/utils';
 import { CheckIfDataIsArray } from '../constant';
 
+import dayjs from 'dayjs';
+
+import Lightbox from "yet-another-react-lightbox";
+import Captions from "yet-another-react-lightbox/plugins/captions";
+import "yet-another-react-lightbox/styles.css";
+import "yet-another-react-lightbox/plugins/captions.css";
+
 
 function Products() {
-    var [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
-    const [imageFile, setImageFile] = useState('');
-    const [timeslotsList, setTimeslots] = useState([]);
+    const { id } = useParams();
+    const navigate = useNavigate();
 
+    const [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
+    const [timeslotsList, setTimeslots] = useState([]);
     const [services, setServices] = useState([]);
     const [reviewsList, setReviews] = useState([]);
     const [isFavorite, setIsFavorite] = useState(false);
     const [user, setUser] = useState('');
-
-    const { id } = useParams();
-    const navigate = useNavigate();
+    const [openYARL, setOpenYARL] = useState(false);
+    const [imageForYARL, setImageForYARL] = useState([])
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
     useEffect(() => {
         http.get(`/Product/getservice/${id}`)
@@ -54,56 +60,138 @@ function Products() {
                 if (res.data.memPrice != null) {
                     setIsMemberPriceVisible(true)
                 }
-                if (res.data.image) {
-                    setImageFile(res.data.image);
-                }
-    
-                console.log(res.data);
-                setServices(res.data);
-    
-                if (res.data.memPrice != null) {
-                    setIsMemberPriceVisible(true)
-                }
-    
-                if (res.data.image) {
-                    setImageFile(res.data.image);
-                }
-    
+
                 const timeslotValues = res.data.timeSlots;
                 const timeValues = timeslotValues.split(', ')
                 setTimeslots(timeValues);
-    
-            });
-    
-        http.get(`/Review/getreview/${id}`).then((res) => {
-            console.log(res.data);
-            setReviews(res.data);
-        });
-    
-        http.get(`/user/auth`).then((res) => {
-            setUser(res.data.user);
-            console.log(res.data.user.name);
-    
-            http.get(`/Wishlist/getwishlist/${res.data.user.name}/${id}`).then((res) => {
-                setIsFavorite(res.data);
-            }).catch((error) => {
-                console.error("Error fetching wishlist:", error);
-            });
-    
-        });
-    }, []);
-    
-         
-    const formik = useFormik({
-        initialValues: {
-            ServiceId: id,
-            service: services,
-            email : user.email,
-            quantity: 0,
-            timeslot: '',
-            date: '',
-        },
 
+            });
+
+        http.get(`/Review/getreview/${id}`)
+            .then((res) => {
+                res.data = [
+                    {
+                        "id": 9,
+                        "serviceId": 1,
+                        "rating": 4,
+                        "user": "Amos Tan Jun Wei",
+                        "description": "<p>sadadadasdas</p>",
+                        "media": 'https://avionrx.blob.core.windows.net/avalon/1da88e73-36b0-41f8-89a7-2d4d414e39c0',
+                        "createdAt": "2024-02-12T22:41:51",
+                        "updatedAt": "2024-02-12T22:41:51"
+                    },
+                    {
+                        "id": 8,
+                        "serviceId": 1,
+                        "rating": 5,
+                        "user": "Amos Tan",
+                        "description": "<p>asdasd</p>",
+                        "media": null,
+                        "createdAt": "2024-02-12T22:41:45",
+                        "updatedAt": "2024-02-12T22:41:45"
+                    },
+                    {
+                        "id": 7,
+                        "serviceId": 0,
+                        "rating": 5,
+                        "user": "Amos Tan",
+                        "description": "<p>asdasd</p>",
+                        "media": null,
+                        "createdAt": "2024-02-12T22:40:55",
+                        "updatedAt": "2024-02-12T22:40:55"
+                    },
+                    {
+                        "id": 6,
+                        "serviceId": 0,
+                        "rating": 5,
+                        "user": "Amos Tan",
+                        "description": "<p>asdadsa</p>",
+                        "media": 'https://avionrx.blob.core.windows.net/avalon/b27096cc-1a58-4317-8fa7-144e07cf266c',
+                        "createdAt": "2024-02-12T22:40:41",
+                        "updatedAt": "2024-02-12T22:40:41"
+                    },
+                    {
+                        "id": 5,
+                        "serviceId": 0,
+                        "rating": 3,
+                        "user": "string",
+                        "description": "string",
+                        "media": null,
+                        "createdAt": "2024-02-12T22:36:05",
+                        "updatedAt": "2024-02-12T22:36:05"
+                    },
+                    {
+                        "id": 4,
+                        "serviceId": 0,
+                        "rating": 5,
+                        "user": "Amos Tan",
+                        "description": "<p>sadasdsadas</p>",
+                        "media": null,
+                        "createdAt": "2024-02-12T22:34:26",
+                        "updatedAt": "2024-02-12T22:34:26"
+                    },
+                    {
+                        "id": 3,
+                        "serviceId": 0,
+                        "rating": 5,
+                        "user": "Amos Tan",
+                        "description": "<p>sadasdsadas</p>",
+                        "media": null,
+                        "createdAt": "2024-02-12T22:34:24",
+                        "updatedAt": "2024-02-12T22:34:24"
+                    },
+                    {
+                        "id": 2,
+                        "serviceId": 0,
+                        "rating": 4,
+                        "user": "Amos Tan",
+                        "description": "<p>adasdsada</p>",
+                        "media": null,
+                        "createdAt": "2024-02-12T22:31:21",
+                        "updatedAt": "2024-02-12T22:31:21"
+                    },
+                    {
+                        "id": 1,
+                        "serviceId": 0,
+                        "rating": 5,
+                        "user": "Amos Tan",
+                        "description": "<p>adsadsadasdsadsad</p>",
+                        "media": null,
+                        "createdAt": "2024-02-12T22:22:04",
+                        "updatedAt": "2024-02-12T22:22:04"
+                    }
+                ]
+                const data = CheckIfDataIsArray(res.data)
+                setReviews(data);
+                // const mediaArray = data.filter(obj => obj.media !== null).map(obj => ({ "src": obj.media }))
+                const mediaArray = data.map(r => ({
+                    "src": r.media, "title": services.name, "description": (
+                        <Box>
+                            <Typography>User: {r.user}</Typography>
+                            <Typography>Description: {r.description.replace(/<[^>]*>?/gm, '')}</Typography>
+                        </Box>
+                    )
+                }))
+                setImageForYARL(mediaArray)
+            });
+
+
+        http.get(`/user/auth`)
+            .then((res) => {
+                setUser(res.data.user);
+                console.log(res.data.user.name);
+
+                http.get(`/Wishlist/getwishlist/${res.data.user.name}/${id}`).then((res) => {
+                    setIsFavorite(res.data);
+                }).catch((error) => {
+                    console.error("Error fetching wishlist:", error);
+                });
+            });
+    }, []);
+
+
+    const formik = useFormik({
+        initialValues: { ServiceId: id, service: services, email: user.email, quantity: 0, timeslot: '', date: '' },
         validationSchema: yup.object().shape({
             timeslot: yup.string().required('Timeslots is required'),
             date: yup.date().required('Date is required'),
@@ -217,6 +305,13 @@ function Products() {
         );
     });
 
+    function getInitials(name) {
+        const words = name.split(' ');
+        const firstInitial = words[0].charAt(0);
+        const lastInitial = words[words.length - 1].charAt(0);
+        const initials = firstInitial + lastInitial;
+        return initials;
+    }
 
 
     const blue = { 100: '#DAECFF', 200: '#B6DAFF', 400: '#3399FF', 500: '#007FFF', 600: '#0072E5', 700: '#0059B2', 900: '#003A75' };
@@ -327,115 +422,25 @@ function Products() {
     );
 
     return (
-        <Container>
-            <Container>
-                <Container>
-                    {imageFile && (
-                        imageFile.split(',').map((fileName, index) => (
-                            <Box key={index} className="aspect-ratio-container" sx={{ mt: 2 }}>
-                                <img alt={`product-${index}`} src={`${import.meta.env.VITE_FILE_BASE_URL}${fileName}`} className='image-insert' />
-                            </Box>
-                        ))
-                    )}
-                </Container>
-            </Container>
-
-            <Grid container spacing={2}>
-
-                <Grid item xs={8} md={8} lg={8} >
-
-                    <Typography variant='h4' style={{ marginTop: "40px" }}>
-                        Description
-                    </Typography>
-
-
-                    <Box onClick={handleClick}>
-                        {!isFavorite ?
-
-                            <Box>
-                                <FavoriteBorderIcon /> Add to your wishlist
-                            </Box>
-
-                            :
-
-                            <Box>
-                                <FavoriteIcon /> Remove from wishlist
-                            </Box>
-
-                        }
-
+        <Box>
+            {services.image && (
+                services.image.split(',').map((fileName, index) => (
+                    <Box key={index} className="aspect-ratio-container" sx={{ mt: 2 }}>
+                        <img alt={`product-${index}`} src={`${import.meta.env.VITE_FILE_BASE_URL}${fileName}`} className='image-insert' />
                     </Box>
+                ))
+            )}
 
-                    <Typography variant="subtitle1" sx={{ flexGrow: 1 }} style={{ marginTop: "10px " }}>
-                        {services.description?.replace(/<[^>]*>?/gm, '') || ''}
-                    </Typography>
-
-
-                </Grid>
-
-
-                <Grid item xs={4} md={4} lg={4} >
-
-                    <Box className="booking-box" component="form" onSubmit={formik.handleSubmit}>
-                        <Typography variant='h4' style={{ marginTop: "40px" }}>
-                            Book Now
-                        </Typography>
-
-                        <Typography>Price: ${services.price}</Typography>
-
-                        <Typography>Slots left: {services.slots}</Typography>
-                        <InputLabel>Timeslot :</InputLabel>
-                        <Select
-                            style={{ marginTop: "15px" }}
-                            fullWidth
-                            margin="normal"
-                            labelId="timeslots-label"
-                            id="timeslot"
-                            name="timeslot"
-                            value={formik.values.timeslot}
-                            onChange={formik.handleChange}
-                            error={formik.touched.timeslot && Boolean(formik.errors.timeslot)}
-                            helperText={formik.touched.timeslot && formik.errors.timeslot}
-                        >
-                            <MenuItem value="" disabled>
-                                Select a timeslot
-                            </MenuItem>
-                            {timeslotsList.map((timeslots) => (
-                                <MenuItem key={timeslots} value={timeslots}>
-                                    {timeslots}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        <InputLabel>Date :</InputLabel>
-
-                        {formik.touched.date && formik.errors.date ? (
-                            <Typography color="error">{formik.errors.date}</Typography>
-                        ) : null}
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                value={formik.values.date}
-                                onChange={(value) => formik.setFieldValue('date', value)}
-                                renderInput={(props) => <TextField {...props} error={formik.touched.date && Boolean(formik.errors.date)} helperText={formik.touched.date && formik.errors.date} />}
-                            />
-                        </LocalizationProvider>
-
-                        {formik.touched.quantity && formik.errors.quantity ? (
-                            <Typography color="error">{formik.errors.quantity}</Typography>
-                        ) : null}
-                        <InputLabel>Quantity :</InputLabel>
-                        <CustomNumberInput
-                            aria-label="Demo number input"
-                            placeholder="Type a number…"
-                            value={formik.values.quantity}
-                            onChange={(newValue) => formik.setFieldValue('quantity', newValue)}
-                            error={formik.touched.quantity && Boolean(formik.errors.quantity)}
-                            helperText={formik.touched.quantity && formik.errors.quantity}
-                        />
-
-                        <Box sx={{ mt: 2 }}>
-                            <Button variant="contained" type="submit" className='addbtn'>
-                                Add to Cart
-                            </Button>
+            {/* IMAGE & INFO */}
+            <Box marginTop={"20px"} display={"grid"} gridTemplateColumns={"1fr 300px"} gap={"10px"}>
+                {/* <img alt="product" src={`${import.meta.env.VITE_FILE_BASE_URL}${services.image}`} className='image-insert' /> */}
+                <img src={services.image} style={{ borderRadius: "10px", objectFit: "cover", minHeight: "300px" }} />
+                <Card style={{ position: "relative" }} className='productPageCard'>
+                    <CardHeader title={services.name} subheader={"$" + services.price} />
+                    <CardContent>
+                        <Box display={"flex"} alignItems={"center"} gap={"10px"}>
+                            <TimelineRounded fontSize='small' />
+                            <Typography variant="body2" color="text.secondary">{services.slots} slots</Typography>
                         </Box>
                         {services.memPrice != null &&
                             <Box display={"flex"} alignItems={"center"} gap={"10px"}>
@@ -443,14 +448,15 @@ function Products() {
                                 <Typography variant="body2" color="text.secondary">${services.memPrice} (Member Exclusive)</Typography>
                             </Box>
                         }
-                    </Box>
+                    </CardContent>
                     <CardActions style={{ position: "absolute", bottom: "8px" }}>
                         <Button onClick={handleFavClick} startIcon={isFavorite ? <FavoriteRounded /> : <FavoriteBorderRounded />}>
                             {isFavorite ? "Remove from Wishlist" : " Add to Wishlist"}
                         </Button>
                     </CardActions>
-                </Grid>
-            </Grid>
+                </Card>
+            </Box>
+
 
 
             {/* DESCRIPTION */}
@@ -459,24 +465,31 @@ function Products() {
                 <Typography variant="subtitle1" style={{ marginTop: "5px" }}>{services.description?.replace(/<[^>]*>?/gm, '') || ''}</Typography>
             </Box>
 
-
-            {/* REVIEWS  */}
+            {/* REVIEWS */}
             {reviewsList.length != 0 &&
-                <Box>
-                    <Typography variant='h5' style={{ marginTop: "40px", marginBottom: "0px" }}>Reviews</Typography>
+                <Box marginTop={"40px"}>
+                    <Typography variant='h5' style={{ marginBottom: "10px" }}>Reviews</Typography>
                     <Box display={"grid"} gap={"10px"}>
-                        {reviewsList.map((reviews, i) => {
+                        <Lightbox plugins={[Captions]} open={openYARL} close={() => setOpenYARL(false)} slides={imageForYARL} index={selectedImageIndex} />
+                        {reviewsList.map((review, i) => {
                             return (
-                                <Box>
-                                    <Typography variant="h5" component="div">{reviews.subject}</Typography>
-                                    <Rating name="read-only" value={reviews.rating} readOnly />
-                                    <Typography>{reviews.description.replace(/<[^>]*>?/gm, '')}</Typography>
-                                    <Typography>Listed on : {reviews.createdAt}</Typography>
-                                    <Typography>Listed by : {reviews.user}</Typography>
-                                    <Box style={{ width: "80px" }}>
-                                        <img alt="product" src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`} className='image-insert' />
-                                    </Box>
-                                </Box>
+                                <Card key={i}>
+                                    <CardHeader
+                                        style={{ alignItems: "center" }}
+                                        avatar={<Avatar>{getInitials(review.user)}</Avatar>}
+                                        title={review.user} subheader={dayjs(review.createdAt).format("D MMM YYYY, h:mm A")}
+                                        action={<Rating icon={<StarRounded />} emptyIcon={<StarBorderRounded />} value={review.rating} readOnly />}
+                                    />
+                                    <CardContent>
+                                        <Typography variant="subtitle1" color="text.secondary">{review.description.replace(/<[^>]*>?/gm, '')}</Typography>
+                                        {review.media != null
+                                            ? <Box onClick={() => { setSelectedImageIndex(i); setOpenYARL(true); }} style={{ cursor: "pointer" }}>
+                                                <img src={review.media} style={{ height: "150px", width: "300px", borderRadius: "5px", objectFit: "cover", marginTop: "10px" }} />
+                                            </Box>
+                                            : null
+                                        }
+                                    </CardContent>
+                                </Card>
                             );
                         })}
                     </Box>
@@ -517,7 +530,7 @@ function Products() {
                     </FormControl>
                 </Box>
             </Box>
-        </Container>
+        </Box>
     )
 }
 
