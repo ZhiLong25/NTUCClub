@@ -8,7 +8,7 @@ import EventCard from './components/event';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
 import http from '../http';
-import { CheckIfDataIsArray, sampleCategoryItems, GetCategoryCodeName } from './constant';
+import { CheckIfDataIsArray, sampleCategoryItems, GetCategoryCodeName, sampleExperienceItems } from './constant';
 
 
 function Home() {
