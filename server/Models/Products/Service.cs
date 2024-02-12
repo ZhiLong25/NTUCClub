@@ -39,11 +39,5 @@ namespace NTUCClub.Models.Products
         [Column(TypeName = "datetime")]
         public DateTime UpdatedAt { get; set; }
 
-
-
-        [ForeignKey("Id")]
-        public int CategoryID { get; set; }
-        // Navigation property to represent the one-to-many relationship
-        public Category? CatName { get; set; }
     }
 }

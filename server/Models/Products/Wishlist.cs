@@ -14,8 +14,8 @@ namespace NTUCClub.Models.Products
         [Required]
         public int ServiceId { get; set; }
 
-        //[ForeignKey("ServiceId")]
-        //public Service Service { get; set; }
+        [ForeignKey("ServiceId")]
+        public Service Service { get; set; }
 
         [Column(TypeName = "datetime")]
         public DateTime CreatedAt { get; set; }

@@ -11,7 +11,7 @@ function EventCard(props) {
   var descriptionWithoutHTML = events.description.replace(/(<([^>]+)>)/ig, '');
   descriptionWithoutHTML = descriptionWithoutHTML.replace(/([.,!?])/g, '$1 ');
   var imagelink = import.meta.env.VITE_FILE_BASE_URL + events.image
-  // imagelink = events.image;
+  imagelink = events.image;
 
   return (
     <Link to={finalURL} className='link'>
