@@ -30,9 +30,8 @@ function ViewQueries() {
         const modifiedData = res.data.map(item => ({
           ...item,
         }));
-        setQuery(modifiedData)
-        console.log(modifiedData)
-      })
+        setQuery(modifiedData);
+      });
   }, [])
 
   const reply = (id) => {
@@ -51,6 +50,7 @@ function ViewQueries() {
       <Grid container spacing={2} style={{ marginTop: "5%", marginBottom: "5%" }}>
         {
           query.map((query, i) => {
+           
             return (
               <Grid item xs={12} md={6} lg={4} key={query.id}>
                 <div style={{
@@ -68,6 +68,8 @@ function ViewQueries() {
                   }}>
 
                     <div style={{ height: "15vh" }}>
+                   
+                   
                       <CardContent style={{ margin: "auto" }}>
 
                         <Box sx={{}}
@@ -136,6 +138,20 @@ function ViewQueries() {
                         </Button>
                       </CardContent>
                       </div>
+
+                      <CardContent style={{ margin: "auto" }}>
+                <Typography
+                  style={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: query.queryReply === 'NotReplied' ? "red" : "green",
+                    fontSize: "0.7rem"
+                  }}
+                >
+                  Status: {query.queryReply === 'NotReplied' ? "Not Replied" : "Replied"}
+                </Typography>
+              </CardContent>
+
                     </div>
 
 
