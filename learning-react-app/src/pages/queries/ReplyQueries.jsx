@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, Card, TextField, Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import http from '../../http';
 import { useFormik } from 'formik';
+import { useParams } from 'react-router-dom';
 import * as yup from 'yup';
 
 import SendIcon from '@mui/icons-material/Send';
 
 function ReplyQueries({ queryId, onClose }) {
+  const {id} = useParams()
+  const [queries,setQueries] = useState(null)
+  useEffect(()=>{
+    http.get(`/Query/GetQueryID/${id}`).then((res)=>{
+      setQueries(res.data[0])
+      console.log(res.data[0])
+    })
+  },[])
+
   const formik = useFormik({
     initialValues: {
       QueryReply: '',
@@ -16,7 +26,12 @@ function ReplyQueries({ queryId, onClose }) {
       QueryReply: yup.string().trim().required('Reply content is required'),
     }),
     onSubmit: (data) => {
-      http.put(`/Query/QueryID/${queryId}`, { QueryReply: data.QueryReply })
+      data.Email = queries.email
+      data.QueryDescription = queries.queryDescription
+      data.QuerySubject = queries.querySubject
+      data.id = id
+      console.log(data)
+      http.put(`/Query/QueryID/${id}`,data)
         .then(() => {
           toast.success('Query replied successfully');
           onClose(); // Close the reply modal or navigate back to the queries list
