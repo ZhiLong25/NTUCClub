@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NTUCClub.Models;
 using NTUCClub.Models.Products;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+//using static Microsoft.EntityFrameworkCore.DbLoggerCategory; 
 
 namespace NTUCClub.Controllers
 {
@@ -16,6 +16,15 @@ namespace NTUCClub.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public IActionResult GetAll(string? search)
+        {
+            IQueryable<Enquiery> result = _context.Queries;
+
+            var list = result.OrderByDescending(x => x.CreatedAt).ToList();
+            return Ok(list);
+        }
+
         [HttpGet("GetQueryID/{id}")]
         public IActionResult GetQuerybyID(int id)
         {
@@ -28,8 +37,9 @@ namespace NTUCClub.Controllers
         }
 
 
+
         [HttpGet("GetQuery/{Email}")]
-        public IActionResult GetVoucher(string Email)
+        public IActionResult GetQuery(string Email)
         {
             var myQuery = _context.Queries.Where(x => x.Email == Email).ToArray();
             if (myQuery == null)
@@ -52,6 +62,7 @@ namespace NTUCClub.Controllers
                 Email = query.Email.Trim(),
                 QuerySubject = query.QuerySubject.Trim(),
                 QueryDescription = query.QueryDescription.Trim(),
+                QueryReply = query.QueryReply.Trim(),
                 CreatedAt = now,
                 UpdatedAt = now
             };
@@ -62,55 +73,49 @@ namespace NTUCClub.Controllers
 
 
 
-        //[HttpPost("Replyquery")]
-        //public IActionResult ReplyQuery(Query query)
-        //{
-        //    var existingQuery = _context.Queries.FirstOrDefault(q => q.Id == query.Id);
+        [HttpPost("Replyquery")]
+        public IActionResult ReplyQuery(Enquiery query)
+        {
+            var existingQuery = _context.Queries.FirstOrDefault(q => q.Id == query.Id);
 
-        //    if (existingQuery == null)
-        //    {
-        //        return NotFound(); // Return a 404 if the query is not found
-        //    }
+            if (existingQuery == null)
+            {
+                return NotFound(); // Return a 404 if the query is not found 
+            }
 
-        //    // Assuming you receive the query reply content in the 'query.QueryReply' property
-        //    existingQuery.QueryReply = query.QueryReply.Trim();
-        //    existingQuery.UpdatedAt = DateTime.Now;
+            // Assuming you receive the query reply content in the 'query.QueryReply' property 
+            existingQuery.QueryReply = query.QueryReply.Trim();
+            existingQuery.UpdatedAt = DateTime.Now;
 
-        //    _context.SaveChanges();
+            _context.SaveChanges();
 
-        //    return Ok(existingQuery);
-        //}
+            return Ok(existingQuery);
+        }
 
 
 
-        [HttpPut("QueryID")]
-
+        [HttpPut("QueryID/{id}")]
         public IActionResult UpdateQuery(int id, Enquiery query)
         {
-            var myQuery = _context.Queries.Where(x => x.Id == id).FirstOrDefault();
+            var myQuery = _context.Queries.FirstOrDefault(x => x.Id == id);
             if (myQuery == null)
             {
                 return NotFound();
             }
-            if (query.Email != null)
-            {
-                myQuery.Email = query.Email.Trim();
 
-            }
-            if (query.QuerySubject != null)
-            {
-                myQuery.QuerySubject = query.QuerySubject.Trim();
+            
+            
 
-            }
-            if (query.QueryDescription != null)
+            if (!string.IsNullOrEmpty(query.QueryReply))
             {
-                myQuery.QueryDescription = query.QueryDescription.Trim();
+                myQuery.QueryReply = query.QueryReply.Trim();
             }
 
             myQuery.UpdatedAt = DateTime.Now;
             _context.SaveChanges();
             return Ok();
         }
+
         [HttpDelete("DeletequeryID/{id}")]
         public IActionResult DeleteQueryById(int id)
         {

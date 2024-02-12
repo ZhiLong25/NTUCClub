@@ -233,7 +233,7 @@ function UpdateProfile() {
                                         marginTop: "5%",
                                         margin:"auto"
                                     }}
-                                    src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
+                                    src={imageFile??`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
                                     />
                                     )
                                 }
