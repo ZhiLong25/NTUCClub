@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Typography, Card, TextField, Button } from '@mui/material';
+import { Box, Typography, Card, TextField, Button, Grid } from '@mui/material';
 import { Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import UserContext from '../../contexts/UserContext';
@@ -158,100 +158,102 @@ function addVouchers() {
 
   return (
     <Box>
-       <Typography variant="h4" sx={{ mt: 8, fontWeight: 'bold', color: '#E6533F', textAlign:'center' }}>
-          Add Voucher
+      <Button sx={{mt: 2}}onClick={goBack}><ArrowBackIcon /> Back to Dashboard</Button>
+
+      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#E6533F', textAlign: 'center' }}>
+        Add Voucher
       </Typography>
 
-      <Button onClick={goBack}><ArrowBackIcon /> Back to Dashboard</Button>
-
-      <div className='main-container'>
-        <Card className='pfp-container' style={{ height: "325px" }}>
-
-          <Box style={{ marginBottom: "30px", marginTop: "30px", height: "5rem", textAlign: "center" }}>
-            {imageFile ? (
-              <img
-                alt="tutorial"
-                className="voucherImg"
-                style={{
-                  borderRadius: "150%",
-                    height: "200px",
-                    width: "200px",
-                    margin: "auto",
-                }}
-                src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
-              />
-            ) : (
-              <img
-                src= "/assets/placeholder.jpg"
-                alt="placeholder"
-                className="voucherImg"
+      <Grid container spacing={1}>
+        <Grid item xs={12} md={3} lg={5} >
+          <Card className='pfp-container' style={{ height: "325px" }}>
+            <Box style={{ marginBottom: "30px", marginTop: "30px", height: "5rem", textAlign: "center" }}>
+              {imageFile ? (
+                <img
+                  alt="tutorial"
+                  className="voucherImg"
                   style={{
                     borderRadius: "150%",
                     height: "200px",
                     width: "200px",
                     margin: "auto",
                   }}
+                  src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
+                />
+              ) : (
+                <img
+                  src="/assets/placeholder.jpg"
+                  alt="placeholder"
+                  className="voucherImg"
+                  style={{
+                    borderRadius: "150%",
+                    height: "200px",
+                    width: "200px",
+                    margin: "auto",
+                  }}
+                />
+              )}
+              <Button variant="contained" component="label" style={{ marginTop: "25px", backgroundColor: "#E6533F", color: "white" }}>
+                Upload Image
+                <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
+              </Button>
+            </Box>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={9} lg={7} >
+          <Card className='information-container' >
+            <Box component="form" sx={{ maxWidth: '500px', width: '100%' }} onSubmit={formik.handleSubmit} style={{ margin: "auto", marginTop: "5%" }}>
+              <TextField
+                fullWidth margin="dense" autoComplete="off"
+                label={<div style={{ display: 'flex', alignItems: 'center' }}>
+                  <DriveFileRenameOutlineIcon style={{ marginRight: 8 }} />
+                  Voucher Name
+                </div>}
+                name="Voucher_Name"
+                value={formik.values.Voucher_Name}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.Voucher_Name && Boolean(formik.errors.Voucher_Name)}
+                helperText={formik.touched.Voucher_Name && formik.errors.Voucher_Name}
               />
-            )}
-            <Button variant="contained" component="label" style={{ marginTop: "25px", backgroundColor: "#E6533F", color: "white" }}>
-              Upload Image
-              <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
-            </Button>
-          </Box>
-        </Card>
-
-        <Card className='information-container' >
-          <Box component="form" sx={{ maxWidth: '500px', width: '100%' }} onSubmit={formik.handleSubmit} style={{ margin: "auto", marginTop: "5%" }}>
-            <TextField
-              fullWidth margin="dense" autoComplete="off"
-              label={<div style={{ display: 'flex', alignItems: 'center'}}>
-                <DriveFileRenameOutlineIcon style={{ marginRight: 8 }} />
-                Voucher Name
-              </div>}
-              name="Voucher_Name"
-              value={formik.values.Voucher_Name}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.Voucher_Name && Boolean(formik.errors.Voucher_Name)}
-              helperText={formik.touched.Voucher_Name && formik.errors.Voucher_Name}
-            />
-            <TextField
-              fullWidth
-              multiline // Enable multiline
-              rows={4} // Adjust the number of rows as needed
-              margin="dense"
-              autoComplete="off"
-              label={
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <DescriptionIcon style={{ marginRight: 8 }} />
-                  Voucher Details
-                </div>
-              }
-              name="Voucher_Details"
-              value={formik.values.Voucher_Details}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.Voucher_Details && Boolean(formik.errors.Voucher_Details)}
-              helperText={formik.touched.Voucher_Details && formik.errors.Voucher_Details}
-            />
-            <DropdownCounter
-              style={{ marginTop: "8px" }}
-              value={formik.values.Voucher_Quantity}
-              onChange={(e) => formik.setFieldValue('Voucher_Quantity', e.target.value)}
-            />
-
-            <div style={{ marginTop: "8px" }}><p>Select Expiry Date</p></div>
-            <div style={{ marginTop: "8px" }}>
-              <Calendar onChange={onChange} value={date} className="black-selected-date"
+              <TextField
+                fullWidth
+                multiline // Enable multiline
+                rows={4} // Adjust the number of rows as needed
+                margin="dense"
+                autoComplete="off"
+                label={
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <DescriptionIcon style={{ marginRight: 8 }} />
+                    Voucher Details
+                  </div>
+                }
+                name="Voucher_Details"
+                value={formik.values.Voucher_Details}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.Voucher_Details && Boolean(formik.errors.Voucher_Details)}
+                helperText={formik.touched.Voucher_Details && formik.errors.Voucher_Details}
               />
-            </div>
-            <Button fullWidth variant="contained" sx={{ mt: 4 }} style={{ background: "#03C04A", marginBottom: "10%" }} type="submit">
-              Add
-            </Button>
-          </Box>
-          <ToastContainer />
-        </Card>
-      </div>
+              <DropdownCounter
+                style={{ marginTop: "8px" }}
+                value={formik.values.Voucher_Quantity}
+                onChange={(e) => formik.setFieldValue('Voucher_Quantity', e.target.value)}
+              />
+
+              <div style={{ marginTop: "8px", marginBottom: "8px"}}><p>Select Expiry Date</p></div>
+              <div style={{ marginTop: "8px" }}>
+                <Calendar onChange={onChange} value={date} className="black-selected-date"
+                />
+              </div>
+              <Button fullWidth variant="contained" sx={{ mt: 4 }} style={{ background: "#03C04A", marginBottom: "10%" }} type="submit">
+                Add
+              </Button>
+            </Box>
+            <ToastContainer />
+          </Card>
+        </Grid>
+      </Grid>
     </Box>
   );
 }

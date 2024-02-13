@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Typography, Card, TextField, Button } from '@mui/material';
+import { Box, Typography, Card, TextField, Button, Grid } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import UserContext from '../../contexts/UserContext';
 import http from '../../http';
@@ -100,42 +100,6 @@ function updateVouchers() {
         .matches(/^[a-zA-Z0-9\s]+$/, "Only letter and numbers input accepted"),
     }),
 
-    // onSubmit: (data) => {
-    //   const formData = new FormData();
-
-    //   // if (imageFile) {
-    //   //   data.voucher_Image = imageFile;
-    //   // }
-    //   data.Voucher_Details = data.Voucher_Details.trim()
-    //   data.Voucher_Name = data.Voucher_Name.trim();
-    //   data.Voucher_Validity = date.toISOString();
-    //   formData.append('Voucher_Details', data.Voucher_Details);
-    //   formData.append('Voucher_Name', data.Voucher_Name);
-    //   formData.append('Voucher_Validity', data.Voucher_Validity);
-    //   formData.append('Voucher_Quantity', data.Voucher_Quantity);
-    //   formData.append('VoucherImage', imageFile);
-    //   // console.log(date.toISOString())
-
-    // if (date< new Date()){
-    //     toast.error("Date should not be in the past")
-    // }
-    //   if (user.userType === "Admin") {
-    //     data.Activity_ID = -1
-    //   }
-    //   console.log(data)
-    //   http.put(`/Voucher/${id}`, formData)
-    //     .then((res) => {
-    //       toast.success("Voucher Updated");
-    //       setTimeout(() => {
-    //           window.location.reload();
-    //       }, 2000);
-    //     })
-    //     .catch(function (err) {
-    //       console.log("Error")
-    //       toast.error(`${err.response.data.message}`);
-    //     });
-    // }
-
     onSubmit: (data) => {
       data.Voucher_Details = data.Voucher_Details.trim();
       data.Voucher_Name = data.Voucher_Name.trim();
@@ -153,14 +117,6 @@ function updateVouchers() {
           data.Voucher_Image = imageFile;
         }
 
-        // const formData = new FormData();
-        // formData.append('Voucher_Details', data.Voucher_Details);
-        // formData.append('Voucher_Name', data.Voucher_Name);
-        // formData.append('Voucher_Validity', data.Voucher_Validity);
-        // formData.append('Voucher_Quantity', data.Voucher_Quantity);
-        // formData.append('Activity_ID', data.Activity_ID);
-        // formData.append('VoucherImage', data.Voucher_Image);
-        // console.log(formData)
         http.put(`/Voucher/${id}`, data)
           .then((res) => {
             toast.success("Voucher Updated");
@@ -183,99 +139,116 @@ function updateVouchers() {
   }
 
   return (
-    <Box >
-      <Button style={{ marginTop: '5%' }} onClick={goBack}><ArrowBackIcon /> Back to Dashboard</Button>
+    <Box>
+      <Button sx={{ mt: 2 }} onClick={goBack}><ArrowBackIcon /> Back to Dashboard</Button>
 
-      <div className='main-container' style={{marginTop: '1%'}}>
-        <Card className='pfp-container'>
-          <Box style={{ width: "80%", height: "100%", margin: "auto" }}>
-            <Box style={{ marginBottom: "30px", marginTop: "30px", height: "5rem", textAlign: "center" }} >
-              {
-                imageFile && (
-                  <img
-                    alt="tutorial"
-                    className="voucherImg"
-                    style={{
-                      height: "150px",
-                      width: "150px",
-                      objectFit: 'cover', // Adjust based on your requirements
-                      marginTop: "5%",
-                      margin: "auto"
-                    }}
-                    src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
-                  />
-                )
-              }
-              <Button variant="contained" component="label" style={{ marginTop: "25px" }}>
-                Update Image
-                <input hidden accept="image/*" multiple type="file"
-                  onChange={onFileChange} />
+      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#E6533F', textAlign: 'center' }}>
+        Edit Voucher
+      </Typography>
+
+      <Grid container spacing={1}>
+        <Grid item xs={12} md={3} lg={5} >
+          <Card className='pfp-container' style={{ height: "325px" }}>
+            <Box style={{ marginBottom: "30px", marginTop: "30px", height: "5rem", textAlign: "center" }}>
+              {imageFile ? (
+                <img
+                  alt="tutorial"
+                  className="voucherImg"
+                  style={{
+                    borderRadius: "150%",
+                    height: "200px",
+                    width: "200px",
+                    margin: "auto",
+                  }}
+                  src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
+                />
+              ) : (
+                <img
+                  src="/assets/placeholder.jpg"
+                  alt="placeholder"
+                  className="voucherImg"
+                  style={{
+                    borderRadius: "150%",
+                    height: "200px",
+                    width: "200px",
+                    margin: "auto",
+                  }}
+                />
+              )}
+              <Button variant="contained" component="label" style={{ marginTop: "25px", backgroundColor: "#E6533F", color: "white" }}>
+                Change Image
+                <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
               </Button>
             </Box>
-          </Box>
-        </Card>
-        <Card className='information-container' >
-
-          <Typography variant="h5" sx={{ my: 2 }} style={{ marginTop: "5%", textAlign: "center", fontWeight:"bold" }}>
-            Update Voucher
-          </Typography>
-          <Box component="form" sx={{ maxWidth: '500px', margin: "auto" }} onSubmit={formik.handleSubmit}>
-            <TextField
-              fullWidth margin="dense" autoComplete="off"
-              label={<div style={{ display: 'flex', alignItems: 'center' }}>
-                <DriveFileRenameOutlineIcon style={{ marginRight: 8 }} />
-                Voucher Name
-              </div>}
-              name="Voucher_Name"
-              value={formik.values.Voucher_Name ?? VoucherDetails.Voucher_Name}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.Voucher_Name && Boolean(formik.errors.Voucher_Name)}
-              helperText={formik.touched.Voucher_Name && formik.errors.Voucher_Name}
-            />
-            <TextField
-              fullWidth margin="dense" autoComplete="off"
-              label={<div style={{ display: 'flex', alignItems: 'center' }}>
-                <DescriptionIcon style={{ marginRight: 8 }} />
-                Details
-              </div>}
-              name="Voucher_Details"
-              value={formik.values.Voucher_Details ?? VoucherDetails.Voucher_Details}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.Voucher_Details && Boolean(formik.errors.Voucher_Details)}
-              helperText={formik.touched.Voucher_Details && formik.errors.Voucher_Details}
-            />
-            <TextField
-              fullWidth margin="dense" autoComplete="off"
-              label={<div style={{ display: 'flex', alignItems: 'center' }}>
-                <ProductionQuantityLimitsIcon style={{ marginRight: 8 }} />
-                Quantity
-              </div>}
-              name="Voucher_Quantity"
-              value={formik.values.Voucher_Quantity ?? VoucherDetails.Voucher_Quantity}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.Voucher_Quantity && Boolean(formik.errors.Voucher_Quantity)}
-              helperText={formik.touched.Voucher_Quantity && formik.errors.Voucher_Quantity}
-            />
-
-            <Calendar
-              onChange={onChange}
-              className="black-selected-date"
-              
-              value={VoucherDetails.Voucher_Validity}
-            />
-
-            <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#03C04A", marginBottom: "5%" }} type="submit">
-              Update
-            </Button>
-          </Box>
-          <ToastContainer />
-        </Card>
-      </div>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={9} lg={7} >
+          <Card className='information-container' >
+            <Box component="form" sx={{ maxWidth: '500px', width: '100%' }} onSubmit={formik.handleSubmit} style={{ margin: "auto", marginTop: "5%" }}>
+              <TextField
+                fullWidth margin="dense" autoComplete="off"
+                label={<div style={{ display: 'flex', alignItems: 'center'}}>
+                  <DriveFileRenameOutlineIcon style={{ marginRight: 8 }} />
+                  Voucher Name
+                </div>}
+                name="Voucher_Name"
+                value={formik.values.Voucher_Name}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.Voucher_Name && Boolean(formik.errors.Voucher_Name)}
+                helperText={formik.touched.Voucher_Name && formik.errors.Voucher_Name}
+              />
+              <TextField
+                fullWidth
+                multiline // Enable multiline
+                rows={4} // Adjust the number of rows as needed
+                margin="dense"
+                autoComplete="off"
+                label={
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <DescriptionIcon style={{ marginRight: 8 }} />
+                    Voucher Details
+                  </div>
+                }
+                name="Voucher_Details"
+                value={formik.values.Voucher_Details}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.Voucher_Details && Boolean(formik.errors.Voucher_Details)}
+                helperText={formik.touched.Voucher_Details && formik.errors.Voucher_Details}
+              />
+              <TextField
+                fullWidth margin="dense" autoComplete="off"
+                label={<div style={{ display: 'flex', alignItems: 'center' }}>
+                  <ProductionQuantityLimitsIcon style={{ marginRight: 8 }} />
+                  Quantity
+                </div>}
+                name="Voucher_Quantity"
+                value={formik.values.Voucher_Quantity ?? VoucherDetails.Voucher_Quantity}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.Voucher_Quantity && Boolean(formik.errors.Voucher_Quantity)}
+                helperText={formik.touched.Voucher_Quantity && formik.errors.Voucher_Quantity}
+              />
+              <div style={{ marginTop: "8px", marginBottom: "8px"}}><p>Change Expiry Date</p></div>
+              <Calendar
+                onChange={onChange}
+                className="black-selected-date"
+                
+                value={VoucherDetails.Voucher_Validity}
+              />
+              <Button fullWidth variant="contained" sx={{ mt: 4 }} style={{ background: "#03C04A", marginBottom: "10%" }} type="submit">
+                Update
+              </Button>
+            </Box>
+            <ToastContainer />
+          </Card>
+        </Grid>
+      </Grid>
     </Box>
   );
+
+  
 }
 
 export default updateVouchers

@@ -82,7 +82,7 @@ function voucherDashboard() {
     return (
         <Box sx={{ position: 'relative' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography variant="h4" sx={{ mt: 8, fontWeight: 'bold', color: '#E6533F' }}>
+                <Typography variant="h4" sx={{ ml: 1, mt: 8, fontWeight: 'bold', color: '#E6533F' }}>
                     Vouchers
                 </Typography>
             
