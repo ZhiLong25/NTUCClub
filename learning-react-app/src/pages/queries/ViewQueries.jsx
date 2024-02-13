@@ -99,7 +99,8 @@ function ViewQueries() {
   };
   const del = (id) => {
     http.delete(`/Query/DeletequeryID/${id}`).then(() => {
-      toast.success("Successfully deleted")
+      toast.success("Successfully deleted");
+      setFilteredQuery((prevQueries) => prevQueries.filter((query) => query.id !== id));
 
     }).catch((err) => {
       toast.error("Can't delete right now")
@@ -247,6 +248,20 @@ function ViewQueries() {
 
                       }}>
 
+                        <CardContent style={{ margin: "auto" }}>
+                          <Typography
+                            style={{
+                              fontWeight: "bold",
+                              textAlign: "left",
+                              color: query.queryReply === 'NotReplied' ? "red" : "green",
+                              fontSize: "1rem"
+                            }}
+                          >
+                            Status: {query.queryReply === 'NotReplied' ? "Not Replied" : "Replied"}
+                          </Typography>
+                        </CardContent>
+
+
                         <div style={{ height: "4%", display: "flex", flexDirection: "row" }}>
                           <CardContent style={{ margin: "auto", flex: "2" }}>
 
@@ -263,6 +278,7 @@ function ViewQueries() {
 
 
                           </CardContent>
+                          
                           <CardContent style={{ margin: "auto", flex: "2" }}>
 
                             
@@ -311,11 +327,11 @@ function ViewQueries() {
                               onClick={() => reply(query.id)} id={query.id}>
                               {<div style={{ display: 'flex', alignItems: 'center', fontSize: "0.7rem" }}>
                                 <EditIcon style={{ marginRight: 8, fontSize: "18px" }} />
-                                Reply
+                                 Reply
                               </div>}
                             </Button>
                           </CardContent>
-                          <CardContent style={{ margin: "auto", marginBottom: "-8px" }}>
+                          <CardContent style={{ margin: "auto" }}>
                             <Button fullWidth variant="contained" sx={{ }}
                               style={{ backgroundColor: "red", padding: "15px", fontWeight: "bold" }}
                               onClick={() => del(query.id)} id={query.id}>
@@ -325,6 +341,7 @@ function ViewQueries() {
                               </div>}
                             </Button>
                           </CardContent>
+                          
                         </div>
 
 
