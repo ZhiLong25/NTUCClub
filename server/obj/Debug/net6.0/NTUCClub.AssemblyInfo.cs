@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NTUCClub")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+854c58ddf5fb82642e8bde69ae1f61b303ce309c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9989b3bc7d7dec90d098989a0ddd6974dd03c839")]
 [assembly: System.Reflection.AssemblyProductAttribute("NTUCClub")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NTUCClub")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

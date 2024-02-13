@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Wm2ry0MFnyC42DCL+ZrD0Dk2bbzWtsNUoJS3i24Pk6A=",
+  "Hash": "+/cn7TLCFMt26gknvJb3UguhYnLoUkw5ZfI8h0Mrkio=",
   "Source": "NTUCClub",
   "BasePath": "_content/NTUCClub",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\8N1R6K2ooz.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\9QlUXw5SLL.jpg",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+      "BasePath": "_content/NTUCClub",
+      "RelativePath": "uploads/9QlUXw5SLL.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\9QlUXw5SLL.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\C1oW--U7hd.jpg",
