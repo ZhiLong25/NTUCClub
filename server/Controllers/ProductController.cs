@@ -36,11 +36,11 @@ namespace NTUCClub.Controllers
                         break;
 
                     case "atoz":
-                        result = result.OrderBy(x => x.Name); 
+                        result = result.OrderBy(x => x.Name);
                         break;
 
                     case "ztoa":
-                        result = result.OrderByDescending(x => x.Name); 
+                        result = result.OrderByDescending(x => x.Name);
                         break;
 
                     case "priceAsc":
@@ -92,6 +92,7 @@ namespace NTUCClub.Controllers
                 Name = service.Name.Trim(),
                 Description = service.Description.Trim(),
                 Category = service.Category,
+                Location = service.Location,
                 Price = service.Price,
                 MemPrice = service.MemPrice,
                 TimeSlots = service.TimeSlots,
@@ -107,6 +108,92 @@ namespace NTUCClub.Controllers
             return Ok(myService);
         }
 
+        [HttpPost("addservice/{vendor}")]
+        public IActionResult AddServiceVendor(Service service, string vendor)
+        {
+            var now = DateTime.Now;
+
+            // Fetch or create the category based on the service.Category value
+            //var category = _context.Category.FirstOrDefault(c => c.Name == service.Category.Trim())
+            //              ?? new Category { Name = service.Category.Trim() };
+
+            var myService = new Service()
+            {
+                Image = service.Image,
+                Name = service.Name.Trim(),
+                Description = service.Description.Trim(),
+                Category = service.Category,
+                Location = service.Location,
+                Price = service.Price,
+                MemPrice = service.MemPrice,
+                TimeSlots = service.TimeSlots,
+                Slots = service.Slots,
+                Vendor = vendor,
+                CreatedAt = now,
+                UpdatedAt = now,
+            };
+
+            _context.Services.Add(myService);
+            _context.SaveChanges();
+
+            return Ok(myService);
+        }
+
+        [HttpGet("getservice/{vendor}")]
+        public IActionResult GetServiceVendor(string vendor)
+        {
+
+            var service = _context.Services.FirstOrDefault(s => s.Vendor == vendor);
+            if (service == null)
+            {
+                return NotFound();
+            }
+            return Ok(service);
+        }
+
+        [HttpPut("updateservice/{vendor}/{id}")]
+        public IActionResult UpdateServiceVendor(int id, string vendor, Service service)
+        {
+
+            // Fetch or create the category based on the service.Category value
+            //var category = _context.Category.FirstOrDefault(c => c.Name == service.Category.Trim())
+            //              ?? new Category { Name = service.Category.Trim() };
+
+            var myService = _context.Services.Find(id);
+            if (myService == null)
+            {
+                return NotFound();
+            }
+
+            myService.Name = service.Name.Trim();
+            myService.Description = service.Description.Trim();
+            myService.Price = service.Price;
+            myService.MemPrice = service.MemPrice;
+            myService.Location = service.Location;
+            myService.TimeSlots = service.TimeSlots;
+            myService.Slots = service.Slots;
+            myService.Vendor = service.Vendor.Trim();
+            myService.UpdatedAt = DateTime.Now;
+            myService.Category = service.Category;
+            myService.Image = service.Image;
+
+            _context.SaveChanges();
+            return Ok();
+        }
+
+        [HttpDelete("deleteservice/{vendor}/{id}")]
+        public IActionResult DeleteServiceVendor(int id)
+        {
+            var myService = _context.Services.Find(id);
+            if (myService == null)
+            {
+                return NotFound();
+            }
+
+            _context.Services.Remove(myService);
+            _context.SaveChanges();
+            return Ok();
+        }
 
         [HttpPut("updateservice/{id}")]
         public IActionResult UpdateService(int id, Service service)
@@ -126,6 +213,7 @@ namespace NTUCClub.Controllers
             myService.Description = service.Description.Trim();
             myService.Price = service.Price;
             myService.MemPrice = service.MemPrice;
+            myService.Location = service.Location;
             myService.TimeSlots = service.TimeSlots;
             myService.Slots = service.Slots;
             myService.Vendor = service.Vendor.Trim();
@@ -154,4 +242,3 @@ namespace NTUCClub.Controllers
 
     }
 }
-

@@ -251,7 +251,7 @@ function Login() {
                         </span>
                     </div>
                     <Button fullWidth variant="contained" sx={{ mt: 2 }}
-                        type="submit" style={{ background: "#E8533F" }} onClick={loginBtn}>
+                        type="submit" style={{ background: "#E8533F" }} >
                         Login
                     </Button>
                 </Box>
