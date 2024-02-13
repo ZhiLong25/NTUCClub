@@ -34,6 +34,7 @@ function ViewVouchers() {
       window.emailjs.send('service_qhtp69m', 'template_dflgof5', { user_email: userEmail, message: `Your redemption code is: ${code}` }, 'un_wt1KWNfUgrWWvA')
         .then(
           (response) => {
+            toast.success('Redemption Code sent. Please check your inbox.')
             console.log('Email sent:', response);
           },
           (error) => {
@@ -173,7 +174,7 @@ function ViewVouchers() {
                   <Button fullWidth variant="contained" sx={{ mt: 2 }}
                     style={{ backgroundColor: "#E6533F", padding: "10px", fontSize: "1rem", fontWeight: "bold" }}
                     onClick={() => handleOpen(voucher.id)} id={voucher.id}>
-                    Claim Voucher
+                    Get Voucher Code
                   </Button>
                 </CardContent>
               </CardContent>
