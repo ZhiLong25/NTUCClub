@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Box, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions, CircularProgress, Grid } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -8,6 +8,14 @@ function Payment() {
   const navigate = useNavigate();
   const location = useLocation();
   const { state } = location;
+
+  useEffect(() => {
+    // Check if state contains cartItems and discount
+    if (!state || !state.cartItems) {
+      // Redirect to cart page if data is missing
+      navigate('/cart');
+    }
+  }, [navigate, state]);
 
   const handlePayNow = () => {
     // Simulate payment completion
@@ -23,18 +31,12 @@ function Payment() {
 
   const [openDialog, setOpenDialog] = React.useState(false);
 
-  // Check if state contains cartItems and discount
-  if (!state || !state.cartItems || !state.discount) {
-    // Redirect to cart page if data is missing
-    navigate('/cart');
-    return null; // Return null to prevent rendering content before redirection
-  }
-
-  const { cartItems, discount } = state;
+  const { cartItems, discount } = state || {};
 
   // Function to calculate the total price
   const getTotalPrice = () => {
-    const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    if (!cartItems || !cartItems.length) return 0;
+    const subtotal = cartItems.reduce((total, item) => total + item.service.price * item.quantity, 0);
     return subtotal - subtotal * discount;
   };
 
@@ -43,55 +45,63 @@ function Payment() {
       <Typography variant="h4" gutterBottom>
         Payment Details
       </Typography>
-      <Box>
-        <Typography variant="h6" gutterBottom>
-          Order Summary
-        </Typography>
-        <ul style={{ listStyleType: 'none', paddingLeft: '0' }}>
-          {cartItems.map((item) => (
-            <li key={item.id}>
-              <Typography>{item.name} - ${item.price * item.quantity}</Typography>
-            </li>
-          ))}
-        </ul>
-        <Typography variant="subtitle1">
-          Total: ${getTotalPrice()}
-        </Typography>
-      </Box>
-      <Box mt={4}>
-        <Typography variant="h6" gutterBottom>
-          Payment Information
-        </Typography>
-        <form>
-          <TextField
-            label="Card Number"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Expiry Date"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="CVV"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Name on Card"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-          />
-          <Button variant="contained" color="primary" fullWidth onClick={handlePayNow} style={{ marginTop: '16px' }}>
-            Pay Now
-          </Button>
-        </form>
-      </Box>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h6" gutterBottom>
+            Order Summary
+          </Typography>
+          <Box border="1px solid #ccc" borderRadius="8px" p={2} mb={2}>
+            {cartItems && cartItems.length > 0 ? (
+              <>
+                {cartItems.map((item) => (
+                  <Box key={item.id} mb={1}>
+                    <Typography>{item.service.name} - ${item.service.price * item.quantity}</Typography>
+                  </Box>
+                ))}
+                <Typography variant="subtitle1">
+                  Total: ${getTotalPrice()}
+                </Typography>
+              </>
+            ) : (
+              <Typography variant="subtitle1">No items in cart</Typography>
+            )}
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h6" gutterBottom>
+            Payment Information
+          </Typography>
+          <form>
+            <TextField
+              label="Card Number"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              label="First Name"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+            />
+             <TextField
+              label="Last Name"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              label="CVV"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+            />
+            <Button variant="contained" color="primary" fullWidth onClick={handlePayNow} style={{ marginTop: '16px' }}>
+              Pay Now
+            </Button>
+          </form>
+        </Grid>
+      </Grid>
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
         <DialogTitle>Payment Successful!</DialogTitle>
         <DialogContent>

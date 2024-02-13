@@ -48,6 +48,7 @@ import PaymentRecords from './pages/cart/paymentRecords';
 import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import ReplyQueries from "./pages/queries/ReplyQueries";
+import ViewReplies from "./pages/queries/ViewReplies";
 import Addadmin from './pages/users/Addadmin';
 
 
@@ -56,13 +57,12 @@ import Addadmin from './pages/users/Addadmin';
 import Accounts from './pages/users/Accounts';
 import AddMerchant from './pages/users/AddMerchant';
 import RegisterGoogle from "./pages/users/RegisterGoogle"
-
+import ReactGA from "react-ga4"
 import "./pages/styles/chatbot.css"
 // import "./script"
 import Faq from './pages/Faq';
 function App() {
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
       http.get('/user/auth').then((res) => {
@@ -70,6 +70,8 @@ function App() {
         setUser(res.data.user);
       });
     }
+    ReactGA.initialize("G-0V1W79YL3R")
+
   }, []);
 
 
@@ -91,6 +93,7 @@ function App() {
                     <Route path={"/Addadmin"} element={<Addadmin />} />
                     <Route path={"/Accounts"} element={<Accounts />} />
                     <Route path={"/ViewQueries"} element={<ViewQueries />} />
+                    <Route path={"/ViewReplies"} element={<ViewReplies />} />
                     <Route path={"/replyqueries/:id"} element={<ReplyQueries />} />
                     <Route path={"/AddMerchant"} element={<AddMerchant />} />
                     <Route path={"/Faq"} element={<Faq />} />
