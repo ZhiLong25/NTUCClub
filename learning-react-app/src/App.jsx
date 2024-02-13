@@ -48,6 +48,7 @@ import PaymentRecords from './pages/cart/paymentRecords';
 import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import ReplyQueries from "./pages/queries/ReplyQueries";
+import ViewReplies from "./pages/queries/ViewReplies";
 import Addadmin from './pages/users/Addadmin';
 
 
@@ -92,6 +93,7 @@ function App() {
                     <Route path={"/Addadmin"} element={<Addadmin />} />
                     <Route path={"/Accounts"} element={<Accounts />} />
                     <Route path={"/ViewQueries"} element={<ViewQueries />} />
+                    <Route path={"/ViewReplies"} element={<ViewReplies />} />
                     <Route path={"/replyqueries/:id"} element={<ReplyQueries />} />
                     <Route path={"/AddMerchant"} element={<AddMerchant />} />
                     <Route path={"/Faq"} element={<Faq />} />

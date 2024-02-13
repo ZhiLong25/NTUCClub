@@ -3,7 +3,7 @@ import { Box, Typography, Card, TextField, Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import http from '../../http';
 import { useFormik } from 'formik';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import * as yup from 'yup';
 
 import SendIcon from '@mui/icons-material/Send';
@@ -23,7 +23,14 @@ function ReplyQueries({ onClose }) {
       QueryReply: '',
     },
     validationSchema: yup.object({
-      QueryReply: yup.string().trim().required('Reply content is required'),
+      QueryReply: yup
+      .string()
+      .trim()
+      .required('Reply content is required')
+      .test('not-replied', 'Query has already been replied', function (value) {
+        // Check if the query has already been replied
+        return !query || query.queryReply === 'NotReplied';
+      }),
     }),
     onSubmit: (data) => {
       data.Email = query.email;
@@ -36,15 +43,20 @@ function ReplyQueries({ onClose }) {
           toast.success('Query replied successfully');
           onClose(); // Close the reply modal or navigate back to the queries list
         })
-        .catch((err) => {
-          console.error(err);
-          toast.error('Failed to reply to query');
+        .catch(function (err) {
+          toast.error(`${err.response.data.message}`);
         });
     },
   });
 
   return (
     <Card style={{ marginTop: '8%', background: 'white', borderRadius: '50px', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '48em', position: 'relative' }}>
+
+      <Link to="/ViewQueries" style={{ textDecoration: 'none', marginBottom: '10px' }}>
+        <Button variant="outlined" style={{ color: '#03C04A', borderColor: '#03C04A', marginBottom: '10px' }}>
+          Back to Queries
+        </Button>
+      </Link>
       <Typography variant="h5" sx={{ my: 2 }} style={{ marginTop: '5%' }}>
         Reply to Query
       </Typography>

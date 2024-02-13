@@ -121,6 +121,11 @@ export default function AdminNav() {
                     subLabel: 'View Queries for Admin',
                     href: '/ViewQueries',
                 },
+                {
+                    label: 'View Replies',
+                    subLabel: 'View Replies to queries',
+                    href: '/ViewReplies',
+                },
 
             ],
         },
