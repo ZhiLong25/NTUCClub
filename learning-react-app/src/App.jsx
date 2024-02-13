@@ -108,6 +108,9 @@ function App() {
                     <Route path={"/editservice/:id"} element={<EditService />} />
                     <Route path={"/managevendor"} element={<ManageVendor />} />
                     <Route path={"/Faq"} element={<Faq />} />
+                    <Route path={"/experiences"} element={< ProductsPage />} />
+                    <Route path={"/experiences/:id"} element={<Products />} />
+
                   </Routes>
                 </>
               ) : (

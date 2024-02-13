@@ -107,17 +107,17 @@ export default function UserNav() {
             children: [
                 {
                     label: 'Experiences Near You',
-                    subLabel: '',
+                    subLabel: 'Is convenience an issue? No worries, we got you covered',
                     href: '/expnearme',
                 },
                 {
-                    label: 'Your Wishlist',
-                    subLabel: '',
+                    label: 'Wishlist',
+                    subLabel: 'View your wishlist',
                     href: '/wishlist',
                 },
                 {
-                    label: 'Add Reviews',
-                    subLabel: '',
+                    label: 'Reviews',
+                    subLabel: 'Add your reviews here',
                     href: '/addreviews',
                 },
 

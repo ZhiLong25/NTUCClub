@@ -71,7 +71,8 @@ def main():
     
 
     dataset = ["scraped_data.pdf"]
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = "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"
+    print(api_key)
     st.set_page_config(page_title="Ask us any questions!",
                        page_icon="🚲")
     st.write(css, unsafe_allow_html=True)

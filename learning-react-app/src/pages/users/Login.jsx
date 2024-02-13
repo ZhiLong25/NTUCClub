@@ -180,7 +180,7 @@ function Login() {
             background: "linear-gradient(45deg, rgba(255, 99, 71, 0.4) 0%, rgba(255, 99, 71, 0.7) 100%)",
             borderRadius: "50px",
             boxShadow: "4px 4px 8px rgba(255, 99, 71, 0.5)",
-            height: "60dvh",
+            height: "70dvh",
             position: 'relative'
         }}>
             <div className='circle1' style={{ ...circleStyles }}></div>
