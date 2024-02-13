@@ -29,10 +29,10 @@ import UpdateCard from './pages/cards/updateCard';
 import ManageCard from './pages/cards/manageCard';
 
 import ProductDash from './pages/products/ProductDash';
-import AddService from './pages/products/AddService';
-import GetService from './pages/products/GetService';
-import EditService from './pages/products/EditService';
-import ManageVendor from './pages/products/ManageVendor';
+import AddService from './pages/admin/AddService';
+import GetService from './pages/admin/GetService';
+import EditService from './pages/admin/EditService';
+import ManageVendor from './pages/admin/ManageVendor';
 
 import AddReviews from './pages/products/AddReviews';
 
@@ -50,14 +50,21 @@ import ViewQueries from "./pages/queries/ViewQueries";
 import ReplyQueries from "./pages/queries/ReplyQueries";
 import ViewReplies from "./pages/queries/ViewReplies";
 import Addadmin from './pages/users/Addadmin';
-
-
+import AdminDash from './pages/admin/AdminDash';
 // import Adminaccounts from './pages/users/Adminaccounts';
 // import Accounts from './pages/users/accounts';
 import Accounts from './pages/users/Accounts';
 import AddMerchant from './pages/users/AddMerchant';
 import RegisterGoogle from "./pages/users/RegisterGoogle"
+
+
+import AddServiceVendor from "./pages/vendor/AddServiceVendor"
+import EditServiceVendor from "./pages/vendor/EditServiceVendor"
+import GetServiceVendor from "./pages/vendor/GetServiceVendor"
+
+
 import ReactGA from "react-ga4"
+
 import "./pages/styles/chatbot.css"
 // import "./script"
 import Faq from './pages/Faq';
@@ -98,6 +105,16 @@ function App() {
                     <Route path={"/AddMerchant"} element={<AddMerchant />} />
                     <Route path={"/Faq"} element={<Faq />} />
                     <Route path={"/paymentRecords"} element={<PaymentRecords />} />
+                    <Route path={"/admindash"} element={<AdminDash />} />
+                    <Route path={"/addservice"} element={<AddService />} />
+
+                    {/* Products/Vendors CRUD */}
+                    <Route path={"/adminDash"} element={<AdminDash />} />
+                    <Route path={"/addservice"} element={<AddService />} />
+                    <Route path={"/getservice"} element={<GetService />} />
+                    <Route path={"/editservice/:id"} element={<EditService />} />
+                    <Route path={"/managevendor"} element={<ManageVendor />} />
+
                   </Routes>
                 </>
               ) : user.userType === "Merchant" ? (
@@ -106,11 +123,16 @@ function App() {
                   <Routes>
                     <Route path={"/"} element={<Home />} />
                     <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
-                    <Route path={"/addservice"} element={<AddService />} />
                     <Route path={"/getservice"} element={<GetService />} />
                     <Route path={"/editservice/:id"} element={<EditService />} />
                     <Route path={"/managevendor"} element={<ManageVendor />} />
                     <Route path={"/Faq"} element={<Faq />} />
+
+
+                    <Route path={"/productdash"} element={<ProductDash />} />
+                    <Route path={"/addservicevendor"} element={<AddServiceVendor />} />
+                    <Route path={"/getservicevendor"} element={<GetServiceVendor />} />
+                    <Route path={"/editservicevendor/:id"} element={<EditServiceVendor />} />
                     <Route path={"/experiences"} element={< ProductsPage />} />
                     <Route path={"/experiences/:id"} element={<Products />} />
 
