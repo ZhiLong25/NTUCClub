@@ -21,6 +21,9 @@ import Lightbox from "yet-another-react-lightbox";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
+import Carousel from 'react-material-ui-carousel'
+
+import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 
 
 function Products() {
@@ -37,6 +40,9 @@ function Products() {
     const [imageForYARL, setImageForYARL] = useState([])
     const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
+    const [locationCoords, setLocationCoords] = useState({ lat: 0, lng: 0 });
+
+
     useEffect(() => {
         http.get(`/Product/getservice/${id}`)
             .then((res) => {
@@ -50,11 +56,16 @@ function Products() {
                 const timeValues = timeslotValues.split(', ')
                 setTimeslots(timeValues);
 
+                const location = res.data.location;
+                // Call function to get coordinates
+                fetchCoordinates(location);
+
+
             });
 
         http.get(`/Review/getreview/${id}`)
             .then((res) => {
-                
+
                 const data = CheckIfDataIsArray(res.data)
                 setReviews(data);
                 // const mediaArray = data.filter(obj => obj.media !== null).map(obj => ({ "src": obj.media }))
@@ -82,6 +93,26 @@ function Products() {
                 });
             });
     }, []);
+
+    const fetchCoordinates = (locationName) => {
+        // Using Google Maps Geocoding API
+        const API_KEY = 'AIzaSyAqS06SaOm9qPZ25jGGECjCyAAbnKd_jLg';
+        const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationName)}&key=${API_KEY}`;
+
+        fetch(geocodingUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Extract latitude and longitude from the response
+                const { lat, lng } = data.results[0].geometry.location;
+                setLocationCoords({ lat, lng });
+                console.log(lat, lng)
+            })
+            .catch(error => {
+                console.error("Error fetching coordinates:", error);
+            });
+    };
+
+
 
     const formik = useFormik({
         initialValues: { ServiceId: id, service: services, email: user.email, quantity: 0, timeslot: '', date: '' },
@@ -316,20 +347,20 @@ function Products() {
         `,
     );
 
+
     return (
         <Box>
-            {services.image && (
-                services.image.split(',').map((fileName, index) => (
-                    <Box key={index} className="aspect-ratio-container" sx={{ mt: 2 }}>
-                        <img alt={`product-${index}`} src={`${import.meta.env.VITE_FILE_BASE_URL}${fileName}`} className='image-insert' />
-                    </Box>
-                ))
-            )}
 
             {/* IMAGE & INFO */}
             <Box marginTop={"20px"} display={"grid"} gridTemplateColumns={"1fr 300px"} gap={"10px"}>
-                {/* <img alt="product" src={`${import.meta.env.VITE_FILE_BASE_URL}${services.image}`} className='image-insert' /> */}
-                <img src={services.image} style={{ borderRadius: "10px", objectFit: "cover", minHeight: "300px" }} />
+                <Carousel className="carouselBanner" indicators={false} animation={"slide"} duration={750} navButtonsAlwaysVisible={true}>
+                    {services && services.image && services.image.split(',').map((fileName, index) => (
+                        <Box key={index} sx={{ mt: 2 }}>
+                            <img alt={`product-${index}`} src={`${import.meta.env.VITE_FILE_BASE_URL}${fileName}`} style={{ height: "300px" }} className='image-insert' />
+                        </Box>
+                    ))}
+                </Carousel>
+
                 <Card style={{ position: "relative" }} className='productPageCard'>
                     <CardHeader title={services.name} subheader={"$" + services.price} />
                     <CardContent>
@@ -352,12 +383,23 @@ function Products() {
                 </Card>
             </Box>
 
-
-
             {/* DESCRIPTION */}
             <Box>
                 <Typography variant='h5' style={{ marginTop: "40px", marginBottom: "0px" }}>Description</Typography>
                 <Typography variant="subtitle1" style={{ marginTop: "5px" }}>{services.description?.replace(/<[^>]*>?/gm, '') || ''}</Typography>
+
+
+                <LoadScript googleMapsApiKey="AIzaSyAqS06SaOm9qPZ25jGGECjCyAAbnKd_jLg">
+                    <GoogleMap
+                        mapContainerStyle={{ width: '100%', height: '400px' }}
+                        center={locationCoords}
+                        zoom={15}
+                    >
+                        <Marker position={{ lat: locationCoords.lat, lng: locationCoords.lng }} />
+
+                    </GoogleMap>
+                </LoadScript>
+
             </Box>
 
             {/* REVIEWS */}

@@ -47,8 +47,26 @@ export default function UserNav() {
             ],
         },
         {
-            label: 'Products',
-            href: "/productspage",
+            label: 'Experiences',
+            href: "/experiences",
+            children: [
+                {
+                    label: 'Experiences Near You',
+                    subLabel: '',
+                    href: '/expnearme',
+                },
+                {
+                    label: 'Your Wishlist',
+                    subLabel: '',
+                    href: '/wishlist',
+                },
+                {
+                    label: 'Add Reviews',
+                    subLabel: '',
+                    href: '/addreviews',
+                },
+
+            ],
         },
         {
             label: 'Vouchers',
@@ -77,10 +95,6 @@ export default function UserNav() {
                 },
 
             ],
-        },
-        {
-            label: 'Hire Designers',
-            href: '#',
         },
     ] : []
 
