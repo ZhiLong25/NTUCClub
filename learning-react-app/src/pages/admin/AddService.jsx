@@ -149,6 +149,7 @@ function AddService() {
         .then((res) => {
           console.log(res.data);
           sendImageToTelegram(data.name, data.description);
+
           navigate("/admindash");
 
         })
