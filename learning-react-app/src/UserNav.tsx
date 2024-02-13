@@ -75,6 +75,17 @@ export default function UserNav() {
 
     const NAV_ITEMS: Array<NavItem> = user ? [
         {
+            label: 'Experiences',
+            children: [
+                {
+                    label: 'Experiences',
+                    subLabel: 'Explore what we have to provide!',
+                    href: '/productspage',
+                },
+               
+            ],
+        },
+        {
             label: 'Account',
             children: [
                 {

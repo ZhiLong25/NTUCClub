@@ -15,28 +15,27 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-function AdminDash() {
+
+function ProductDash() {
 
   const [totalServices, setTotalServices] = useState(0);
   const [totalCategory, setTotalCategory] = useState(0);
   const [totalVendors, setTotalVendors] = useState(0);
   const [serviceList, setServiceList] = useState([]);
 
-
   useEffect(() => {
     http.get('/Product/getservice')
       .then((res) => {
-        setServiceList(res.data);
         const data = CheckIfDataIsArray(res.data)
         setTotalServices(data.length);
       });
       console.log(serviceList)
 
-    // http.get('/Category/getcategory')
-    //   .then((res) => {
-    //     const data = CheckIfDataIsArray(res.data)
-    //     setTotalCategory(data.length);
-    //   });
+    http.get('/Category/getcategory')
+      .then((res) => {
+        const data = CheckIfDataIsArray(res.data)
+        setTotalCategory(data.length);
+      });
 
     http.get('/Vendor/getvendor')
       .then((res) => {
@@ -44,7 +43,18 @@ function AdminDash() {
         setTotalVendors(data.length);
       });
 
+    getServices();
   }, []);
+
+
+  const getServices = () => {
+    http.get('/Product/getservice')
+      .then((res) => {
+        const data = CheckIfDataIsArray(res.data)
+        setServiceList(data);
+      });
+  };
+
 
 
   const options = { filterType: 'checkbox' };
@@ -52,7 +62,7 @@ function AdminDash() {
 
   return (
     <Box className="main-wrap admin-wrap" >
-      <Typography variant="h5" className="main-title" style={{ marginTop: "20px", marginBottom: "10px" }}>Admin Dashboard</Typography>
+      <Typography variant="h5" className="main-title" style={{ marginTop: "20px", marginBottom: "10px" }}>Dashboard</Typography>
 
       {/* STATS */}
       <Flex gap={"10px"}>
@@ -83,19 +93,13 @@ function AdminDash() {
       <Box className="quickAccesChips" marginTop={"30px"}>
         <Typography variant="h6" style={{ marginBottom: "5px" }}>Quick Access</Typography>
         <Box display={'flex'} alignItems={'center'} gap={"10px"}>
-        <Link to={"/addservice"}>
-            <Chip icon={<AddRounded />} label="Services" />
-          </Link>
           <Link to={"/getservice"}>
             <Chip icon={<SearchRounded />} label="Services" />
           </Link>
-
-          {/* /managevendor */}
-          <Link to={"/addmerchant"}> 
-            <Chip icon={<AddRounded />} label="Vendors" />
+          <Link to={"/addservice"}>
+            <Chip icon={<AddRounded />} label="Services" />
           </Link>
-
-          <Link to={"/managevendor"}> 
+          <Link to={"/managevendor"}>
             <Chip icon={<SearchRounded />} label="Vendors" />
           </Link>
 
@@ -111,4 +115,4 @@ function AdminDash() {
   )
 }
 
-export default AdminDash;
+export default ProductDash;

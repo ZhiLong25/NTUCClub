@@ -1,5 +1,5 @@
 import global from '../../global';
-import { CategoryRounded, TimelineRounded, FavoriteRounded, FavoriteBorderRounded, AutoAwesomeRounded, StarRounded, StarBorderRounded } from '@mui/icons-material';
+import { AccessTime, Search, Clear, Edit, TimelineRounded, FavoriteRounded, FavoriteBorderRounded, AutoAwesomeRounded, StarRounded, StarBorderRounded } from '@mui/icons-material';
 import { useNavigate, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
@@ -14,7 +14,6 @@ import { unstable_useNumberInput as useNumberInput } from '@mui/base/unstable_us
 import { styled } from '@mui/system';
 import { unstable_useForkRef as useForkRef } from '@mui/utils';
 import { CheckIfDataIsArray } from '../constant';
-import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 
 import dayjs from 'dayjs';
 
@@ -23,6 +22,8 @@ import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import Carousel from 'react-material-ui-carousel'
+
+import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 
 
 function Products() {
@@ -41,6 +42,7 @@ function Products() {
 
     const [locationCoords, setLocationCoords] = useState({ lat: 0, lng: 0 });
 
+
     useEffect(() => {
         http.get(`/Product/getservice/${id}`)
             .then((res) => {
@@ -57,6 +59,7 @@ function Products() {
                 const location = res.data.location;
                 // Call function to get coordinates
                 fetchCoordinates(location);
+
 
             });
 
@@ -91,8 +94,6 @@ function Products() {
             });
     }, []);
 
-    console.log(services)
-
     const fetchCoordinates = (locationName) => {
         // Using Google Maps Geocoding API
         const API_KEY = 'AIzaSyAqS06SaOm9qPZ25jGGECjCyAAbnKd_jLg';
@@ -110,6 +111,7 @@ function Products() {
                 console.error("Error fetching coordinates:", error);
             });
     };
+
 
 
     const formik = useFormik({
@@ -224,7 +226,7 @@ function Products() {
                 <StyledStepperButton {...getDecrementButtonProps()} className="decrement" onClick={handleDecrement} type="button">
                     ▾
                 </StyledStepperButton>
-                <StyledInputElement {...inputProps} readOnly/>
+                <StyledInputElement {...inputProps} />
             </StyledInputRoot>
         );
     });
@@ -361,14 +363,10 @@ function Products() {
 
                 <Card style={{ position: "relative" }} className='productPageCard'>
                     <CardHeader title={services.name} subheader={"$" + services.price} />
-                    <CardContent style={{ minHeight: "150px" }}>
+                    <CardContent>
                         <Box display={"flex"} alignItems={"center"} gap={"10px"}>
                             <TimelineRounded fontSize='small' />
                             <Typography variant="body2" color="text.secondary">{services.slots} slots</Typography>
-                        </Box>
-                        <Box display={"flex"} alignItems={"center"} gap={"10px"}>
-                            <CategoryRounded fontSize='small' />
-                            <Typography variant="body2" color="text.secondary">{services.category}</Typography>
                         </Box>
                         {services.memPrice != null &&
                             <Box display={"flex"} alignItems={"center"} gap={"10px"}>
@@ -385,50 +383,23 @@ function Products() {
                 </Card>
             </Box>
 
-            {/* BOOK */}
-            <Box padding={"20px"} backgroundColor={"#efefef"} position={"sticky"} top={"20px"} borderRadius={"10px"} marginTop={"60px"}>
-                <Typography variant='h6' style={{ marginBottom: "5px", fontWeight: "bold" }}>Book Now</Typography>
-                <Box component="form" onSubmit={formik.handleSubmit}>
-                    <FormControl style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr auto", gap: "20px", alignItems: "center" }}>
-                        <Select
-                            displayEmpty
-                            name="timeslot"
-                            label="Select a Timeslot"
-                            variant='standard'
-                            value={formik.values.timeslot}
-                            onChange={formik.handleChange}
-                            helperText={formik.touched.timeslot && formik.errors.timeslot}
-                            error={formik.touched.timeslot && Boolean(formik.errors.timeslot)}
-                        >
-                            <MenuItem value="" disabled>Select a Timeslot</MenuItem>
-                            {timeslotsList.map((timeslot) => (
-                                <MenuItem key={timeslot} value={timeslot}>{timeslot}</MenuItem>
-                            ))}
-                        </Select>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker slotProps={{ textField: { variant: "standard", placeholder: "Select a Date" } }} />
-                        </LocalizationProvider>
-                        <CustomNumberInput
-                            aria-label="Demo number input"
-                            placeholder="Type a number…"
-                            value={formik.values.quantity}  // Assuming formik is used to manage state
-                            onChange={(newValue) => formik.setFieldValue('quantity', newValue)} // Update the formik state with the new value
-                        />
-                        <Button variant="contained" type="submit">Add to Cart</Button>
-                    </FormControl>
-                </Box>
-            </Box>
-
-            {/* DESCRIPTION & LOCATION */}
+            {/* DESCRIPTION */}
             <Box>
                 <Typography variant='h5' style={{ marginTop: "40px", marginBottom: "0px" }}>Description</Typography>
                 <Typography variant="subtitle1" style={{ marginTop: "5px" }}>{services.description?.replace(/<[^>]*>?/gm, '') || ''}</Typography>
-                <Typography variant='h6' style={{ marginTop: "20px", marginBottom: "0px", fontWeight: 'normal' }}>Location</Typography>
+
+
                 <LoadScript googleMapsApiKey="AIzaSyAqS06SaOm9qPZ25jGGECjCyAAbnKd_jLg">
-                    <GoogleMap mapContainerStyle={{ width: '100%', height: '400px' }} center={locationCoords} zoom={15}>
+                    <GoogleMap
+                        mapContainerStyle={{ width: '100%', height: '400px' }}
+                        center={locationCoords}
+                        zoom={15}
+                    >
                         <Marker position={{ lat: locationCoords.lat, lng: locationCoords.lng }} />
+
                     </GoogleMap>
                 </LoadScript>
+
             </Box>
 
             {/* REVIEWS */}
@@ -461,6 +432,40 @@ function Products() {
                     </Box>
                 </Box>
             }
+
+            {/* BOOK */}
+            <Box padding={"20px"} backgroundColor={"#efefef"} position={"sticky"} bottom={"20px"} borderRadius={"10px"} marginTop={"60px"}>
+                <Typography variant='h6' style={{ marginBottom: "5px", fontWeight: "bold" }}>Book Now</Typography>
+                <Box component="form" onSubmit={formik.handleSubmit}>
+                    <FormControl style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr auto", gap: "20px", alignItems: "center" }}>
+                        <Select
+                            displayEmpty
+                            name="timeslot"
+                            label="Select a Timeslot"
+                            variant='standard'
+                            value={formik.values.timeslot}
+                            onChange={formik.handleChange}
+                            helperText={formik.touched.timeslot && formik.errors.timeslot}
+                            error={formik.touched.timeslot && Boolean(formik.errors.timeslot)}
+                        >
+                            <MenuItem value="" disabled>Select a Timeslot</MenuItem>
+                            {timeslotsList.map((timeslot) => (
+                                <MenuItem key={timeslot} value={timeslot}>{timeslot}</MenuItem>
+                            ))}
+                        </Select>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker slotProps={{ textField: { variant: "standard", placeholder: "Select a Date" } }} />
+                        </LocalizationProvider>
+                        <CustomNumberInput
+                            aria-label="Demo number input"
+                            placeholder="Type a number…"
+                            value={formik.values.quantity}  // Assuming formik is used to manage state
+                            onChange={(newValue) => formik.setFieldValue('quantity', newValue)} // Update the formik state with the new value
+                        />
+                        <Button variant="contained" type="submit">Add to Cart</Button>
+                    </FormControl>
+                </Box>
+            </Box>
         </Box>
     )
 }

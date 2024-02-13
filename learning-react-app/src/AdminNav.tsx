@@ -71,18 +71,6 @@ export default function AdminNav() {
     }
 
     const NAV_ITEMS: Array<NavItem> = user ? [
-
-        {
-            label: 'Manage Services',
-            children: [
-                {
-                    label: 'Services Dashboard',
-                    subLabel: 'Handle all service related functions here',
-                    href: '/productdash',
-                },
-
-            ],
-        },
         {
             label: 'Account',
             children: [
@@ -136,7 +124,14 @@ export default function AdminNav() {
 
             ],
         },
-
+        {
+            label: 'Learn Design',
+            href: '#',
+        },
+        {
+            label: 'Hire Designers',
+            href: '#',
+        },
     ] : []
     const linkColor = useColorModeValue('gray.600', 'gray.200')
     const linkHoverColor = useColorModeValue('gray.800', 'white')

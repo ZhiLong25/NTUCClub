@@ -15,6 +15,7 @@ import MUIDataTable from "mui-datatables";
 
 function ManageVendor() {
 
+
     const [serviceList, setServiceList] = useState([]);
     const [imageFile, setImageFile] = useState(null);
 
@@ -97,10 +98,10 @@ function ManageVendor() {
     return (
         <Container>
             <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
-                Vendors
+                Add Vendors
             </Typography>
 
-            {/* <Box component="form" onSubmit={formik.handleSubmit}>
+            <Box component="form" onSubmit={formik.handleSubmit}>
 
                 <Grid container spacing={2}>
                     <Grid item xs={4} md={4} lg={4} >
@@ -146,14 +147,14 @@ function ManageVendor() {
                     </Grid>
                 </Grid>
 
-            </Box> */}
+            </Box>
 
 
             <Box>
 
-                {/* <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
+                <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
                     View and Manage Vendor
-                </Typography> */}
+                </Typography>
                 
                 <MUIDataTable title="Vendor List" data={serviceList} columns={columns} options={options} />
 

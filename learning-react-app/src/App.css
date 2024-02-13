@@ -112,7 +112,7 @@ img {
   z-index: 1;
 }
 
-/* MUI */
+/*  */
 .MuiList-root .MuiButtonBase-root {
   border-radius: 0px !important;
 }
@@ -127,13 +127,4 @@ img {
 
 .MuiChip-label {
   margin-top: 2px;
-}
-
-/* DESCRIPTION FIELD IN PRODUCT */
-.ql-toolbar {
-  margin: 0px;
-}
-
-.ql-container {
-  height: auto !important;
 }

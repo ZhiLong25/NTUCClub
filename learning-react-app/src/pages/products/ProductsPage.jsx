@@ -9,14 +9,13 @@ import EventCard from '../components/event';
 
 function ProductsPage() {
   const [serviceList, setServiceList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
   const [search, setSearch] = useState('');
   const [openSortFilter, setOpenSortFilter] = useState(false);
   const [openCategoryFilter, setOpenCategoryFilter] = useState(false);
 
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedSort, setSelectedSort] = useState("recentlyadded");
-
-
 
   const onClickClear = () => {
     setSearch('');
@@ -73,6 +72,7 @@ function ProductsPage() {
   }, []);
 
 
+
   const handleCategoryChange = (event) => {
     const { value } = event.target;
     if (selectedCategory.includes(value)) {
@@ -120,15 +120,17 @@ function ProductsPage() {
                   <RadioGroup onChange={(e) => setSelectedSort(e.target.value)}>
                     <FormControl fullWidth>
                       {sortList.map((sort, i) => (
-                        <FormControlLabel fullWidth
-                          control={
-                            <MenuItem key={i} value={sort.title} style={{ width: "100%" }}>
-                              <Radio value={sort.value} checked={sort.value == selectedSort} />
-                              <ListItemText primary={sort.title} />
-                            </MenuItem>
-                          }
-                        >
-                        </FormControlLabel>
+                        <>
+                          <FormControlLabel fullWidth
+                            control={
+                              <MenuItem key={i} value={sort.title} style={{ width: "100%" }}>
+                                <Radio value={sort.value} checked={sort.value == selectedSort} />
+                                <ListItemText primary={sort.title} />
+                              </MenuItem>
+                            }
+                          >
+                          </FormControlLabel>
+                        </>
                       ))}
                     </FormControl>
                   </RadioGroup>
@@ -140,7 +142,7 @@ function ProductsPage() {
                 </ListItemButton>
                 <Collapse in={openCategoryFilter}>
                   <FormControl fullWidth >
-                    {sampleCategoryItems.map((cat, i) => (
+                    {categoryList.map((cat, i) => (
                       <FormControlLabel
                         control={
                           <MenuItem key={i} value={cat.title} style={{ width: "100%" }}>

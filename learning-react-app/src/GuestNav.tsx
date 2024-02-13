@@ -90,5 +90,15 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Experiences',
     href: '/experiences',
   },
-  
+  {
+    label: 'Queries',
+    children: [
+      {
+        label: 'View Queries',
+        subLabel: 'View Queries for Admin',
+        href: '/ViewQueries',
+      },
+
+    ],
+  }
 ]
