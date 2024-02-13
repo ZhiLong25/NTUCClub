@@ -1,0 +1,29 @@
+.filterbar{
+    width:60%;
+    height:11% !important;
+    box-shadow: "4px 4px 8px rgba(255, 99, 71, 0.5)";
+    display:flex;
+    flex-direction: row;
+    margin-top: 5%;
+    box-shadow: "4px 4px 8px rgba(255, 99, 71, 0.8)";
+}
+
+.AllClick:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.PositiveClick:hover{
+    text-decoration: underline;
+    cursor: pointer;
+
+}
+
+.NegativeClick:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.NeutralClick:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
