@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Container, AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
+
 import MyTheme from './themes/MyTheme';
 import Tutorials from './pages/Tutorials';
 import MyForm from './pages/MyForm';
@@ -32,6 +33,7 @@ import AddService from './pages/products/AddService';
 import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageVendor from './pages/products/ManageVendor';
+
 import AddReviews from './pages/products/AddReviews';
 
 import Products from './pages/products/Products'
@@ -45,6 +47,7 @@ import PaymentRecords from './pages/cart/paymentRecords';
 
 import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
+import ReplyQueries from "./pages/queries/ReplyQueries";
 import Addadmin from './pages/users/Addadmin';
 
 
@@ -88,6 +91,7 @@ function App() {
                     <Route path={"/Addadmin"} element={<Addadmin />} />
                     <Route path={"/Accounts"} element={<Accounts />} />
                     <Route path={"/ViewQueries"} element={<ViewQueries />} />
+                    <Route path={"/replyqueries/:id"} element={<ReplyQueries />} />
                     <Route path={"/AddMerchant"} element={<AddMerchant />} />
                     <Route path={"/Faq"} element={<Faq />} />
                     <Route path={"/paymentRecords"} element={<PaymentRecords />} />
@@ -154,7 +158,7 @@ function App() {
 
 
 
-                  <Route path={"/addquery"} element={<addQuery />} />
+        
                   <Route path={"/Faq"} element={<Faq />} />
                 </Routes>
               </>

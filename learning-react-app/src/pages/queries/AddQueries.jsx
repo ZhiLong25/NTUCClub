@@ -47,9 +47,10 @@ function AddQueries() {
         }),
         onSubmit: (data) => {
             console.log(data)
-            data.Email = data.Email.trim().toLowerCase();;
+            data.Email = data.Email.trim().toLowerCase();
             data.QuerySubject = data.QuerySubject.trim()
             data.QueryDescription = data.QueryDescription.trim();
+            data.QueryReply = "NotReplied"
             http.post("/Query/Addquery", data)
                 .then((res) => {
                     console.log(res.data);
