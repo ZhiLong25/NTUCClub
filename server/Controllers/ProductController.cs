@@ -92,7 +92,6 @@ namespace NTUCClub.Controllers
                 Name = service.Name.Trim(),
                 Description = service.Description.Trim(),
                 Category = service.Category,
-                Location = service.Location,
                 Price = service.Price,
                 MemPrice = service.MemPrice,
                 TimeSlots = service.TimeSlots,
@@ -127,7 +126,6 @@ namespace NTUCClub.Controllers
             myService.Description = service.Description.Trim();
             myService.Price = service.Price;
             myService.MemPrice = service.MemPrice;
-            myService.Location = service.Location;
             myService.TimeSlots = service.TimeSlots;
             myService.Slots = service.Slots;
             myService.Vendor = service.Vendor.Trim();

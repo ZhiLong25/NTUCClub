@@ -7,12 +7,29 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace NTUCClub.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class initialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Category",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    Image = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.Id);
+                })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
@@ -40,7 +57,6 @@ namespace NTUCClub.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    ServiceId = table.Column<int>(type: "int", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: false),
                     User = table.Column<string>(type: "longtext", nullable: false),
                     Description = table.Column<string>(type: "longtext", nullable: true),
@@ -51,31 +67,6 @@ namespace NTUCClub.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reviews", x => x.Id);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Services",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Image = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
-                    Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false),
-                    Category = table.Column<string>(type: "longtext", nullable: false),
-                    Price = table.Column<float>(type: "float", nullable: false),
-                    MemPrice = table.Column<float>(type: "float", nullable: true),
-                    TimeSlots = table.Column<string>(type: "longtext", nullable: false),
-                    Slots = table.Column<int>(type: "int", nullable: false),
-                    Vendor = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Location = table.Column<string>(type: "longtext", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Services", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -135,29 +126,6 @@ namespace NTUCClub.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "CartItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(type: "longtext", nullable: false),
-                    ServiceId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<string>(type: "longtext", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CartItems_Services_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Services",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Wishlist",
                 columns: table => new
                 {
@@ -171,10 +139,35 @@ namespace NTUCClub.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Wishlist", x => x.Id);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Services",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Image = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false),
+                    Category = table.Column<string>(type: "longtext", nullable: false),
+                    Price = table.Column<float>(type: "float", nullable: false),
+                    MemPrice = table.Column<float>(type: "float", nullable: true),
+                    TimeSlots = table.Column<string>(type: "longtext", nullable: false),
+                    Slots = table.Column<int>(type: "int", nullable: false),
+                    Vendor = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    CategoryID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Services", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Wishlist_Services_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Services",
+                        name: "FK_Services_Category_CategoryID",
+                        column: x => x.CategoryID,
+                        principalTable: "Category",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -235,25 +228,48 @@ namespace NTUCClub.Migrations
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "cart",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    ServiceId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Activity_Name = table.Column<string>(type: "longtext", nullable: false),
+                    Activity_Price = table.Column<float>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_cart", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_cart_Services_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Cards_UserId",
                 table: "Cards",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_ServiceId",
-                table: "CartItems",
+                name: "IX_cart_ServiceId",
+                table: "cart",
                 column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Services_CategoryID",
+                table: "Services",
+                column: "CategoryID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vouchers_UserId",
                 table: "Vouchers",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Wishlist_ServiceId",
-                table: "Wishlist",
-                column: "ServiceId");
         }
 
         /// <inheritdoc />
@@ -263,7 +279,7 @@ namespace NTUCClub.Migrations
                 name: "Cards");
 
             migrationBuilder.DropTable(
-                name: "CartItems");
+                name: "cart");
 
             migrationBuilder.DropTable(
                 name: "Queries");
@@ -284,10 +300,13 @@ namespace NTUCClub.Migrations
                 name: "Wishlist");
 
             migrationBuilder.DropTable(
+                name: "Services");
+
+            migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Services");
+                name: "Category");
         }
     }
 }

@@ -34,9 +34,6 @@ namespace NTUCClub.Models.Products
         [Required, MinLength(3), MaxLength(100)]
         public string Vendor { get; set; } = string.Empty;
 
-        [Required]
-        public string Location { get; set; } = string.Empty;
-
         [Column(TypeName = "datetime")]
         public DateTime CreatedAt { get; set; }
         [Column(TypeName = "datetime")]
