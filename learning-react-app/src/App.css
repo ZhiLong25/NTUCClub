@@ -101,3 +101,30 @@ img {
 .carouselBanner img {
   border-radius: 10px;
 }
+
+/* PRODUCT PAGE */
+.productPageCard .MuiCardHeader-root {
+  padding-top: 30px;
+}
+
+/* POPUP NAV */
+.chakra-popover__popper {
+  z-index: 1;
+}
+
+/*  */
+.MuiList-root .MuiButtonBase-root {
+  border-radius: 0px !important;
+}
+
+.MuiListItem-root .MuiButtonBase-root {
+  border-radius: 10px !important;
+}
+
+.filterSection .MuiButtonBase-root {
+  border-radius: 10px !important;
+}
+
+.MuiChip-label {
+  margin-top: 2px;
+}

@@ -1,9 +1,9 @@
-import { Search, Clear, MenuRounded, SearchOffRounded, CategoryRounded, ExpandLessRounded, ExpandMoreRounded, SwapVertRounded } from '@mui/icons-material';
+import { Search, Clear, SearchOffRounded, CategoryRounded, ExpandLessRounded, ExpandMoreRounded, SwapVertRounded } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Grid, IconButton, Divider, Paper, InputBase, Button, FormControl, InputLabel, Select, OutlinedInput, MenuItem, Checkbox, ListItemText, Chip, Alert, AlertTitle, Collapse, List, ListSubheader, ListItemButton, ListItemIcon, FormGroup, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { Box, Typography, Grid, IconButton, Divider, Paper, InputBase, FormControl, MenuItem, Checkbox, ListItemText, Chip, Alert, AlertTitle, Collapse, List, ListSubheader, ListItemButton, ListItemIcon, FormGroup, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import http from '../../http';
 import '../styles/product.css';
-import { CheckIfDataIsArray, sampleExperienceItems, sampleCategoryItems, sortList } from '../constant';
+import { CheckIfDataIsArray, GetCategoryCodeName, sampleCategoryItems, sortList } from '../constant';
 import EventCard from '../components/event';
 
 function ProductsPage() {
@@ -61,6 +61,13 @@ function ProductsPage() {
         setServiceList(data);
         // setServiceList(sampleExperienceItems)
       })
+
+    const params = new URLSearchParams(window.location.search);
+    const reqCategory = params.get('category');
+    if (reqCategory != null && reqCategory != "") {
+      const getCategoryInfo = sampleCategoryItems.find((v) => GetCategoryCodeName((v.title).toLocaleLowerCase()) == reqCategory.toLocaleLowerCase());
+      if (getCategoryInfo != undefined) setSelectedCategory([getCategoryInfo.title])
+    }
   }, []);
 
 
@@ -75,9 +82,14 @@ function ProductsPage() {
     }
   };
 
+  const handleDeleteCategoryChip = (title) => {
+    const updatedCategory = selectedCategory.filter(category => category !== title);
+    setSelectedCategory(updatedCategory);
+  }
+
   return (
-    <Box style={{ padding: "30px 0 20px" }}>
-      {/* <Typography variant="h5" style={{ marginBottom: "20px", marginTop: '20px' }}>Experiences</Typography> */}
+    <Box style={{ padding: "20px 0 20px" }}>
+      <Typography variant="h5" style={{ marginBottom: "20px" }}>Experiences</Typography>
       <Box display={"grid"} gridTemplateColumns={"300px 1fr"} gap={"30px"}>
         <Box className="searchAndFilterSection">
           <Box position={"sticky"} top={"30px"}>
@@ -88,6 +100,12 @@ function ProductsPage() {
               {search.trim() != '' ? <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" /> : null}
               <IconButton type="button" onClick={onClickSearch} style={{ padding: "10px" }}><Search /></IconButton>
             </Paper>
+
+            {/* CURRENT FILTER */}
+            <Box className='currentFilterSection' marginTop={"20px"} display={"flex"} gap={"5px"} flexWrap={"wrap"}>
+              <Chip label={sortList.find((s) => s.value == selectedSort).title} variant="filled" />
+              {selectedCategory.length != 0 && selectedCategory.map((v) => <Chip label={v} variant='filled' onDelete={() => handleDeleteCategoryChip(v)} />)}
+            </Box>
 
             {/* FILTER */}
             <Box className='filterSection' style={{ marginTop: "5px" }}>
@@ -127,7 +145,7 @@ function ProductsPage() {
                       <FormControlLabel
                         control={
                           <MenuItem key={i} value={cat.title} style={{ width: "100%" }}>
-                            <Checkbox onChange={handleCategoryChange} value={cat.title} />
+                            <Checkbox onChange={handleCategoryChange} value={cat.title} checked={selectedCategory.includes(cat.title)} />
                             <ListItemText primary={cat.title} />
                           </MenuItem>
                         } />

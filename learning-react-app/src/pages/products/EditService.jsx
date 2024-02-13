@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AccessTime, Search, Clear, Edit } from '@mui/icons-material';
 
-import { Container, Box, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, IconButton,InputLabel, Select, MenuItem, Grid } from '@mui/material';
+import { Container, Box, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, ListItemIcon, ListItemText, DialogContentText, DialogActions, IconButton, InputLabel, Select, MenuItem, Grid } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
@@ -18,6 +18,8 @@ import placeholder from './media/placeholder.png';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { useTheme } from '@mui/material/styles';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { CheckIfDataIsArray, sampleCategoryItems, GetCategoryCodeName } from '../../pages/constant';
+
 
 function EditService() {
 
@@ -216,14 +218,15 @@ function EditService() {
               </Button>
             </Box>
           </Grid>
-            
+
           <Grid item xs={8} md={8} lg={8} >
 
-          <Link onClick={handleOpen} style={{float:"right"}}>
-                        <IconButton color="primary" sx={{ padding: '4px' }}>
-                          <Clear />
-                        </IconButton>
-                      </Link>
+            <Link onClick={handleOpen} style={{ float: "right" }}>
+              <IconButton color="primary" sx={{ padding: '4px' }}>
+                <Clear />
+              </IconButton>
+            </Link>
+            <InputLabel id="title">Title</InputLabel>
 
             <TextField
               fullWidth margin="normal" autoComplete="off"
@@ -235,6 +238,7 @@ function EditService() {
               helperText={formik.touched.name && formik.errors.name}
             />
 
+            <InputLabel id="description">Description</InputLabel>
             <ReactQuill
               style={{ borderRadius: "5px" }}
               value={formik.values.description}
@@ -260,6 +264,7 @@ function EditService() {
               <div class="css-1wc848c-MuiFormHelperText-root" style={{ color: '#D32F2F' }}>{formik.errors.description}</div>
             )}
 
+<InputLabel id="description">Vendor</InputLabel>
 
             <Select
               style={{ marginTop: "15px" }}
@@ -331,9 +336,12 @@ function EditService() {
               ))}
             </Select>
 
+
             <Grid container spacing={2}>
 
               <Grid item xs={4} md={4} lg={4} >
+                <InputLabel id="price">Price</InputLabel>
+
                 <TextField
                   fullWidth margin='normal' autoComplete='off'
                   label="Price"
@@ -348,6 +356,8 @@ function EditService() {
               </Grid>
 
               <Grid item xs={4} md={4} lg={4} >
+                <InputLabel id="slots">Slots</InputLabel>
+
                 <TextField
                   fullWidth margin='normal' autoComplete='off'
                   label="Slots"
@@ -384,7 +394,7 @@ function EditService() {
                     <MenuItem key={category.title} value={category.title}>
 
                       <ListItemIcon>{category.icon}
-                      
+
                       </ListItemIcon>
                       <ListItemText primary={category.title} />
 
@@ -435,40 +445,40 @@ function EditService() {
 
 
         <Dialog open={open} onClose={handleClose} >
-         <img src='https://cdn-icons-png.flaticon.com/512/3588/3588294.png' style={{ minWidth: "20%" }} alt="warning" className='noti-icon' />
+          <img src='https://cdn-icons-png.flaticon.com/512/3588/3588294.png' style={{ minWidth: "20%" }} alt="warning" className='noti-icon' />
 
-        <DialogTitle>
-          Delete Service
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you sure you want to delete this service?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
+          <DialogTitle>
+            Delete Service
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to delete this service?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
 
-          <Button variant="contained" color="error" className='noti-btn'
-            onClick={deleteService}>
-            Delete
-          </Button>
+            <Button variant="contained" color="error" className='noti-btn'
+              onClick={deleteService}>
+              Delete
+            </Button>
 
-        </DialogActions>
-        <DialogActions>
-          <Button variant="contained" color="inherit" className='noti-btn'
-            onClick={handleClose}>
-            Cancel
-          </Button>
-        </DialogActions>
+          </DialogActions>
+          <DialogActions>
+            <Button variant="contained" color="inherit" className='noti-btn'
+              onClick={handleClose}>
+              Cancel
+            </Button>
+          </DialogActions>
 
-      </Dialog>
+        </Dialog>
 
-      <Dialog open={isDeleted} onClose={handleClose}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/768px-Flat_tick_icon.svg.png" className='noti-icon' />
+        <Dialog open={isDeleted} onClose={handleClose}>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/768px-Flat_tick_icon.svg.png" className='noti-icon' />
 
-        <DialogTitle>
-          Service has been deleted
-        </DialogTitle>
-      </Dialog>
+          <DialogTitle>
+            Service has been deleted
+          </DialogTitle>
+        </Dialog>
 
 
 

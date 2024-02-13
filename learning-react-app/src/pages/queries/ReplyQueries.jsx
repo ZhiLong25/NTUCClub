@@ -8,15 +8,15 @@ import * as yup from 'yup';
 
 import SendIcon from '@mui/icons-material/Send';
 
-function ReplyQueries({ queryId, onClose }) {
-  const {id} = useParams()
-  const [queries,setQueries] = useState(null)
-  useEffect(()=>{
-    http.get(`/Query/GetQueryID/${id}`).then((res)=>{
-      setQueries(res.data[0])
-      console.log(res.data[0])
-    })
-  },[])
+function ReplyQueries({ onClose }) {
+  const { id } = useParams();
+  const [query, setQuery] = useState(null);
+
+  useEffect(() => {
+    http.get(`/Query/GetQueryID/${id}`).then((res) => {
+      setQuery(res.data[0]);
+    });
+  }, [id]);
 
   const formik = useFormik({
     initialValues: {
@@ -26,12 +26,12 @@ function ReplyQueries({ queryId, onClose }) {
       QueryReply: yup.string().trim().required('Reply content is required'),
     }),
     onSubmit: (data) => {
-      data.Email = queries.email
-      data.QueryDescription = queries.queryDescription
-      data.QuerySubject = queries.querySubject
-      data.id = id
-      console.log(data)
-      http.put(`/Query/QueryID/${id}`,data)
+      data.Email = query.email;
+      data.QueryDescription = query.queryDescription;
+      data.QuerySubject = query.querySubject;
+      data.id = id;
+
+      http.put(`/Query/QueryID/${id}`, data)
         .then(() => {
           toast.success('Query replied successfully');
           onClose(); // Close the reply modal or navigate back to the queries list
@@ -48,31 +48,44 @@ function ReplyQueries({ queryId, onClose }) {
       <Typography variant="h5" sx={{ my: 2 }} style={{ marginTop: '5%' }}>
         Reply to Query
       </Typography>
-      <Box component="form" sx={{ maxWidth: '500px' }} onSubmit={formik.handleSubmit}>
-        <TextField
-          fullWidth
-          margin="dense"
-          autoComplete="off"
-          label="Query Reply"
-          name="QueryReply"
-          value={formik.values.QueryReply}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={formik.touched.QueryReply && Boolean(formik.errors.QueryReply)}
-          helperText={formik.touched.QueryReply && formik.errors.QueryReply}
-        />
+      {query && (
+        <Box component="form" sx={{ maxWidth: '500px' }} onSubmit={formik.handleSubmit}>
+          <Typography variant="body1">
+            <strong>Email:</strong> {query.email}
+          </Typography>
+          <Typography variant="body1">
+            <strong>Subject:</strong> {query.querySubject}
+          </Typography>
+          <Typography variant="body1">
+            <strong>Description:</strong> {query.queryDescription}
+          </Typography>
 
-        <Button
-          fullWidth
-          variant="contained"
-          sx={{ mt: 2 }}
-          style={{ background: '#03C04A' }}
-          type="submit"
-          startIcon={<SendIcon />}
-        >
-          Send Reply
-        </Button>
-      </Box>
+          {/* Rest of the form */}
+          <TextField
+            fullWidth
+            margin="dense"
+            autoComplete="off"
+            label="Query Reply"
+            name="QueryReply"
+            value={formik.values.QueryReply}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.QueryReply && Boolean(formik.errors.QueryReply)}
+            helperText={formik.touched.QueryReply && formik.errors.QueryReply}
+          />
+
+          <Button
+            fullWidth
+            variant="contained"
+            sx={{ mt: 2 }}
+            style={{ background: '#03C04A' }}
+            type="submit"
+            startIcon={<SendIcon />}
+          >
+            Send Reply
+          </Button>
+        </Box>
+      )}
       <ToastContainer />
     </Card>
   );

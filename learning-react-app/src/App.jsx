@@ -33,11 +33,12 @@ import AddService from './pages/products/AddService';
 import GetService from './pages/products/GetService';
 import EditService from './pages/products/EditService';
 import ManageVendor from './pages/products/ManageVendor';
-// import ManageTimeslots from './pages/products/ManageTimeslots';
+
 import AddReviews from './pages/products/AddReviews';
 
 import Products from './pages/products/Products'
 import ProductsPage from './pages/products/ProductsPage';
+import ViewWishlist from './pages/products/ViewWishlist';
 
 import Cart from './pages/cart/cart';
 import Payment from './pages/cart/payment';
@@ -47,11 +48,16 @@ import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import ReplyQueries from "./pages/queries/ReplyQueries";
 import Addadmin from './pages/users/Addadmin';
+
+
+
+
 // import Adminaccounts from './pages/users/Adminaccounts';
 // import Accounts from './pages/users/accounts';
 import Accounts from './pages/users/Accounts';
 import AddMerchant from './pages/users/AddMerchant';
 import RegisterGoogle from "./pages/users/RegisterGoogle"
+
 import "./pages/styles/chatbot.css"
 // import "./script"
 import Faq from './pages/Faq';
@@ -122,6 +128,9 @@ function App() {
                     <Route path={"/Faq"} element={<Faq />} />
 
                     <Route path={"/addreviews"} element={< AddReviews />} />
+                    <Route path={"/wishlist"} element={< ViewWishlist />} />
+
+
 
                     <Route path={"/experiences/:id"} element={<Products />} />
                     <Route path={"/experiences"} element={< ProductsPage />} />
@@ -145,9 +154,10 @@ function App() {
                   <Route path={"/getservice"} element={<GetService />} />
                   <Route path={"/editservice/:id"} element={<EditService />} />
                   <Route path={"/managevendor"} element={<ManageVendor />} />
+                  
                   <Route path={"/experiences/:id"} element={<Products />} />
                   <Route path={"/experiences"} element={< ProductsPage />} />
-                  <Route path={"/addreviews"} element={< AddReviews />} />
+
 
 
         

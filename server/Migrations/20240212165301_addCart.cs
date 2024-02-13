@@ -6,27 +6,27 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace NTUCClub.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateCart : Migration
+    public partial class addCart : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "cart",
+                name: "CartItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Email = table.Column<string>(type: "longtext", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Activity_Name = table.Column<string>(type: "longtext", nullable: false),
-                    Activity_Price = table.Column<float>(type: "float", nullable: false)
+                    Date = table.Column<string>(type: "longtext", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cart", x => x.Id);
+                    table.PrimaryKey("PK_CartItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_cart_Services_ServiceId",
+                        name: "FK_CartItems_Services_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "Services",
                         principalColumn: "Id",
@@ -35,8 +35,8 @@ namespace NTUCClub.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_cart_ServiceId",
-                table: "cart",
+                name: "IX_CartItems_ServiceId",
+                table: "CartItems",
                 column: "ServiceId");
         }
 
@@ -44,7 +44,7 @@ namespace NTUCClub.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "cart");
+                name: "CartItems");
         }
     }
 }

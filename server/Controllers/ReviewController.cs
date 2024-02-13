@@ -23,15 +23,19 @@ namespace NTUCClub.Controllers
             return Ok(list);
         }
 
-        [HttpGet("getreview/{id}")]
-        public IActionResult GetReview(int id)
+        [HttpGet("getreview/{serviceId}")]
+        public IActionResult GetReviewsByServiceId(int serviceId)
         {
-            Reviews? reviews = _context.Reviews.Find(id);
-            if (reviews == null)
+            var reviews = _context.Reviews
+                .Where(r => r.ServiceId == serviceId)
+                .ToList();
+
+            if (reviews == null || !reviews.Any())
             {
-                return NotFound();
+                return NotFound(); 
             }
-            return Ok(reviews);
+
+            return Ok(reviews); 
         }
 
 
@@ -42,7 +46,7 @@ namespace NTUCClub.Controllers
 
             var myReview = new Reviews()
             {
-                //ServiceId = reviews.ServiceId,
+                ServiceId = reviews.ServiceId,
                 Rating = reviews.Rating,
                 User = reviews.User,
                 Description = reviews.Description,
