@@ -18,28 +18,38 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { useTheme } from '@mui/material/styles';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { CheckIfDataIsArray, sampleCategoryItems, GetCategoryCodeName } from '../../pages/constant';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 function AddService() {
   const navigate = useNavigate();
   const [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
-  const [imageFile, setImageFile] = useState('');
   // const [categoryList, setCategoryList] = useState([]);
   const [vendorList, setVendorList] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
 
-
+  const [value, setValue] = useState(null);
 
   useEffect(() => {
     // http.get('/Category/getcategory').then((res) => {
     //   setCategoryList(res.data);
     // });
-    
+
     http.get('/Vendor/getvendor').then((res) => {
       setVendorList(res.data);
     });
 
   }, []);
+
+  const handleDeleteImage = (index) => {
+    setImageFiles((prevImageFiles) => {
+      const newImageFiles = [...prevImageFiles];
+      newImageFiles.splice(index, 1);
+      return newImageFiles;
+    });
+  };
 
   const onFileChange = (e) => {
     const files = e.target.files;
@@ -74,7 +84,7 @@ function AddService() {
       description: '',
       price: null,
       timeslots: '',
-
+      location: '',
       slots: null,
       vendor: '',
       category: ''
@@ -95,6 +105,8 @@ function AddService() {
 
       price: yup.number().required('Price is required'),
 
+      // location: yup.string().required('Location is required'),
+
       timeslots: yup.array().min(1, 'Timeslots is required').of(yup.string().required('Timeslot is required')),
       slots: yup.number().required('Slots amount is required'),
 
@@ -114,10 +126,11 @@ function AddService() {
 
       data.timeslots = data.timeslots.join(', ');
 
-      if (imageFile) {
-        data.image = imageFile;
+      if (imageFilesAsString) {
+        data.image = imageFilesAsString;
       }
       console.log("Submit button clicked");
+      console.log(data)
       http.post("/Product/addservice", data)
         .then((res) => {
           console.log(res.data);
@@ -176,16 +189,31 @@ function AddService() {
         <Grid container spacing={2}>
           <Grid item xs={4} md={4} lg={4} >
             <Box sx={{ textAlign: 'center', mt: 2 }} >
-              {
-                imageFile ? (
-                  <Box className="aspect-ratio-container" sx={{ mt: 2 }}>
-                    <img alt="tutorial" src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`} />
-                  </Box>
-                ) : (
-                  <img src={placeholder} alt="placeholder" />
-                )
-              }
+              {imageFiles.length > 0 ? (
+                <Grid container spacing={2}>
+                  {imageFiles.map((image, index) => (
+                    <Grid item key={index}>
+                      <Box sx={{ mt: 2, position: 'relative' }}>
+                      <IconButton
+                          onClick={() => handleDeleteImage(index)}
+                          sx={{ position: 'absolute', top: '5px', right: '5px' }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
 
+                        <img
+                          alt={`Image ${index + 1}`}
+                          src={`${import.meta.env.VITE_FILE_BASE_URL}${image}`}
+                          style={{ maxWidth: "100px", maxHeight: "100px" }}
+                        />
+
+                      </Box>
+                    </Grid>
+                  ))}
+                </Grid>
+              ) : (
+                <img src={placeholder} alt="placeholder" />
+              )}
               <Button variant="contained" component="label" style={{ marginTop: "20px" }}>
                 Upload Image
                 <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
@@ -232,6 +260,31 @@ function AddService() {
             {formik.touched.description && formik.errors.description && (
               <div class="css-1wc848c-MuiFormHelperText-root" style={{ color: '#D32F2F' }}>{formik.errors.description}</div>
             )}
+
+
+            <InputLabel id="location-label">Location</InputLabel>
+
+            <GooglePlacesAutocomplete
+              placeholder="Type a place"
+              apiKey="AIzaSyAqS06SaOm9qPZ25jGGECjCyAAbnKd_jLg"
+              autocompletionRequest={{
+                componentRestrictions: {
+                  country: ['sg'] // Restrict to Singapore only
+                }
+              }}
+              selectProps={{
+                value,
+                onChange: (newValue) => {
+                  setValue(newValue);
+                  // Set the location field in Formik form state
+                  formik.setFieldValue('location', newValue.label);
+                },
+              }}
+
+            />
+
+
+            {/* Your existing code */}
 
             <InputLabel id="vendor-label">Vendor</InputLabel>
 
@@ -364,7 +417,7 @@ function AddService() {
                     <MenuItem key={category.title} value={category.title}>
 
                       <ListItemIcon>{category.icon}
-                      
+
                       </ListItemIcon>
                       <ListItemText primary={category.title} />
 

@@ -185,6 +185,10 @@ namespace NTUCClub.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<float?>("MemPrice")
                         .HasColumnType("float");
 

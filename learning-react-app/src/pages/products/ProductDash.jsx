@@ -29,6 +29,7 @@ function ProductDash() {
         const data = CheckIfDataIsArray(res.data)
         setTotalServices(data.length);
       });
+      console.log(serviceList)
 
     http.get('/Category/getcategory')
       .then((res) => {
@@ -57,7 +58,7 @@ function ProductDash() {
 
 
   const options = { filterType: 'checkbox' };
-  const columns = ['ID', 'Name', 'Category', 'Updated At'];
+  const columns = ['id', 'name', 'category', 'updatedAt'];
 
   return (
     <Box className="main-wrap admin-wrap" >

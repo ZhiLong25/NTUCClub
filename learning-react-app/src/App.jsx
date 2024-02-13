@@ -39,6 +39,7 @@ import AddReviews from './pages/products/AddReviews';
 import Products from './pages/products/Products'
 import ProductsPage from './pages/products/ProductsPage';
 import ViewWishlist from './pages/products/ViewWishlist';
+import ExperienceNearMe from './pages/products/ExperienceNearMe';
 
 import Cart from './pages/cart/cart';
 import Payment from './pages/cart/payment';
@@ -48,8 +49,6 @@ import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import ReplyQueries from "./pages/queries/ReplyQueries";
 import Addadmin from './pages/users/Addadmin';
-
-
 
 
 // import Adminaccounts from './pages/users/Adminaccounts';
@@ -109,6 +108,9 @@ function App() {
                     <Route path={"/editservice/:id"} element={<EditService />} />
                     <Route path={"/managevendor"} element={<ManageVendor />} />
                     <Route path={"/Faq"} element={<Faq />} />
+                    <Route path={"/experiences"} element={< ProductsPage />} />
+                    <Route path={"/experiences/:id"} element={<Products />} />
+
                   </Routes>
                 </>
               ) : (
@@ -129,8 +131,7 @@ function App() {
 
                     <Route path={"/addreviews"} element={< AddReviews />} />
                     <Route path={"/wishlist"} element={< ViewWishlist />} />
-
-
+                    <Route path={"/expnearme"} element={< ExperienceNearMe />} />
 
                     <Route path={"/experiences/:id"} element={<Products />} />
                     <Route path={"/experiences"} element={< ProductsPage />} />
