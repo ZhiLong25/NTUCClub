@@ -139,7 +139,7 @@ namespace NTUCClub.Controllers
             return Ok(myService);
         }
 
-        [HttpGet("getservice/{vendor}")]
+        [HttpGet("getvendorservice/{vendor}")]
         public IActionResult GetServiceVendor(string vendor)
         {
 
