@@ -83,7 +83,7 @@ function voucherDashboard() {
         <Box sx={{ position: 'relative' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Typography variant="h4" sx={{ ml: 1, mt: 8, fontWeight: 'bold', color: '#E6533F' }}>
-                    Vouchers
+                    All Vouchers
                 </Typography>
             
                 <TextField
@@ -151,7 +151,7 @@ function voucherDashboard() {
 
                                     }
                                     {
-                                        <DeleteIcon onClick={() => handleOpen(voucher.id)} id={voucher.id} style={{ marginRight: 8, fontSize: "1.5rem", color: "red" }} />
+                                        <DeleteIcon onClick={() => handleOpen(voucher.id)} id={voucher.id} style={{ marginRight: 8, fontSize: "1.5rem", cursor: "pointer", color: "red" }} />
 
                                     }
                                 </Box>
