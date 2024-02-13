@@ -102,6 +102,28 @@ export default function UserNav() {
             ],
         },
         {
+            label: 'Experiences',
+            href: "/experiences",
+            children: [
+                {
+                    label: 'Experiences Near You',
+                    subLabel: '',
+                    href: '/expnearme',
+                },
+                {
+                    label: 'Your Wishlist',
+                    subLabel: '',
+                    href: '/wishlist',
+                },
+                {
+                    label: 'Add Reviews',
+                    subLabel: '',
+                    href: '/addreviews',
+                },
+
+            ],
+        },
+        {
             label: 'Vouchers',
             children: [
                 {
@@ -129,7 +151,6 @@ export default function UserNav() {
 
             ],
         },
-        
     ] : []
     const linkColor = useColorModeValue('gray.600', 'gray.200')
     const linkHoverColor = useColorModeValue('gray.800', 'white')

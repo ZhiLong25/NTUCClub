@@ -38,3 +38,8 @@
 .ql-container.ql-snow {
     border-radius: 0px 0px 5px 5px imr !important;
 }
+
+.css-qbdosj-Input , .css-166bipr-Input {
+    min-height: 45px!important;
+}
+
