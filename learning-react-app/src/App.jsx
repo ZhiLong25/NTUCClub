@@ -56,13 +56,12 @@ import Addadmin from './pages/users/Addadmin';
 import Accounts from './pages/users/Accounts';
 import AddMerchant from './pages/users/AddMerchant';
 import RegisterGoogle from "./pages/users/RegisterGoogle"
-
+import ReactGA from "react-ga4"
 import "./pages/styles/chatbot.css"
 // import "./script"
 import Faq from './pages/Faq';
 function App() {
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
       http.get('/user/auth').then((res) => {
@@ -70,6 +69,8 @@ function App() {
         setUser(res.data.user);
       });
     }
+    ReactGA.initialize("G-0V1W79YL3R")
+
   }, []);
 
 

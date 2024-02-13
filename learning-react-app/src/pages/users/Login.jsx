@@ -1,4 +1,4 @@
-import React, { useContext, useState,useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Box, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -14,15 +14,15 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import EmailIcon from '@mui/icons-material/Email';
 import '../styles/login.css'
-import {jwtDecode } from "jwt-decode";
-
+import { jwtDecode } from "jwt-decode";
+import ReactGA from "react-ga4";
 function Login() {
     const navigate = useNavigate();
     const [icon, setIcon] = useState(eyeOff);
     const [pass, setPass] = useState(false)
     const [type, setType] = useState("password");
     const [open, setOpen] = useState(false);
-    const[email,setEmail] = useState("")
+    const [email, setEmail] = useState("")
     const { setUser } = useContext(UserContext);
     const circleStyles = {
         position: 'absolute',
@@ -31,6 +31,7 @@ function Login() {
         borderRadius: '50%',
 
     };
+    
     //for forgot password modal
     const handleOpen = () => {
         setOpen(true);
@@ -64,11 +65,12 @@ function Login() {
         onSubmit: (data) => {
             data.password = data.password.trim();
             console.log(data)
-            http.put(`/user/securitydetails/${email}`,data)
+            http.put(`/user/securitydetails/${email}`, data)
                 .then((res) => {
                     console.log("changed successful!"); // Log the parsed response data
                     toast.success("Changed Suceessfully!")
                     handleClose(true)
+                   
                 })
                 .catch(function (err) {
                     toast.error(`${err.response.data.message}`);
@@ -91,15 +93,15 @@ function Login() {
             data.email = data.email.trim().toLowerCase();
             console.log(data.email)
             http
-            .get(`/user/findemail/${data.email}`)
-            .then((res) => {
+                .get(`/user/findemail/${data.email}`)
+                .then((res) => {
                     // handleLogin()
                     console.log()
                     setEmail(res.data.id)
                     setPass(true)
                 })
                 .catch(function (err) {
-                    
+
                     toast.error(`${err.response.data.message}`);
                 });
         },
@@ -127,6 +129,11 @@ function Login() {
                     localStorage.setItem("accessToken", res.data.accessToken);
                     setUser(res.data.user);
                     navigate("/");
+                    ReactGA.event({
+                        category: "login_category",
+                        action: "login_action",
+                        label: "login_label", // optional
+                    })
                 })
                 .catch(function (err) {
                     toast.error(`${err.response.data.message}`);
@@ -135,14 +142,14 @@ function Login() {
 
     });
     //google auth part
-  const clientId ="187449264999-e8qk675ti421g8lau39aq1d9rqpvaq9r.apps.googleusercontent.com"
-  const handleCallbackResponse=(response)=>{
-        console.log("Encoded JWT:"+response.credential)
-        var userObject = jwtDecode (response.credential);
+    const clientId = "187449264999-e8qk675ti421g8lau39aq1d9rqpvaq9r.apps.googleusercontent.com"
+    const handleCallbackResponse = (response) => {
+        console.log("Encoded JWT:" + response.credential)
+        var userObject = jwtDecode(response.credential);
         var email = userObject.email;
         //need check if account exist or not
-        http.get(`user/findemail/${email}`).then(async(res)=>{
-            await http.post("/user/login", res.data).then((res)=>{
+        http.get(`user/findemail/${email}`).then(async (res) => {
+            await http.post("/user/login", res.data).then((res) => {
                 console.log("logging in")
                 localStorage.setItem("accessToken", res.data.accessToken);
                 setUser(userObject);
@@ -150,27 +157,27 @@ function Login() {
             })
         })
         userObject.Email = userObject.email
-        http.post("/user/register/userGoogle", userObject).then((res)=>{
+        http.post("/user/register/userGoogle", userObject).then((res) => {
             localStorage.setItem('userDatagoogle', JSON.stringify(userObject));
             navigate("/RegisterGoogle")
 
-        }).catch(function(err){
+        }).catch(function (err) {
             toast.error(`${err.response.data.message}`);
         })
-  }
+    }
 
-  useEffect(()=>{
-    // global google
-    google.accounts.id.initialize({
-      client_id:clientId,
-      callback:handleCallbackResponse
-    })
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      {theme:"outline",size:"large",text: "Sign in with Google",prompt: "none"}
-    )
-    google.accounts.id.prompt();
-  },[])
+    useEffect(() => {
+        // global google
+        google.accounts.id.initialize({
+            client_id: clientId,
+            callback: handleCallbackResponse
+        })
+        google.accounts.id.renderButton(
+            document.getElementById("signInDiv"),
+            { theme: "outline", size: "large", text: "Sign in with Google", prompt: "none" }
+        )
+        google.accounts.id.prompt();
+    }, [])
     return (
         <Box sx={{
             marginTop: 8,
@@ -195,7 +202,7 @@ function Login() {
                 </Typography>
                 <Box component="form" sx={{ maxWidth: '500px' }}
                     onSubmit={formik.handleSubmit}>
-                    <TextField style={{width:"25dvw"}}
+                    <TextField style={{ width: "25dvw" }}
                         fullWidth margin="dense" autoComplete="off"
                         label={
                             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -210,9 +217,9 @@ function Login() {
                         error={formik.touched.email && Boolean(formik.errors.email)}
                         helperText={formik.touched.email && formik.errors.email}
                     />
-                    <div style={{display:"flex",flexDirection:"row",position:"relative",width:"25dvw"}}>
+                    <div style={{ display: "flex", flexDirection: "row", position: "relative", width: "25dvw" }}>
                         <TextField
-                            
+
                             fullWidth margin="dense" autoComplete="off"
                             label={
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -229,7 +236,7 @@ function Login() {
                         />
                         <span
                             className="eyespan"
-                            style={{ display: "inline-block",margin:"auto",position:"absolute",left:"90%",top:"30%" }}
+                            style={{ display: "inline-block", margin: "auto", position: "absolute", left: "90%", top: "30%" }}
                         >
                             <Icon
                                 icon={icon}
@@ -244,7 +251,7 @@ function Login() {
                         </span>
                     </div>
                     <Button fullWidth variant="contained" sx={{ mt: 2 }}
-                        type="submit" style={{ background: "#E8533F" }}>
+                        type="submit" style={{ background: "#E8533F" }} onClick={loginBtn}>
                         Login
                     </Button>
                 </Box>
@@ -280,7 +287,7 @@ function Login() {
                         Forget Password?
                     </a>
                 </Box>
-                    <div id="signInDiv"></div>
+                <div id="signInDiv"></div>
                 <Dialog open={open} onClose={handleClose}>
                     <img
                         src="https://cdn-icons-png.flaticon.com/512/3588/3588294.png"
@@ -302,22 +309,22 @@ function Login() {
                             onSubmit={formikemail.handleSubmit}
                             style={{ margin: "auto" }}
                         >
-                           <TextField 
-                        fullWidth margin="dense" autoComplete="off"
-                        label={
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <PersonIcon style={{ marginRight: 8 }} />
-                                Email
-                            </div>
-                        }
-                        name="email"
-                        value={formikemail.values.email}
-                        onChange={formikemail.handleChange}
-                        onBlur={formikemail.handleBlur}
-                        error={formikemail.touched.email && Boolean(formikemail.errors.email)}
-                        helperText={formikemail.touched.email && formik.errors.email}
-                    />
-                            
+                            <TextField
+                                fullWidth margin="dense" autoComplete="off"
+                                label={
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <PersonIcon style={{ marginRight: 8 }} />
+                                        Email
+                                    </div>
+                                }
+                                name="email"
+                                value={formikemail.values.email}
+                                onChange={formikemail.handleChange}
+                                onBlur={formikemail.handleBlur}
+                                error={formikemail.touched.email && Boolean(formikemail.errors.email)}
+                                helperText={formikemail.touched.email && formik.errors.email}
+                            />
+
                             <Button
                                 fullWidth
                                 variant="contained"
@@ -354,41 +361,41 @@ function Login() {
                         sx={{ maxWidth: "500px" }}
                         onSubmit={formikpass.handleSubmit}
                     >
-                        
-                        <div style={{display:"flex",flexDirection:"row",position:"relative",width:"25dvw"}}>
-                        <TextField
-                            
-                            fullWidth margin="dense" autoComplete="off"
-                            label={
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <LockIcon style={{ marginRight: 8 }} />
-                                    Password
-                                </div>
-                            }
-                            name="password" type={type}
-                            value={formikpass.values.password}
-                            onChange={formikpass.handleChange}
-                            onBlur={formikpass.handleBlur}
 
-                            error={formikpass.touched.password && Boolean(formikpass.errors.password)}
-                            helperText={formikpass.touched.password && formikpass.errors.password}
-                        />
-                        <span
-                            className="eyespan"
-                            style={{ display: "inline-block",margin:"auto",position:"absolute",left:"23dvw",top:"25%" }}
-                        >
-                            <Icon
-                                icon={icon}
-                                onClick={passToggle}
-                                style={{
-                                    display: "inline-block",
-                                    color: "black",
-                                    cursor: "pointer",
-                                }}
+                        <div style={{ display: "flex", flexDirection: "row", position: "relative", width: "25dvw" }}>
+                            <TextField
+
+                                fullWidth margin="dense" autoComplete="off"
+                                label={
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <LockIcon style={{ marginRight: 8 }} />
+                                        Password
+                                    </div>
+                                }
+                                name="password" type={type}
+                                value={formikpass.values.password}
+                                onChange={formikpass.handleChange}
+                                onBlur={formikpass.handleBlur}
+
+                                error={formikpass.touched.password && Boolean(formikpass.errors.password)}
+                                helperText={formikpass.touched.password && formikpass.errors.password}
                             />
+                            <span
+                                className="eyespan"
+                                style={{ display: "inline-block", margin: "auto", position: "absolute", left: "23dvw", top: "25%" }}
+                            >
+                                <Icon
+                                    icon={icon}
+                                    onClick={passToggle}
+                                    style={{
+                                        display: "inline-block",
+                                        color: "black",
+                                        cursor: "pointer",
+                                    }}
+                                />
 
-                        </span>
-                    </div>
+                            </span>
+                        </div>
                         <Button
                             fullWidth
                             variant="contained"
