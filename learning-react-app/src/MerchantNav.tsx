@@ -75,6 +75,17 @@ export default function UserNav() {
 
     const NAV_ITEMS: Array<NavItem> = user ? [
         {
+            label: 'Manage Services',
+            children: [
+                {
+                    label: 'Services Dashboard',
+                    subLabel: 'Handle all service related functions here',
+                    href: '/admindash',
+                },
+
+            ],
+        },
+        {
             label: 'Experiences',
             children: [
                 {
@@ -118,22 +129,7 @@ export default function UserNav() {
 
             ],
         },
-        {
-            label: 'FAQ',
-            children: [
-                {
-                    label: 'Send Query',
-                    subLabel: 'Ask us any questions(slow but more detailed reply)',
-                    href: '/AddQueries',
-                },
-                {
-                    label: 'Chat Bot',
-                    subLabel: 'Ask us any questions(chatting with our AI',
-                    href: '/FAQ',
-                },
 
-            ],
-        },
         
     ] : []
     const linkColor = useColorModeValue('gray.600', 'gray.200')

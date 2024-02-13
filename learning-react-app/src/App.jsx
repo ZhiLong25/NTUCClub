@@ -28,11 +28,11 @@ import ViewCard from './pages/cards/viewCard';
 import UpdateCard from './pages/cards/updateCard';
 import ManageCard from './pages/cards/manageCard';
 
-import ProductDash from './pages/products/ProductDash';
-import AddService from './pages/products/AddService';
-import GetService from './pages/products/GetService';
-import EditService from './pages/products/EditService';
-import ManageVendor from './pages/products/ManageVendor';
+import ProductDash from './pages/vendor/ProductDash';
+import AddService from './pages/admin/AddService';
+import GetService from './pages/admin/GetService';
+import EditService from './pages/admin/EditService';
+import ManageVendor from './pages/admin/ManageVendor';
 
 import AddReviews from './pages/products/AddReviews';
 
@@ -49,13 +49,17 @@ import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import ReplyQueries from "./pages/queries/ReplyQueries";
 import Addadmin from './pages/users/Addadmin';
-
+import AdminDash from './pages/admin/AdminDash';
 
 // import Adminaccounts from './pages/users/Adminaccounts';
 // import Accounts from './pages/users/accounts';
 import Accounts from './pages/users/Accounts';
 import AddMerchant from './pages/users/AddMerchant';
 import RegisterGoogle from "./pages/users/RegisterGoogle"
+
+import AddServiceVendor from './pages/vendor/AddServiceVendor';
+import EditServiceVendor from './pages/vendor/EditServiceVendor';
+import GetServiceVendor from './pages/vendor/GetServiceVendor';
 
 import "./pages/styles/chatbot.css"
 // import "./script"
@@ -83,6 +87,7 @@ function App() {
                 <>
                   <AdminNav />
                   <Routes>
+
                     <Route path={"/"} element={<Home />} />
                     <Route path={"/voucherDashboard"} element={<VoucherDashboard />} />
                     <Route path={"/addVouchers"} element={<AddVouchers />} />
@@ -95,19 +100,27 @@ function App() {
                     <Route path={"/AddMerchant"} element={<AddMerchant />} />
                     <Route path={"/Faq"} element={<Faq />} />
                     <Route path={"/paymentRecords"} element={<PaymentRecords />} />
+
+                    {/* Products/Vendors CRUD */}
+                    <Route path={"/adminDash"} element={<AdminDash />} />
+                    <Route path={"/addservice"} element={<AddService />} />
+                    <Route path={"/getservice"} element={<GetService />} />
+                    <Route path={"/editservice/:id"} element={<EditService />} />
+                    <Route path={"/managevendor"} element={<ManageVendor />} />
+
                   </Routes>
                 </>
               ) : user.userType === "Merchant" ? (
                 <>
                   <MerchantNav />
                   <Routes>
+                    {/* Vendor Services CRUD */}
                     <Route path={"/"} element={<Home />} />
-                    <Route path={"/productdash"} element={<ProductDash />} />  {/*Reference */}
-                    <Route path={"/addservice"} element={<AddService />} />
-                    <Route path={"/getservice"} element={<GetService />} />
-                    <Route path={"/editservice/:id"} element={<EditService />} />
-                    <Route path={"/managevendor"} element={<ManageVendor />} />
-                    <Route path={"/Faq"} element={<Faq />} />
+                    <Route path={"/productdash"} element={<ProductDash />} />
+                    <Route path={"/addservicevendor"} element={<AddServiceVendor />} />
+                    <Route path={"/getservicevendor"} element={<GetServiceVendor />} />
+                    <Route path={"/editservicevendor/:id"} element={<EditServiceVendor />} />
+
                   </Routes>
                 </>
               ) : (
@@ -125,13 +138,13 @@ function App() {
                     <Route path={"/cart"} element={<Cart />} />
                     <Route path={"/payment"} element={<Payment />} />
                     <Route path={"/Faq"} element={<Faq />} />
+                    <Route path={"/experiences/:id"} element={<Products />} />
+                    <Route path={"/experiences"} element={< ProductsPage />} />
 
                     <Route path={"/addreviews"} element={< AddReviews />} />
                     <Route path={"/wishlist"} element={< ViewWishlist />} />
-                    <Route path={"/expnearme"} element={< ExperienceNearMe />} />
+                    <Route path={"/expnearme"} element={< ExperienceNearMe />} /> 
 
-                    <Route path={"/experiences/:id"} element={<Products />} />
-                    <Route path={"/experiences"} element={< ProductsPage />} />
                   </Routes>
                 </>
               )
@@ -146,19 +159,8 @@ function App() {
                   <Route path={"/verification"} element={<Verification />} />
                   <Route path={"/AddQueries"} element={<AddQueries />} />
                   <Route path={"/RegisterGoogle"} element={<RegisterGoogle />} />
-
-                  <Route path={"/productdash"} element={<ProductDash />} />
-                  <Route path={"/addservice"} element={<AddService />} />
-                  <Route path={"/getservice"} element={<GetService />} />
-                  <Route path={"/editservice/:id"} element={<EditService />} />
-                  <Route path={"/managevendor"} element={<ManageVendor />} />
-                  
                   <Route path={"/experiences/:id"} element={<Products />} />
                   <Route path={"/experiences"} element={< ProductsPage />} />
-
-
-
-        
                   <Route path={"/Faq"} element={<Faq />} />
                 </Routes>
               </>

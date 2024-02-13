@@ -3,7 +3,6 @@ using NTUCClub.Models.Products;
 using Microsoft.AspNetCore.Authorization;
 using NanoidDotNet;
 
-
 namespace NTUCClub.Controllers
 {
     [ApiController]
@@ -36,11 +35,11 @@ namespace NTUCClub.Controllers
                         break;
 
                     case "atoz":
-                        result = result.OrderBy(x => x.Name); 
+                        result = result.OrderBy(x => x.Name);
                         break;
 
                     case "ztoa":
-                        result = result.OrderByDescending(x => x.Name); 
+                        result = result.OrderByDescending(x => x.Name);
                         break;
 
                     case "priceAsc":
@@ -76,6 +75,20 @@ namespace NTUCClub.Controllers
             return Ok(service);
         }
 
+        [HttpGet("getservicevendor/{vendor}/{search}")]
+        public IActionResult GetAllVendor(string vendor, string? search)
+        {
+            IQueryable<Service> result = _context.Services.Where(x => x.Vendor == vendor);
+
+            if (search != null)
+            {
+                result = result.Where(x => x.Name.Contains(search) || x.Description.Contains(search) || x.Vendor.Contains(search));
+            }
+
+            var list = result.OrderByDescending(x => x.CreatedAt).ToList();
+            return Ok(result);
+        }
+
 
         [HttpPost("addservice")]
         public IActionResult AddService(Service service)
@@ -108,6 +121,64 @@ namespace NTUCClub.Controllers
             return Ok(myService);
         }
 
+
+
+        [HttpGet("getvendorservice/{vendor}")]
+        public IActionResult GetServiceVendor(string vendor)
+        {
+            var services = _context.Services.Where(s => s.Vendor == vendor).ToList();
+
+            if (services.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(services);
+        }
+
+        [HttpPut("updateservice/{vendor}/{id}")]
+        public IActionResult UpdateServiceVendor(int id, string vendor, Service service)
+        {
+
+            // Fetch or create the category based on the service.Category value
+            //var category = _context.Category.FirstOrDefault(c => c.Name == service.Category.Trim())
+            //              ?? new Category { Name = service.Category.Trim() };
+
+            var myService = _context.Services.Find(id);
+            if (myService == null)
+            {
+                return NotFound();
+            }
+
+            myService.Name = service.Name.Trim();
+            myService.Description = service.Description.Trim();
+            myService.Price = service.Price;
+            myService.MemPrice = service.MemPrice;
+            myService.Location = service.Location;
+            myService.TimeSlots = service.TimeSlots;
+            myService.Slots = service.Slots;
+            myService.Vendor = service.Vendor.Trim();
+            myService.UpdatedAt = DateTime.Now;
+            myService.Category = service.Category;
+            myService.Image = service.Image;
+
+            _context.SaveChanges();
+            return Ok();
+        }
+
+        [HttpDelete("deleteservice/{vendor}/{id}")]
+        public IActionResult DeleteServiceVendor(int id)
+        {
+            var myService = _context.Services.Find(id);
+            if (myService == null)
+            {
+                return NotFound();
+            }
+
+            _context.Services.Remove(myService);
+            _context.SaveChanges();
+            return Ok();
+        }
 
         [HttpPut("updateservice/{id}")]
         public IActionResult UpdateService(int id, Service service)
@@ -156,4 +227,3 @@ namespace NTUCClub.Controllers
 
     }
 }
-

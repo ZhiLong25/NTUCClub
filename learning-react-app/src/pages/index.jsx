@@ -14,43 +14,18 @@ import { CheckIfDataIsArray, sampleCategoryItems, GetCategoryCodeName, sampleExp
 function Home() {
   const [services, setServices] = useState([]);
   const carouselItems = [
-    {
-      name: "Random Name #1",
-      description: "Probably the most random thing you have ever seen!",
-      img: "/assets/home/1.jpg"
-    },
-    {
-      name: "Random Name #2",
-      description: "Hello World!",
-      img: "/assets/home/2.jpg"
-    },
-    {
-      name: "Random Name #2",
-      description: "Hello World!",
-      img: "/assets/home/3.jpg"
-    },
-    {
-      name: "Random Name #2",
-      description: "Hello World!",
-      img: "/assets/home/4.jpg"
-    },
-    {
-      name: "Random Name #2",
-      description: "Hello World!",
-      img: "/assets/home/5.jpg"
-    }
+    { img: "/assets/home/1.jpg" },
+    { img: "/assets/home/2.jpg" },
+    { img: "/assets/home/3.jpg" },
+    { img: "/assets/home/4.jpg" },
+    { img: "/assets/home/5.jpg" }
   ]
 
   useEffect(() => {
     http.get('/Product/getservice')
       .then((res) => {
-        try {
-          const data = CheckIfDataIsArray(res.data)
-          setServices(data);
-        }
-        catch {
-          setServices([])
-        }
+        const data = CheckIfDataIsArray(res.data)
+        setServices(data);
       })
       .catch((err) => {
         console.log(err)
@@ -93,12 +68,7 @@ function Home() {
           Sweet Experiences With Your Sweetheart
         </Typography>
         <div id='eventList' >
-          {services.map((event, i) => {
-            if (i < 7) {
-              const icon = sampleCategoryItems.find((cat) => cat.title === event.category)?.icon
-              return (<EventCard key={i} events={event} icon={icon} />)
-            }
-          })}
+          {services.map((event, i) => { if (i < 7) { return (<EventCard key={i} events={event} />) } })}
           <Link to={"/experiences"} className='link'>
             <Card>
               <CardActionArea style={{ padding: "20px", textAlign: "center", display: "flex", placeContent: "center", alignItems: "center", height: "100%", fontWeight: "bold", backgroundColor: "black", color: "white" }}>

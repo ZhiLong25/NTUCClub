@@ -43,3 +43,12 @@
     min-height: 45px!important;
 }
 
+.noti-btn {
+    width: 100%;
+}
+
+.noti-icon {
+    max-width: "20px"!important;
+    display: block;
+    margin:"auto";
+}

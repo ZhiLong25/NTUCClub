@@ -92,13 +92,28 @@ function AddMerchant() {
       data.ProfilePicture = "defaultPfp.png"
       http.post(`/User/register/merchant`, data)
         .then((res) => {
+
+          http.post("/Vendor/addvendor", vendordata)
+          .then((res) => {
+            console.log("vendoradded")
+              console.log(res.data);
+  
+          })
+          
           console.log(res.data);
           localStorage.setItem('userData', JSON.stringify(res.data));
-          toast.success("Admin Added")
+          toast.success("Merchant Added")
         })
         .catch(function (err) {
           toast.error(`${err.response.data.message}`);
         });
+        
+        const vendordata = {
+          image: '',
+          name: data.name
+        }
+        
+
     }
   });
 
@@ -116,7 +131,7 @@ function AddMerchant() {
       position: 'relative'
     }}>
       <Typography variant="h5" sx={{ my: 2 }} style={{ marginTop: "5%" }}>
-        Add Admin
+        Add Merchant
       </Typography>
       <Box component="form" sx={{ maxWidth: '500px' }}
         onSubmit={formik.handleSubmit}>
