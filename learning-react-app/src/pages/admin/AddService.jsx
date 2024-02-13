@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Container, Box, Typography, TextField, Button, InputLabel, ListItemIcon, Select, MenuItem, Grid, Chip, ListItemText } from '@mui/material';
+import { Container, OutlinedInput, Box, Card, CardMedia, CardHeader, IconButton, Typography, TextField, Button, InputLabel, ListItemIcon, Select, MenuItem, Grid, Chip, ListItemText } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
@@ -9,33 +9,23 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import placeholder from './media/placeholder.png';
 import '../styles/product.css'
-import OutlinedInput from '@mui/material/OutlinedInput';
 import { useTheme } from '@mui/material/styles';
-import CancelIcon from '@mui/icons-material/Cancel';
-import { CheckIfDataIsArray, sampleCategoryItems, GetCategoryCodeName } from '../../pages/constant';
+import { CheckIfDataIsArray, sampleCategoryItems, GetCategoryCodeName } from '../constant';
+import { DeleteRounded, CancelRounded, UploadRounded, AddRounded } from '@mui/icons-material';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from '@mui/material/IconButton';
 
 function AddService() {
   const navigate = useNavigate();
-  // const [categoryList, setCategoryList] = useState([]);
   const [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
   const [vendorList, setVendorList] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
-  const [blobImage, setBlobImage] = useState();
+  const [blobImage, setBlobImage] = useState('');
   const [value, setValue] = useState(null);
-
   const formOptions = { headers: { 'Content-Type': 'multipart/form-data' } }
 
   useEffect(() => {
-    // http.get('/Category/getcategory').then((res) => {
-    //   setCategoryList(res.data);
-    // });
-
     http.get('/Vendor/getvendor')
       .then((res) => {
         const data = CheckIfDataIsArray(res.data)
@@ -50,8 +40,6 @@ function AddService() {
       return newImageFiles;
     });
   };
-
-
 
   const converImageToBlob = (files) => {
     const reader = new FileReader();
@@ -82,6 +70,7 @@ function AddService() {
   }
 
   const onFileChange = (e) => {
+
     const files = e.target.files;
     converImageToBlob(files)
     if (files) {
@@ -116,7 +105,6 @@ function AddService() {
       slots: null,
       vendor: '',
       category: ''
-
     },
     enableReinitialize: true,
 
@@ -157,8 +145,13 @@ function AddService() {
       console.log("Submit button clicked");
       console.log(data)
 
-      // ADD TELEGRAM API HERE
-      sendImageToTelegram(data.name, data.description);
+      http.post("/Product/addservice", data)
+        .then((res) => {
+          console.log(res.data);
+          sendImageToTelegram(data.name, data.description);
+          navigate("/admindash");
+
+        })
     }
   });
 
@@ -168,6 +161,8 @@ function AddService() {
   const MenuProps = { PaperProps: { style: { maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP, width: 250 } } };
   const names = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
   const theme = useTheme();
+  const uploadImgPaddingValue = imageFiles.length === 0 ? "16px" : "";
+  const uploadImgMarginValue = imageFiles.length === 0 ? "0" : "20px 0 0 0"
 
   function getStyles(name, personName, theme) {
     return {
@@ -180,38 +175,15 @@ function AddService() {
 
   return (
     <Container>
-      <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>Add Events / Services</Typography>
-      <Box component="form" onSubmit={formik.handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={4} md={4} lg={4} >
-            <Box sx={{ textAlign: 'center', mt: 2 }} >
-              {imageFiles.length > 0 ? (
-                <Grid container spacing={2}>
-                  {imageFiles.map((image, index) => (
-                    <Grid item key={index}>
-                      <Box sx={{ mt: 2, position: 'relative' }}>
-                        <IconButton onClick={() => handleDeleteImage(index)} sx={{ position: 'absolute', top: '5px', right: '5px' }}>
-                          <DeleteIcon />
-                        </IconButton>
-                        <img alt={`Image ${index + 1}`} src={`${import.meta.env.VITE_FILE_BASE_URL}${image}`} style={{ maxWidth: "100px", maxHeight: "100px" }} />
-                      </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              ) : (
-                <img src={placeholder} alt="placeholder" />
-              )}
-              <Button variant="contained" component="label" style={{ marginTop: "20px" }}>
-                Upload Image
-                <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
-              </Button>
-            </Box>
-          </Grid>
+      <Typography variant='h5' style={{ marginTop: "20px", marginBottom: "10px" }}>Add Experience</Typography>
 
-          <Grid item xs={8} md={8} lg={8} >
-            <InputLabel id="title">Title</InputLabel>
+      <Box component="form" onSubmit={formik.handleSubmit}>
+        <Grid container spacing={3}>
+          {/* FORM FIELDS */}
+          <Grid item display={"grid"} gap={"15px"}>
             <TextField
-              fullWidth margin="normal" autoComplete="off"
+              fullWidth
+              autoComplete="off"
               label="Title"
               name="name"
               value={formik.values.name}
@@ -220,58 +192,40 @@ function AddService() {
               helperText={formik.touched.name && formik.errors.name}
             />
 
-            <InputLabel id="description">Description</InputLabel>
             <ReactQuill
-              style={{ borderRadius: "5px" }}
+              placeholder='Description'
+              style={{ borderRadius: "10px" }}
               value={formik.values.description}
               onChange={(value) => formik.setFieldValue('description', value)}
               modules={{
                 toolbar: [
                   [{ header: [1, 2, false] }],
                   ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                  [{ list: 'ordered' }, { list: 'bullet' }],
-                  ['link', 'image'],
-                  ['clean'],
+                  [{ list: 'ordered' }, { list: 'bullet' }], ['link', 'image'], ['clean']
                 ],
               }}
-              formats={[
-                'header',
-                'bold', 'italic', 'underline', 'strike', 'blockquote',
-                'list', 'bullet',
-                'link', 'image',
-              ]}
-              placeholder='Enter description here...'
+              formats={['header', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'link', 'image']}
             />
             {formik.touched.description && formik.errors.description && (
               <div class="css-1wc848c-MuiFormHelperText-root" style={{ color: '#D32F2F' }}>{formik.errors.description}</div>
             )}
 
-
-            <InputLabel id="location-label">Location</InputLabel>
             <GooglePlacesAutocomplete
-              placeholder="Type a place"
               apiKey="AIzaSyAqS06SaOm9qPZ25jGGECjCyAAbnKd_jLg"
-              autocompletionRequest={{
-                componentRestrictions: {
-                  country: ['sg'] // Restrict to Singapore only
-                }
-              }}
+              autocompletionRequest={{ componentRestrictions: { country: ['sg'] } }}
               selectProps={{
                 value,
+                placeholder: 'Location',
                 onChange: (newValue) => {
                   setValue(newValue);
-                  // Set the location field in Formik form state
                   formik.setFieldValue('location', newValue.label);
                 },
               }}
             />
 
-
-            <InputLabel id="vendor-label">Vendor</InputLabel>
             <Select
-              style={{ marginTop: "15px" }}
-              fullWidth margin="normal"
-              labelId="vendor-label"
+              displayEmpty
+              fullWidth
               id="vendor"
               name="vendor"
               value={formik.values.vendor}
@@ -279,57 +233,50 @@ function AddService() {
               error={formik.touched.vendor && Boolean(formik.errors.vendor)}
               helperText={formik.touched.vendor && formik.errors.vendor}
             >
-              <MenuItem value="" disabled>Select a Vendor</MenuItem>
-              {vendorList.map((vendor) => (
-                <MenuItem key={vendor.id} value={vendor.name}>
-                  {vendor.name}
-                </MenuItem>
-              ))}
+              <MenuItem value="" disabled>Vendor</MenuItem>
+              {vendorList.map((vendor) => (<MenuItem key={vendor.id} value={vendor.name}>{vendor.name}</MenuItem>))}
             </Select>
-            <InputLabel id="timeslot">Timeslots</InputLabel>
+
             <Select
-              style={{ width: "100%" }}
-              labelId="demo-multiple-chip-label"
+              multiple
+              displayEmpty
+              fullWidth
               id="timeslots"
               name="timeslots"
-              multiple
+              placeholder='Select a Timeslot'
               value={formik.values.timeslots || []}
               onChange={(event) => {
                 const selectedValues = event.target.value;
-                console.log('Timeslots', selectedValues);
-                formik.setFieldValue('timeslots', Array.isArray(selectedValues) ? selectedValues : [selectedValues]); // Ensure it's always an array
+                formik.setFieldValue('timeslots', Array.isArray(selectedValues) ? selectedValues : [selectedValues]);
               }}
-              input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
               renderValue={(selected) => {
-                if (Array.isArray(selected)) {
-                  return (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                      {selected.map((value) => (
-                        <Chip
-                          key={value}
-                          label={value}
-                          value={value}
-                          onDelete={() => {
-                            const newSelected = formik.values.timeslots.filter((item) => item !== value);
-                            const newSelectedString = newSelected.join(','); // Convert array to string
-                            formik.setFieldValue('timeslots', newSelectedString); // Update formik state with the string
-                          }}
-                          deleteIcon={<CancelIcon />}
-                        />
-                      ))}
-                    </Box>
-                  );
-                } else {
-                  return selected;
+                if (selected.length === 0) {
+                  return <label>Timeslot</label>;
+                }
+                else {
+                  if (Array.isArray(selected)) {
+                    return (
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: "5px" }}>
+                        {selected.map((value) => (
+                          <Chip key={value} label={value} value={value} deleteIcon={<CancelRounded />}
+                            onDelete={() => {
+                              const newSelected = formik.values.timeslots.filter((item) => item !== value);
+                              const newSelectedString = newSelected.join(','); // Convert array to string
+                              formik.setFieldValue('timeslots', newSelectedString); // Update formik state with the string
+                            }}
+                          />
+                        ))}
+                      </Box>
+                    );
+                  } else {
+                    return selected;
+                  }
                 }
               }}
             >
+              <MenuItem value="" disabled>Select a Timeslot</MenuItem>
               {names.map((name) => (
-                <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, formik.values.timeslots || [], theme)}
-                >
+                <MenuItem key={name} value={name} style={getStyles(name, formik.values.timeslots || [], theme)}>
                   {name}
                 </MenuItem>
               ))}
@@ -338,9 +285,9 @@ function AddService() {
 
             <Grid container spacing={2}>
               <Grid item xs={4} md={4} lg={4} >
-                <InputLabel id="price">Price</InputLabel>
                 <TextField
-                  fullWidth margin='normal' autoComplete='off'
+                  fullWidth
+                  autoComplete='off'
                   label="Price"
                   name='price'
                   type="number"
@@ -349,14 +296,13 @@ function AddService() {
                   error={formik.touched.price && Boolean(formik.errors.price)}
                   helperText={formik.touched.price && formik.errors.price}
                 />
-
               </Grid>
 
               <Grid item xs={4} md={4} lg={4} >
-                <InputLabel id="slots">Slots</InputLabel>
-
+                {/* <InputLabel id="slots">Slots</InputLabel> */}
                 <TextField
-                  fullWidth margin='normal' autoComplete='off'
+                  fullWidth
+                  autoComplete='off'
                   label="Slots"
                   name='slots'
                   type="number"
@@ -365,52 +311,42 @@ function AddService() {
                   error={formik.touched.slots && Boolean(formik.errors.slots)}
                   helperText={formik.touched.slots && formik.errors.slots}
                 />
-
               </Grid>
 
               <Grid item xs={4} md={4} lg={4} >
-                <InputLabel id="category">Category</InputLabel>
+                {/* <InputLabel id="category">Category</InputLabel> */}
                 <Select
-                  style={{ marginTop: "15px" }}
-                  fullWidth margin="normal"
-                  renderValue={(v) => v}
-                  labelId="category-label"
-                  id="category"
+                  fullWidth
+                  displayEmpty
                   name="category"
                   value={formik.values.category}
                   onChange={formik.handleChange}
                   error={formik.touched.category && Boolean(formik.errors.category)}
                   helperText={formik.touched.category && formik.errors.category}
+                  renderValue={(v) => {
+                    if (v.length === 0) {
+                      return <label>Category</label>;
+                    }
+                    return v
+                  }}
                 >
-                  <MenuItem value="" disabled>
-                    Select a Category
-                  </MenuItem>
+                  <MenuItem value="" disabled>Category</MenuItem>
                   {sampleCategoryItems.map((category) => (
                     <MenuItem key={category.title} value={category.title}>
-
-                      <ListItemIcon>{category.icon}
-
-                      </ListItemIcon>
+                      <ListItemIcon>{category.icon}</ListItemIcon>
                       <ListItemText primary={category.title} />
-
                     </MenuItem>
                   ))}
                 </Select>
-
-
               </Grid>
             </Grid>
 
 
-            <FormControlLabel
-              control={<Switch onChange={(e) => setIsMemberPriceVisible(e.target.checked)} />}
-              label="Member Price"
-            />
+            <FormControlLabel control={<Switch onChange={(e) => setIsMemberPriceVisible(e.target.checked)} />} label="Member Price" />
 
             {isMemberPriceVisible && (
               <Grid item xs={4} md={4} lg={4}>
                 <InputLabel id="memprice">Member Price</InputLabel>
-
                 <TextField
                   fullWidth
                   margin="normal"
@@ -427,21 +363,37 @@ function AddService() {
             )}
 
 
+            {/* ADD BTN */}
+            <Box sx={{ mt: 2 }} textAlign={'right'}>
+              <Button startIcon={<AddRounded />} variant="contained" type="submit">Add</Button>
+            </Box>
+          </Grid>
 
-            <Box sx={{ mt: 2 }}>
-              <Button variant="contained" type="submit" className='addbtn'>
-                Add
+          {/* IMAGE PREVIEW */}
+          <Grid item xs={4} md={4} lg={4} >
+            <Box sx={{ textAlign: 'center' }} >
+              {imageFiles.length > 0 ? (
+                <Grid container spacing={2}>
+                  {imageFiles.map((image, index) => (
+                    <Grid item key={index}>
+                      <Box sx={{ mt: 2, position: 'relative' }}>
+                        <Card>
+                          <CardHeader action={<IconButton onClick={() => handleDeleteImage(index)} sx={{ position: 'absolute', top: '5px', right: '5px' }}><DeleteRounded /></IconButton>} />
+                          <CardMedia component="img" image={`${import.meta.env.VITE_FILE_BASE_URL}${image}`} alt={`Image ${index + 1}`} style={{ objectFit: "contain", width: "150px", height: "150px" }} />
+                        </Card>
+                      </Box>
+                    </Grid>
+                  ))}
+                </Grid>
+              ) : null}
+              <Button startIcon={<UploadRounded />} fullWidth variant='outlined' component='label' style={{ margin: uploadImgMarginValue, padding: uploadImgPaddingValue }}>
+                Upload Images
+                <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
               </Button>
             </Box>
-
           </Grid>
-        </Grid >
-
-
-
-
-      </Box >
-
+        </Grid>
+      </Box>
     </Container >
   );
 }
