@@ -7,6 +7,7 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import UserContext from '../../contexts/UserContext';
 
 function ViewVouchers() {
   const navigate = useNavigate();
@@ -15,7 +16,6 @@ function ViewVouchers() {
   const [id, setID] = useState(null);
   const [user, setUser] = useState();
   const [searchTerm, setSearchTerm] = useState('');
-  const [userMobileNumber, setUserMobileNumber] = useState('');
 
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
@@ -43,11 +43,12 @@ function ViewVouchers() {
     } else {
       console.error('emailjs is not initialized.');
     }
+    console.log(userEmail)
   };
 
   const handleYesClick = () => {
     const verificationCode = generateRandomCode();
-
+    console.log(user.email);
     sendEmailToUser(user?.email, verificationCode);
 
     handleClose();
@@ -80,14 +81,14 @@ function ViewVouchers() {
     voucher.voucher_Name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const claim = (id) => {
-    console.log(user.id)
-    http.put(`User/claim/${user.id}/${id}`).then(() => {
-      toast.success("Successfully claimed")
-    }).catch((err) => {
-      toast.error(err)
-    })
-  }
+  // const claim = (id) => {
+  //   console.log(user.id)
+  //   http.put(`User/claim/${user.id}/${id}`).then(() => {
+  //     toast.success("Successfully claimed")
+  //   }).catch((err) => {
+  //     toast.error(err)
+  //   })
+  // }
 
   const handleOpen = (id) => {
     setID(id)
