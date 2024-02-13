@@ -1,4 +1,3 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Container, Box, Typography, TextField, Button, InputLabel, ListItemIcon, Select, MenuItem, Grid, Chip, ListItemText } from '@mui/material';
 import React, { useState, useEffect } from 'react';
@@ -8,12 +7,10 @@ import * as yup from 'yup';
 import http from '../../http';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import placeholder from './media/placeholder.png';
 import '../styles/product.css'
-
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { useTheme } from '@mui/material/styles';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -25,22 +22,25 @@ import IconButton from '@mui/material/IconButton';
 
 function AddService() {
   const navigate = useNavigate();
-  const [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
   // const [categoryList, setCategoryList] = useState([]);
+  const [isMemberPriceVisible, setIsMemberPriceVisible] = useState(false);
   const [vendorList, setVendorList] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
-
+  const [blobImage, setBlobImage] = useState();
   const [value, setValue] = useState(null);
+
+  const formOptions = { headers: { 'Content-Type': 'multipart/form-data' } }
 
   useEffect(() => {
     // http.get('/Category/getcategory').then((res) => {
     //   setCategoryList(res.data);
     // });
 
-    http.get('/Vendor/getvendor').then((res) => {
-      setVendorList(res.data);
-    });
-
+    http.get('/Vendor/getvendor')
+      .then((res) => {
+        const data = CheckIfDataIsArray(res.data)
+        setVendorList(data);
+      });
   }, []);
 
   const handleDeleteImage = (index) => {
@@ -51,8 +51,39 @@ function AddService() {
     });
   };
 
+
+
+  const converImageToBlob = (files) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64Image = event.target.result.split(',')[1];
+      const binaryImage = atob(base64Image);
+      const arrayBuffer = new ArrayBuffer(binaryImage.length);
+      const uint8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < binaryImage.length; i++) {
+        uint8Array[i] = binaryImage.charCodeAt(i);
+      }
+
+      const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+      setBlobImage(blob)
+    };
+    reader.readAsDataURL(files[0]);
+  }
+
+  const sendImageToTelegram = (title, description) => {
+    const removeHTMLDescription = description.replace(/<[^>]*>?/gm, '')
+    const caption = `<b>${title}</b>\n\n${removeHTMLDescription}`;
+    const formData = new FormData();
+    formData.append('photo', blobImage, 'image.jpg');
+    formData.append('chat_id', '-1002088213559');
+    formData.append('caption', caption);
+    formData.append('parse_mode', 'HTML');
+    http.post("https://api.telegram.org/bot6933338568:AAFGiQqnJ1S5wQnowUebvVhnoOA-BlSSFSs/sendPhoto", formData, formOptions)
+  }
+
   const onFileChange = (e) => {
     const files = e.target.files;
+    converImageToBlob(files)
     if (files) {
       const formData = new FormData();
       Array.from(files).forEach((file) => {
@@ -62,11 +93,8 @@ function AddService() {
         }
         formData.append('files', file);
       });
-      http.post('/file/upload-multiple', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+
+      http.post('/file/upload-multiple', formData, formOptions)
         .then((res) => {
           setImageFiles((prevImageFiles) => [...prevImageFiles, ...res.data.filenames]);
           console.log(imageFiles)
@@ -120,53 +148,25 @@ function AddService() {
     }),
 
     onSubmit: (data) => {
-
       const imageFilesAsString = imageFiles.join(',');
       data.image = imageFilesAsString;
-
       data.timeslots = data.timeslots.join(', ');
-
       if (imageFilesAsString) {
         data.image = imageFilesAsString;
       }
       console.log("Submit button clicked");
       console.log(data)
-      http.post("/Product/addservice", data)
-        .then((res) => {
-          console.log(res.data);
-          // http.get("https://api.telegram.org/bot6933338568:AAFGiQqnJ1S5wQnowUebvVhnoOA-BlSSFSs/sendMessage?chat_id=-1002088213559&text=%3Cb%3EA%20new%20activities%20has%20been%20added!%3C/b%3E%20Click%20%3Ca%20href=%27google.com%27%3Ehere%3C/a%3E%20to%20see!&parse_mode=HTML")
-          navigate("/productdash");
 
-        })
+      // ADD TELEGRAM API HERE
+      sendImageToTelegram(data.name, data.description);
     }
   });
 
 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-      },
-    },
-  };
-
-  const names = [
-    '12:00',
-    '13:00',
-    '14:00',
-    '15:00',
-    '16:00',
-    '17:00',
-    '18:00',
-    '19:00',
-    '20:00',
-    '21:00',
-    '22:00',
-  ];
-
+  const MenuProps = { PaperProps: { style: { maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP, width: 250 } } };
+  const names = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
   const theme = useTheme();
 
   function getStyles(name, personName, theme) {
@@ -180,12 +180,8 @@ function AddService() {
 
   return (
     <Container>
-      <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>
-        Add Events / Services
-      </Typography>
-
+      <Typography variant='h5' sx={{ my: 2 }} style={{ marginTop: "5%" }}>Add Events / Services</Typography>
       <Box component="form" onSubmit={formik.handleSubmit}>
-
         <Grid container spacing={2}>
           <Grid item xs={4} md={4} lg={4} >
             <Box sx={{ textAlign: 'center', mt: 2 }} >
@@ -194,19 +190,10 @@ function AddService() {
                   {imageFiles.map((image, index) => (
                     <Grid item key={index}>
                       <Box sx={{ mt: 2, position: 'relative' }}>
-                      <IconButton
-                          onClick={() => handleDeleteImage(index)}
-                          sx={{ position: 'absolute', top: '5px', right: '5px' }}
-                        >
+                        <IconButton onClick={() => handleDeleteImage(index)} sx={{ position: 'absolute', top: '5px', right: '5px' }}>
                           <DeleteIcon />
                         </IconButton>
-
-                        <img
-                          alt={`Image ${index + 1}`}
-                          src={`${import.meta.env.VITE_FILE_BASE_URL}${image}`}
-                          style={{ maxWidth: "100px", maxHeight: "100px" }}
-                        />
-
+                        <img alt={`Image ${index + 1}`} src={`${import.meta.env.VITE_FILE_BASE_URL}${image}`} style={{ maxWidth: "100px", maxHeight: "100px" }} />
                       </Box>
                     </Grid>
                   ))}
@@ -223,7 +210,6 @@ function AddService() {
 
           <Grid item xs={8} md={8} lg={8} >
             <InputLabel id="title">Title</InputLabel>
-
             <TextField
               fullWidth margin="normal" autoComplete="off"
               label="Title"
@@ -235,7 +221,6 @@ function AddService() {
             />
 
             <InputLabel id="description">Description</InputLabel>
-
             <ReactQuill
               style={{ borderRadius: "5px" }}
               value={formik.values.description}
@@ -263,7 +248,6 @@ function AddService() {
 
 
             <InputLabel id="location-label">Location</InputLabel>
-
             <GooglePlacesAutocomplete
               placeholder="Type a place"
               apiKey="AIzaSyAqS06SaOm9qPZ25jGGECjCyAAbnKd_jLg"
@@ -280,14 +264,10 @@ function AddService() {
                   formik.setFieldValue('location', newValue.label);
                 },
               }}
-
             />
 
 
-            {/* Your existing code */}
-
             <InputLabel id="vendor-label">Vendor</InputLabel>
-
             <Select
               style={{ marginTop: "15px" }}
               fullWidth margin="normal"
@@ -299,17 +279,13 @@ function AddService() {
               error={formik.touched.vendor && Boolean(formik.errors.vendor)}
               helperText={formik.touched.vendor && formik.errors.vendor}
             >
-              <MenuItem value="" disabled>
-                Select a Vendor
-              </MenuItem>
+              <MenuItem value="" disabled>Select a Vendor</MenuItem>
               {vendorList.map((vendor) => (
                 <MenuItem key={vendor.id} value={vendor.name}>
                   {vendor.name}
                 </MenuItem>
               ))}
             </Select>
-
-
             <InputLabel id="timeslot">Timeslots</InputLabel>
             <Select
               style={{ width: "100%" }}
@@ -361,10 +337,8 @@ function AddService() {
 
 
             <Grid container spacing={2}>
-
               <Grid item xs={4} md={4} lg={4} >
                 <InputLabel id="price">Price</InputLabel>
-
                 <TextField
                   fullWidth margin='normal' autoComplete='off'
                   label="Price"
@@ -393,8 +367,6 @@ function AddService() {
                 />
 
               </Grid>
-
-
 
               <Grid item xs={4} md={4} lg={4} >
                 <InputLabel id="category">Category</InputLabel>
@@ -463,14 +435,14 @@ function AddService() {
             </Box>
 
           </Grid>
-        </Grid>
+        </Grid >
 
 
 
 
-      </Box>
+      </Box >
 
-    </Container>
+    </Container >
   );
 }
 export default AddService;
