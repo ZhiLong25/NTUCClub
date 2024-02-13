@@ -22,8 +22,8 @@ namespace NTUCClub.Models.Products
 
 
         // Navigation property to represent the one-to-many relationship
-        [JsonIgnore]
-        public List<Service>? Services { get; set; }
+        /*[JsonIgnore]
+        public List<Service>? Services { get; set; }*/
 
 
     }

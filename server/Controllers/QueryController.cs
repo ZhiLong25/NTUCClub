@@ -115,7 +115,7 @@ namespace NTUCClub.Controllers
             _context.SaveChanges();
             return Ok();
         }
-
+        
         [HttpDelete("DeletequeryID/{id}")]
         public IActionResult DeleteQueryById(int id)
         {

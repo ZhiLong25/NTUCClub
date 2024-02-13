@@ -48,6 +48,7 @@ import PaymentRecords from './pages/cart/paymentRecords';
 import AddQueries from "./pages/queries/AddQueries";
 import ViewQueries from "./pages/queries/ViewQueries";
 import ReplyQueries from "./pages/queries/ReplyQueries";
+import ViewReplies from "./pages/queries/ViewReplies";
 import Addadmin from './pages/users/Addadmin';
 import AdminDash from './pages/admin/AdminDash';
 // import Adminaccounts from './pages/users/Adminaccounts';
@@ -56,16 +57,19 @@ import Accounts from './pages/users/Accounts';
 import AddMerchant from './pages/users/AddMerchant';
 import RegisterGoogle from "./pages/users/RegisterGoogle"
 
+
 import AddServiceVendor from "./pages/vendor/AddServiceVendor"
 import EditServiceVendor from "./pages/vendor/EditServiceVendor"
 import GetServiceVendor from "./pages/vendor/GetServiceVendor"
+
+
+import ReactGA from "react-ga4"
 
 import "./pages/styles/chatbot.css"
 // import "./script"
 import Faq from './pages/Faq';
 function App() {
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
       http.get('/user/auth').then((res) => {
@@ -73,6 +77,8 @@ function App() {
         setUser(res.data.user);
       });
     }
+    ReactGA.initialize("G-0V1W79YL3R")
+
   }, []);
 
 
@@ -94,6 +100,7 @@ function App() {
                     <Route path={"/Addadmin"} element={<Addadmin />} />
                     <Route path={"/Accounts"} element={<Accounts />} />
                     <Route path={"/ViewQueries"} element={<ViewQueries />} />
+                    <Route path={"/ViewReplies"} element={<ViewReplies />} />
                     <Route path={"/replyqueries/:id"} element={<ReplyQueries />} />
                     <Route path={"/AddMerchant"} element={<AddMerchant />} />
                     <Route path={"/Faq"} element={<Faq />} />
@@ -121,10 +128,14 @@ function App() {
                     <Route path={"/managevendor"} element={<ManageVendor />} />
                     <Route path={"/Faq"} element={<Faq />} />
 
+
                     <Route path={"/productdash"} element={<ProductDash />} />
                     <Route path={"/addservicevendor"} element={<AddServiceVendor />} />
                     <Route path={"/getservicevendor"} element={<GetServiceVendor />} />
                     <Route path={"/editservicevendor/:id"} element={<EditServiceVendor />} />
+                    <Route path={"/experiences"} element={< ProductsPage />} />
+                    <Route path={"/experiences/:id"} element={<Products />} />
+
                   </Routes>
                 </>
               ) : (

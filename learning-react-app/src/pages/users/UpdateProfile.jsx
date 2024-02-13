@@ -217,12 +217,11 @@ function UpdateProfile() {
         <Box>
             <div className='main-container'>
                 <Card className='pfp-container'>
-                    <Box component="form" onSubmit={formik.handleSubmit}style={{width:"80%",height:"100%",margin:"auto"}}> 
+                    <Box component="form" onSubmit={formik.handleSubmit} style={{ width: "80%", height: "100%", margin: "auto" }}>
 
-                        <Box style={{ marginBottom: "30px", marginTop: "30px", height: "5rem",textAlign:"center" }} >
-                            {
-                                imageFile && (
-                                    <img
+                        <Box style={{ marginBottom: "30px", marginTop: "30px", height: "5rem", textAlign: "center" }} >
+                            {imageFile && (
+                                <img
                                     alt="tutorial"
                                     className="pfpimg"
                                     style={{
@@ -231,17 +230,17 @@ function UpdateProfile() {
                                         width: "150px",
                                         objectFit: 'cover', // Adjust based on your requirements
                                         marginTop: "5%",
-                                        margin:"auto"
+                                        margin: "auto"
                                     }}
-                                    src={imageFile??`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
-                                    />
-                                    )
-                                }
-                                    <Button variant="contained" component="label" style={{ marginTop: "25px" }}>
-                                        Upload Image
-                                        <input hidden accept="image/*" multiple type="file"
-                                            onChange={onFileChange} />              </Button>
-                            <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#E8533F", marhin:"auto" }}
+                                    src={imageFile.startsWith('http') ? imageFile : `${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
+                                />
+                            )}
+                            <Button variant="contained" component="label" style={{ marginTop: "25px" }}>
+                                Upload Image
+                                <input hidden accept="image/*" multiple type="file"
+                                    onChange={onFileChange} />
+                            </Button>
+                            <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#E8533F", marhin: "auto" }}
                                 type="submit">
                                 Save
                             </Button>
@@ -259,7 +258,6 @@ function UpdateProfile() {
                                 Name
                             </div>}
                             name="name"
-                            style={{ background: colour }}
                             value={formik.values.name ?? userDetail.name}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -274,8 +272,6 @@ function UpdateProfile() {
                                 email
                             </div>}
                             name="email"
-                            style={{ background: colour }}
-
                             value={formik.values.email ?? userDetail.email}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -291,7 +287,6 @@ function UpdateProfile() {
                                 phone
                             </div>}
                             name="phone"
-                            style={{ background: colour }}
 
                             value={formik.values.phone ?? userDetail.phone}
                             onChange={formik.handleChange}
@@ -375,7 +370,7 @@ function UpdateProfile() {
                             />
                             <span
                                 className="eyespan"
-                                style={{ display: "inline-block", margin: "auto", position: "absolute", left: "90%", top: "30%"}}
+                                style={{ display: "inline-block", margin: "auto", position: "absolute", left: "90%", top: "30%" }}
                             >
                                 <Icon
                                     icon={icon2}
