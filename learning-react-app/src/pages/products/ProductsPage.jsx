@@ -6,6 +6,7 @@ import '../styles/product.css';
 import { CheckIfDataIsArray, GetCategoryCodeName, sampleCategoryItems, sortList } from '../constant';
 import EventCard from '../components/event';
 
+
 function ProductsPage() {
   const [serviceList, setServiceList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
