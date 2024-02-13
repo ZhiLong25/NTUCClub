@@ -14,6 +14,7 @@ import Calendar from "react-calendar";
 import "../styles/updateProfile.css";
 import { useNavigate } from 'react-router-dom';
 import "../styles/calendar.css";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function addVouchers() {
   const navigate = useNavigate()
@@ -71,7 +72,7 @@ function addVouchers() {
         .max(100, 'Name must be at most 50 characters')
         .required('Name is required')
         .matches(/^[a-zA-Z0-9\s]+$/, "Only letter and numbers input accepted"),
-      }),
+    }),
 
     onSubmit: (data) => {
       data.Voucher_Details = data.Voucher_Details.trim();
@@ -90,6 +91,11 @@ function addVouchers() {
           data.Voucher_Image = imageFile;
         }
 
+        if (imageFile == null) {
+          toast.error('Please upload an image');
+          return;
+        }
+
         const formData = new FormData();
         formData.append('Voucher_Details', data.Voucher_Details);
         formData.append('Voucher_Name', data.Voucher_Name);
@@ -100,13 +106,13 @@ function addVouchers() {
         console.log(formData)
         http.post("/Voucher/Addvoucher", formData)
         http.post("/Voucher/Addvoucher", data)
-        .then((res) => {
-          toast.success("Voucher Added");
-          setTimeout(() => {
+          .then((res) => {
+            toast.success("Voucher Added");
+            setTimeout(() => {
               navigate("/voucherdashboard")
-          }, 2000); // 2000 milliseconds = 2 seconds
-      })
-      
+            }, 2000); // 2000 milliseconds = 2 seconds
+          })
+
           .catch(function (err) {
             console.error('Error:', err);
             toast.error(`${err.response.data.message}`);
@@ -136,7 +142,7 @@ function addVouchers() {
         })
         .catch(function (error) {
           console.log(error.response);
-        });
+        })
     }
   };
 
@@ -146,130 +152,105 @@ function addVouchers() {
     }
   }, [formik.values.Voucher_Image]);
 
+  const goBack = () => {
+    navigate("/voucherdashboard")
+  }
+
   return (
     <Box>
+       <Typography variant="h4" sx={{ mt: 8, fontWeight: 'bold', color: '#E6533F', textAlign:'center' }}>
+          Add Voucher
+      </Typography>
 
-      
-<div className='main-container'>
-                <Card className='pfp-container'>
-                <Box style={{ width: "80%", height: "100%", margin: "auto" }}>
-        <Box style={{ marginBottom: "30px", marginTop: "30px", height: "5rem", textAlign: "center" }} >
-          {
-            imageFile && (
+      <Button onClick={goBack}><ArrowBackIcon /> Back to Dashboard</Button>
+
+      <div className='main-container'>
+        <Card className='pfp-container' style={{ height: "325px" }}>
+
+          <Box style={{ marginBottom: "30px", marginTop: "30px", height: "5rem", textAlign: "center" }}>
+            {imageFile ? (
               <img
                 alt="tutorial"
                 className="voucherImg"
                 style={{
-                  height: "150px",
-                  width: "150px",
-                  objectFit: 'cover', // Adjust based on your requirements
-                  marginTop: "5%",
-                  margin: "auto"
+                  borderRadius: "150%",
+                    height: "200px",
+                    width: "200px",
+                    margin: "auto",
                 }}
                 src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}
               />
-            )
-          }
-          <Button variant="contained" component="label" style={{ marginTop: "25px" }}>
-            Upload Image
-            <input hidden accept="image/*" multiple type="file"
-              onChange={onFileChange} />              
-              </Button>
-        </Box>
-      </Box>
-      </Card>
-      <Card className='information-container' >
-        <Typography variant="h5" sx={{ my: 2, marginTop: "5%" }}style={{textAlign:"center", fontWeight:"bold"}}>
-          Add Voucher
-        </Typography>
-        <Box component="form" sx={{ maxWidth: '500px', width: '100%' }} onSubmit={formik.handleSubmit} style={{margin:"auto"}}>
-          
-          {/* <Box mb={2}>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={onImageChange}
-              style={{ display: 'none' }}
-              id="imageInput"  // Assign a unique id to the file input
-            />
-            {!uploadedImage ? (
-              <label htmlFor="imageInput">
-                <Button component="span" fullWidth variant="contained" sx={{ background: "#03C04A" }}>
-                  Upload Image
-                </Button>
-              </label>
             ) : (
-              <Box mt={2} mb={2} sx={{ width: '200px', height: '200px', overflow: 'hidden', position: 'relative' }}>
-                <img
-                  src={uploadedImage}
-                  alt="Uploaded"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-                <Button
-                  variant="contained"
-                  sx={{
-                    position: 'absolute',
-                    bottom: 8,
-                    right: 8,
-                    background: "#03C04A",
+              <img
+                src= "/assets/placeholder.jpg"
+                alt="placeholder"
+                className="voucherImg"
+                  style={{
+                    borderRadius: "150%",
+                    height: "200px",
+                    width: "200px",
+                    margin: "auto",
                   }}
-                  onClick={onEditImage}
-                >
-                  Edit Image
-                </Button>
-              </Box>
+              />
             )}
-            {image && <Typography variant="subtitle1">{image.name}</Typography>}
-          </Box> */}
-          <TextField
-            fullWidth margin="dense" autoComplete="off"
-            label={<div style={{ display: 'flex', alignItems: 'center' }}>
-              <DriveFileRenameOutlineIcon style={{ marginRight: 8 }} />
-              Voucher Name
-            </div>}
-            name="Voucher_Name"
-            value={formik.values.Voucher_Name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.Voucher_Name && Boolean(formik.errors.Voucher_Name)}
-            helperText={formik.touched.Voucher_Name && formik.errors.Voucher_Name}
-          />
-          <TextField
-            fullWidth
-            multiline // Enable multiline
-            rows={4} // Adjust the number of rows as needed
-            margin="dense"
-            autoComplete="off"
-            label={
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <DescriptionIcon style={{ marginRight: 8 }} />
-                Details
-              </div>
-            }
-            name="Voucher_Details"
-            value={formik.values.Voucher_Details}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.Voucher_Details && Boolean(formik.errors.Voucher_Details)}
-            helperText={formik.touched.Voucher_Details && formik.errors.Voucher_Details}
-          />
-          <DropdownCounter
-            style={{ marginTop: "8px" }}
-            value={formik.values.Voucher_Quantity}
-            onChange={(e) => formik.setFieldValue('Voucher_Quantity', e.target.value)}
-          />
+            <Button variant="contained" component="label" style={{ marginTop: "25px", backgroundColor: "#E6533F", color: "white" }}>
+              Upload Image
+              <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
+            </Button>
+          </Box>
+        </Card>
 
-          <div style={{ marginTop: "8px" }}><p>Select Expiry Date</p></div>
-          <div style={{ marginTop: "8px" }}>
-            <Calendar onChange={onChange} value={date} className="black-selected-date"
- />
-          </div>
-          <Button fullWidth variant="contained" sx={{ mt: 2 }} style={{ background: "#03C04A",marginBottom:"5%" }} type="submit">
-            Add
-          </Button>
-        </Box>
-        <ToastContainer />
-      </Card>
+        <Card className='information-container' >
+          <Box component="form" sx={{ maxWidth: '500px', width: '100%' }} onSubmit={formik.handleSubmit} style={{ margin: "auto", marginTop: "5%" }}>
+            <TextField
+              fullWidth margin="dense" autoComplete="off"
+              label={<div style={{ display: 'flex', alignItems: 'center'}}>
+                <DriveFileRenameOutlineIcon style={{ marginRight: 8 }} />
+                Voucher Name
+              </div>}
+              name="Voucher_Name"
+              value={formik.values.Voucher_Name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.Voucher_Name && Boolean(formik.errors.Voucher_Name)}
+              helperText={formik.touched.Voucher_Name && formik.errors.Voucher_Name}
+            />
+            <TextField
+              fullWidth
+              multiline // Enable multiline
+              rows={4} // Adjust the number of rows as needed
+              margin="dense"
+              autoComplete="off"
+              label={
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <DescriptionIcon style={{ marginRight: 8 }} />
+                  Voucher Details
+                </div>
+              }
+              name="Voucher_Details"
+              value={formik.values.Voucher_Details}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.Voucher_Details && Boolean(formik.errors.Voucher_Details)}
+              helperText={formik.touched.Voucher_Details && formik.errors.Voucher_Details}
+            />
+            <DropdownCounter
+              style={{ marginTop: "8px" }}
+              value={formik.values.Voucher_Quantity}
+              onChange={(e) => formik.setFieldValue('Voucher_Quantity', e.target.value)}
+            />
+
+            <div style={{ marginTop: "8px" }}><p>Select Expiry Date</p></div>
+            <div style={{ marginTop: "8px" }}>
+              <Calendar onChange={onChange} value={date} className="black-selected-date"
+              />
+            </div>
+            <Button fullWidth variant="contained" sx={{ mt: 4 }} style={{ background: "#03C04A", marginBottom: "10%" }} type="submit">
+              Add
+            </Button>
+          </Box>
+          <ToastContainer />
+        </Card>
       </div>
     </Box>
   );
