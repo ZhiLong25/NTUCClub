@@ -44,9 +44,13 @@ function Products() {
 
 
     useEffect(() => {
+
+        
         http.get(`/Product/getservice/${id}`)
             .then((res) => {
 
+                console.log("here")
+                console.log(res.data);
                 setServices(res.data);
                 if (res.data.memPrice != null) {
                     setIsMemberPriceVisible(true)
@@ -59,6 +63,8 @@ function Products() {
                 const location = res.data.location;
                 // Call function to get coordinates
                 fetchCoordinates(location);
+
+
 
 
             });
@@ -96,7 +102,7 @@ function Products() {
 
     const fetchCoordinates = (locationName) => {
         // Using Google Maps Geocoding API
-        const API_KEY = 'AIzaSyAqS06SaOm9qPZ25jGGECjCyAAbnKd_jLg';
+        const API_KEY = 'AIzaSyB_BVhLtxQ5o8igWibtI9aEtlXjHntnSf0';
         const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationName)}&key=${API_KEY}`;
 
         fetch(geocodingUrl)
@@ -348,6 +354,48 @@ function Products() {
     );
 
 
+    useEffect(() => {
+        // Check if the Google Maps API script has already been added to the document
+        if (!document.getElementById("google-maps-api")) {
+            // Create a new script element for the Google Maps API
+            const script = document.createElement("script");
+            script.id = "google-maps-api";
+            script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB_BVhLtxQ5o8igWibtI9aEtlXjHntnSf0&libraries=places`;
+            script.async = true;
+            script.onload = initializeMap;
+            // Append the script element to the document head
+            document.head.appendChild(script);
+        } else {
+            // If the Google Maps API script has already been added, initialize the map immediately
+            initializeMap();
+        }
+    }, [locationCoords]);
+    
+    const initializeMap = () => {
+        // Ensure that the google.maps object and its properties are available
+        if (window.google && window.google.maps) {
+            // Get the container element for the map
+            const mapDiv = document.getElementById("map");
+            // Check if the container element exists
+            if (mapDiv) {
+                // Create the map and marker
+                const map = new window.google.maps.Map(mapDiv, {
+                    center: { lat: locationCoords.lat, lng: locationCoords.lng },
+                    zoom: 15,
+                });
+                new window.google.maps.Marker({
+                    position: { lat: locationCoords.lat, lng: locationCoords.lng },
+                    map: map,
+                });
+            } else {
+                console.error("Container element for the map not found");
+            }
+        } else {
+            console.error("Google Maps API is not available");
+        }
+    };
+    
+
     return (
         <Box>
 
@@ -388,17 +436,18 @@ function Products() {
                 <Typography variant='h5' style={{ marginTop: "40px", marginBottom: "0px" }}>Description</Typography>
                 <Typography variant="subtitle1" style={{ marginTop: "5px" }}>{services.description?.replace(/<[^>]*>?/gm, '') || ''}</Typography>
 
-
-                <LoadScript googleMapsApiKey="AIzaSyAqS06SaOm9qPZ25jGGECjCyAAbnKd_jLg">
+                {locationCoords.lat !== 0 && locationCoords.lng !== 0 && (
+                    <div id="map" style={{ width: '100%', height: '400px' }}>
                     <GoogleMap
-                        mapContainerStyle={{ width: '100%', height: '400px' }}
+                        mapContainerStyle={{ width: '100%', height: '100%' }}
                         center={locationCoords}
                         zoom={15}
                     >
-                        <Marker position={{ lat: locationCoords.lat, lng: locationCoords.lng }} />
-
+                        {/* Add the Marker component here */}
+                        {<Marker position={{ lat: locationCoords.lat, lng: locationCoords.lng }} />}
                     </GoogleMap>
-                </LoadScript>
+                </div>
+                )}
 
             </Box>
 

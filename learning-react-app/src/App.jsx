@@ -32,7 +32,7 @@ import ProductDash from './pages/products/ProductDash';
 import AddService from './pages/admin/AddService';
 import GetService from './pages/admin/GetService';
 import EditService from './pages/admin/EditService';
-import ManageVendor from './pages/admin/ManageVendor';
+import ManageVendor from './pages/products/ManageVendor';
 
 import AddReviews from './pages/products/AddReviews';
 
@@ -72,6 +72,7 @@ function App() {
   const [user, setUser] = useState(null);
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
+      
       http.get('/user/auth').then((res) => {
         console.log(res.data.user)
         setUser(res.data.user);

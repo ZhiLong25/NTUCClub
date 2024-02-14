@@ -22,13 +22,24 @@ function ProductDash() {
   const [totalCategory, setTotalCategory] = useState(0);
   const [totalVendors, setTotalVendors] = useState(0);
   const [serviceList, setServiceList] = useState([]);
+  const [user, setUser] = useState(null);
+
+
 
   useEffect(() => {
-    http.get('/Product/getservice')
+    http.get('/user/auth').then((res) => {
+      console.log(res.data.user)
+      setUser(res.data.user);
+
+
+      http.get(`/Product/getvendorservice/${res.data.name}`)
       .then((res) => {
         const data = CheckIfDataIsArray(res.data)
         setTotalServices(data.length);
       });
+    });
+
+    
       console.log(serviceList)
 
     http.get('/Category/getcategory')
@@ -81,13 +92,13 @@ function ProductDash() {
             <Typography className="statsData">{totalCategory}</Typography>
           </Flex>
         </CardContent> */}
-        <CardContent className="statsCard" style={{ background: "linear-gradient(to top, #feada6 0%, #f5efef 100%)" }}>
+        {/* <CardContent className="statsCard" style={{ background: "linear-gradient(to top, #feada6 0%, #f5efef 100%)" }}>
           <Typography className="statsTitle" variant='subtitle'>Vendors</Typography>
           <Flex gap={"5px"} alignItems={"center"}>
             <StorefrontOutlined fontSize='large' />
             <Typography className="statsData">{totalVendors}</Typography>
           </Flex>
-        </CardContent>
+        </CardContent> */}
       </Flex>
 
       {/* QUICK ACCESS */}

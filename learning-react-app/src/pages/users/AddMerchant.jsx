@@ -95,6 +95,18 @@ function AddMerchant() {
           console.log(res.data);
           localStorage.setItem('userData', JSON.stringify(res.data));
           toast.success("Admin Added")
+          
+          const merchant = {
+            image: '',
+            name: data.name
+          }
+
+          http.post("/Vendor/addvendor", merchant)
+          .then((res) => {
+              console.log(res.data);
+              window.location.reload();
+          })
+
         })
         .catch(function (err) {
           toast.error(`${err.response.data.message}`);

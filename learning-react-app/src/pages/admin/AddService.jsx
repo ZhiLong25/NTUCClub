@@ -212,7 +212,7 @@ function AddService() {
             )}
 
             <GooglePlacesAutocomplete
-              apiKey="AIzaSyAqS06SaOm9qPZ25jGGECjCyAAbnKd_jLg"
+              apiKey="AIzaSyB_BVhLtxQ5o8igWibtI9aEtlXjHntnSf0"
               autocompletionRequest={{ componentRestrictions: { country: ['sg'] } }}
               selectProps={{
                 value,

@@ -12,9 +12,7 @@ import placeholder from './media/placeholder.png'
 
 import MUIDataTable from "mui-datatables";
 
-
 function ManageVendor() {
-
 
     const [serviceList, setServiceList] = useState([]);
     const [imageFile, setImageFile] = useState(null);
