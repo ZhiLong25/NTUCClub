@@ -142,7 +142,7 @@ function ProductsPage() {
                 </ListItemButton>
                 <Collapse in={openCategoryFilter}>
                   <FormControl fullWidth >
-                    {categoryList.map((cat, i) => (
+                    {sampleCategoryItems.map((cat, i) => (
                       <FormControlLabel
                         control={
                           <MenuItem key={i} value={cat.title} style={{ width: "100%" }}>
@@ -163,7 +163,10 @@ function ProductsPage() {
             <Box>
               <Typography variant='subtitle1' textAlign={'right'}>Total Results: {serviceList.length}</Typography>
               <Grid gridTemplateColumns={{ base: "1fr", md: "1fr 1fr 1fr" }} display={"grid"} gap={"10px"} marginTop={"10px"}>
-                {serviceList.map((services, i) => { return (<EventCard events={services} key={i} />) })}
+                {serviceList.map((services, i) => { 
+                  const icon = sampleCategoryItems.find((cat) => cat.title === services.category)?.icon
+                  return (<EventCard key={i} events={services} icon={icon} />)
+                   })}
               </Grid>
             </Box> :
             <Alert icon={<SearchOffRounded fontSize="inherit" />} severity="info">
