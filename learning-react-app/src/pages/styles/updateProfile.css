@@ -5,7 +5,7 @@
 }
 .pfp-container{
     flex:2;
-    height:20rem
+    height:20rem !important
 }
 .information-container{
     flex:3;

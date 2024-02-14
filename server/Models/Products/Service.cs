@@ -12,7 +12,7 @@ namespace NTUCClub.Models.Products
         public string? Image { get; set; }
 
         [Required, MinLength(3), MaxLength(100)]
-        public string Name { get; set;} = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         [Required, MinLength(3), MaxLength(500)]
         public string Description { get; set; } = string.Empty;
@@ -24,6 +24,9 @@ namespace NTUCClub.Models.Products
         public float Price { get; set; }
 
         public float? MemPrice { get; set; }
+        [Required]
+        public string Location { get; set; }
+
 
         [Required]
         public string TimeSlots { get; set; }
@@ -33,9 +36,6 @@ namespace NTUCClub.Models.Products
 
         [Required, MinLength(3), MaxLength(100)]
         public string Vendor { get; set; } = string.Empty;
-
-        [Required]
-        public string Location { get; set; } = string.Empty;
 
         [Column(TypeName = "datetime")]
         public DateTime CreatedAt { get; set; }

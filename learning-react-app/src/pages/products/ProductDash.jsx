@@ -50,6 +50,7 @@ function ProductDash() {
   const getServices = () => {
     http.get('/Product/getservice')
       .then((res) => {
+        console.log(res.data)
         const data = CheckIfDataIsArray(res.data)
         setServiceList(data);
       });

@@ -3,6 +3,7 @@ using NTUCClub.Models;
 using NTUCClub.Models.Products;
 using System.Security.Claims;
 using Microsoft.AspNetCore.DataProtection;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace NTUCClub.Controllers
 {
@@ -49,8 +50,12 @@ namespace NTUCClub.Controllers
 			var now = DateTime.Now;
 			var dataProtectionProvider = DataProtectionProvider.Create("EncryptData");
 			var protector = dataProtectionProvider.CreateProtector("MySecretKey");
-
-			var myCard = new Card()
+			var Mycard = _context.Cards.FirstOrDefault(x => x.Card_Number == card.Card_Number);
+			if (Mycard != null)
+			{
+				return NotFound();
+			}
+            var myCard = new Card()
 			{
 				Card_Number = card.Card_Number.Trim(),
 				Card_Name = card.Card_Name.Trim(),
