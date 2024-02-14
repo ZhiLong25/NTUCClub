@@ -254,62 +254,10 @@ namespace NTUCClub.Controllers
             var list = result.OrderByDescending(x => x.CreatedAt).ToList();
             return Ok(result);
         }
-        [HttpGet("getvendorservice/{vendor}")]
-        public IActionResult GetServiceVendor(string vendor)
-        {
-            var services = _context.Services.Where(s => s.Vendor == vendor).ToList();
 
-            if (services.Count == 0)
-            {
-                return NotFound();
-            }
 
-            return Ok(services);
-        }
+        
 
-        [HttpPut("updateservice/{vendor}/{id}")]
-        public IActionResult UpdateServiceVendor(int id, string vendor, Service service)
-        {
-
-            // Fetch or create the category based on the service.Category value
-            //var category = _context.Category.FirstOrDefault(c => c.Name == service.Category.Trim())
-            //              ?? new Category { Name = service.Category.Trim() };
-
-            var myService = _context.Services.Find(id);
-            if (myService == null)
-            {
-                return NotFound();
-            }
-
-            myService.Name = service.Name.Trim();
-            myService.Description = service.Description.Trim();
-            myService.Price = service.Price;
-            myService.MemPrice = service.MemPrice;
-            myService.Location = service.Location;
-            myService.TimeSlots = service.TimeSlots;
-            myService.Slots = service.Slots;
-            myService.Vendor = service.Vendor.Trim();
-            myService.UpdatedAt = DateTime.Now;
-            myService.Category = service.Category;
-            myService.Image = service.Image;
-
-            _context.SaveChanges();
-            return Ok();
-        }
-
-        [HttpDelete("deleteservice/{vendor}/{id}")]
-        public IActionResult DeleteServiceVendor(int id)
-        {
-            var myService = _context.Services.Find(id);
-            if (myService == null)
-            {
-                return NotFound();
-            }
-
-            _context.Services.Remove(myService);
-            _context.SaveChanges();
-            return Ok();
-        }
 
     }
 }
