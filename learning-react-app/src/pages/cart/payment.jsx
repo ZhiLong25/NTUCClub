@@ -22,11 +22,13 @@ function Payment() {
     // You would integrate your actual payment logic here
     // For demonstration, we'll show the dialog immediately and then simulate payment completion
     setOpenDialog(true);
+    http.put(`User/ChangeUsertype/${user.id}`).then((res)=>{
     setTimeout(() => {
       setOpenDialog(false);
       toast.success('Payment successful!');
       navigate('/cart');
     }, 2000);
+    })
   };
 
   const [openDialog, setOpenDialog] = React.useState(false);

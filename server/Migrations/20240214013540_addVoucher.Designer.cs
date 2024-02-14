@@ -11,8 +11,8 @@ using NTUCClub;
 namespace NTUCClub.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240213172736_updateCart")]
-    partial class updateCart
+    [Migration("20240214013540_addVoucher")]
+    partial class addVoucher
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

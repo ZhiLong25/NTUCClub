@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dK2JqpoGDzuiW/Jn2Uwr49IdAFS0oGpU+IL9vDV3X38=",
+  "Hash": "IB8Bf2kS+vMSOUSU4WKiXNP8bzKdO8tbs7bIEMoL5W4=",
   "Source": "NTUCClub",
   "BasePath": "_content/NTUCClub",
   "Mode": "Default",
@@ -1137,6 +1137,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\YFzAbggs17.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\YJyFRM8ey8.jpg",
+      "SourceId": "NTUCClub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\",
+      "BasePath": "_content/NTUCClub",
+      "RelativePath": "uploads/YJyFRM8ey8.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\YJyFRM8ey8.jpg"
     },
     {
       "Identity": "C:\\Users\\Jun Liang\\Documents\\GitHub\\NTUCClub\\server\\wwwroot\\uploads\\YKcSv6m9t9.jpg",
