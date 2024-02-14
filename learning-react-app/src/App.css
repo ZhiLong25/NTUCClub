@@ -128,3 +128,8 @@ img {
 .MuiChip-label {
   margin-top: 2px;
 }
+
+
+.ql-container {
+  height:auto!important;
+}
