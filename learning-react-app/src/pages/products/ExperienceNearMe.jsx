@@ -51,18 +51,18 @@ function ExperienceNearMe() {
 
     useEffect(() => {
         const fetchData = async () => {
-        // Fetch user location
-        getUserLocation();
+            // Fetch user location
+            getUserLocation();
 
-        // Fetch services
-        try {
-            const res = await http.get(`/Product/getservice/`);
-            setServices(res.data);
-            console.log("Services:", res.data);
-        } catch (error) {
-            console.error('Error fetching services:', error);
-        }
-    };
+            // Fetch services
+            try {
+                const res = await http.get(`/Product/getservice/`);
+                setServices(res.data);
+                console.log("Services:", res.data);
+            } catch (error) {
+                console.error('Error fetching services:', error);
+            }
+        };
 
         // Call fetchData once when the component mounts
         fetchData();
@@ -85,9 +85,8 @@ function ExperienceNearMe() {
                 if (distance < 10) {
                     console.log("distance")
                     console.log(distance)
-                    nearest.push({ ...service, distance }); // Add distance to the service object
+                    nearest.push({ ...service, distance, latitude: serviceLocation.lat, longitude: serviceLocation.lng }); // Include lat and lng properties
                 }
-
             }
         }
         console.log(nearest)
@@ -114,7 +113,6 @@ function ExperienceNearMe() {
             if (data.results && data.results.length > 0) {
 
                 const { lat, lng } = data.results[0].geometry.location;
-                console.log(lat, lng)
                 return { lat, lng };
             } else {
                 console.error('No results found for location:', locationName);
@@ -130,12 +128,8 @@ function ExperienceNearMe() {
         const fetchNearestServices = async () => {
             if (userLocation) {
 
-
                 if (showAllServices) {
-                    // Set nearest services to all services
-                    const nearestServices = await filterNearestServices(services, userLocation);
-                    setNearestServices(nearestServices);
-                } else {
+
                     // Calculate distance for all services
                     const servicesWithDistance = await Promise.all(services.map(async service => {
                         const serviceLocation = await geocodeLocation(service.location);
@@ -144,18 +138,28 @@ function ExperienceNearMe() {
                         return { ...service, latitude: lat, longitude: lng, distance }; // Add latitude and longitude to service object
                     }));
                     setNearestServices(servicesWithDistance);
+
+                    console.log("distanceServ", servicesWithDistance)
+
+
+                } else {
+                    // Set nearest services to all services
+                    const nearestServices = await filterNearestServices(services, userLocation);
+                    setNearestServices(nearestServices);
+
+                    console.log("filterServ", nearestServices)
                 }
             }
         };
         fetchNearestServices();
     }, [userLocation, services, showAllServices]);
 
-    const handleToggleServices = () => {
+    const handleToggleServices = async () => {
         setShowAllServices(prevState => !prevState);
+        console.log("showAllServices:", showAllServices); // Log the current value of showAllServices
+        console.log("nearestServices:", nearestServices); // Log the current value of nearestServices
     };
 
-    console.log("userloc")
-    console.log(userLocation);
 
     return (
         <Box>
@@ -173,10 +177,13 @@ function ExperienceNearMe() {
                         console.log("No valid latitude and longitude in userLocation")
                     )}
 
+
+
                     {/* Display markers for nearest services */}
                     {nearestServices.map((service, index) => (
                         <Marker key={index} position={{ lat: parseFloat(service.latitude), lng: parseFloat(service.longitude) }} />
                     ))}
+                    
                 </GoogleMap>
             </LoadScript>
             <Typography variant="h4" gutterBottom>
@@ -184,7 +191,7 @@ function ExperienceNearMe() {
             </Typography>
 
             <Button onClick={handleToggleServices}>
-                {showAllServices ? 'Showing Nearest Services' : 'Showing All Services'}
+                {showAllServices ? 'Show Nearest Services' : 'Show All Services'}
             </Button>
 
             {nearestServices.map((service, index) => (
