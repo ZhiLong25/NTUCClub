@@ -239,7 +239,21 @@ namespace NTUCClub.Controllers
             return Ok();
 
         }
+        [HttpPut("ChangeUsertype/{id}")]
+        public IActionResult ChangeUsertype(int id)
+        {
+            var foundUser = _context.Users.FirstOrDefault(x => x.Id == id);
 
+            if (foundUser.UserType == "User") {
+                foundUser.UserType = "UserMember";
+            }
+            else
+            {
+                return Ok();
+            }
+            _context.SaveChanges();
+            return Ok();
+        }
         [HttpPost("Addadmin/{usertype}")]
         public IActionResult Addadmin(string usertype, RegisterRequest request)
         {
