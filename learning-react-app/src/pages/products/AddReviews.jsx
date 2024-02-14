@@ -53,6 +53,7 @@
                 http.post("/Review/addreview", data)
                     .then((res) => {
                         console.log(res.data);
+                        navigate("/")
                     })
             }
         });

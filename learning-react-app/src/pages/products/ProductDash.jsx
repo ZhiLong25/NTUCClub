@@ -97,7 +97,7 @@ function ProductDash() {
           <Link to={"/getservice"}>
             <Chip icon={<SearchRounded />} label="Services" />
           </Link>
-          <Link to={"/addservice"}>
+          <Link to={"/addservicevendor"}>
             <Chip icon={<AddRounded />} label="Services" />
           </Link>
           <Link to={"/managevendor"}>

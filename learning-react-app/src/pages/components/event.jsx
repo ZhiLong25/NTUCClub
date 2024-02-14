@@ -23,6 +23,7 @@ function EventCard(props) {
           <CardContent style={{ height: "100%" }}>
             <Typography className='eventTitle' gutterBottom style={{ fontWeight: "bold", fontSize: "large", lineHeight: "normal" }}>{events.name}</Typography>
             <Typography variant="body2" color="text.secondary">
+              {events.category}
               <div className='eventDescription'>{descriptionWithoutHTML}</div>
               <div className='eventPrice'>
                 <label style={{ display: "block", marginTop: "20px" }}>${events.price}</label>

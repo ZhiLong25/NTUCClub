@@ -108,6 +108,11 @@ function App() {
                     <Route path={"/admindash"} element={<AdminDash />} />
                     <Route path={"/addservice"} element={<AddService />} />
 
+                    <Route path={"/expnearme"} element={< ExperienceNearMe />} />
+
+                    <Route path={"/experiences/:id"} element={<Products />} />
+                    <Route path={"/experiences"} element={< ProductsPage />} />
+
                     {/* Products/Vendors CRUD */}
                     <Route path={"/adminDash"} element={<AdminDash />} />
                     <Route path={"/addservice"} element={<AddService />} />
@@ -133,9 +138,11 @@ function App() {
                     <Route path={"/addservicevendor"} element={<AddServiceVendor />} />
                     <Route path={"/getservicevendor"} element={<GetServiceVendor />} />
                     <Route path={"/editservicevendor/:id"} element={<EditServiceVendor />} />
-                    <Route path={"/experiences"} element={< ProductsPage />} />
-                    <Route path={"/experiences/:id"} element={<Products />} />
 
+                    <Route path={"/expnearme"} element={< ExperienceNearMe />} />
+
+                    <Route path={"/experiences/:id"} element={<Products />} />
+                    <Route path={"/experiences"} element={< ProductsPage />} />
                   </Routes>
                 </>
               ) : (
